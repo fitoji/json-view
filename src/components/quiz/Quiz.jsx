@@ -26,7 +26,7 @@ function Quiz() {
   return (
     <div className="container">
       <h1 className="bg-emerald-400 font-bold">Test preba</h1>
-      <Button>Click me</Button>
+
       {error && <div className="error">{error}</div>}
 
       {data && (
