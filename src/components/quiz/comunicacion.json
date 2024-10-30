@@ -1,0 +1,168 @@
+[
+    {
+      "id": 1,
+      "question": "¿Cuál de los siguientes porcentajes corresponde a la importancia del lenguaje no verbal en la comunicación?",
+      "option1": "7%",
+      "option2": "38%",
+      "option3": "55%",
+      "option4": "45%",
+      "ans": 3,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 2,
+      "question": "Según los axiomas de Paul Watzlawick, ¿qué afirma sobre la posibilidad de no comunicarse?",
+      "option1": "Siempre es posible no comunicarse.",
+      "option2": "No es posible no comunicarse.",
+      "option3": "Solo es posible no comunicarse en situaciones específicas.",
+      "option4": "No se menciona la posibilidad de no comunicarse.",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 3,
+      "question": "¿Qué aspecto de la comunicación analiza cómo las personas organizan su espacio personal y sus implicaciones?",
+      "option1": "Proxémica.",
+      "option2": "Quinesia.",
+      "option3": "Paralingüística.",
+      "option4": "Actitud.",
+      "ans": 1,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 4,
+      "question": "¿Cuál de las siguientes es una función de la comunicación no verbal sobre la comunicación oral?",
+      "option1": "Reemplazo.",
+      "option2": "Validación.",
+      "option3": "Retroalimentación.",
+      "option4": "Paráfrasis.",
+      "ans": 1,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 5,
+      "question": "En el contexto de los estilos de comunicación, ¿cómo se caracteriza el estilo pasivo?",
+      "option1": "Defiende agresivamente los derechos personales.",
+      "option2": "Expresa opiniones y sentimientos sin violar derechos ajenos.",
+      "option3": "No defiende los derechos ni expresa opiniones libremente.",
+      "option4": "Usa gestos de amenaza y posturas intimidantes.",
+      "ans": 3,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 6,
+      "question": "¿Qué barrera de comunicación se refiere a las diferencias en idioma, edad y vocabulario que pueden obstaculizar la comprensión?",
+      "option1": "Psicológicas",
+      "option2": "Lingüísticas",
+      "option3": "Habilidad comunicativa",
+      "option4": "Interferencias",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 7,
+      "question": "Según el documento, ¿cuál es una de las 'Reglas de oro de la comunicación'?",
+      "option1": "Hablar constantemente para evitar silencios.",
+      "option2": "Validar suposiciones antes de aceptarlas.",
+      "option3": "Utilizar un lenguaje técnico y complejo.",
+      "option4": "Ignorar el Feedback para mantener el foco.",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 8,
+      "question": "En el contexto de la comunicación efectiva, ¿qué técnica se utiliza para mostrar comprensión repitiendo en otras palabras lo que el emisor ha dicho?",
+      "option1": "Validación",
+      "option2": "Paráfrasis",
+      "option3": "Información",
+      "option4": "Pregunta abierta",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 9,
+      "question": "¿Cuál de los siguientes no es un elemento de la comunicación según el documento?",
+      "option1": "Emisor",
+      "option2": "Código",
+      "option3": "Diálogo",
+      "option4": "Canal",
+      "ans": 3,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 10,
+      "question": "¿Qué estilo de comunicación se caracteriza por una expresión clara y directa, y el uso de mensajes en primera persona?",
+      "option1": "Estilo Pasivo",
+      "option2": "Estilo Asertivo",
+      "option3": "Estilo Agresivo",
+      "option4": "Estilo Reactivo",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 11,
+      "question": "¿Qué estudia la quinesia dentro del contexto de la comunicación no verbal?",
+      "option1": "Las barreras psicológicas que afectan la comunicación.",
+      "option2": "La organización del espacio personal y sus implicaciones.",
+      "option3": "Los mensajes transmitidos a través de movimientos corporales.",
+      "option4": "Las características vocales como el tono y la velocidad del habla.",
+      "ans": 3,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 12,
+      "question": "La proxémica, como parte del estudio de la comunicación, examina:",
+      "option1": "La expresividad agregada al lenguaje a través de elementos paralingüísticos.",
+      "option2": "La manera en que los humanos organizan su espacio personal y las implicaciones de ello.",
+      "option3": "Los movimientos faciales y gestos durante la comunicación.",
+      "option4": "La forma en que se utilizan las pausas y silencios en el discurso.",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 13,
+      "question": "¿Qué aspecto de la comunicación estudia la paralingüística?",
+      "option1": "La influencia de los gestos y la postura en el mensaje transmitido.",
+      "option2": "La utilización de espacios físicos durante la interacción social.",
+      "option3": "Cómo las cualidades de la voz, como la entonación y el volumen, afectan la comunicación efectiva.",
+      "option4": "La interpretación de los mensajes escritos y digitales en la comunicación.",
+      "ans": 3,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 14,
+      "question": "Según los axiomas de comunicación descritos en el documento, ¿cuál es la diferencia principal entre la comunicación digital y analógica?",
+      "option1": "La comunicación digital se refiere exclusivamente al uso de dispositivos electrónicos, mientras que la analógica implica el uso de papel y bolígrafo.",
+      "option2": "La comunicación digital utiliza palabras y es verbal, mientras que la analógica incluye tono, gestos y otros aspectos no verbales.",
+      "option3": "La comunicación digital es más efectiva en situaciones formales, y la analógica es preferida en contextos informales.",
+      "option4": "La comunicación digital es siempre clara y precisa, a diferencia de la comunicación analógica que es ambigua y sujeta a interpretaciones.",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    },
+    {
+      "id": 15,
+      "question": "¿Cuál de las siguientes estrategias NO es recomendada para contrarrestar las barreras en la comunicación según el documento proporcionado?",
+      "option1": "Utilizar un lenguaje adecuado y claro adaptado al receptor.",
+      "option2": "Ignorar la retroalimentación para mantener la coherencia del mensaje.",
+      "option3": "Escuchar con atención y mantener una actitud positiva y objetiva.",
+      "option4": "Comprobar el Feedback y evitar ideas preconcebidas y generalizaciones.",
+      "ans": 2,
+      "asignatura": "ESP",
+      "tema": "alguno"
+    }
+  ]
+  
