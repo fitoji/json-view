@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="flex flex-col justify-center py-4 space-y-1 bg-sky-50">
       <p className="text-xs text-slate-500 text-center">
-        2024 SuperTest v.Alpha. Una iniciativa de
+        2024 JsonTest v.Alpha. Una iniciativa de
         <a className="text-xs text-slate-800 font-bold" target="_blank" href="https://fitoji.dev.ar/"> Aneka </a>
       </p>
 

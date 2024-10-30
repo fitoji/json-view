@@ -1,25 +1,20 @@
 import React, { lazy, Suspense } from 'react'
-import { useAuth, AuthProvider } from '../context/authContext'
-import { Link } from 'react-router-dom'
-
-import './landing.css'
+//import { useAuth, AuthProvider } from '../context/authContext'
 import { DataProvider } from '../context/DataContext'
-import JsonViewer from '../quiz/JsonViewer'
-import Quiz from '../quiz/Quiz'
+import V0json from '../quiz/V0json'
 
 // Componente de carga
 const LoadingFallback = () => <div>Cargando...</div>
 
 export default function Landing() {
-  const { user } = useAuth()
+  //const { user } = useAuth()
   //const { user } = AuthProvider()
-
-  console.log(user)
+  
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen">
       <main className="flex-1">
         <div className="flex flex-col items-center space-y-4 text-center">
-          <h1 className="text-2xl font-bold tracking-tighter sm:text-4xl md:text-2xl lg:text-4xl/none text-emerald-700">
+          <h1 className="mt-5 text-2xl font-bold tracking-tighter sm:text-4xl md:text-2xl lg:text-4xl/none text-emerald-700">
             Visualizador de Tests en formato Json
           </h1>
           <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
@@ -27,17 +22,16 @@ export default function Landing() {
           </p>
 
           <DataProvider>
-            <JsonViewer />
-            <Quiz />
+            <V0json/>
           </DataProvider>
-          <div>
+         {/*  <div>
             <img
               className="rounded-lg"
               width={400}
               src="/hero.webp"
               alt="hero imagen"
             />
-          </div>
+          </div> */}
           {/* <div className="bg-emerald-200 rounded-md p-1 shadow-md">
                   <span class="background">
                     <Link to={'/login'} class="button">

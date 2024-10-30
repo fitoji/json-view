@@ -1,5 +1,4 @@
 import { useData } from '../context/DataContext'
-import { Button } from '@/components/ui/button'
 
 function Quiz() {
   const { data, setData, error, setError } = useData()

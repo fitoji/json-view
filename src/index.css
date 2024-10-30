@@ -89,9 +89,6 @@
   margin: 0 auto;
 }
 
-.main-title {
-  margin-top: 2rem;
-}
 
 .navbar {
   padding: 2rem;
@@ -102,64 +99,8 @@
   border-bottom: 2px solid black;
 }
 
-.logo {
-  text-decoration: none;
-  color: black;
-}
 
-.menu {
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
 
-.menu-link {
-  text-decoration: none;
-  color: black;
-  font-size: 1.2rem;
-}
-
-.menu-link:hover {
-  text-decoration: underline;
-}
-
-.categoria {
-  font-size: .8rem;
-  color: #424242;
-  margin-top: 1rem;
-}
-
-.item-count {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.item-count button,
-
-.item-count button:hover,
-
-.formulario {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  align-items: flex-start;
-}
-
-.formulario input {
-  padding: .5rem;
-  width: 18rem;
-  border-radius: .5rem;
-  border: 2px solid black;
-}
-
-.formulario input:focus {
-  outline: 0;
-  border: 2px solid var(--clr-main);
-  outline: 2px solid var(--clr-main);
-}
 
 .fito-fondo {
   min-height: 100vh;

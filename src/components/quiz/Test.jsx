@@ -1,22 +1,25 @@
 import { useRef, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { preguntasAleatorias } from '../helpers/funcionesTest.mjs'
+
+import { preguntasAleatorias } from '../../helpers/funcionesTest.mjs'
 import { motion, AnimatePresence } from "framer-motion"
 import './Test.css'
 import { ArrowBigRightDash, Settings, TriangleAlert, Undo2 } from 'lucide-react'
-import Modal from './Modal'
-import { Button } from "./ui/button"
-import { Input } from './ui/input'
-import { Switch } from "./ui/switch"
-import { Label } from "./ui/label"
-import { Progress } from "./ui/progress"
-import { Card, CardContent, CardFooter } from "./ui/card"
-import { Separator } from "./ui/separator"
+import Modal from '../Modal'
+import { Button } from "../ui/button"
+import { Input } from '../ui/input'
+import { Switch } from "../ui/switch"
+import { Label } from "../ui/label"
+import { Progress } from "../ui/progress"
+import { Card, CardContent, CardFooter } from "../ui/card"
+import { Separator } from "../ui/separator"
 import { toast } from "sonner"
-import Temporizador from './Temporizador'
+import Temporizador from '../Temporizador'
 
 
-const Test = ({ data }) => {
+
+
+const Test = ({data}) => {
+
   //menu modal
   const [open, setOpen] = useState(false)
   const [openAlert, setOpenAlert] = useState(false)
@@ -289,15 +292,11 @@ const Test = ({ data }) => {
                         Repasar equivocaciones
                         <TriangleAlert className='text-white' />
                       </Button>}
-                      <Button className="flex flex-row justify-center gap-1 rounded-lg bg-sky-400 px-5 py-3 text-base mb-3 font-bold text-slate-100 transition duration-200 hover:bg-sky-300 active:bg-sky-500" onClick={() => setOpen(true)}>
-                        Menu
-                        <Settings />
-                      </Button>
-
-                      <Link className="flex flex-row  px-5 py-2 bg-emerald-400 rounded-lg text-base font-bold hover:bg-emerald-300 justify-center text-slate-100 " to="/lista">
+                                         
+                      {/* <Link className="flex flex-row  px-5 py-2 bg-emerald-400 rounded-lg text-base font-bold hover:bg-emerald-300 justify-center text-slate-100 " to="/lista">
                         Volver al Inicio
                         <Undo2 />
-                      </Link >
+                      </Link > */}
                     </div>
 
                   </>
@@ -394,11 +393,8 @@ const Test = ({ data }) => {
                 </div>
               </div>
               <hr className='mt-10' />
-              <div className='flex flex-row gap-4 mt-4'>
-                <Link className='flex font-bold w-1/2 justify-center bg-emerald-300 hover:bg-emerald-200 rounded-lg p-2' to="/lista">
-                  Inicio
-                  <Undo2 />
-                </Link>
+              <div className='flex flex-row gap-4 mt-4 justify-center'>
+                
                 <Button className="flex flex-row w-1/2 rounded-lg bg-sky-400 font-bold transition duration-200 hover:bg-sky-300 active:bg-sky-500 justify-center p-2" onClick={handleSubmit}>
                   Aceptar
                   <ArrowBigRightDash />

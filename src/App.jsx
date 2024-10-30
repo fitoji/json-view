@@ -2,16 +2,8 @@ import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Separator } from '@/components/ui/separator'
 //import NavBar from './components/NavBar'
-//import MateriaListContainer from "./components/MateriaListContainer"
-//import MateriaDetailContainer from "./components/MateriaDetailContainer"
-//import TestContainer from "./components/TestContainer"
-const MateriaDetailContainer = lazy(() =>
-  import('./components/MateriaDetailContainer')
-)
-const MateriaListContainer = lazy(() =>
-  import('./components/MateriaListContainer')
-)
-const TestContainer = lazy(() => import('./components/TestContainer'))
+
+
 import { Toaster } from '@/components/ui/sonner'
 import Landing from './components/login/Landing'
 import Footer from './components/Footer'
@@ -40,23 +32,7 @@ function App() {
                 <Route path="/" element={<Landing />} />
                 {/* <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} /> */}
-                <Route
-                  path="/lista"
-                  element={
-                    <ProtectedRoute>
-                      <MateriaListContainer />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/materia/:id"
-                  element={<MateriaDetailContainer />}
-                />
-
-                <Route
-                  path="/materia/:id/:subItem"
-                  element={<TestContainer />}
-                />
+                             
               </Routes>
             </AuthProvider>
           </Suspense>
