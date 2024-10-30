@@ -1,0 +1,28 @@
+.spinner {
+    width: 36px;
+    height: 36px;
+  
+    border: 5px solid #fffc;
+    border-top-color: rgb(16 185 129);
+    border-radius: 100%;
+  
+    animation: spin 1s infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg) }
+  }
+  
+  
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  

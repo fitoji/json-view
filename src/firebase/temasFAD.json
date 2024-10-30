@@ -1,0 +1,457 @@
+[
+    {
+      "id": "4zbNQNJefWmJhe7VrmMW",
+      "subItem":"Tema 1",
+      "mat":"FAD",
+      "test": [
+        {
+          "id": 1,
+          "question": "La etiología se ocupa de:",
+          "option1": "Cómo se manifiesta la enfermedad.",
+          "option2": "Los síntomas de la enfermedad.",
+          "option3": "La causa de la enfermedad.",
+          "option4": "Todas son correctas.",
+          "ans": 3,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 2,
+          "question": "Los síntomas patognomónicos son:",
+          "option1": "Los que aparecen en un escaso número de enfermedades",
+          "option2": "Los síntomas exclusivos de una enfermedad.",
+          "option3": "Síntomas comunes a muchas enfermedades.",
+          "option4": "Los que advierte el médico.",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 3,
+          "question": "El dolor el cansancio y el picor son:",
+          "option1": "Síntomas",
+          "option2": "Signos",
+          "option3": "Diagnósticos",
+          "option4": "Síndromes",
+          "ans": 1,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 4,
+          "question": "La anatomía estudia:",
+          "option1": "La estructura de las diferentes partes del cuerpo",
+          "option2": "La situación de las diferentes partes del cuerpo",
+          "option3": "Las relaciones de las diferentes partes del cuerpo",
+          "option4": "Todas son correctas",
+          "ans": 4,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 5,
+          "question": "La médula ósea y la sangre tienen en común:",
+          "option1": "Son tejidos.",
+          "option2": "Son órganos.",
+          "option3": "Son epitelios.",
+          "option4": "Son correctas “a” y “c”",
+          "ans": 1,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 6,
+          "question": "Señala la respuesta incorrecta:",
+          "option1": "Un aparato es un conjunto de órganos de tejidos diferentes que actúan coordinadamente para cumplir alguna función fisiológica",
+          "option2": "Un sistema es una agrupación de órganos formados por distinto tipo de tejido que desarrollan una determinada función fisiológica",
+          "option3": "Un sistema es una agrupación de órganos formados por el mismo tipo de tejido que desarrollan una determinada función fisiológica",
+          "option4": "Un órgano es un conjunto de tejidos diferentes anatómicamente identificables que desempeñan una función específica",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 7,
+          "question": "El plano medial o sagital divide el cuerpo en dos mitades:",
+          "option1": "Anterior y posterior",
+          "option2": "Superior e inferior",
+          "option3": "Izquierda y derecha",
+          "option4": "Proximal y distal",
+          "ans": 3,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 8,
+          "question": "En cuanto a los términos de dirección marca la incorrecta:",
+          "option1": "Anterior o ventral: situado en la parte delantera",
+          "option2": "Caudal o cefálica: en la parte más cercana a la cabeza o mira hacia arriba",
+          "option3": "Posterior o dorsal: mira hacia atrás",
+          "option4": "Caudal o plantar: parte más alejada de la cabeza o mira hacia abajo",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 9,
+          "question": "Marca la respuesta incorrecta:",
+          "option1": "En el epigastrio se localizan el estómago el duodeno el páncreas y el bazo",
+          "option2": "En el hipogastrio se ubican el epiplón mayor, el intestino delgado, la vejiga y el útero en la mujer",
+          "option3": "En la fosa iliaca izquierda se encuentra el colon descendente y sigmoide",
+          "option4": "Más de una es incorrecta",
+          "ans": 1,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 10,
+          "question": "La membrana plasmática no está compuesta por:",
+          "option1": "Fosfolípidos",
+          "option2": "Proteínas",
+          "option3": "Colesterol",
+          "option4": "Mielina",
+          "ans": 4,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 11,
+          "question": "En cuanto a los ribosomas señala la incorrecta:",
+          "option1": "Están formados por proteínas y ácido ribonucleico",
+          "option2": "Se localizan libres en el citoplasma o Unidos al RER",
+          "option3": "Están formados por dos subunidades idénticas",
+          "option4": "Carecen de membrana",
+          "ans": 3,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 12,
+          "question": "Señala la afirmación falsa:",
+          "option1": "Las mitocondrias realizan la respiración celular",
+          "option2": "Para oxidar los principios inmediatos gastan una molécula de ATP",
+          "option3": "La mitocondria posee su propio ADN",
+          "option4": "Los glóbulos rojos carecen de mitocondrias",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 13,
+          "question": "En cuanto al nucleoplasma señala la respuesta incorrecta:",
+          "option1": "Contiene el nucleolo y la cromatina",
+          "option2": "El nucleolo es un cuerpo fluido y esférico que no tiene membrana",
+          "option3": "La cromatina está formada por ADN asociado a proteínas y histonas/ no histonas",
+          "option4": "La cromatina en la célula en división se condensa formando los cromosomas",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 14,
+          "question": "¿Qué tipo de transporte a través de la membrana se lleva a cabo sin gasto energético?",
+          "option1": "Difusión simple",
+          "option2": "Osmosis",
+          "option3": "Difusión facilitada",
+          "option4": "Todas las anteriores",
+          "ans": 4,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 15,
+          "question": "¿En cuál de los siguientes procesos se produce la salida de sustancias de la célula al exterior?",
+          "option1": "Endocitosis",
+          "option2": "Exocitosis",
+          "option3": "Pinocitosis",
+          "option4": "Ninguna es correcta",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 16,
+          "question": "¿En qué fase de la reproducción celular se produce un intercambio de fragmentos de ADN entre cromátidas, denominado recombinación o entrecruzamiento de genes?",
+          "option1": "Profase mitótica",
+          "option2": "Primera división mitótica",
+          "option3": "Segunda división meiótica",
+          "option4": "Primera división meiótica",
+          "ans": 4,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 17,
+          "question": "Un tejido es:",
+          "option1": "Un conjunto de células distintas que se unen para llevar a cabo una función especializada",
+          "option2": "Una agrupación de células formadas por el mismo tejido que desarrollan una función fisiológica",
+          "option3": "Un conjunto de células semejantes que se unen para realizar una función especializada",
+          "option4": "Ninguna es correcta",
+          "ans": 3,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 18,
+          "question": "En cuanto al tejido epitelial marca la respuesta falsa:",
+          "option1": "El epitelio pseudoestratificado en realidad es un epitelio simple porque todas las células apoyan en la membrana basal",
+          "option2": "Las células cúbicas tienen forma de columna y pueden tener microvellosidades",
+          "option3": "Las células transicionales varían de forma de planas a cilíndricas y viceversa",
+          "option4": "Puede ser epitelio de revestimiento o glandular",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 19,
+          "question": "La unidad estructural del tejido óseo compacto es:",
+          "option1": "La osteona",
+          "option2": "La histona",
+          "option3": "El osteocito",
+          "option4": "El leucocito",
+          "ans": 1,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        },
+        {
+          "id": 20,
+          "question": "¿Qué tipo de tejido muscular no contiene fibras estriadas?",
+          "option1": "Muscular esquelético",
+          "option2": "Muscular liso",
+          "option3": "Muscular cardiaco",
+          "option4": "Muscular plano",
+          "ans": 2,
+          "asignatura": "FAD",
+          "tema": "Tema 1"
+        }
+      ]
+    },
+    {
+        "id": "4zbNQNJefWmJhe7VrmMW",
+        "subItem":"Tema 2",
+        "mat":"FAD",
+        "test":[
+            {
+              "id": 1,
+              "question": "En la capa mucosa del tubo digestivo existe una capa fina de músculo liso que se denomina:",
+              "option1": "Lámina propia",
+              "option2": "Muscularis mucosae",
+              "option3": "Submucosa",
+              "option4": "Epitelio",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 2,
+              "question": "Los repliegues peritoneales que unen el intestino grueso a la pared abdominal posterior son:",
+              "option1": "Mesenterio",
+              "option2": "Mesocolon",
+              "option3": "Retroperitoneales",
+              "option4": "Ninguna de los anteriores",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 3,
+              "question": "Las células filiformes de la lengua detectan:",
+              "option1": "El sabor dulce",
+              "option2": "El sabor salado",
+              "option3": "El sabor amargo",
+              "option4": "La temperatura",
+              "ans": 4,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 4,
+              "question": "Las válvulas conniventes se encuentran en:",
+              "option1": "El estómago",
+              "option2": "El recto",
+              "option3": "El intestino",
+              "option4": "Las glándulas salivares",
+              "ans": 3,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 5,
+              "question": "La parte del colon que va desde el ángulo hepático hasta el esplénico se llama:",
+              "option1": "Colon ascendente",
+              "option2": "Colon descendente",
+              "option3": "Colon transverso",
+              "option4": "Colon sigmoide",
+              "ans": 3,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 6,
+              "question": "Los sinusoides hepáticos son:",
+              "option1": "Pequeños conductos entre hepatocitos que colectan la bilis",
+              "option2": "Capilares sanguíneos",
+              "option3": "Conjuntos de hepatocitos",
+              "option4": "Ninguna de las anteriores",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 7,
+              "question": "En cuanto al páncreas, señala la incorrecta:",
+              "option1": "El conducto de Santorini desemboca en la segunda ampolla del duodeno",
+              "option2": "Es retroperitoneal",
+              "option3": "Su cabeza es el extremo derecho y más próximo al duodeno",
+              "option4": "La glándula endocrina está formada por los acinos pancreáticos",
+              "ans": 4,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 8,
+              "question": "La arteria gástrica izquierda es una división de:",
+              "option1": "El tronco celiaco",
+              "option2": "Arteria mesentérica superior",
+              "option3": "Arteria mesentérica inferior",
+              "option4": "Arteria hepática derecha",
+              "ans": 1,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 9,
+              "question": "¿Qué estructura no se encuentra en el hígado?",
+              "option1": "Ligamento falciforme",
+              "option2": "Lóbulo cuadrado",
+              "option3": "Cápsula de Glisson",
+              "option4": "Todas se encuentran en el hígado",
+              "ans": 4,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 10,
+              "question": "La porción más larga del intestino delgado es:",
+              "option1": "El yeyuno",
+              "option2": "El íleon",
+              "option3": "El duodeno",
+              "option4": "El colon",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 11,
+              "question": "¿Cuáles son las neuronas que transmiten impulsos nerviosos desde el SNC hacia los ganglios autónomos?",
+              "option1": "Neurona ganglionar",
+              "option2": "Neurona preganglionar",
+              "option3": "Neurona postganglionar",
+              "option4": "Tanto “b” como “c” son correctas",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 12,
+              "question": "La saliva contiene:",
+              "option1": "Sodio",
+              "option2": "Ptialina",
+              "option3": "Potasio",
+              "option4": "Todas son correctas",
+              "ans": 4,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 13,
+              "question": "Las células D del fondo y el cuerpo del estómago segregan:",
+              "option1": "Gastrina",
+              "option2": "Somatostatina",
+              "option3": "Pepsina",
+              "option4": "Moco",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 14,
+              "question": "La histamina es:",
+              "option1": "El mayor estimulador paracrino de ácido gástrico",
+              "option2": "Un conocido neurotransmisor",
+              "option3": "Una glucoproteina con función protectora",
+              "option4": "Ninguna de las anteriores",
+              "ans": 1,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 15,
+              "question": "La tripsina es:",
+              "option1": "Una enzima proteolítica del jugo pancreático",
+              "option2": "Una lipasa del jugo pancreático",
+              "option3": "Una enzima proteolítica del jugo intestinal",
+              "option4": "Una lipasa del jugo pancrático",
+              "ans": 1,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 16,
+              "question": "La digestión de los hidratos de carbono comienza en:",
+              "option1": "El estómago",
+              "option2": "La boca",
+              "option3": "El intestino",
+              "option4": "La faringe",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 17,
+              "question": "¿A qué pH tiene la pepsina su actividad máxima?",
+              "option1": "pH 0.8",
+              "option2": "pH mayor de 5",
+              "option3": "pH 2-3",
+              "option4": "pH 8",
+              "ans": 3,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 18,
+              "question": "¿Cuál es un mecanismo de absorción del sodio?",
+              "option1": "Cotransporte con cloro",
+              "option2": "Cotransporte de sodio y otras sustancias orgánicas",
+              "option3": "Movimiento pasivo de sodio por canales",
+              "option4": "Todas las anteriores",
+              "ans": 4,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 19,
+              "question": "Los movimientos de segmentación son:",
+              "option1": "Ondas peristálticas",
+              "option2": "Ondas antiperistálticas",
+              "option3": "Movimientos en masa",
+              "option4": "Son correctas “a” y “c”",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            },
+            {
+              "id": 20,
+              "question": "El recto contiene pliegues transversales que se denominan:",
+              "option1": "Coanas",
+              "option2": "Válvulas rectales",
+              "option3": "Columnas anales",
+              "option4": "Pliegues de Morgagni",
+              "ans": 2,
+              "asignatura": "FAD",
+              "tema": "Tema 2"
+            }
+          ]
+    }
+]    
+      
