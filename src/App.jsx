@@ -10,8 +10,8 @@ import Footer from './components/Footer'
 import Cargador from './components/Cargador'
 //import Login from './components/login/Login'
 //import Register from './components/login/Register'
-import { AuthProvider } from './components/context/authContext'
-import { ProtectedRoute } from './components/login/ProtectedRoute'
+//import { AuthProvider } from './components/context/authContext'
+//import { ProtectedRoute } from './components/login/ProtectedRoute'
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
               </div>
             }
           >
-            <AuthProvider>
+            {/* <AuthProvider> */}
               {/* <NavBar /> */}
               <Routes>
                 <Route path="/" element={<Landing />} />
@@ -34,7 +34,7 @@ function App() {
                 <Route path="/register" element={<Register />} /> */}
                              
               </Routes>
-            </AuthProvider>
+            {/* </AuthProvider> */}
           </Suspense>
         </main>
         <Toaster />

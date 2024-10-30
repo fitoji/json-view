@@ -158,7 +158,7 @@ const Test = ({data}) => {
   const temporizadorRef = useRef();
   const reset = () => {
     setIndex(0)
-    setNPreguntas(npreguntas) // Restablece npreguntas al valor original
+    setNPreguntas(data.length) // Restablece npreguntas al valor original
     const newQuestions = preguntasAleatorias(npreguntas, data, preguntaAleatoria)
     setQuestions(newQuestions)
     setQuestion(newQuestions[0])
@@ -193,7 +193,7 @@ const Test = ({data}) => {
     setOriginalNPreguntas(Number(event.target.value)) */
     const numPreguntas = Number(event.target.value)
     setNPreguntas(numPreguntas)
-    setOriginalNPreguntas(numPreguntas)
+    //setOriginalNPreguntas(numPreguntas)
     setQuestions(preguntasAleatorias(numPreguntas, data, preguntaAleatoria))
     setQuestion(questions[0])
     setIndex(0)
@@ -366,10 +366,11 @@ const Test = ({data}) => {
 
             <div className='flex flex-col'>
               <div>
-                <div className='flex flex-row items-center justify-between'>
+                {/* todo */}
+                {/* <div className='flex flex-row items-center justify-between'>
                   <div className=' text-sm font-medium leading-6 text-gray-900 pr-2'>Número de preguntas del Test: </div>
                   <Input type="number" className='w-20 mb-2' onChange={handleInputChange} min="1" max={data.length} placeholder={data.length} />
-                </div>
+                </div> */}
 
                 <Separator />
                 <div className='mt-2 flex flex-row items-center w-full justify-between text-sm font-medium text-gray-900 '>
