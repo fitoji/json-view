@@ -383,12 +383,8 @@ const Test = ({data}) => {
                     />
                   </div>
                   <div className="flex items-center  space-x-2">
-                    <Label htmlFor="opciones-random">Opciones Aleatorias</Label>
-                    <Switch
-                      id="opciones-random"
-                    /* checked={opcionesAleatoria}
-                    onCheckedChange={handleOpcionesChange} */
-                    />
+                    
+                    
                   </div>
 
                 </div>
