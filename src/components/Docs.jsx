@@ -39,15 +39,15 @@ export default function Docs() {
         </Button>
         </div>
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-4xl font-bold text-emerald-700 mb-6">JsonTests - Documentación</h1>
+        <h1 className="text-4xl font-bold text-emerald-700 mb-6">Visor JsonTests - Documentación</h1>
 
         <Section title="Introducción" id="introduccion">
           <p>
-            JsonTests es una aplicación diseñada para que los estudiantes puedan practicar con tests interactivos de manera rápida y eficiente. La aplicación toma cuestionarios en formato JSON y los convierte en tests interactivos, permitiendo a los usuarios repasar y aprender de manera dinámica.
+            Visor JsonTests es una aplicación diseñada para que los estudiantes puedan practicar con tests interactivos de manera rápida y eficiente. La aplicación toma cuestionarios en formato JSON y los convierte en tests interactivos, permitiendo a los usuarios repasar y aprender de manera dinámica.
           </p>
         </Section>
         <Section title="Formato de Entrada" id="formato">
-          <p>JsonTests requiere que los cuestionarios estén en un formato JSON específico. Aquí tienes un ejemplo de cómo debe estructurarse cada pregunta:</p>
+          <p>Visor JsonTests requiere que los cuestionarios estén en un formato JSON específico. Aquí tienes un ejemplo de cómo debe estructurarse cada pregunta:</p>
           <pre className="bg-emerald-100 p-4 rounded-md mt-2 overflow-x-auto">
             {JSON.stringify({
               "id": 1,
@@ -95,6 +95,8 @@ export default function Docs() {
             <p className="pl-5 py-2">En los Campos "asignatura" y "tema" puedes poner el valor que corresponda a la asignatura estudiada, y en tema el numero o nombre del tema que el cuestionario indique, tambien se lo puedes pedir a GPT para que cambie automaticamente en todas las preguntas</p>
             <li className="font-semibold">¿Qué significa el "ans"?</li>
             <p className="pl-5 py-2">En el campo "ans" va el valor de la respuesta correcta ("answer"). a=1, b=2, c=3, d=4. Normalmente GPT lo detecta automaticamente, conviene verificar.</p>
+            <li className="font-semibold">¿No entiendo nada de informática, pero quiero usar la app, ¿cómo puedo hacer?</li>
+            <p className="pl-5 py-2">Lée Método Rápido, donde se explica como con una petición ChatGPT puedes tener el cuestionario en el formato correcto, ¡sin tocar nada!.</p>
           </ol>
           
         </Section>
@@ -109,6 +111,15 @@ export default function Docs() {
           </ol>
         </Section>
 
+        <Section title="Método Rápido" id="rapido">
+          <p>Si no quieres complicaciones con temas de informática. Aquí tienes un ejemplo de cómo preguntarle a ChatGPT:</p>
+          <p className="bg-emerald-100 p-4 rounded-md my-2 overflow-y-auto">
+          Considerando la siguiente documentación: https://visortests-gpt.vercel.app/docs
+          crea un cuestionario de <strong className="text-rose-600">[ingresar numero de preguntas] </strong> preguntas sobre el tema <strong className="text-rose-600">[ingresar tema]</strong>  en formato json. Guárdalo en un archivo json.
+          </p>
+          <p>¡De esta manera ya tendrías listo tu cuestionario en el formato json para poder prácticar y seguir estudiando!</p>
+          <p>No te olvides de ingresar el número de preguntas del test y el tema (cuanto más específico seas, más precisas serán las preguntas)!</p>
+        </Section>
         <Section title="Características Principales" id="caracteristicas">
           <ul className="list-disc pl-5">
             <li><strong>Orden Aleatorio de preguntas:</strong> Las preguntas van en orden aleatorio (puede desactivarse esta opción en el MENU).</li>
@@ -120,10 +131,10 @@ export default function Docs() {
 
         <Section title="Soporte y Contacto" id="soporte">
           <p>
-            Si tienes alguna pregunta, sugerencia o encuentras algún problema mientras usas JsonTests, por favor contacta con nuestro equipo de soporte en [fitoji@protonmail.com].
+            Si tienes alguna pregunta, sugerencia o encuentras algún problema mientras usas Visor JsonTests, por favor contacta con nuestro equipo de soporte en [fitoji@protonmail.com].
           </p>
           <p className="mt-2">
-            ¡Esperamos que disfrutes usando JsonTests para mejorar tu aprendizaje!
+            ¡Esperamos que disfrutes usando Visor JsonTests para mejorar tu aprendizaje!
           </p>
         </Section>
         <div className="flex justify-end">
