@@ -9,10 +9,7 @@ import Landing from './components/login/Landing'
 import Footer from './components/Footer'
 import Cargador from './components/Cargador'
 import Docs from './components/Docs'
-//import Login from './components/login/Login'
-//import Register from './components/login/Register'
-//import { AuthProvider } from './components/context/authContext'
-//import { ProtectedRoute } from './components/login/ProtectedRoute'
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
@@ -40,6 +37,7 @@ function App() {
 
         <Separator />
         <Footer className="w-full shrink-0 border-t bg-sky-50" />
+        <Analytics />
       </div>
     </BrowserRouter>
   )
