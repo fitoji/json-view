@@ -48,7 +48,7 @@ export default function Docs() {
         </Section>
         <Section title="Formato de Entrada" id="formato">
           <p>JsonTests requiere que los cuestionarios estén en un formato JSON específico. Aquí tienes un ejemplo de cómo debe estructurarse cada pregunta:</p>
-          <pre className="bg-gray-100 p-4 rounded-md mt-2 overflow-x-auto">
+          <pre className="bg-emerald-100 p-4 rounded-md mt-2 overflow-x-auto">
             {JSON.stringify({
               "id": 1,
               "question": "Aqui hay una PREGUNTA:",
@@ -63,15 +63,40 @@ export default function Docs() {
           </pre>
           <p className="mt-4">Para convertir un cuestionario de formato PDF a este formato JSON, puedes utilizar ChatGPT con el siguiente prompt:</p>
           <p className="italic mt-2">"Utilizando el siguiente formato json, transforma el cuestionario del pdf, cambia los valores de asignatura a: '[valor indicado]' y tema a: '[tema indicado]'"</p>
-        </Section>
-
-        <Section title="Primeros pasos" id="instalacion">
-          <p>Para comenzar a usar la aplicación:</p>
-          <ol className="list-decimal pl-5 mt-2">
-            <li>Asegúrate de tener tu cuestionario en formato JSON (ver Formato de Entrada para más detalles).</li>
-            <li>Carga tu archivo JSON utilizando el input proporcionado o seleccionándolo desde el explorador de archivos.</li>
+          <p className="mt-4 mb-2">Ten en cuenta en el cuestionario que entregues a GPT tenga la siguiente estructura:</p>
+          <div className="bg-emerald-100 rounded-md pt-3 pr-3 overflow-x-auto">
+          <ol className="pl-5 ">
+            <li className="font-semibold">Pregunta 1 - ¿Cuál de los siguientes porcentajes corresponde a la importancia del lenguaje no verbal en la comunicación?</li>
+            <p className="pl-4">A) 7%</p>
+            <p className="pl-4">B) 38%</p>
+            <p className="pl-4">C) 55%</p>
+            <p className="pl-4">D) 45%</p>
+            <li className="font-semibold">Pregunta 2 - Según los axiomas de Paul Watzlawick, ¿qué afirma sobre la posibilidad de no comunicarse?</li>
+            <p className="pl-4">A) Siempre es posible no comunicarse.</p>
+            <p className="pl-4">B) No es posible no comunicarse.</p>
+            <p className="pl-4">C) Solo es posible no comunicarse en situaciones específicas.</p>
+            <p className="pl-4">D) No se menciona la posibilidad de no comunicarse.</p>
+          <p>etc...</p>
           </ol>
-          <p className="mt-2">¡Y eso es todo! Estás listo para empezar a practicar.</p>
+          <ol className="list-decimal pl-5 mt-2 pb-4">
+            <p className="font-semibold">Soluciones</p>
+            <li>C) 55%</li>
+            <li>B) No es posible no comunicarse.</li>
+            <p>etc...</p>
+          </ol>
+          </div>
+          
+        </Section>
+        
+        <Section title="FAQ" id="instalacion">
+          <p>Preguntas Frequentes:</p>
+          <ol className="list-decimal pl-5 mt-2">
+            <li className="font-semibold">¿Y cómo sabes el código de asignatura ("COA", "ESP"...)? ¿te acepta más o menos cualquiera?</li>
+            <p className="pl-5 py-2">En los Campos "asignatura" y "tema" puedes poner el valor que corresponda a la asignatura estudiada, y en tema el numero o nombre del tema que el cuestionario indique, tambien se lo puedes pedir a GPT para que cambie automaticamente en todas las preguntas</p>
+            <li className="font-semibold">¿Qué significa el "ans"?</li>
+            <p className="pl-5 py-2">En el campo "ans" va el valor de la respuesta correcta ("answer"). a=1, b=2, c=3, d=4. Normalmente GPT lo detecta automaticamente, conviene verificar.</p>
+          </ol>
+          
         </Section>
 
         <Section title="Modo de uso" id="uso">
@@ -86,16 +111,16 @@ export default function Docs() {
 
         <Section title="Características Principales" id="caracteristicas">
           <ul className="list-disc pl-5">
-            <li><strong>Tests Interactivos:</strong> Practica con preguntas de opción múltiple de manera dinámica.</li>
+            <li><strong>Orden Aleatorio de preguntas:</strong> Las preguntas van en orden aleatorio (puede desactivarse esta opción en el MENU).</li>
+            <li><strong>Orden Aleatorio de opciones:</strong> Las opciones a,b,c,d irán cambiando aleatoriamente, se mantiene referencia para aquellas respuestas que digan a y b son ciertas por ejemplo.</li>
             <li><strong>Retroalimentación Inmediata:</strong> Recibe información sobre cada respuesta a medida que avanzas en el test.</li>
             <li><strong>Repaso de Errores:</strong> Una vez finalizado el test, puedes repasar las preguntas que respondiste incorrectamente.</li>
-            <li><strong>Flexibilidad:</strong> Utiliza cuestionarios en formato JSON, lo que permite una fácil integración y creación de nuevos tests.</li>
           </ul>
         </Section>
 
         <Section title="Soporte y Contacto" id="soporte">
           <p>
-            Si tienes alguna pregunta o encuentras algún problema mientras usas JsonTests, por favor contacta con nuestro equipo de soporte en [fitoji@protonmail.com].
+            Si tienes alguna pregunta, sugerencia o encuentras algún problema mientras usas JsonTests, por favor contacta con nuestro equipo de soporte en [fitoji@protonmail.com].
           </p>
           <p className="mt-2">
             ¡Esperamos que disfrutes usando JsonTests para mejorar tu aprendizaje!

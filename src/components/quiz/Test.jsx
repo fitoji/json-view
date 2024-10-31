@@ -212,7 +212,7 @@ const Test = ({data}) => {
       <div className='bg-emerald-300 w-full md:w-1/6  bg-opacity-30 px-4 py-4 md:h-svh  '>
         <div>
           <h1 className='hidden md:block text-xl font-bold pb-4 pt-20 text-center'>Módulo: {question.asignatura}</h1>
-          <p className="text-pretty hidden md:block pt-2">{`Bienvenidos al cuestionario sobre los contenidos vistos en las clases correspondientes a ${question.tema}. Son ${npreguntas} preguntas. ¡Mucha suerte!`}</p>
+          <p className="text-pretty hidden md:block pt-2">{`Bienvenidos al cuestionario ${question.tema}. Son ${npreguntas} preguntas. ¡Mucha suerte!`}</p>
         </div>
         <div className="md:hidden flex flex-row justify-around">
           <h1 className='text-xl font-bold pb-4'>Módulo: {question.asignatura}</h1>
