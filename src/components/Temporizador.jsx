@@ -46,9 +46,10 @@ const Temporizador = forwardRef(({ isRunning, setIsRunning }, ref) => {
   }
 
   return (
-    <Card>
+    <Card className="bg-[#89eae0] bg-gradient-to-br from-[#89eae0] to-[#f1e8fb]
+    hover:bg-gradient-to-br">
       <CardContent className="flex flex-col items-center space-y-1 p-3">
-        <div className="text-xl md:text-2xl text-slate-600 font-bold" >
+        <div className="text-xl md:text-2xl text-slate-700 font-bold" >
           {formatTime(time)}
         </div>
       </CardContent>

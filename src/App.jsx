@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/sonner'
 import Landing from './components/login/Landing'
 import Footer from './components/Footer'
 import Cargador from './components/Cargador'
+import Docs from './components/Docs'
 //import Login from './components/login/Login'
 //import Register from './components/login/Register'
 //import { AuthProvider } from './components/context/authContext'
@@ -24,17 +25,15 @@ function App() {
                 Cargando...
                 <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />
               </div>
-            }
-          >
-            {/* <AuthProvider> */}
-              {/* <NavBar /> */}
+            }>
+             {/* <NavBar /> */}
               <Routes>
                 <Route path="/" element={<Landing />} />
-                {/* <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} /> */}
+                <Route path="/docs" element={<Docs />} />
+                {/* <Route path="/register" element={<Register />} />  */}
                              
               </Routes>
-            {/* </AuthProvider> */}
+           
           </Suspense>
         </main>
         <Toaster />

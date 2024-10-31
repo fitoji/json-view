@@ -2,6 +2,8 @@ import React, { lazy, Suspense } from 'react'
 //import { useAuth, AuthProvider } from '../context/authContext'
 import { DataProvider } from '../context/DataContext'
 import V0json from '../quiz/V0json'
+import { CircleHelp } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 // Componente de carga
 const LoadingFallback = () => <div>Cargando...</div>
@@ -12,6 +14,13 @@ export default function Landing() {
   
   return (
     <div className="flex flex-col min-h-screen">
+      <div className="flex justify-end pr-6 pt-1">
+      <Link
+        className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
+        to="/docs">
+        <CircleHelp />       
+      </Link>
+      </div>
       <main className="flex-1">
         <div className="flex flex-col items-center space-y-4 text-center">
           <h1 className="mt-5 text-2xl font-bold tracking-tighter sm:text-4xl md:text-2xl lg:text-4xl/none text-emerald-700">

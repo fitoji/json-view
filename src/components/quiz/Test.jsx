@@ -328,6 +328,12 @@ const Test = ({data}) => {
       <div className='bg-emerald-300 w-full bg-opacity-30 pl-8 pr-4 md:w-1/6'>
         <div className="flex justify-between md:flex-col md:pt-20">
           <div className="flex flex-row justify-around gap-4  md:flex-col">
+          
+          <div className="flex flex-row">
+                <Temporizador isRunning={isRunning} setIsRunning={setIsRunning} ref={temporizadorRef} /> 
+            </div>
+         
+
             <div className="flex flex-row drop-shadow-xl ">
               <img src="/icons8-accept-48.png" 
               alt="icono bien" 
@@ -344,28 +350,24 @@ const Test = ({data}) => {
               <div className='text-xl mt-4 ml-2 text-rose-600'>{mal}</div>
               
             </div>
-            <div className="flex flex-row drop-shadow-xl ">
-                <Temporizador isRunning={isRunning} setIsRunning={setIsRunning} ref={temporizadorRef} /> 
-              </div>
+            
+           
+            
           </div>
-          <div className=" md:justify-end mb-2 align-top pt-1 md:pt-10">
-            <Button className=" rounded-lg bg-sky-500 px-5 py-2 text-white  hover:bg-sky-400 active:bg-sky-500 drop-shadow-xl" onClick={() => setOpen(true)}>
+          <div className=" md:justify-end mb-2 align-top pt-1 md:pt-4">
+            <Button className=" rounded-lg bg-sky-500 px-2 py-2 text-white ml-2  hover:bg-sky-400 active:bg-sky-500 drop-shadow-xl" onClick={() => setOpen(true)}>
               <Settings className='' />
               <span className="hidden md:inline">Menu</span>
             </Button>
           </div>
-        </div>
-        {/* //Menu Modales */}
-        <Modal open={open} onClose={() => setOpen(false)}>
-          
-          <div className='text-center w-80'>
-            <Settings size={56} className='mx-auto text-sky-500' />
-            <div className='mx-auto my-4 w-48'>
-              <h3 className='text-lg font-black text-gray-800'>Menu</h3>
-            </div>
-
-            <div className='flex flex-col'>
-              <div>
+          <Modal open={open} onClose={() => setOpen(false)}>
+              <div className='text-center w-80'>
+                <Settings size={56} className='text-sky-500' />
+                <div>
+                  <h3 className='text-lg font-black text-gray-800'>Menu</h3>
+                </div>
+              <div className='flex flex-col'>
+                <div>
                 {/* todo */}
                 {/* <div className='flex flex-row items-center justify-between'>
                   <div className=' text-sm font-medium leading-6 text-gray-900 pr-2'>Número de preguntas del Test: </div>
@@ -400,6 +402,9 @@ const Test = ({data}) => {
             </div>
           </div>
         </Modal>
+        </div>
+        {/* //Menu Modales */}
+        
 
         <Modal open={openAlert} onClose={() => setOpenAlert(false)}>
           <div className='text-center w-56'>
