@@ -3,6 +3,9 @@ import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import Test from './Test'
 
+import { Button } from '../ui/button';
+import { ArrowDownToLine, FileJson, Mail } from "lucide-react";
+
 export default function V0json() {
     const [jsonData, setJsonData] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -35,10 +38,13 @@ export default function V0json() {
     }
   
     return (
-      <div className="container mx-auto p-4">
-        
-        <div className="mb-4">
-            <Input
+      <div className="container mx-auto p-2">
+        <div className="mb-2">
+          {/* <Label className="flex flex-row justify-center text-slate-600">Selecciona un archivo o arrastra y sueltalo aquí
+          <ArrowDownToLine />
+          </Label> */}
+           <div className="relative">
+           <Input
             id="fileInput"
             type="file"
             accept=".json"
@@ -48,6 +54,11 @@ export default function V0json() {
     hover:bg-gradient-to-br hover:from-emerald-300 hover:to-emerald-100 transition-colors duration-200 ease-in-out"
       
           />
+          <div className="pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center pe-3 text-muted-foreground/80 peer-disabled:opacity-50">
+          <FileJson  size={16} strokeWidth={2} aria-hidden="true" />
+        </div>
+           </div>
+            
         </div>
          {isLoading ? (
           <div className="text-center">
@@ -62,3 +73,5 @@ export default function V0json() {
       </div>
     )
   }
+
+
