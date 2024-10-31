@@ -3,10 +3,10 @@ import { useRef, useState, useEffect } from 'react'
 import { preguntasAleatorias } from '../../helpers/funcionesTest.mjs'
 import { motion, AnimatePresence } from "framer-motion"
 import './Test.css'
-import { ArrowBigRightDash, Settings, TriangleAlert, Undo2 } from 'lucide-react'
+import { ArrowBigRightDash, Settings, TriangleAlert } from 'lucide-react'
 import Modal from '../Modal'
 import { Button } from "../ui/button"
-import { Input } from '../ui/input'
+//import { Input } from '../ui/input'
 import { Switch } from "../ui/switch"
 import { Label } from "../ui/label"
 import { Progress } from "../ui/progress"

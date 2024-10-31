@@ -8,8 +8,12 @@ import { Toaster } from '@/components/ui/sonner'
 import Landing from './components/login/Landing'
 import Footer from './components/Footer'
 import Cargador from './components/Cargador'
-import Docs from './components/Docs'
+
 import { Analytics } from "@vercel/analytics/react"
+//import Docs from './components/Docs'
+const Docs = lazy(() =>
+  import('./components/Docs')
+)
 
 function App() {
   return (
@@ -27,7 +31,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/docs" element={<Docs />} />
-                {/* <Route path="/register" element={<Register />} />  */}
+                
                              
               </Routes>
            
