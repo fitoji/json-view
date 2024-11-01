@@ -26,7 +26,7 @@ export default function StoredFiles({ files, onSelect, onDelete, setTituloOff })
                       onSelect(fileName); 
                       setTituloOff(false)
                       window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                      }} className="rounded-xl bg-sky-500 mr-2 text-base font-bold text-white transition duration-200 hover:bg-sky-400 active:bg-green-100">
+                      }} className="rounded-xl bg-sky-500 mr-2 text-base text-white transition duration-200 hover:bg-sky-400 active:bg-green-100">
                       <SquarePlay />
                         <span className="hidden md:inline">
                         Ver

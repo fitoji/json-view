@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Test from './quiz/Test'
 
 export default function FileViewer({ content }) {
