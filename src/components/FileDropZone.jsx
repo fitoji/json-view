@@ -82,7 +82,7 @@ export default function FileDropZone({ onFileDrop }) {
       }`}
     >
         
-      {isDragging ? 'Suelta el archivo aquí' : 'Arrastra y suelta un archivo JSON aquí'}
+      {isDragging ? 'Suelta el test aquí' : 'Arrastra y suelta un test JSON aquí'}
       
     </div>
     <Input
