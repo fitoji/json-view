@@ -18,7 +18,8 @@ export default function StoredFiles({ files, onSelect, onDelete, setTituloOff })
         ) : (
           fileEntries.map(([fileName]) => (
             <div key={fileName} className="flex justify-between flex-col md:flex-row items-center mb-2 border-dotted border-2 border-slate-200">
-              <span className="">{fileName}</span>
+              {/* <span className="">{fileName}</span> */}
+              <span className="pl-4">{fileName.replace('.json', '')}</span>
               
                   <div className="flex flex-row items-center mx-2">
                     <Button onClick={() => { 
