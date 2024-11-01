@@ -1,13 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DataProvider } from '../context/DataContext'
 import V0json from '../quiz/V0json'
 import { CircleHelp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Progress } from "@/components/ui/progress"
+import FileDropZone from '../FileDropZone'
+import StoredFiles from '../StoredFiles'
+import StorageUsage from '../StorageUsage'
+import FileViewer from '../FileViewer'
+
 // Componente de carga
 const LoadingFallback = () => <div>Cargando...</div>
 
 export default function Landing() {
+  const [files, setFiles] = useState({})
+  const [selectedFile, setSelectedFile] = useState(null)
+  const [storageUsage, setStorageUsage] = useState(0)
+
+  useEffect(() => {
+    const storedFiles = JSON.parse(localStorage.getItem('jsonFiles') || '{}')
+    setFiles(storedFiles)
+    updateStorageUsage()
+  }, [])
+  const updateStorageUsage = () => {
+    const totalSpace = 5 * 1024 * 1024 // 5MB (ejemplo de límite)
+    const usedSpace = new Blob([JSON.stringify(localStorage)]).size
+    setStorageUsage((usedSpace / totalSpace) * 100)
+  }
+  const handleFileDrop = (fileName, content) => {
+    const updatedFiles = { ...files, [fileName]: content }
+    setFiles(updatedFiles)
+    localStorage.setItem('jsonFiles', JSON.stringify(updatedFiles))
+    updateStorageUsage()
+  }
+
+  const handleFileSelect = (fileName) => {
+    setSelectedFile(files[fileName])
+  }
+
+  const handleFileDelete = (fileName) => {
+    const updatedFiles = { ...files }
+    delete updatedFiles[fileName]
+    setFiles(updatedFiles)
+    localStorage.setItem('jsonFiles', JSON.stringify(updatedFiles))
+    updateStorageUsage()
+    if (selectedFile === files[fileName]) {
+      setSelectedFile(null)
+    }
+  }
   const [tituloOff,setTituloOff] = useState(true)
   
   return (
@@ -34,10 +77,19 @@ export default function Landing() {
         }
         </div>
         <DataProvider>
-          <V0json  setTituloOff={setTituloOff} />
+          {/* <V0json  setTituloOff={setTituloOff} /> */}
+       
+
+        <div className="container mx-auto p-4">
+          {/* <h1 className="text-2xl font-bold mb-4">Almacenamiento de Archivos JSON</h1> */}
+          {selectedFile && <FileViewer content={selectedFile} />}
+          <FileDropZone onFileDrop={handleFileDrop} />
+          <div className="mt-4">
+            <StoredFiles files={files || {}} onSelect={handleFileSelect} onDelete={handleFileDelete} setTituloOff={setTituloOff}/>
+          </div>
+          <StorageUsage usage={storageUsage} />
+        </div>
         </DataProvider>
-         
-        
       </main>
     </div>
   )

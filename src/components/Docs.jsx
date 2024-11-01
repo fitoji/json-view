@@ -107,12 +107,13 @@ export default function Docs() {
         <AccordionTrigger>Modo de uso</AccordionTrigger>
         <AccordionContent>
         <ol className="list-decimal pl-5">
-            <li>Carga tu archivo JSON de cuestionarios.</li>
-            <li>La aplicación convertirá automáticamente el JSON en un test interactivo.</li>
+            <li>Carga tu archivos JSON de cuestionarios (puedes seleccionarlos uno a uno o arrastrarlos y soltarlos).</li>
+            <li>En un componente se mostrarán los tests guardados correctamente.</li>
+            <li>Clickea en VER y  <strong>¡empieza a practicar!</strong></li>
             <li>Comienza a responder las preguntas una por una.</li>
             <li>Recibe retroalimentación inmediata sobre tus respuestas.</li>
             <li>Al finalizar el test, tendrás la opción de repasar tus errores.</li>
-          </ol>
+        </ol>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-4">
@@ -123,6 +124,7 @@ export default function Docs() {
             <li><strong>Orden Aleatorio de opciones:</strong> Las opciones a,b,c,d irán cambiando aleatoriamente, se mantiene referencia para aquellas respuestas que digan a y b son ciertas por ejemplo.</li>
             <li><strong>Retroalimentación Inmediata:</strong> Recibe información sobre cada respuesta a medida que avanzas en el test.</li>
             <li><strong>Repaso de Errores:</strong> Una vez finalizado el test, puedes repasar las preguntas que respondiste incorrectamente.</li>
+            <li><strong>Almacenamiento en Local:</strong> Podrás almacenar cientos de Test en la memoria local de tu Navegador, tus cuestionarios están solo en tu Navegador y solo tu tendrás acceso.</li>
           </ul>
         </AccordionContent>
       </AccordionItem>

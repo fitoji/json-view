@@ -20,7 +20,13 @@ import Temporizador from '../Temporizador'
 
 
 const Test = ({data}) => {
-
+  useEffect(() => { // {{ edit_1 }}
+    reset()
+    setNPreguntas(data.length); // Actualiza el número de preguntas cuando cambia data
+    const newQuestions = preguntasAleatorias(data.length, data, preguntaAleatoria);
+    setQuestions(newQuestions); // Actualiza las preguntas aleatorias
+    setQuestion(newQuestions[0]); // Establece la primera pregunta
+  }, [data]);
   //menu modal
   const [open, setOpen] = useState(false)
   const [openAlert, setOpenAlert] = useState(false)
