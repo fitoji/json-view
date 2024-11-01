@@ -26,13 +26,13 @@ export default function StoredFiles({ files, onSelect, onDelete, setTituloOff })
                       onSelect(fileName); 
                       setTituloOff(false)
                       window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                      }} className="rounded-xl bg-sky-500 mr-2 text-base text-white transition duration-200 hover:bg-sky-400 active:bg-green-100">
+                      }} className="rounded-xl bg-emerald-300 mr-2 text-base text-white transition duration-200 hover:bg-emerald-200 active:bg-green-100" size="sm">
                       <SquarePlay />
                         <span className="hidden md:inline">
                         Ver
                         </span>
                       </Button>
-                    <Button onClick={() => onDelete(fileName)} variant="destructive">
+                    <Button onClick={() => onDelete(fileName)} variant="destructive"size="sm">
                       <Trash2 />
                       <span className="hidden md:inline">
                       Eliminar
