@@ -18,6 +18,7 @@ import Temporizador from '../Temporizador'
 
 
 
+
 const Test = ({data}) => {
 
   //menu modal
@@ -311,6 +312,7 @@ const Test = ({data}) => {
                 <ArrowBigRightDash />
                 Siguiente
               </Button>
+              
               <div className='flex h-5 items-center space-x-4 text-sm md:text-base pt-4'>
                 <div >
                   {index + 1} de {npreguntas} preguntas
