@@ -30,6 +30,9 @@ export default function Docs() {
       <AccordionItem value="item-1">
         <AccordionTrigger>Introducción</AccordionTrigger>
         <AccordionContent>
+          <div className="flex justify-center">
+            <img src="../public/visor.webp" alt="imagen visor json" className="rounded-lg mb-2 md:size-2/4 lg:size-3/4" />
+          </div>
         Visor JsonTests es una aplicación diseñada para que los estudiantes puedan practicar con tests interactivos de manera rápida y eficiente. La aplicación toma cuestionarios en formato JSON y los convierte en tests interactivos, permitiendo a los usuarios repasar y aprender de manera dinámica.
         </AccordionContent>
       </AccordionItem>
@@ -87,6 +90,8 @@ export default function Docs() {
             <p className="pl-5 py-2">En el campo "ans" va el valor de la respuesta correcta ("answer"). a=1, b=2, c=3, d=4. Normalmente GPT lo detecta automaticamente, conviene verificar.</p>
             <li className="font-semibold">¿No entiendo nada de informática, pero quiero usar la app, ¿cómo puedo hacer?</li>
             <p className="pl-5 py-2">Lée Método Rápido, donde se explica como con solo una petición a ChatGPT puedes tener el cuestionario en el formato correcto, ¡sin tocar nada!.</p>
+            <li className="font-semibold">Es que el formato no está bien, le he pedido al gpt que me lo arregle pero dice que en este momento no puede y me da el contenido para que lo pege en .txt</li>
+            <p className="pl-5 py-2">¡Con la nueva version puedes agregar un archivo <strong>TXT</strong> y el Visor lo interpretara como un archivo JSON!</p>
           </ol>
         </AccordionContent>
       </AccordionItem>

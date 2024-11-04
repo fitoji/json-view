@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { SquarePlay, Trash2 } from 'lucide-react'
-import { Separator } from './ui/separator'
+
 
 export default function StoredFiles({ files, onSelect, onDelete, setTituloOff }) {
   const fileEntries = Object.entries(files)

@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { DataProvider } from '../context/DataContext'
-import V0json from '../quiz/V0json'
 import { CircleHelp } from 'lucide-react'
 import { Link } from 'react-router-dom'
+//import V0json from '../quiz/V0json'
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
 import FileDropZone from '../FileDropZone'
 import StoredFiles from '../StoredFiles'
 import StorageUsage from '../StorageUsage'
 import FileViewer from '../FileViewer'
 
-// Componente de carga
-const LoadingFallback = () => <div>Cargando...</div>
+
+
 
 export default function Landing() {
+  
+
   const [files, setFiles] = useState({})
   const [selectedFile, setSelectedFile] = useState(null)
   const [storageUsage, setStorageUsage] = useState(0)
@@ -83,9 +82,10 @@ export default function Landing() {
         <div className="container mx-auto p-4">
           {/* <h1 className="text-2xl font-bold mb-4">Almacenamiento de Archivos JSON</h1> */}
           {selectedFile && <FileViewer content={selectedFile} />}
-          <FileDropZone onFileDrop={handleFileDrop} />
+          <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
           <div className="mt-4">
-            <StoredFiles files={files || {}} onSelect={handleFileSelect} onDelete={handleFileDelete} setTituloOff={setTituloOff}/>
+            <StoredFiles files={files || {}} onSelect={handleFileSelect} onDelete={handleFileDelete} setTituloOff={setTituloOff} />
+
           </div>
           <StorageUsage usage={storageUsage} />
         </div>

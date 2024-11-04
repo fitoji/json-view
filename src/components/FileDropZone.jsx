@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Input } from './ui/input'
+import { ArrowDownToLine, ArrowUpToLine } from 'lucide-react'
 
-export default function FileDropZone({ onFileDrop }) {
+export default function FileDropZone({ onFileDrop, tituloOff }) {
   const [isDragging, setIsDragging] = useState(false)
 
   const handleDragOver = (e) => {
@@ -21,7 +22,8 @@ export default function FileDropZone({ onFileDrop }) {
       const reader = new FileReader()
       reader.onload = (event) => {
         try {
-          const jsonContent = JSON.parse(event.target.result)
+          let jsonContent = JSON.parse(event.target.result)
+          
           onFileDrop(file.name, jsonContent)
         } catch (error) {
           console.error('Error parsing JSON:', error)
@@ -47,12 +49,16 @@ export default function FileDropZone({ onFileDrop }) {
       const reader = new FileReader()
       reader.onload = (event) => {
         try {
-          const jsonContent = JSON.parse(event.target.result)
+          let jsonContent = JSON.parse(event.target.result)
+          if (file.type === 'text/plain') {
+            // Si el archivo es .txt, cambiar su extensión a .json
+            jsonContent = JSON.parse(event.target.result);
+            setFileName(file.name.replace('.txt', '.json'));
+          } else {
+            jsonContent = JSON.parse(event.target.result);
+          }
           setJsonData(jsonContent)
-          onFileDrop(file.name, jsonContent)
-          
-         
-          
+          onFileDrop(file.name, jsonContent)    
         } catch (error) {
           console.error('Error al parsear el JSON:', error)
           
@@ -72,28 +78,40 @@ export default function FileDropZone({ onFileDrop }) {
 
 
   return (
-    <div className="bg-white hover:bg-emerald-100">
-<div
+    <div className="bg-white rounded-md pt-4 pb-4">
+    {/*<div
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       className={`border-2 border-dashed rounded-lg p-8 text-center ${
         isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
-      }`}
+      }`
     >
-        
-      {isDragging ? 'Suelta el test aquí' : 'Arrastra y suelta un test JSON aquí'}
+    {isDragging ? 'Suelta el test aquí' : 'Arrastra y suelta un test JSON aquí'}  
+    </div>*/}
+   {tituloOff &&( <div className="flex justify-center pb-1">
+    <ArrowDownToLine />
       
-    </div>
+      Clickea o arrastra y suelta un cuestionario .json aquí
+    <ArrowDownToLine />
+    </div>)}
+    
     <Input
     id="fileInput"
     type="file"
     accept=".json"
     onChange={handleFileUpload}
-    className="shadow-lg
-hover:bg-emerald-100 transition-colors"
-
-  />
+    className="shadow-lg hover:bg-emerald-100 transition-colors"
+    />
+    { (<div className="flex flex-row justify-center pt-2">
+    <ArrowUpToLine />
+      
+      Clickea o arrastra y suelta un cuestionario .json aquí
+      <ArrowUpToLine />
+      
+    </div>)
+      }
+   
     </div>
     
   )
