@@ -31,7 +31,7 @@ export default function Docs() {
         <AccordionTrigger>Introducción</AccordionTrigger>
         <AccordionContent>
           <div className="flex justify-center">
-            <img src="../public/visor.webp" alt="imagen visor json" className="rounded-lg mb-2 md:size-2/4 lg:size-3/4" />
+            <img src="/visor.webp" alt="imagen visor json" className="rounded-lg mb-2 md:size-2/4 lg:size-3/4" />
           </div>
         Visor JsonTests es una aplicación diseñada para que los estudiantes puedan practicar con tests interactivos de manera rápida y eficiente. La aplicación toma cuestionarios en formato JSON y los convierte en tests interactivos, permitiendo a los usuarios repasar y aprender de manera dinámica.
         </AccordionContent>
