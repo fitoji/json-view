@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Input } from './ui/input'
 import { ArrowDownToLine, ArrowUpToLine } from 'lucide-react'
+import { toast } from 'sonner';
 
 export default function FileDropZone({ onFileDrop, tituloOff }) {
   const [isDragging, setIsDragging] = useState(false)
@@ -27,6 +28,7 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
           onFileDrop(file.name, jsonContent)
         } catch (error) {
           console.error('Error parsing JSON:', error)
+         
         }
       }
       reader.readAsText(file)
@@ -57,11 +59,27 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
           } else {
             jsonContent = JSON.parse(event.target.result);
           }
+          toast.success("¡El cuestionario ha sido cargado exitosamente!",
+            {
+              duration: 1000,
+              style: {
+                backgroundColor: '#3399ff',
+                color: '#fff',
+              },
+            })
           setJsonData(jsonContent)
           onFileDrop(file.name, jsonContent)    
         } catch (error) {
           console.error('Error al parsear el JSON:', error)
-          
+          toast.error("'El archivo no es un JSON válido'",
+            {
+              duration: 5000,
+              style: {
+                backgroundColor: '#ff0066',
+                color: '#fff',
+              },
+            }
+          )
         } finally {
           
           setIsLoading(false)
@@ -103,7 +121,7 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
     onChange={handleFileUpload}
     className="shadow-lg hover:bg-emerald-100 transition-colors"
     />
-    { (<div className="flex flex-row justify-center pt-2">
+    {tituloOff && (<div className="flex flex-row justify-center pt-2">
     <ArrowUpToLine />
       
       Clickea o arrastra y suelta un cuestionario .json aquí
