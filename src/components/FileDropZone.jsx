@@ -63,7 +63,7 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
           }
           toast.success("¡El cuestionario ha sido cargado exitosamente!",
             {
-              duration: 1000,
+              duration: 3000,
               style: {
                 backgroundColor: '#3399ff',
                 color: '#fff',
@@ -111,7 +111,7 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
     {isDragging ? 'Suelta el test aquí' : 'Arrastra y suelta un test JSON aquí'}  
     </div>*/}
     <div className="flex flex-col justify-center w-full max-w-sm items-center gap-1.5">
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center text-wrap px-2">
       <Label htmlFor="fileInput">
         Clickea o arrastra y suelta un cuestionario .json aquí</Label>
       <ArrowDownToLine />
@@ -122,7 +122,7 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
         type="file"
         accept=".json, .txt"
         onChange={handleFileUpload}
-        className="shadow-lg hover:bg-emerald-100 transition-colors"
+        className="shadow-lg hover:bg-emerald-100 transition-all duration-300"
       /> 
     </div>
 
