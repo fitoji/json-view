@@ -66,9 +66,7 @@ export default function V0json({setTituloOff}) {
           <Label className="flex flex-row justify-center text-slate-600" htmlFor="fileInput">Selecciona un archivo o arrastra y sueltalo aquí
           <ArrowDownToLine size={16}/>
           </Label>
-        )
-          
-        }
+        )}
         
            <div className="relative">
           

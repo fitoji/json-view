@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Input } from './ui/input'
 import { ArrowDownToLine, ArrowUpToLine } from 'lucide-react'
 import { toast } from 'sonner';
+import { Label } from './ui/label';
+
 
 export default function FileDropZone({ onFileDrop, tituloOff }) {
   const [isDragging, setIsDragging] = useState(false)
@@ -96,7 +98,8 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
 
 
   return (
-    <div className="bg-white rounded-md pt-4 pb-4">
+    <div className="rounded-md pt-4 pb-4 bg-[#89eae0] bg-gradient-to-br from-[#89eae0] to-[#f1e8fb]
+       hover:bg-gradient-to-br flex justify-center">
     {/*<div
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -107,28 +110,24 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
     >
     {isDragging ? 'Suelta el test aquí' : 'Arrastra y suelta un test JSON aquí'}  
     </div>*/}
-   {tituloOff &&( <div className="flex justify-center pb-1">
-    <ArrowDownToLine />
+    <div className="flex flex-col justify-center w-full max-w-sm items-center gap-1.5">
+      <div className="flex flex-row items-center">
+      <Label htmlFor="fileInput">
+        Clickea o arrastra y suelta un cuestionario .json aquí</Label>
+      <ArrowDownToLine />
+      </div>
       
-      Clickea o arrastra y suelta un cuestionario .json aquí
-    <ArrowDownToLine />
-    </div>)}
+      <Input
+        id="fileInput"
+        type="file"
+        accept=".json, .txt"
+        onChange={handleFileUpload}
+        className="shadow-lg hover:bg-emerald-100 transition-colors"
+      /> 
+    </div>
+
     
-    <Input
-    id="fileInput"
-    type="file"
-    accept=".json"
-    onChange={handleFileUpload}
-    className="shadow-lg hover:bg-emerald-100 transition-colors"
-    />
-    {tituloOff && (<div className="flex flex-row justify-center pt-2">
-    <ArrowUpToLine />
-      
-      Clickea o arrastra y suelta un cuestionario .json aquí
-      <ArrowUpToLine />
-      
-    </div>)
-      }
+    
    
     </div>
     

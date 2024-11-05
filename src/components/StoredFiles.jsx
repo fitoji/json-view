@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { SquarePlay, Trash2 } from 'lucide-react'
+import { CircleArrowRight, Trash2 } from 'lucide-react'
 
 
 export default function StoredFiles({ files, onSelect, onDelete, setTituloOff }) {
@@ -27,7 +27,7 @@ export default function StoredFiles({ files, onSelect, onDelete, setTituloOff })
                       setTituloOff(false)
                       window.scrollTo({ top: 0, behavior: 'smooth' }); 
                       }} className="rounded-xl bg-emerald-300 mr-2 text-base text-white transition duration-200 hover:bg-emerald-200 active:bg-green-100" size="sm">
-                      <SquarePlay />
+                      <CircleArrowRight />
                         <span className="hidden md:inline">
                         Ver
                         </span>

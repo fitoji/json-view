@@ -369,12 +369,12 @@ const Test = ({data}) => {
             </Button>
           </div>
           <Modal open={open} onClose={() => setOpen(false)}>
-              <div className='text-center w-80'>
+              <div className='w-80 flex flex-col items-center'>
                 <Settings size={56} className='text-sky-500' />
-                <div>
-                  <h3 className='text-lg font-black text-gray-800'>Menu</h3>
+                <div className="mx-auto my-4 w-48 text-center">
+                  <h3 className='text-lg text-gray-800 font-bold'>Menu</h3>
                 </div>
-              <div className='flex flex-col'>
+              <div className=''>
                 <div>
                 {/* todo */}
                 {/* <div className='flex flex-row items-center justify-between'>
@@ -403,8 +403,8 @@ const Test = ({data}) => {
               <div className='flex flex-row gap-4 mt-4 justify-center'>
                 
                 <Button className="flex flex-row w-1/2 rounded-lg bg-sky-400 font-bold transition duration-200 hover:bg-sky-300 active:bg-sky-500 justify-center p-2" onClick={handleSubmit}>
-                  Aceptar
                   <ArrowBigRightDash />
+                  Aceptar
                 </Button>
               </div>
             </div>
