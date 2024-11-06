@@ -10,6 +10,8 @@ import StorageUsage from '../StorageUsage'
 import FileViewer from '../FileViewer'
 
 
+
+
 export default function Landing() {
   
 
@@ -83,7 +85,7 @@ export default function Landing() {
           <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
           <div className="mt-4">
             <StoredFiles files={files || {}} onSelect={handleFileSelect} onDelete={handleFileDelete} setTituloOff={setTituloOff} />
-            
+           
           </div>
           <StorageUsage usage={storageUsage} />
         </div>

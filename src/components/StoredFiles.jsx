@@ -1,51 +1,121 @@
-import React from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { CircleArrowRight, Trash2 } from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import {
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  arrayMove,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+
+import { SortableFileItem } from './SortableFileItem';
 
 
-export default function StoredFiles({ files, onSelect, onDelete, setTituloOff }) {
-  const fileEntries = Object.entries(files)
+export default function StoredFiles({
+  files,
+  onSelect,
+  onDelete,
+  setTituloOff,
+  onFileAdd,
+  onReorder,
+}) {
+  const [orderedFiles, setOrderedFiles] = useState([]);
+
+  useEffect(() => {
+    // Actualizar el estado local cuando cambien los archivos externos
+     const storedOrderedFiles = JSON.parse(localStorage.getItem('orderedFiles'))|| [];
+     const currentFiles = Object.keys(files);
+
+     const newOrderedFiles = [
+      ...storedOrderedFiles.filter(file => currentFiles.includes(file)),
+      ...currentFiles.filter(file => !storedOrderedFiles.includes(file))
+    ];
+
+    setOrderedFiles(newOrderedFiles);
+
+    //localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
+  }, [files]);
+
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 200,
+        tolerance: 8,
+      },
+    })
+  );
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = orderedFiles.indexOf(active.id);
+      const newIndex = orderedFiles.indexOf(over.id);
+      
+      const newOrderedFiles = arrayMove(orderedFiles, oldIndex, newIndex);
+      setOrderedFiles(newOrderedFiles);
+      localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
+      // Notificar al componente padre sobre el nuevo orden
+      if (onReorder) {
+        onReorder(newOrderedFiles);
+      }
+     // localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
+    }
+  };
+
+  const handleFileDrop = (e) => {
+    
+  };
 
   return (
-    <Card>
+    <Card
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={handleFileDrop}
+      className="transition-all duration-200"
+    >
       <CardHeader>
-        <CardTitle className="flex justify-center md:justify-start">Tests JSON Almacenados</CardTitle>
+        <CardTitle className="flex justify-center">
+          Tests JSON Almacenados
+        </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col">
-        {fileEntries.length === 0 ? (
-          <p>No hay archivos almacenados.</p>
-        ) : (
-          fileEntries.map(([fileName]) => (
-            <div key={fileName} className="flex justify-between flex-col md:flex-row items-center mb-2 border-dotted border-2 border-slate-200">
-              {/* <span className="">{fileName}</span> */}
-              <span className="pl-4">{fileName.replace('.json', '')}</span>
-              
-                  <div className="flex flex-row items-center mx-2">
-                    <Button onClick={() => { 
-                      onSelect(fileName); 
-                      setTituloOff(false)
-                      window.scrollTo({ top: 0, behavior: 'smooth' }); 
-                      }} className="rounded-xl bg-emerald-300 mr-2 text-base text-white transition duration-200 hover:bg-emerald-200 active:bg-green-100" size="sm">
-                      <CircleArrowRight />
-                        <span className="hidden md:inline">
-                        Ver
-                        </span>
-                      </Button>
-                    <Button onClick={() => onDelete(fileName)} variant="destructive"size="sm">
-                      <Trash2 />
-                      <span className="hidden md:inline">
-                      Eliminar
-                        </span>
-                      
-                      </Button>
-                  </div>
-                  
-              </div>
+      <CardContent className="flex flex-col relative min-h-[200px]">
+        {orderedFiles.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-32 text-gray-500 border-2 border-dashed border-gray-200 rounded-lg">
             
-          ))
+            <p>No hay  cuestionarios almacenados.</p>
+          </div>
+        ) : (
+          <DndContext
+            sensors={sensors}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext items={orderedFiles} strategy={verticalListSortingStrategy}>
+              <div className="space-y-2">
+                {orderedFiles.map((fileName) => (
+                  <SortableFileItem
+                    key={fileName}
+                    fileName={fileName}
+                    onSelect={onSelect}
+                    onDelete={onDelete}
+                    setTituloOff={setTituloOff}
+                    
+                  />
+                ))}
+              </div>
+            </SortableContext>
+          </DndContext>
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
