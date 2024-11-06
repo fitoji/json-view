@@ -119,6 +119,12 @@ export default function Docs() {
             <li>Recibe retroalimentación inmediata sobre tus respuestas.</li>
             <li>Al finalizar el test, tendrás la opción de repasar tus errores.</li>
         </ol>
+       
+        <div className="flex justify-center pt-4">
+          <video controls className="rounded-lg mb-2 md:size-3/4">
+            <source src="/ayuda1.webm" type="video/webm" />
+          </video> 
+        </div>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-4">
