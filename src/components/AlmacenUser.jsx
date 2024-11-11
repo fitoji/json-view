@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Button } from './ui/button'
-import { Trash2 } from 'lucide-react'
+
 
 const AlmacenUser = ({fileName,onSelect, onDelete, setTituloOff}) => {
 

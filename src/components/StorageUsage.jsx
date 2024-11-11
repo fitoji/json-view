@@ -6,7 +6,7 @@ export default function StorageUsage({ usage }) {
   return (
     <div>
       {usage > 0.3 &&
-       <Card className="text-sm mt-5 bg-[#89eae0] bg-gradient-to-br from-[#89eae0] to-[#f1e8fb]
+       <Card className="text-sm mt-2 bg-[#89eae0] bg-gradient-to-br from-[#89eae0] to-[#f1e8fb]
        hover:bg-gradient-to-br">
          <CardHeader>
            <CardTitle className="text-sm">Uso del Almacenamiento Persistente del Navegador</CardTitle>

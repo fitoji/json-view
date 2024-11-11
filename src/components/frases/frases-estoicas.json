@@ -1,0 +1,157 @@
+{
+  "frases":[
+    {
+      "frase": "La felicidad de tu vida depende de la calidad de tus pensamientos.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Lo que importa no es lo que te sucede, sino cómo reaccionas ante ello.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La felicidad y la libertad comienzan con una clara comprensión de un principio: algunas cosas están bajo nuestro control y otras no.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Aquel que no puede gobernarse a sí mismo tampoco puede gobernar a los demás.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La adversidad es una oportunidad para mostrar fortaleza.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La mayor parte de lo que decimos y hacemos no es necesario; elimina esas actividades y ganarás más tiempo y tranquilidad.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Si realmente quieres escapar de las cosas que te atormentan, lo que necesitas no es estar en un lugar diferente, sino ser una persona diferente.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Recuerda que no es lo que ocurre, sino cómo lo interpretamos, lo que realmente nos afecta.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "No pierdas tiempo en discusiones sobre cómo debe ser un buen hombre. Sé uno.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "No podemos dirigir el viento, pero podemos ajustar las velas.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "No es la muerte lo que un hombre debe temer, sino nunca empezar a vivir.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Quien sufre antes de ser necesario, sufre más de lo necesario.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La verdadera libertad radica en ser independiente de la opinión de los demás.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Elige no ser dañado y no te sentirás dañado. No te sientas dañado y no lo serás.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La prueba de una buena persona es que se da cuenta de sus propios errores.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Nada, a no ser que tú lo creas, puede hacerte daño.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "No es porque las cosas sean difíciles que no nos atrevemos; es porque no nos atrevemos que son difíciles.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Todo lo que escuchamos es una opinión, no un hecho. Todo lo que vemos es una perspectiva, no la verdad.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La tranquilidad que proviene de saber que nada puede arrebatarte lo esencial.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La virtud es la única fortaleza verdadera.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Las dificultades fortalecen la mente, como el trabajo físico fortalece el cuerpo.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Cuando te levantes por la mañana, piensa en el privilegio de estar vivo.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Solo el sabio es libre.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "No busques que los eventos sucedan como deseas; desea que sucedan como suceden y serás feliz.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Recuerda que el dolor es sólo temporal y la virtud es eterna.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Deja de esperar que los demás te comprendan y empieza a comprenderte a ti mismo.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Haz cada cosa en la vida como si fuera lo último que haces.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Es en las crisis cuando descubrimos de qué estamos hechos.",
+      "autor": "Séneca",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "Aprende a ser indiferente hacia lo que hace que otros se desesperen.",
+      "autor": "Marco Aurelio",
+      "categoria": ["estoicismo", "motivacion"]
+    },
+    {
+      "frase": "La paz comienza cuando aprendes a ser indiferente a las cosas que no están bajo tu control.",
+      "autor": "Epicteto",
+      "categoria": ["estoicismo", "motivacion"]
+    }
+
+  ]
+   
+}
+  

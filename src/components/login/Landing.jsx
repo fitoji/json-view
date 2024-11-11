@@ -8,6 +8,7 @@ import FileDropZone from '../FileDropZone'
 import StoredFiles from '../StoredFiles'
 import StorageUsage from '../StorageUsage'
 import FileViewer from '../FileViewer'
+import FraseAleatoria from '../frases/FraseAleatoria'
 
 
 
@@ -56,17 +57,10 @@ export default function Landing() {
     <div className="flex flex-col min-h-screen">
       
       <main className="flex-1">
-        <div className="flex justify-end pr-6 pt-1">
-          <Link
-            className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
-            to="/docs">
-            <CircleHelp />       
-          </Link>
-        </div>
         <div className="flex flex-col items-center space-y-4 text-center">
          {tituloOff &&
          <div>
-          <h1 className="text-2xl font-bold tracking-tighter md:text-4xl lg:text-4xl/none text-emerald-700">
+          <h1 className="text-2xl pt-4 font-bold tracking-tighter md:text-4xl lg:text-4xl/none text-emerald-700">
             Visualizador de Tests en formato Json
           </h1>
           <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
@@ -79,7 +73,7 @@ export default function Landing() {
           {/* <V0json  setTituloOff={setTituloOff} /> */}
        
 
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto">
           {/* <h1 className="text-2xl font-bold mb-4">Almacenamiento de Archivos JSON</h1> */}
           {selectedFile && <FileViewer content={selectedFile} />}
           <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
@@ -87,6 +81,7 @@ export default function Landing() {
             <StoredFiles files={files || {}} onSelect={handleFileSelect} onDelete={handleFileDelete} setTituloOff={setTituloOff} />
            
           </div>
+          <FraseAleatoria/>
           <StorageUsage usage={storageUsage} />
         </div>
         </DataProvider>

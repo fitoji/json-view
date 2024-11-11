@@ -108,7 +108,6 @@ export default function StoredFiles({
                     onSelect={onSelect}
                     onDelete={onDelete}
                     setTituloOff={setTituloOff}
-                    
                   />
                 ))}
               </div>

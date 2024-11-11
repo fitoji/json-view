@@ -14,16 +14,6 @@ export default function Docs() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 to-emerald-50 pr-6 pt-1">
-      <div className="flex justify-end">
-      <div className="flex justify-end">
-      <Link
-        className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
-        to="/">
-        <Undo2  />
-      </Link>
-      </div>
-        
-        </div>
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-4xl font-bold text-emerald-700 mb-6">Visor JsonTests - Documentación</h1>
         <Accordion type="single" collapsible className="w-full">
@@ -143,18 +133,20 @@ export default function Docs() {
       <AccordionItem value="item-5">
         <AccordionTrigger>Soporte y Contacto</AccordionTrigger>
         <AccordionContent>
+          <div className='flex flex-col md:flex-row items-center'>
+<img src="./mascot.webp" alt="imagen mascota" height={90} width={90} />
+          <div className='flex flex-col pl-4'>
         <p>
             Si tienes alguna pregunta, sugerencia o encuentras algún problema mientras usas Visor JsonTests, por favor contacta con nuestro equipo de soporte en <strong>fitoji@protonmail.com</strong>.
           </p>
           <p className="mt-2">
             ¡Esperamos que disfrutes usando Visor JsonTests para mejorar tu aprendizaje!
           </p>
+          </div>
+          </div>
         </AccordionContent>
       </AccordionItem>
-      
-      
-
-    </Accordion>
+   </Accordion>
     
     </div>
     </div>

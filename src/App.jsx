@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Separator } from '@/components/ui/separator'
-//import NavBar from './components/NavBar'
+import NavBar from './components/NavBar'
 
 
 import { Toaster } from '@/components/ui/sonner'
@@ -27,14 +27,11 @@ function App() {
                 <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />
               </div>
             }>
-             {/* <NavBar /> */}
+             <NavBar />
               <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/docs" element={<Docs />} />
-                
-                             
               </Routes>
-           
           </Suspense>
         </main>
         <Toaster />

@@ -1,0 +1,241 @@
+[
+    {
+      "frase": "Veni, vidi, vici.",
+      "traduccion": "Vine, vi, vencí.",
+      "autor": "Julio César",
+      "categoria": ["latin", "historia"]
+    },
+    {
+      "frase": "Carpe diem.",
+      "traduccion": "Aprovecha el día.",
+      "autor": "Horacio",
+      "categoria": ["latin", "filosofía"]
+    },
+      
+    {
+      "frase": "Alea iacta est.",
+      "traduccion": "La suerte está echada.",
+      "autor": "Julio César",
+      "categoria": ["latin", "historia"]
+    },
+   
+    {
+      "frase": "Amor vincit omnia.",
+      "traduccion": "El amor lo conquista todo.",
+      "autor": "Virgilio",
+      "categoria": ["latin", "poesía"]
+    },
+   
+    {
+      "frase": "Si vis pacem, para bellum.",
+      "traduccion": "Si quieres la paz, prepárate para la guerra.",
+      "autor": "Vegecio",
+      "categoria": ["latin", "militar"]
+    },
+   
+    {
+      "frase": "Mens sana in corpore sano.",
+      "traduccion": "Mente sana en cuerpo sano.",
+      "autor": "Juvenal",
+      "categoria": ["latin", "sabiduría"]
+    },
+    {
+      "frase": "Tempus fugit.",
+      "traduccion": "El tiempo vuela.",
+      "autor": "Virgilio",
+      "categoria": ["latin", "filosofía"]
+    },
+    {
+      "frase": "Ad astra per aspera.",
+      "traduccion": "A las estrellas a través de las dificultades.",
+      "autor": "Séneca",
+      "categoria": ["latin", "filosofía"]
+    },
+    {
+      "frase": "Acta, non verba.",
+      "traduccion": "Hechos, no palabras.",
+      "autor": "Proverbio latino",
+      "categoria": ["latin", "sabiduría"]
+    },
+    {
+      "frase": "Aequam memento rebus in arduis servare mentem.",
+      "traduccion": "Recuerda mantener la calma en las dificultades.",
+      "autor": "Horacio",
+      "categoria": ["latin", "filosofía"]
+    },
+    {
+      "frase": "Audaces fortuna iuvat.",
+      "traduccion": "La fortuna favorece a los audaces.",
+      "autor": "Virgilio",
+      "categoria": ["latin", "filosofía"]
+    },
+     
+   
+    {
+      "frase": "Memento mori.",
+      "traduccion": "Recuerda que morirás.",
+      "autor": "Proverbio latino",
+      "categoria": ["latin", "filosofía"]
+    },
+    
+    {
+      "frase": "Non scholae, sed vitae discimus.",
+      "traduccion": "No aprendemos para la escuela, sino para la vida.",
+      "autor": "Séneca",
+      "categoria": ["latin", "filosofía"]
+    },
+    {
+      "frase": "Omnia vincit amor.",
+      "traduccion": "El amor todo lo vence.",
+      "autor": "Virgilio",
+      "categoria": ["latin", "poesía"]
+    },
+    
+    {
+      "frase": "Repetitio est mater studiorum.",
+      "traduccion": "La repetición es la madre del estudio.",
+      "autor": "Proverbio latino",
+      "categoria": ["latin", "sabiduría"]
+    },
+    
+        {
+      "frase": "Tempora mutantur, nos et mutamur in illis.",
+      "traduccion": "Los tiempos cambian, y nosotros cambiamos con ellos.",
+      "autor": "Proverbio latino",
+      "categoria": ["latin", "sabiduría"]
+    },
+   
+    {
+      "frase": "Ad infinitum.",
+      "traduccion": "Hasta el infinito.",
+      "autor": "Proverbio latino",
+      "categoria": ["latin", "sabiduría"]
+    },
+    {
+          "frase": "Ad astra per aspera.",
+          "traduccion": "A las estrellas a través de las dificultades.",
+          "autor": "Séneca",
+          "categoria": ["latin", "filosofía"]
+        },
+        {
+          "frase": "Dum spiro, spero.",
+          "traduccion": "Mientras respiro, espero.",
+          "autor": "Cicerón",
+          "categoria": ["latin", "sabiduría"]
+        },
+        {
+          "frase": "Errare humanum est.",
+          "traduccion": "Errar es humano.",
+          "autor": "Séneca",
+          "categoria": ["latin", "sabiduría"]
+        },
+       
+        {
+          "frase": "Mens sana in corpore sano.",
+          "traduccion": "Mente sana en cuerpo sano.",
+          "autor": "Juvenal",
+          "categoria": ["latin", "sabiduría"]
+        },
+               
+        {
+          "frase": "Festina lente.",
+          "traduccion": "Apresúrate lentamente.",
+          "autor": "Augusto",
+          "categoria": ["latin", "sabiduría"]
+        },
+                
+       
+        {
+          "frase": "Memento vivere.",
+          "traduccion": "Recuerda vivir.",
+          "autor": "Proverbio latino",
+          "categoria": ["latin", "filosofía"]
+        },
+              
+        {
+          "frase": "Per aspera ad astra.",
+          "traduccion": "A través de las dificultades a las estrellas.",
+          "autor": "Séneca",
+          "categoria": ["latin", "filosofía"]
+        },
+       {
+          "frase": "Qui audet adipiscitur.",
+          "traduccion": "El que se atreve, gana.",
+          "autor": "Proverbio latino",
+          "categoria": ["latin", "sabiduría"]
+        },
+        {
+          "frase": "Requiescat in pace.",
+          "traduccion": "Descanse en paz.",
+          "autor": "Proverbio latino",
+          "categoria": ["latin", "religión"]
+        },
+        {
+          "frase": "Scientia potentia est.",
+          "traduccion": "El conocimiento es poder.",
+          "autor": "Francis Bacon",
+          "categoria": ["latin", "sabiduría"]
+        },
+        {
+          "frase": "Si vis amari, ama.",
+          "traduccion": "Si quieres ser amado, ama.",
+          "autor": "Séneca",
+          "categoria": ["latin", "filosofía"]
+        },
+       
+        {
+          "frase": "Vade mecum.",
+          "traduccion": "Ven conmigo.",
+          "autor": "Proverbio latino",
+          "categoria": ["latin", "sabiduría"]
+        },
+        {
+          "frase": "Veritas vos liberabit.",
+          "traduccion": "La verdad os hará libres.",
+          "autor": "Biblia",
+          "categoria": ["latin", "religión"]
+        },
+        {
+          "frase": "Virtus tentamine gaudet.",
+          "traduccion": "La virtud se regocija en la prueba.",
+          "autor": "Proverbio latino",
+          "categoria": ["latin", "sabiduría"]
+        },
+        {
+          "frase": "Ad meliora.",
+          "traduccion": "Hacia cosas mejores.",
+          "autor": "Proverbio latino",
+          "categoria": ["latin", "sabiduría"]
+        },
+       
+       
+        {
+          "frase": "Credo ut intelligam.",
+          "traduccion": "Creo para entender.",
+          "autor": "San Agustín",
+          "categoria": ["latin", "religión"]
+        },
+        {
+          "frase": "Docendo discimus.",
+          "traduccion": "Enseñando, aprendemos.",
+          "autor": "Séneca",
+          "categoria": ["latin", "sabiduría"]
+        },
+       
+        {
+          "frase": "Libertas perfundet omnia luce.",
+          "traduccion": "La libertad ilumina todo con su luz.",
+          "autor": "Virgilio",
+          "categoria": ["latin", "poesía"]
+        },
+              
+        {
+          "frase": "Nec spe, nec metu.",
+          "traduccion": "Sin esperanza ni miedo.",
+          "autor": "Séneca",
+          "categoria": ["latin", "filosofía"]
+        }
+      
+    ]
+     
+    

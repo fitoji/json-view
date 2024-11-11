@@ -31,6 +31,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete, setTituloOff })
       <div
         ref={setNodeRef}
         style={style}
+        
         className="flex flex-col md:flex-row items-center md:justify-between p-1 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-md"
       >
         <div className="flex items-center p-1 gap-2">
@@ -47,10 +48,10 @@ export function SortableFileItem({ fileName, onSelect, onDelete, setTituloOff })
                     {fileName.replace('.json', '')}
                 </span>
             </HoverCardTrigger>
-        <HoverCardContent>
-    Clickea, mantén apretado y mueve la tarjeta hacia donde quieras, para cambiar el orden.
-  </HoverCardContent>
-</HoverCard>
+            <HoverCardContent>
+            Clickea, mantén apretado y mueve la tarjeta hacia donde quieras, para cambiar el orden.
+          </HoverCardContent>
+        </HoverCard>
 
           
         </div>
