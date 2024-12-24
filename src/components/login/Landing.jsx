@@ -54,7 +54,7 @@ const driverObj = driver({
       popover: {
         title: "Documentación de la aplicación",
         description:
-          "Aquí podrás encontrar información y ayuda para poder pedirle de manera correcta a ChatGPT para que realize los test de manera adecuada, también ayuda y consejos para poder usar la app de la mejor manera.",
+          "Aquí podrás encontrar información y ayuda para poder pedirle de manera correcta a ChatGPT para que realize los test de manera adecuada, también ayuda y consejos para poder usar la app.",
       },
     },
   ],
