@@ -18,7 +18,7 @@ const NavBar = () => {
           />
           <span className="font-bold text-xl">Visor JsonTest </span>
         </div>
-        <div className="flex justify-end pr-2 pt-1">
+        <div id="driver-step-4" className="flex justify-end pr-2 pt-1">
           <Link
             className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
             to={location.pathname === "/" ? "/docs" : "/"}
