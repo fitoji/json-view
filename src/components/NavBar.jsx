@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { CircleHelp, Menu, Undo2, X } from 'lucide-react'
-import { Button } from './ui/button'
-import { Link } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-
+import React, { useState } from "react";
+import { CircleHelp, Menu, Undo2, X } from "lucide-react";
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const NavBar = () => {
   const location = useLocation(); // ... código existente ...
@@ -14,7 +13,7 @@ const NavBar = () => {
         <div className="flex items-center">
           <img
             className="h-12"
-            src="/mascot.webp"
+            src="https://utfs.io/f/OrgeCo8Gum6ew8Je4bkx3j7VtxfKkAlXC98D0ovYap6nHgwh"
             alt="SuperTest Mascota"
           />
           <span className="font-bold text-xl">Visor JsonTest </span>
@@ -22,16 +21,15 @@ const NavBar = () => {
         <div className="flex justify-end pr-2 pt-1">
           <Link
             className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
-            to={location.pathname === '/' ? '/docs' : '/'}>
-            {location.pathname === '/' && <CircleHelp />}
-            {location.pathname === '/docs' && <Undo2  />       }
+            to={location.pathname === "/" ? "/docs" : "/"}
+          >
+            {location.pathname === "/" && <CircleHelp />}
+            {location.pathname === "/docs" && <Undo2 />}
           </Link>
         </div>
       </div>
-
-    
     </nav>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
