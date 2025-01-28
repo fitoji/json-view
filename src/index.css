@@ -73,7 +73,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 
 :root {
@@ -89,7 +88,6 @@
   margin: 0 auto;
 }
 
-
 .navbar {
   padding: 2rem;
   display: flex;
@@ -99,13 +97,24 @@
   border-bottom: 2px solid black;
 }
 
-
-
-
 .fito-fondo {
   min-height: 100vh;
   background-color: hsla(0, 0%, 100%, 1);
-  background-image: radial-gradient(circle at 91% 11%, hsla(241.99999999999997, 100%, 88%, 0.66) 4.038772213247173%, transparent 37.2265767974114%), radial-gradient(circle at 66% 37%, hsla(191.91176470588238, 100%, 88%, 1) 0%, transparent 63.33640956108327%), radial-gradient(circle at 36% 87%, hsla(136.32352941176467, 100%, 88%, 1) 12.107536057085522%, transparent 63.33640956108327%);
+  background-image: radial-gradient(
+      circle at 91% 11%,
+      hsla(241.99999999999997, 100%, 88%, 0.66) 4.038772213247173%,
+      transparent 37.2265767974114%
+    ),
+    radial-gradient(
+      circle at 66% 37%,
+      hsla(191.91176470588238, 100%, 88%, 1) 0%,
+      transparent 63.33640956108327%
+    ),
+    radial-gradient(
+      circle at 36% 87%,
+      hsla(136.32352941176467, 100%, 88%, 1) 12.107536057085522%,
+      transparent 63.33640956108327%
+    );
   background-blend-mode: normal, normal, normal;
 }
 

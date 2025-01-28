@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { CircleHelp, Menu, Undo2, X } from "lucide-react";
-import { Button } from "./ui/button";
+import React from "react";
+import { CircleHelp, Undo2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { TourGuideToggle } from "./TourGuideToggle";
+import { useDriverPreference } from "@/hooks/useDriverPreferences";
 
 const NavBar = () => {
-  const location = useLocation(); // ... código existente ...
+  const location = useLocation();
+  const { isTourEnabled, toggleTour } = useDriverPreference();
 
   return (
     <nav className="navbar-fondo text-white">
@@ -18,14 +20,22 @@ const NavBar = () => {
           />
           <span className="font-bold text-xl">Visor JsonTest </span>
         </div>
-        <div id="driver-step-4" className="flex justify-end pr-2 pt-1">
-          <Link
-            className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
-            to={location.pathname === "/" ? "/docs" : "/"}
-          >
-            {location.pathname === "/" && <CircleHelp />}
-            {location.pathname === "/docs" && <Undo2 />}
-          </Link>
+        <div className="flex flex-row items-center gap-4">
+          <div id="driver-step-5">
+            <TourGuideToggle
+              isTourEnabled={isTourEnabled}
+              toggleTour={toggleTour}
+            />
+          </div>
+          <div id="driver-step-4" className="flex justify-end pr-2 pt-1">
+            <Link
+              className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
+              to={location.pathname === "/" ? "/docs" : "/"}
+            >
+              {location.pathname === "/" && <CircleHelp />}
+              {location.pathname === "/docs" && <Undo2 />}
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

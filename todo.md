@@ -1,6 +1,6 @@
 # Para Hacer
 
-[ ] agregar json demo (driver js)
+[x] agregar json demo (driver js)
 [ ]Login
 [ ]Preguntas con IA
 [ ]Opciones aleatorias del menu (agregar opcion de desactivar)
