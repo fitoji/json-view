@@ -20,7 +20,7 @@ const NavBar = () => {
           />
           <span className="font-bold text-xl">Visor JsonTest </span>
         </div>
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-row items-center gap-4 ">
           <div id="driver-step-5">
             <TourGuideToggle
               isTourEnabled={isTourEnabled}
@@ -29,7 +29,7 @@ const NavBar = () => {
           </div>
           <div id="driver-step-4" className="flex justify-end pr-2 pt-1">
             <Link
-              className="bg-emerald-300 mt-2 text-white font-bold rounded-lg p-2 hover:bg-emerald-200"
+              className="bg-emerald-400 mt-2 text-white hover:text-emerald-500 font-bold rounded-lg p-2 hover:bg-emerald-200 shadow-md"
               to={location.pathname === "/" ? "/docs" : "/"}
             >
               {location.pathname === "/" && <CircleHelp />}
