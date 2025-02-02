@@ -12,13 +12,15 @@ import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
 import "./driverjs.css";
 
+import { useTituloOff } from "@/hooks/useTituloOff";
+
 export default function Landing() {
   const [files, setFiles] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [storageUsage, setStorageUsage] = useState(0);
-  const [tituloOff, setTituloOff] = useState(true);
+  const { tituloOff, setTituloOff } = useTituloOff();
   const { isTourEnabled } = useDriverPreference();
-
+  console.log("titulo off desde landig", tituloOff);
   useEffect(() => {
     const storedFiles = JSON.parse(localStorage.getItem("jsonFiles") || "{}");
     setFiles(storedFiles);
@@ -70,6 +72,14 @@ export default function Landing() {
           },
           {
             element: "#driver-step-5",
+            popover: {
+              title: "Preguntas a Inteligencia Artificial",
+              description:
+                "Durante alguna pregunta de un test, cliquea en este botón y podrás preguntarle a la IA",
+            },
+          },
+          {
+            element: "#driver-step-6",
             popover: {
               title: "Desactivar Tour",
               description:

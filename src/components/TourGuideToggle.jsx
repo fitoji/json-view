@@ -9,7 +9,7 @@ export function TourGuideToggle({ isTourEnabled, toggleTour }) {
         htmlFor="tour-mode"
         className="hidden md:block  items-center cursor-pointer"
       >
-        {isTourEnabled ? "Guía Introductoria" : "Guía Off"}
+        {isTourEnabled ? "Guía Introductoria" : "Tour Off"}
       </Label>
       <Switch
         className="bg-gray-200 checked:bg-green-500 checked:hover:bg-green-600"

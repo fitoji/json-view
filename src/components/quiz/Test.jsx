@@ -14,6 +14,20 @@ import { Separator } from "../ui/separator";
 import { toast } from "sonner";
 import Temporizador from "../Temporizador";
 
+import BoltChat from "@/components/chat/BoltChat.jsx";
+import { BotMessageSquare, CircleHelp } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import BotonJavGpt from "../boton-jav";
+
 const Test = ({ data }) => {
   useEffect(() => {
     // {{ edit_1 }}
@@ -381,6 +395,7 @@ const Test = ({ data }) => {
                 ref={temporizadorRef}
               />
             </div>
+            <BotonJavGpt question={question} />
 
             <div className="flex flex-row drop-shadow-xl ">
               <img
