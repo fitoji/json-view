@@ -29,13 +29,23 @@ export default function StoredFiles({
     const loadDefaultFile = async () => {
       if (Object.keys(files).length === 0 && onFileAdd) {
         try {
-          const response = await fetch("/Cuestionario de ejemplo.json");
-          if (response.ok) {
-            const ejemploJson = await response.json();
-            onFileAdd("Cuestionario de ejemplo.json", ejemploJson);
+          // Primero intentamos cargar archivos del localStorage
+          const storedFiles = JSON.parse(localStorage.getItem('jsonFiles') || '{}');
+          if (Object.keys(storedFiles).length > 0) {
+            // Si hay archivos guardados, los restauramos
+            Object.entries(storedFiles).forEach(([fileName, content]) => {
+              onFileAdd(fileName, content);
+            });
+          } else {
+            // Si no hay archivos guardados, cargamos el ejemplo
+            const response = await fetch("/Cuestionario de ejemplo.json");
+            if (response.ok) {
+              const ejemploJson = await response.json();
+              onFileAdd("Cuestionario de ejemplo.json", ejemploJson);
+            }
           }
         } catch (error) {
-          console.error("Error al cargar ejemplo.json:", error);
+          console.error("Error al cargar archivos:", error);
         }
       }
     };
@@ -53,6 +63,11 @@ export default function StoredFiles({
     ];
 
     setOrderedFiles(newOrderedFiles);
+    
+    // Guardar el orden actualizado en localStorage
+    if (currentFiles.length > 0) {
+      localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
+    }
   }, [files, onFileAdd]);
 
   const sensors = useSensors(

@@ -23,9 +23,23 @@ export default function Landing() {
   console.log("titulo off desde landig", tituloOff);
   useEffect(() => {
     const storedFiles = JSON.parse(localStorage.getItem("jsonFiles") || "{}");
-    setFiles(storedFiles);
+    if (Object.keys(storedFiles).length === 0) {
+      // Si no hay archivos almacenados, no hacemos nada aquí
+      // El componente StoredFiles se encargará de cargar el ejemplo
+      setFiles({});
+    } else {
+      setFiles(storedFiles);
+    }
     updateStorageUsage();
   }, []);
+
+  // Efecto para actualizar localStorage cuando cambian los archivos
+  useEffect(() => {
+    if (Object.keys(files).length > 0) {
+      localStorage.setItem("jsonFiles", JSON.stringify(files));
+      updateStorageUsage();
+    }
+  }, [files]);
 
   useEffect(() => {
     if (isTourEnabled) {
@@ -99,7 +113,10 @@ export default function Landing() {
   };
 
   const handleFileDrop = (fileName, content) => {
-    const updatedFiles = { ...files, [fileName]: content };
+    // Obtener los archivos actuales del localStorage
+    const storedFiles = JSON.parse(localStorage.getItem("jsonFiles") || "{}");
+    // Combinar los archivos existentes con el nuevo
+    const updatedFiles = { ...storedFiles, ...files, [fileName]: content };
     setFiles(updatedFiles);
     localStorage.setItem("jsonFiles", JSON.stringify(updatedFiles));
     updateStorageUsage();
