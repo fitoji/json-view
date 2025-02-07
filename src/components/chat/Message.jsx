@@ -1,4 +1,5 @@
 import { BotMessageSquare } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 const Message = ({ message }) => {
   const isUser = message.role === "user";
@@ -19,9 +20,12 @@ const Message = ({ message }) => {
             : "bg-gray-100 text-gray-700 shadow-sm"
         }`}
       >
-        <p className="text-sm md:text-base leading-relaxed break-words h-auto prose">
+        {/* <p className="text-sm md:text-base leading-relaxed break-words h-auto prose">
           {message.content}
-        </p>
+        </p> */}
+        <ReactMarkdown className="prose text-sm md:text-base leading-relaxed break-words h-auto">
+          {message.content}
+        </ReactMarkdown>
       </div>
     </div>
   );

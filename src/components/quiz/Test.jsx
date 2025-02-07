@@ -387,21 +387,23 @@ const Test = ({ data }) => {
       </div>
       <div className="bg-emerald-300 w-full bg-opacity-30 pl-8 pr-4 md:w-1/6">
         <div className="flex justify-between md:flex-col md:pt-20">
-          <div className="flex flex-row justify-around gap-4  md:flex-col">
-            <div className="flex flex-row">
+          <div className="flex flex-row justify-center items-center gap-4  md:flex-col md:gap-2 md:w-full p-1  ">
+            <div className="scale-80 md:scale-100">
               <Temporizador
                 isRunning={isRunning}
                 setIsRunning={setIsRunning}
                 ref={temporizadorRef}
               />
             </div>
-            <BotonJavGpt question={question} />
+            <div className="scale-80 hidden md:inline  md:scale-100">
+              <BotonJavGpt question={question} />
+            </div>
 
             <div className="flex flex-row drop-shadow-xl ">
               <img
                 src="https://utfs.io/f/OrgeCo8Gum6eKylVNYfht4PRXU8nqNh6MurYiIsJ71CDbHvf"
                 alt="icono bien"
-                className={`transition-opacity duration-200 ${
+                className={`transition-opacity duration-200 max-w-full h-auto ${
                   isVisible ? "opacity-100" : "opacity-0"
                 }`}
               />
@@ -409,9 +411,9 @@ const Test = ({ data }) => {
             </div>
             <div className="flex flex-row drop-shadow-xl">
               <img
-                src="https://utfs.io/f/OrgeCo8Gum6ey3WEMjroCV7r9FdRGPWb0fMTEh81mkn3egKq"
+                src="https://7psafmss5c.ufs.sh/f/OrgeCo8Gum6ey3WEMjroCV7r9FdRGPWb0fMTEh81mkn3egKq"
                 alt="icono mal"
-                className={`transition-opacity duration-200 ${
+                className={`transition-opacity duration-200 max-w-full h-auto ${
                   isVisibleMal ? "opacity-100" : "opacity-0"
                 }`}
               />

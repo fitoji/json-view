@@ -7,7 +7,6 @@ import { useDriverPreference } from "@/hooks/useDriverPreferences";
 import { BotMessageSquare } from "lucide-react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,

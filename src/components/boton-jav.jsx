@@ -16,7 +16,7 @@ import BoltChat from "./chat/BoltChat";
 export default function BotonJavGpt({ question }) {
   return (
     <div>
-      <Dialog className="bg-slate-800 shadow-lg">
+      <Dialog className="shadow-lg w-full">
         <DialogTrigger asChild>
           <Button variant="outline">
             <BotMessageSquare className="w-6 h-6 mt-1 text-sky-400" />
@@ -26,7 +26,7 @@ export default function BotonJavGpt({ question }) {
         <DialogContent className=" w-[70%] max-w-none h-auto">
           <DialogHeader>
             <DialogTitle>JavGpt responde.</DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-slate-800 w-2/3">
               Clickea en las opciones y ¡JavGpt te aclará las dudas!
             </DialogDescription>
           </DialogHeader>

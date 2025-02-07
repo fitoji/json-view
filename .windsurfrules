@@ -1,6 +1,7 @@
 1. speak on spanish/
 2. app working with vite react 
 3. app working with vite react and tailwindcss
+4. utiliza siempre tailwindcss
 
 Gestión de Dependencias y Versionado Específico del Workspace:
 Asegúrate de que cada workspace mantenga un package.json actualizado con dependencias y devDependencias fijas para garantizar que el entorno de desarrollo y producción sea reproducible.

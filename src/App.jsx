@@ -21,10 +21,7 @@ function App() {
           <main className="flex-grow">
             <Suspense
               fallback={
-                <div>
-                  Cargando...
-                  <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />
-                </div>
+                <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />
               }
             >
               <NavBar />

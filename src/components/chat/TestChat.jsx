@@ -14,14 +14,20 @@ export default function TestChat({
   data2,
 }) {
   const data = data2;
-  console.log("valor de data", data);
+  //console.log("valor de data", data);
 
   const handleClick = (value) => {
     setInput((prevValue) => prevValue + (prevValue ? " " : "") + value);
   };
 
   const buttonKeys = ["question", "option1", "option2", "option3", "option4"];
-  const buttonKeysQuestion = ["¿porqué?", "¿dónde?", "¿cómo?"];
+  const buttonKeysQuestion = [
+    "¿porqué?",
+    "¿dónde?",
+    "¿cómo?",
+    "¿cuál?",
+    "¿que?",
+  ];
   const contextoPregunta = `Responde considerando el modulo ${data2.asignatura}, dentro del tema ${data2.tema}`;
   console.log("el contexto es", contextoPregunta);
 
@@ -30,8 +36,8 @@ export default function TestChat({
   };
 
   return (
-    <div className="flex flex-col bg-slate-50 rounded-lg p-4 md:p-6 shadow-md">
-      <div className="">
+    <div className="flex flex-col bg-primary-foreground w-auto rounded-lg p-4 md:p-6 shadow-md">
+      <div>
         {buttonKeys.map((key) => (
           <Button
             key={key}
@@ -42,7 +48,7 @@ export default function TestChat({
                 : "bg-emerald-100 hover:bg-sky-200"
             } truncate px-3 py-2`}
           >
-            {data2[key]}
+            <span className="block truncate">{data2[key]}</span>
           </Button>
         ))}
       </div>

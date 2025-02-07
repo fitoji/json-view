@@ -48,8 +48,8 @@ const BoltChat = ({ onSubmit, question }) => {
   };
 
   return (
-    <div className="flex flex-col w-full  p-1 md:p-2 lg:p-2">
-      <div className="w-full md:max-w-3xl lg:max-w-4xl">
+    <div className="flex flex-col p-1 md:p-2 lg:p-2 ">
+      <div className="w-fit">
         <TestChat
           input={input}
           setInput={setInput}
@@ -58,13 +58,13 @@ const BoltChat = ({ onSubmit, question }) => {
           data2={data2}
         />
       </div>
-      <div className="fito-fondo rounded-lg p-1 md:p-6 shadow-xl  mt-6 h-[300px]">
-        <div className=" overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+      <div className="w-full fito-fondo rounded-lg p-1 md:p-6 shadow-xl mt-6 h-[300px]">
+        <div className="overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
           {messages.map((message, index) => (
             <Message key={index} message={message} />
           ))}
           {isLoading && (
-            <div className="flex items-start space-x-2 mr-auto ">
+            <div className="flex items-start space-x-2 mr-auto">
               <BotMessageSquare className="w-5 h-5 md:w-6 md:h-6 mt-1 text-blue-400" />
               <div className="p-2 md:p-3 rounded-lg bg-gray-100">
                 <p className="text-sm text-slate-700">Escribiendo...</p>
