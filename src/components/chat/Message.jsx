@@ -6,7 +6,7 @@ const Message = ({ message }) => {
 
   return (
     <div
-      className={`flex items-start space-x-2 md:space-x-3${
+      className={`flex items-start mt-2 p-2 space-x-2 md:space-x-3${
         isUser ? "flex-row-reverse space-x-reverse ml-auto" : "mr-auto"
       }`}
     >
@@ -17,7 +17,7 @@ const Message = ({ message }) => {
         className={`p-1 md:p-2 rounded-lg ${
           isUser
             ? "bg-sky-500 text-white shadow-sm"
-            : "bg-gray-100 text-gray-700 shadow-sm"
+            : "bg-gray-100 text-slate-700 shadow-sm"
         }`}
       >
         {/* <p className="text-sm md:text-base leading-relaxed break-words h-auto prose">

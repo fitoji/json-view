@@ -16,23 +16,27 @@ export const generateResponse = async (message) => {
   try {
     out=""
     const messages = [
-      { role: "user", content: message },
       {
-        role: "system", content:
-      `Always answer on spanish` +
-      `Be concise. ` +
-      `no utilices la frase como nutricionista. ` +
-      `Highlight relevant phrases in bold. ` +
-      `Eres un nutricionista experto, responde como tal` +
-      `no utilizes mas de 100 palabras`
-          //"Por favor, responde siempre en español, como si fueras un nutricionista experto, explidando simple y claro. dame la respuesta sin el contexto"
-      } // Añade un mensaje del sistema para indicar el idioma
+        role: "system",
+        content: `Instrucciones:
+          - Eres un nutricionista experto y profesional
+          - Responde siempre en español
+          - Sé conciso y claro
+          - Destaca las frases importantes en **negrita**
+          - Mantén un tono profesional pero accesible
+          - Evita usar frases como "como nutricionista"
+          - Limita las respuestas a información precisa y relevante`
+      },
+      {
+        role: "user",
+        content: message
+      }
     ];
     const stream = hf.chatCompletionStream({
       model: MODEL,
       messages: messages,
       max_tokens: 400,
-      temperature: 0.1,
+      temperature: 0.4,
       seed: 0,
       stream: true,
     });

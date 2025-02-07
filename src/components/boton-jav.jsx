@@ -16,24 +16,24 @@ import BoltChat from "./chat/BoltChat";
 export default function BotonJavGpt({ question }) {
   return (
     <div>
-      <Dialog className="shadow-lg w-full">
+      <Dialog className="shadow-lg">
         <DialogTrigger asChild>
           <Button variant="outline">
             <BotMessageSquare className="w-6 h-6 mt-1 text-sky-400" />
             JavGPT
           </Button>
         </DialogTrigger>
-        <DialogContent className=" w-[70%] max-w-none h-auto">
-          <DialogHeader>
+        <DialogContent className="flex flex-col gap-4 w-fit max-w-[70vw] min-w-[50vw]">
+          <DialogHeader className="w-full">
             <DialogTitle>JavGpt responde.</DialogTitle>
-            <DialogDescription className="text-slate-800 w-2/3">
+            <DialogDescription className="text-slate-800">
               Clickea en las opciones y ¡JavGpt te aclará las dudas!
             </DialogDescription>
           </DialogHeader>
-          <div className="flex items-center space-x-2">
+          <div className="flex w-full">
             <BoltChat question={question} />
           </div>
-          <DialogFooter className="sm:justify-start">
+          <div className="flex justify-end mt-auto">
             <DialogClose asChild>
               <Button
                 type="button"
@@ -42,7 +42,7 @@ export default function BotonJavGpt({ question }) {
                 Cerrar
               </Button>
             </DialogClose>
-          </DialogFooter>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

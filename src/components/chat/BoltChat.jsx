@@ -49,7 +49,7 @@ const BoltChat = ({ onSubmit, question }) => {
 
   return (
     <div className="flex flex-col p-1 md:p-2 lg:p-2 ">
-      <div className="w-fit">
+      <div>
         <TestChat
           input={input}
           setInput={setInput}
@@ -58,8 +58,8 @@ const BoltChat = ({ onSubmit, question }) => {
           data2={data2}
         />
       </div>
-      <div className="w-full fito-fondo rounded-lg p-1 md:p-6 shadow-xl mt-6 h-[300px]">
-        <div className="overflow-y-auto p-4 space-y-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+      <div className=" rounded-lg p-1 md:p-6 shadow-xl mt-6">
+        <div className="mt-2 ">
           {messages.map((message, index) => (
             <Message key={index} message={message} />
           ))}
