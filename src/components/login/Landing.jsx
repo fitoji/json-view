@@ -150,6 +150,7 @@ export default function Landing() {
                 onSelect={handleFileSelect}
                 onDelete={handleFileDelete}
                 setTituloOff={setTituloOff}
+                onFileAdd={handleFileDrop}
               />
             </div>
             <FraseAleatoria />

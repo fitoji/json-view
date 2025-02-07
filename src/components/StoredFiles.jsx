@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   DndContext,
@@ -6,15 +6,14 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+} from "@dnd-kit/sortable";
 
-import { SortableFileItem } from './SortableFileItem';
-
+import { SortableFileItem } from "./SortableFileItem";
 
 export default function StoredFiles({
   files,
@@ -27,19 +26,34 @@ export default function StoredFiles({
   const [orderedFiles, setOrderedFiles] = useState([]);
 
   useEffect(() => {
-    // Actualizar el estado local cuando cambien los archivos externos
-     const storedOrderedFiles = JSON.parse(localStorage.getItem('orderedFiles'))|| [];
-     const currentFiles = Object.keys(files);
+    const loadDefaultFile = async () => {
+      if (Object.keys(files).length === 0 && onFileAdd) {
+        try {
+          const response = await fetch("/Cuestionario de ejemplo.json");
+          if (response.ok) {
+            const ejemploJson = await response.json();
+            onFileAdd("Cuestionario de ejemplo.json", ejemploJson);
+          }
+        } catch (error) {
+          console.error("Error al cargar ejemplo.json:", error);
+        }
+      }
+    };
 
-     const newOrderedFiles = [
-      ...storedOrderedFiles.filter(file => currentFiles.includes(file)),
-      ...currentFiles.filter(file => !storedOrderedFiles.includes(file))
+    loadDefaultFile();
+
+    // Actualizar el estado local cuando cambien los archivos externos
+    const storedOrderedFiles =
+      JSON.parse(localStorage.getItem("orderedFiles")) || [];
+    const currentFiles = Object.keys(files);
+
+    const newOrderedFiles = [
+      ...storedOrderedFiles.filter((file) => currentFiles.includes(file)),
+      ...currentFiles.filter((file) => !storedOrderedFiles.includes(file)),
     ];
 
     setOrderedFiles(newOrderedFiles);
-
-    //localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
-  }, [files]);
+  }, [files, onFileAdd]);
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -61,21 +75,19 @@ export default function StoredFiles({
     if (over && active.id !== over.id) {
       const oldIndex = orderedFiles.indexOf(active.id);
       const newIndex = orderedFiles.indexOf(over.id);
-      
+
       const newOrderedFiles = arrayMove(orderedFiles, oldIndex, newIndex);
       setOrderedFiles(newOrderedFiles);
-      localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
+      localStorage.setItem("orderedFiles", JSON.stringify(newOrderedFiles));
       // Notificar al componente padre sobre el nuevo orden
       if (onReorder) {
         onReorder(newOrderedFiles);
       }
-     // localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
+      // localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
     }
   };
 
-  const handleFileDrop = (e) => {
-    
-  };
+  const handleFileDrop = (e) => {};
 
   return (
     <Card
@@ -91,15 +103,14 @@ export default function StoredFiles({
       <CardContent className="flex flex-col relative min-h-[200px]">
         {orderedFiles.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-32 text-gray-500 border-2 border-dashed border-gray-200 rounded-lg">
-            
-            <p>No hay  cuestionarios almacenados.</p>
+            <p>No hay cuestionarios almacenados.</p>
           </div>
         ) : (
-          <DndContext
-            sensors={sensors}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext items={orderedFiles} strategy={verticalListSortingStrategy}>
+          <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+            <SortableContext
+              items={orderedFiles}
+              strategy={verticalListSortingStrategy}
+            >
               <div className="space-y-2">
                 {orderedFiles.map((fileName) => (
                   <SortableFileItem
