@@ -1,0 +1,25 @@
+1. speak on spanish/
+2. app working with vite react 
+3. app working with vite react and tailwindcss
+
+Gestión de Dependencias y Versionado Específico del Workspace:
+Asegúrate de que cada workspace mantenga un package.json actualizado con dependencias y devDependencias fijas para garantizar que el entorno de desarrollo y producción sea reproducible.
+Revisa periódicamente las actualizaciones y la compatibilidad de las dependencias a nivel de workspace, evitando discrepancias entre proyectos.
+Uso de Vite en el Flujo de Trabajo:
+Emplea los scripts de Vite definidos en el workspace (dev, build y preview) para compilar y probar la aplicación de manera local.
+Configura Vite para respetar las particularidades del workspace, asegurando que la configuración específica (como módulos y plugins) se aplique solo al proyecto correspondiente.
+Organización de Componentes y Modularidad Local:
+Cada workspace debe estructurar sus componentes de forma modular y reutilizable. Esto facilita la colaboración interna y el mantenimiento del código en proyectos que puedan compartir similitudes.
+Respeta la convención de nombres y la ubicación de los componentes para mantener la coherencia en el workspace.
+Estilos y Herramientas de Diseño:
+Configura y utiliza Tailwind CSS y tailwind-merge en el contexto del workspace, garantizando que los estilos sean consistentes y se minimicen los conflictos a nivel de proyecto.
+La integración de PostCSS y Autoprefixer debe estar en sintonía con el entorno de desarrollo local para obtener una salida CSS optimizada.
+Integración de Tecnología Next.js y Otras Herramientas:
+Aunque el workspace actual use Vite para la compilación, incorpora las buenas prácticas de Next.js (especialmente si trabajas en un entorno híbrido) en la organización del proyecto, gestionando correctamente el enrutamiento y renderizado.
+Integra herramientas y librerías adicionales (como Prisma para ORM, Radix UI para componentes, etc.) asegurando que la configuración y uso de estas se mantenga encapsulado en el workspace.
+Optimización, Pruebas y Buenas Prácticas de Desarrollo en el Workspace:
+Implementa pruebas unitarias e integradas dentro de cada workspace para asegurar la estabilidad del código.
+Documenta las decisiones, patrones y configuraciones a nivel local, permitiendo que otros desarrolladores comprendan y mantengan el workspace de forma efectiva.
+Seguridad y Configuración de Variables de Entorno Locales:
+Dado que los proyectos son privados, mantén una gestión estricta de las variables de entorno (por ejemplo, usando dotenv) y revisa que cada workspace cuente con configuraciones seguras para evitar fugas de información sensible.
+Cada workspace debe aplicar controles de seguridad y políticas de acceso específicas, incluso si forma parte de un entorno mayor.
