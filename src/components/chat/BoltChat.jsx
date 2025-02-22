@@ -35,11 +35,16 @@ const BoltChat = ({ onSubmit, question }) => {
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error:", error);
+      if (error.status === 429) {
+        alert("¡Se han agotado los tokens disponibles! Por favor, intenta más tarde.");
+      }
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "Lo siento, hubo un error al procesar tu mensaje.",
+          content: error.status === 429 
+            ? "Se han agotado los tokens disponibles. Por favor, espera unos minutos antes de intentar nuevamente." 
+            : "Lo siento, hubo un error al procesar tu mensaje.",
         },
       ]);
     } finally {
