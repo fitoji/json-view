@@ -30,7 +30,7 @@ const Temporizador = forwardRef(({ isRunning, setIsRunning }, ref) => {
   const handleResetTemp = () => {
     setTime(0) // Reinicia el tiempo a 0
     setIsRunning(true)
-    console.log("reseteo temporizador")
+    //console.log("reseteo temporizador")
   }
 
   // Exponer la función handleResetTemp

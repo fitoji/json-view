@@ -20,7 +20,7 @@ export default function Landing() {
   const [storageUsage, setStorageUsage] = useState(0);
   const { tituloOff, setTituloOff } = useTituloOff();
   const { isTourEnabled } = useDriverPreference();
-  console.log("titulo off desde landig", tituloOff);
+//  console.log("titulo off desde landig", tituloOff);
   useEffect(() => {
     const storedFiles = JSON.parse(localStorage.getItem("jsonFiles") || "{}");
     if (Object.keys(storedFiles).length === 0) {

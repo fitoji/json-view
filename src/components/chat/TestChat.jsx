@@ -29,7 +29,7 @@ export default function TestChat({
     "¿que?",
   ];
   const contextoPregunta = `Responde considerando el modulo ${data2.asignatura}, dentro del tema ${data2.tema}`;
-  console.log("el contexto es", contextoPregunta);
+  //console.log("el contexto es", contextoPregunta);
 
   const handleDelete = () => {
     setInput("");

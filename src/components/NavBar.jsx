@@ -21,7 +21,7 @@ const NavBar = () => {
   const location = useLocation();
   const { isTourEnabled, toggleTour } = useDriverPreference();
   const { tituloOff } = useTituloOff();
-  console.log("titulo off", tituloOff);
+  //console.log("titulo off", tituloOff);
 
   return (
     <nav className="navbar-fondo text-white">

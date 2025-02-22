@@ -6,7 +6,7 @@ import AlmacenUser from './AlmacenUser'
 const Almacen = ({files, onSelect, onDelete, setTituloOff}) => {
   
   const [fileEntries, setFileEntries] = useState(Object.entries(files))
-  console.log(fileEntries)
+ // console.log(fileEntries)
 
   const[people, setPeople] = useState([
     {name:"jon", id:1},
@@ -19,10 +19,10 @@ const Almacen = ({files, onSelect, onDelete, setTituloOff}) => {
     const oldIndex = fileEntries.findIndex(([fileName]) => fileName === active.id)
     const newIndex = fileEntries.findIndex(([fileName]) => fileName ===over.id)
 
-    console.log("oldIndex",oldIndex)
-    console.log("newIndex",newIndex)
+    //console.log("oldIndex",oldIndex)
+    //console.log("newIndex",newIndex)
     const newOrder =arrayMove(fileEntries,oldIndex,newIndex)
-    console.log(newOrder)
+   // console.log(newOrder)
      setFileEntries(newOrder) 
      /* localStorage.setItem('fileEntries', JSON.stringify(newOrder)) */
   }

@@ -29,7 +29,7 @@ export default function FileDropZone({ onFileDrop, tituloOff }) {
           
           onFileDrop(file.name, jsonContent)
         } catch (error) {
-          console.error('Error parsing JSON:', error)
+       //   console.error('Error parsing JSON:', error)
          
         }
       }

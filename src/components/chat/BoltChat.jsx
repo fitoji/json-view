@@ -9,7 +9,7 @@ const BoltChat = ({ onSubmit, question }) => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const data2 = question;
-  console.log(data2);
+ // console.log(data2);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {

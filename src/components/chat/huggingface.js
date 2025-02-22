@@ -5,7 +5,7 @@ import { HfInference } from "@huggingface/inference";
 const hf = new HfInference(import.meta.env.VITE_REACT_HUGGINGFACE)
 
 //const MODEL = 'iagovar/roberta-base-bne-sqac-onnx'
-const MODEL ='microsoft/Phi-3.5-mini-instruct'
+const MODEL = 'microsoft/Phi-3.5-mini-instruct'
 //const MODEL ='pankajmathur/orca_mini_phi-4"'
 //const MODEL = 'deepseek-ai/DeepSeek-R1'
 
@@ -14,7 +14,7 @@ let out = "";
 
 export const generateResponse = async (message) => {
   try {
-    out=""
+    out = ""
     const messages = [
       {
         role: "system",
@@ -46,32 +46,32 @@ export const generateResponse = async (message) => {
         out += chunk.choices[0].delta.content; // Acumula el contenido de la respuesta
       }
     }
-    
-    console.log(out)
-    let response = {generated_text: out}
+
+    // console.log(out)
+    let response = { generated_text: out }
     //const result = await response.json();
     return response.generated_text || "Lo siento, no pude entender tu mensaje.";
- 
 
-  }catch (error){
+
+  } catch (error) {
     console.log("error al generar el texto", error)
-   }
-  
-  
+  }
 
-  
 
-      /* "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill",
-      {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${HUGGINGFACE_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ inputs: message }),
-      } */
-   
-   
 
-    
+
+
+  /* "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill",
+  {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${HUGGINGFACE_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ inputs: message }),
+  } */
+
+
+
+
 };
