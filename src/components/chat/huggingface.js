@@ -1,4 +1,5 @@
 import { HfInference } from "@huggingface/inference";
+import { toast } from "sonner";
 
 
 
@@ -14,6 +15,17 @@ let out = "";
 
 export const generateResponse = async (message) => {
   try {
+    if (!hf.apiKey) {
+      toast.error("¡Se han agotado los tokens disponibles o necesitas iniciar sesión! Por favor, verifica tu token de acceso o intenta más tarde.", {
+        duration: 10000,
+        style: {
+          backgroundColor: "#ff0066",
+          color: "#fff",
+        },
+      });
+      //alert("no hay key")
+      throw new Error('429: Please log in or use a HF access token, error sale por aca');
+    }
     out = ""
     const messages = [
       {

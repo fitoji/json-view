@@ -35,15 +35,21 @@ const BoltChat = ({ onSubmit, question }) => {
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error:", error);
-      if (error.status === 429) {
-        alert("¡Se han agotado los tokens disponibles! Por favor, intenta más tarde.");
+      const is429Error = error.status === 429 || 
+                        (error.message && (error.message.includes('429') || 
+                                         error.message.includes('Too Many Requests') || 
+                                         error.message.includes('Please log in')));
+
+      if (is429Error) {
+        toast.error("¡Se han agotado los tokens disponibles o necesitas iniciar sesión! Por favor, verifica tu token de acceso o intenta más tarde.");
       }
+
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: error.status === 429 
-            ? "Se han agotado los tokens disponibles. Por favor, espera unos minutos antes de intentar nuevamente." 
+          content: is429Error
+            ? "Se han agotado los tokens disponibles o necesitas iniciar sesión. Por favor, verifica tu token de acceso o espera unos minutos antes de intentar nuevamente."
             : "Lo siento, hubo un error al procesar tu mensaje.",
         },
       ]);
