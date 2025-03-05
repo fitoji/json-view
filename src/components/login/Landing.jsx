@@ -20,7 +20,7 @@ export default function Landing() {
   const [storageUsage, setStorageUsage] = useState(0);
   const { tituloOff, setTituloOff } = useTituloOff();
   const { isTourEnabled } = useDriverPreference();
-//  console.log("titulo off desde landig", tituloOff);
+  //  console.log("titulo off desde landig", tituloOff);
   useEffect(() => {
     const storedFiles = JSON.parse(localStorage.getItem("jsonFiles") || "{}");
     if (Object.keys(storedFiles).length === 0) {
@@ -79,13 +79,21 @@ export default function Landing() {
           {
             element: "#driver-step-4",
             popover: {
+              title: "Menu general.",
+              description:
+                "Haciendo Click aquí se expandira un menu con opciones.",
+            },
+          },
+          {
+            element: "#driver-step-5",
+            popover: {
               title: "Documentación de la aplicación",
               description:
                 "Aquí podrás encontrar información y ayuda para poder pedirle de manera correcta a ChatGPT para que realize los test de manera adecuada, también ayuda y consejos para poder usar la app.",
             },
           },
           {
-            element: "#driver-step-5",
+            element: "#driver-step-6",
             popover: {
               title: "Preguntas a Inteligencia Artificial",
               description:
@@ -93,7 +101,7 @@ export default function Landing() {
             },
           },
           {
-            element: "#driver-step-6",
+            element: "#driver-step-7",
             popover: {
               title: "Desactivar Tour",
               description:
