@@ -1,5 +1,4 @@
 import React, { lazy, Suspense } from "react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import NavBar from "./components/NavBar";
@@ -38,7 +37,6 @@ function App() {
         <Separator />
         <Footer className="w-full shrink-0 border-t bg-sky-50" />
         <Analytics />
-        <SpeedInsights />
       </div>
     </BrowserRouter>
   );

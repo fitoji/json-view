@@ -220,7 +220,7 @@ const Test = ({ data }) => {
   };
 
   return (
-    <div className="flex flex-col-reverse md:flex-row">
+    <div className="flex flex-col-reverse md:flex-row ">
       <div className="bg-emerald-300 w-full md:w-1/6  bg-opacity-30 px-4 py-4 md:h-svh  ">
         <div>
           <h1 className="hidden md:block text-xl font-bold pb-4 pt-20 text-center">

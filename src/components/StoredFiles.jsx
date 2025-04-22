@@ -2,19 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
 import {
   SortableContext,
-  sortableKeyboardCoordinates,
   arrayMove,
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 import { SortableFileItem } from "./SortableFileItem";
 
@@ -33,9 +30,7 @@ export default function StoredFiles({
       if (Object.keys(files).length === 0 && onFileAdd) {
         try {
           // Primero intentamos cargar archivos del localStorage
-          const storedFiles = JSON.parse(
-            localStorage.getItem("jsonFiles") || "{}"
-          );
+          const storedFiles = JSON.parse(localStorage.getItem('jsonFiles') || '{}');
           if (Object.keys(storedFiles).length > 0) {
             // Si hay archivos guardados, los restauramos
             Object.entries(storedFiles).forEach(([fileName, content]) => {
@@ -68,35 +63,42 @@ export default function StoredFiles({
     ];
 
     setOrderedFiles(newOrderedFiles);
-
+    
     // Guardar el orden actualizado en localStorage
     if (currentFiles.length > 0) {
-      localStorage.setItem("orderedFiles", JSON.stringify(newOrderedFiles));
+      localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
     }
   }, [files, onFileAdd]);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 200,
+        tolerance: 8,
+      },
     })
   );
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
 
-    if (active.id !== over.id) {
-      setOrderedFiles((items) => {
-        const oldIndex = items.findIndex((item) => item === active.id);
-        const newIndex = items.findIndex((item) => item === over.id);
+    if (over && active.id !== over.id) {
+      const oldIndex = orderedFiles.indexOf(active.id);
+      const newIndex = orderedFiles.indexOf(over.id);
 
-        return arrayMove(items, oldIndex, newIndex);
-      });
-      localStorage.setItem("orderedFiles", JSON.stringify(orderedFiles));
+      const newOrderedFiles = arrayMove(orderedFiles, oldIndex, newIndex);
+      setOrderedFiles(newOrderedFiles);
+      localStorage.setItem("orderedFiles", JSON.stringify(newOrderedFiles));
       // Notificar al componente padre sobre el nuevo orden
       if (onReorder) {
-        onReorder(orderedFiles);
+        onReorder(newOrderedFiles);
       }
+      // localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
     }
   };
 
@@ -119,12 +121,7 @@ export default function StoredFiles({
             <p>No hay cuestionarios almacenados.</p>
           </div>
         ) : (
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-            modifiers={[restrictToVerticalAxis]}
-          >
+          <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
             <SortableContext
               items={orderedFiles}
               strategy={verticalListSortingStrategy}
