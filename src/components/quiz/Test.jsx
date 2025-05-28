@@ -13,19 +13,6 @@ import { Card, CardContent, CardFooter } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { toast } from "sonner";
 import Temporizador from "../Temporizador";
-
-import BoltChat from "@/components/chat/BoltChat.jsx";
-import { BotMessageSquare, CircleHelp } from "lucide-react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import BotonJavGpt from "../boton-jav";
 
 const Test = ({ data }) => {
@@ -88,8 +75,9 @@ const Test = ({ data }) => {
   let Option2 = useRef(null);
   let Option3 = useRef(null);
   let Option4 = useRef(null);
+  let Option5 = useRef(null);
 
-  let option_array = [Option1, Option2, Option3, Option4];
+  let option_array = [Option1, Option2, Option3, Option4, Option5];
 
   //efecto parpadeo
   const [isVisible, setIsVisible] = useState(true);
@@ -270,10 +258,22 @@ const Test = ({ data }) => {
                         <li ref={Option4} onClick={(e) => checkAns(e, 4)}>
                           d. {question.option4}
                         </li>
+                        {question.hasOwnProperty("option5") &&
+                          question.option5 !== "" && (
+                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
+                              e. {question.option5}
+                            </li>
+                          )}
                       </ul>
                     )}
                     {numero === 1 && (
                       <ul>
+                        {question.hasOwnProperty("option5") &&
+                          question.option5 !== "" && (
+                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
+                              e. {question.option5}
+                            </li>
+                          )}
                         <li ref={Option2} onClick={(e) => checkAns(e, 2)}>
                           b. {question.option2}
                         </li>
@@ -293,6 +293,12 @@ const Test = ({ data }) => {
                         <li ref={Option4} onClick={(e) => checkAns(e, 4)}>
                           d. {question.option4}
                         </li>
+                        {question.hasOwnProperty("option5") &&
+                          question.option5 !== "" && (
+                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
+                              e. {question.option5}
+                            </li>
+                          )}
                         <li ref={Option3} onClick={(e) => checkAns(e, 3)}>
                           c. {question.option3}
                         </li>
@@ -312,6 +318,12 @@ const Test = ({ data }) => {
                         <li ref={Option4} onClick={(e) => checkAns(e, 4)}>
                           d. {question.option4}
                         </li>
+                        {question.hasOwnProperty("option5") &&
+                          question.option5 !== "" && (
+                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
+                              e. {question.option5}
+                            </li>
+                          )}
                         <li ref={Option1} onClick={(e) => checkAns(e, 1)}>
                           a. {question.option1}
                         </li>
