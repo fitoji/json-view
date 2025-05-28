@@ -77,7 +77,14 @@ const Test = ({ data }) => {
   let Option4 = useRef(null);
   let Option5 = useRef(null);
 
-  let option_array = [Option1, Option2, Option3, Option4, Option5];
+  let option_array = [Option1, Option2, Option3, Option4];
+  useEffect(() => {
+    if (question.hasOwnProperty("option5") && question.option5 !== "") {
+      option_array = [Option1, Option2, Option3, Option4, Option5];
+    } else {
+      option_array = [Option1, Option2, Option3, Option4];
+    }
+  }, [question]);
 
   //efecto parpadeo
   const [isVisible, setIsVisible] = useState(true);
@@ -89,6 +96,7 @@ const Test = ({ data }) => {
     }
   }, [score]);
   const [isVisibleMal, setIsVisibleMal] = useState(true);
+
   useEffect(() => {
     if (mal > 0) {
       setIsVisibleMal(false);
@@ -121,7 +129,13 @@ const Test = ({ data }) => {
               color: "#fff",
             },
           });
-          option_array[question.ans - 1].current.classList.add("right");
+          if (
+            question.ans >= 1 &&
+            question.ans <= 5 &&
+            option_array[question.ans - 1]?.current
+          ) {
+            option_array[question.ans - 1].current.classList.add("right");
+          }
           setMal((prev) => prev + 1);
           setEquiv((prevEquiv) => [...prevEquiv, question]);
         }
