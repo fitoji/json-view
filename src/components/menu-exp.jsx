@@ -1,25 +1,25 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useDriverPreference } from "@/hooks/useDriverPreferences";
-import { Home, Settings, CircleHelp, Undo2 } from "lucide-react";
+import { useDriverPreference } from '@/hooks/useDriverPreferences'
+import { AnimatePresence, motion } from 'framer-motion'
+import { CircleHelp, Home, Settings, Undo2 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
-import { Link } from "react-router-dom";
-import { TourGuideToggle } from "./TourGuideToggle";
-import JavBtn from "./jav-btn-nav";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom'
+
+import { TourGuideToggle } from './TourGuideToggle'
+import JavBtn from './jav-btn-nav'
 
 export default function MenuExp() {
-  const location = useLocation();
-  const { isTourEnabled, toggleTour } = useDriverPreference();
-  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation()
+  const { isTourEnabled, toggleTour } = useDriverPreference()
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
-    setIsOpen(isTourEnabled);
-  }, [isTourEnabled]);
+    setIsOpen(isTourEnabled)
+  }, [isTourEnabled])
 
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   const buttonVariants = {
     closed: {
@@ -28,7 +28,7 @@ export default function MenuExp() {
     open: {
       scale: 1.1,
     },
-  };
+  }
 
   const menuVariants = {
     closed: {
@@ -48,26 +48,26 @@ export default function MenuExp() {
         staggerDirection: 1,
       },
     },
-  };
+  }
 
   const itemVariants = {
     closed: { opacity: 0, x: -10 },
     open: { opacity: 1, x: 0 },
-  };
+  }
 
   const menuItems = [
     {
       icon: <Home size={20} />,
-      href: "/",
-      color: "bg-sky-400 hover:bg-sky-300",
+      href: '/',
+      color: 'bg-sky-400 hover:bg-sky-300',
     },
 
     {
       icon: <CircleHelp size={20} />,
-      href: "/docs",
-      color: "bg-emerald-400 hover:bg-emerald-300",
+      href: '/docs',
+      color: 'bg-emerald-400 hover:bg-emerald-300',
     },
-  ];
+  ]
 
   return (
     <div className="flex flex-col items-center justify-center ">
@@ -77,7 +77,7 @@ export default function MenuExp() {
           className="bg-emerald-400 hover:bg-emerald-300 text-white rounded-lg w-10 h-10 mt-2 flex items-center justify-center shadow-lg z-20 relative"
           onClick={toggleOpen}
           variants={buttonVariants}
-          animate={isOpen ? "open" : "closed"}
+          animate={isOpen ? 'open' : 'closed'}
           whileTap={{ scale: 0.95 }}
         >
           <motion.span
@@ -102,9 +102,9 @@ export default function MenuExp() {
                 <Link
                   id="driver-step-5"
                   className="bg-emerald-400 hover:bg-emerald-300 text-white w-10 h-10 mt-2 flex items-center justify-center rounded-lg shadow-md"
-                  to={location.pathname === "/" ? "/docs" : "/"}
+                  to={location.pathname === '/' ? '/docs' : '/'}
                 >
-                  {location.pathname === "/" ? (
+                  {location.pathname === '/' ? (
                     <CircleHelp className="w-5 h-5" />
                   ) : (
                     <Undo2 className="w-5 h-5" />
@@ -125,5 +125,5 @@ export default function MenuExp() {
         </AnimatePresence>
       </div>
     </div>
-  );
+  )
 }
