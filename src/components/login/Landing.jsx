@@ -157,19 +157,19 @@ export default function Landing() {
               >
                 Visualizador de Tests en formato Json
               </h1>
-              <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
+              <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl mb-8 md:mb-18">
                 ¡Elegi tu archivo .json hecho con gpt y empieza a practicar!
               </p>
             </div>
           )}
         </div>
         <DataProvider>
-          <div className="container mx-auto">
+          <div className="flex flex-col items-center justify-center gap-4 w-full">
             {selectedFile && <FileViewer content={selectedFile} />}
             <div id="driver-step-2">
               <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
             </div>
-            <div id="driver-step-3" className="mt-4">
+            <div id="driver-step-3" className="mt-8 w-full px-4">
               <StoredFiles
                 files={files || {}}
                 onSelect={handleFileSelect}

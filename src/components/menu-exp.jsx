@@ -1,15 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDriverPreference } from "@/hooks/useDriverPreferences";
-import {
-  Home,
-  Settings,
-  User,
-  Bell,
-  Search,
-  CircleHelp,
-  Undo2,
-} from "lucide-react";
+import { Home, Settings, CircleHelp, Undo2 } from "lucide-react";
 
 import { Link } from "react-router-dom";
 import { TourGuideToggle } from "./TourGuideToggle";

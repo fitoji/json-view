@@ -30,7 +30,9 @@ export default function StoredFiles({
       if (Object.keys(files).length === 0 && onFileAdd) {
         try {
           // Primero intentamos cargar archivos del localStorage
-          const storedFiles = JSON.parse(localStorage.getItem('jsonFiles') || '{}');
+          const storedFiles = JSON.parse(
+            localStorage.getItem("jsonFiles") || "{}",
+          );
           if (Object.keys(storedFiles).length > 0) {
             // Si hay archivos guardados, los restauramos
             Object.entries(storedFiles).forEach(([fileName, content]) => {
@@ -63,10 +65,10 @@ export default function StoredFiles({
     ];
 
     setOrderedFiles(newOrderedFiles);
-    
+
     // Guardar el orden actualizado en localStorage
     if (currentFiles.length > 0) {
-      localStorage.setItem('orderedFiles', JSON.stringify(newOrderedFiles));
+      localStorage.setItem("orderedFiles", JSON.stringify(newOrderedFiles));
     }
   }, [files, onFileAdd]);
 
@@ -81,7 +83,7 @@ export default function StoredFiles({
         delay: 200,
         tolerance: 8,
       },
-    })
+    }),
   );
 
   const handleDragEnd = (event) => {
@@ -108,7 +110,7 @@ export default function StoredFiles({
     <Card
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleFileDrop}
-      className="transition-all duration-200"
+      className="transition-all duration-200 shadow-md w-full max-w-none md:p-4"
     >
       <CardHeader>
         <CardTitle className="flex justify-center">
@@ -117,7 +119,7 @@ export default function StoredFiles({
       </CardHeader>
       <CardContent className="flex flex-col relative min-h-[200px]">
         {orderedFiles.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-32 text-gray-500 border-2 border-dashed border-gray-200 rounded-lg">
+          <div className="flex flex-col items-center justify-center h-32 text-slate-500 border-2 border-dashed border-slate-200 rounded-lg">
             <p>No hay cuestionarios almacenados.</p>
           </div>
         ) : (
@@ -126,7 +128,7 @@ export default function StoredFiles({
               items={orderedFiles}
               strategy={verticalListSortingStrategy}
             >
-              <div className="space-y-2">
+              <div className="md:space-y-2">
                 {orderedFiles.map((fileName) => (
                   <SortableFileItem
                     key={fileName}

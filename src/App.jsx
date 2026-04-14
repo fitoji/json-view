@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
         <TituloOffProvider>
-          <main className="flex-grow">
+          <main className="grow">
             <Suspense
               fallback={
                 <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />

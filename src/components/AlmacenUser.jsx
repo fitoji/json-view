@@ -3,7 +3,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
 
-const AlmacenUser = ({fileName,onSelect, onDelete, setTituloOff}) => {
+const AlmacenUser = ({ fileName, onSelect, onDelete, setTituloOff, className = "" }) => {
 
     const {
         attributes,
@@ -24,7 +24,7 @@ const AlmacenUser = ({fileName,onSelect, onDelete, setTituloOff}) => {
     ref={setNodeRef}
     {...attributes}
     {...listeners}
-    className='bg-white rounded-md shadow-md my-2'>
+    className={`bg-white rounded-md shadow-md my-2 ${className}`}>
         <h1>{fileName}</h1>
         <button onClick={() => onDelete(fileName)}>Eliminar</button> {/* Asegúrate de que esto esté presente */}
     </div>

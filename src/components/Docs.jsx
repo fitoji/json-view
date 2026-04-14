@@ -1,6 +1,3 @@
-import { Undo2 } from "lucide-react";
-import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
@@ -10,7 +7,7 @@ import {
 
 export default function Docs() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-emerald-50 pr-6 pt-1">
+    <div className="min-h-screen bg-linear-to-br from-sky-50 to-emerald-50 pr-6 pt-1">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8">
         <h1 className="text-4xl font-bold text-emerald-700 mb-6">
           Visor JsonTests - Documentación
@@ -55,7 +52,7 @@ export default function Docs() {
                     tema: "alguno",
                   },
                   null,
-                  2
+                  2,
                 )}
               </pre>
               <p className="mt-4">
