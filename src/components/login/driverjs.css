@@ -1,6 +1,5 @@
 .driver-popover.driverjs-theme {
-  //background-color: #bbf7d0;
-  background-color: #89eae0; /* Color de fondo base */
+  background-color: #89eae0;
   background-image: linear-gradient(
     to bottom right,
     #89eae0,
