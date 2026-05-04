@@ -17,7 +17,6 @@ import BotonJavGpt from "../boton-jav";
 
 const Test = ({ data }) => {
   useEffect(() => {
-    // {{ edit_1 }}
     reset();
     setNPreguntas(data.length); // Actualiza el número de preguntas cuando cambia data
     const newQuestions = preguntasAleatorias(
