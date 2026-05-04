@@ -4,12 +4,91 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.png" />
-  
+  <link rel="apple-touch-icon" href="/favicon.png" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Página de Visualizador de Tests interactivos con archivos en formato JSON" />
-  
-  <title>Visor JsonTest</title>
+  <meta name="description" content="Visor JsonTests - Crea cuestionarios interactivos desde JSON. Practica con tests, recibe retroalimentación inmediata y repasa tus errores. Herramienta gratuita para estudiantes." />
+  <meta name="keywords" content="visor jsontests, cuestionarios interactivos, tests online, json quiz,practice tests, study quiz, aprender online" />
+  <meta name="author" content="Visortests" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://visortests-gpt.vercel.app" />
+
+  <title>Visor JsonTests - Cuestionarios Interactivos JSON</title>
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Visor JsonTests - Cuestionarios Interactivos JSON" />
+  <meta property="og:description" content="Crea cuestionarios interactivos desde JSON. Practica con tests, recibe retroalimentación inmediata y repasa tus errores." />
+  <meta property="og:url" content="https://visortests-gpt.vercel.app" />
+  <meta property="og:site_name" content="Visor JsonTests" />
+  <meta property="og:locale" content="es_ES" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Visor JsonTests - Cuestionarios Interactivos JSON" />
+  <meta name="twitter:description" content="Crea cuestionarios interactivos desde JSON. Practica con tests, recibe retroalimentación inmediata y repasa tus errores." />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Visor JsonTests",
+    "alternateName": "JSON Tests Viewer",
+    "description": "Aplicación para crear cuestionarios interactivos desde archivos JSON. Permite a estudiantes practicar con tests de manera rápida y eficiente con retroalimentación inmediata.",
+    "url": "https://visortests-gpt.vercel.app",
+    "applicationCategory": "EducationApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Visortests",
+      "url": "https://visortests-gpt.vercel.app"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cómo saber el código de asignatura?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "En los campos 'asignatura' y 'tema' puedes poner el valor que corresponda a la asignatura estudiada. Se acepta cualquier valor y también puedes pedírselo a GPT para que cambie automáticamente en todas las preguntas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué significa el campo 'ans' en el JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "En el campo 'ans' va el valor de la respuesta correcta: a=1, b=2, c=3, d=4. GPT lo detecta automáticamente pero conviene verificar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo usar archivos TXT en lugar de JSON?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, la nueva versión permite agregar archivos TXT y el Visor los interpretará como archivos JSON."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo creo cuestionarios si no sé de informática?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Solo tienes que pedirle a ChatGPT que cree un cuestionario en formato JSON usando la documentación de Visor JsonTests. Explícale el tema y número de preguntas desired."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body role="main" class="fito-fondo">
