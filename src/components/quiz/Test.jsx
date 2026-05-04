@@ -238,7 +238,7 @@ const Test = ({ data }) => {
         </div>
       </div>
       <div className="w-full md:w-2/3">
-        <div>
+        <div role="progressbar" aria-valuenow={index + 1} aria-valuemin={0} aria-valuemax={npreguntas} aria-label={`Progreso: pregunta ${index + 1} de ${npreguntas}`}>
           <Progress value={((index + 1) * 100) / npreguntas} />
         </div>
 
@@ -254,96 +254,48 @@ const Test = ({ data }) => {
               >
                 {result ? null : (
                   <>
+                    {/* Live region para screen readers */}
+                    <div aria-live="polite" aria-atomic="true" className="sr-only">
+                      {lock && (score > 0 ? '¡Respuesta correcta!' : mal > 0 ? 'Respuesta equivocada' : '')}
+                    </div>
                     <h2 className="text-base md:text-xl font-bold pb-2">
                       {index + 1}. {question.question}
                     </h2>
 
                     {numero === 0 && (
-                      <ul>
-                        <li ref={Option1} onClick={(e) => checkAns(e, 1)}>
-                          a. {question.option1}
-                        </li>
-                        <li ref={Option2} onClick={(e) => checkAns(e, 2)}>
-                          b. {question.option2}
-                        </li>
-                        <li ref={Option3} onClick={(e) => checkAns(e, 3)}>
-                          c. {question.option3}
-                        </li>
-                        <li ref={Option4} onClick={(e) => checkAns(e, 4)}>
-                          d. {question.option4}
-                        </li>
-                        {question.hasOwnProperty("option5") &&
-                          question.option5 !== "" && (
-                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
-                              e. {question.option5}
-                            </li>
-                          )}
+                      <ul role="listbox" aria-label="Opciones de respuesta">
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 1)} aria-label={`Opción a: ${question.option1}`}>a. {question.option1}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 2)} aria-label={`Opción b: ${question.option2}`}>b. {question.option2}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 3)} aria-label={`Opción c: ${question.option3}`}>c. {question.option3}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 4)} aria-label={`Opción d: ${question.option4}`}>d. {question.option4}</button></li>
+                        {question.hasOwnProperty("option5") && question.option5 !== "" && (<li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 5)} aria-label={`Opción e: ${question.option5}`}>e. {question.option5}</button></li>)}
                       </ul>
                     )}
                     {numero === 1 && (
-                      <ul>
-                        {question.hasOwnProperty("option5") &&
-                          question.option5 !== "" && (
-                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
-                              e. {question.option5}
-                            </li>
-                          )}
-                        <li ref={Option2} onClick={(e) => checkAns(e, 2)}>
-                          b. {question.option2}
-                        </li>
-                        <li ref={Option4} onClick={(e) => checkAns(e, 4)}>
-                          d. {question.option4}
-                        </li>
-                        <li ref={Option1} onClick={(e) => checkAns(e, 1)}>
-                          a. {question.option1}
-                        </li>
-                        <li ref={Option3} onClick={(e) => checkAns(e, 3)}>
-                          c. {question.option3}
-                        </li>
+                      <ul role="listbox" aria-label="Opciones de respuesta">
+                        {question.hasOwnProperty("option5") && question.option5 !== "" && (<li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 5)} aria-label={`Opción e: ${question.option5}`}>e. {question.option5}</button></li>)}
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 2)} aria-label={`Opción b: ${question.option2}`}>b. {question.option2}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 4)} aria-label={`Opción d: ${question.option4}`}>d. {question.option4}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 1)} aria-label={`Opción a: ${question.option1}`}>a. {question.option1}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 3)} aria-label={`Opción c: ${question.option3}`}>c. {question.option3}</button></li>
                       </ul>
                     )}
                     {numero === 2 && (
-                      <ul>
-                        <li ref={Option4} onClick={(e) => checkAns(e, 4)}>
-                          d. {question.option4}
-                        </li>
-                        {question.hasOwnProperty("option5") &&
-                          question.option5 !== "" && (
-                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
-                              e. {question.option5}
-                            </li>
-                          )}
-                        <li ref={Option3} onClick={(e) => checkAns(e, 3)}>
-                          c. {question.option3}
-                        </li>
-                        <li ref={Option2} onClick={(e) => checkAns(e, 2)}>
-                          b. {question.option2}
-                        </li>
-                        <li ref={Option1} onClick={(e) => checkAns(e, 1)}>
-                          a. {question.option1}
-                        </li>
+                      <ul role="listbox" aria-label="Opciones de respuesta">
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 4)} aria-label={`Opción d: ${question.option4}`}>d. {question.option4}</button></li>
+                        {question.hasOwnProperty("option5") && question.option5 !== "" && (<li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 5)} aria-label={`Opción e: ${question.option5}`}>e. {question.option5}</button></li>)}
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 3)} aria-label={`Opción c: ${question.option3}`}>c. {question.option3}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 2)} aria-label={`Opción b: ${question.option2}`}>b. {question.option2}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 1)} aria-label={`Opción a: ${question.option1}`}>a. {question.option1}</button></li>
                       </ul>
                     )}
                     {numero === 3 && (
-                      <ul>
-                        <li ref={Option3} onClick={(e) => checkAns(e, 3)}>
-                          c. {question.option3}
-                        </li>
-                        <li ref={Option4} onClick={(e) => checkAns(e, 4)}>
-                          d. {question.option4}
-                        </li>
-                        {question.hasOwnProperty("option5") &&
-                          question.option5 !== "" && (
-                            <li ref={Option5} onClick={(e) => checkAns(e, 5)}>
-                              e. {question.option5}
-                            </li>
-                          )}
-                        <li ref={Option1} onClick={(e) => checkAns(e, 1)}>
-                          a. {question.option1}
-                        </li>
-                        <li ref={Option2} onClick={(e) => checkAns(e, 2)}>
-                          b. {question.option2}
-                        </li>
+                      <ul role="listbox" aria-label="Opciones de respuesta">
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 3)} aria-label={`Opción c: ${question.option3}`}>c. {question.option3}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 4)} aria-label={`Opción d: ${question.option4}`}>d. {question.option4}</button></li>
+                        {question.hasOwnProperty("option5") && question.option5 !== "" && (<li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 5)} aria-label={`Opción e: ${question.option5}`}>e. {question.option5}</button></li>)}
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 1)} aria-label={`Opción a: ${question.option1}`}>a. {question.option1}</button></li>
+                        <li><button type="button" className="w-full text-left p-2 rounded hover:bg-gray-100" onClick={(e) => checkAns(e, 2)} aria-label={`Opción b: ${question.option2}`}>b. {question.option2}</button></li>
                       </ul>
                     )}
                     <div></div>
@@ -428,22 +380,24 @@ const Test = ({ data }) => {
             <div className="flex flex-row drop-shadow-xl ">
               <img
                 src="https://utfs.io/f/OrgeCo8Gum6eKylVNYfht4PRXU8nqNh6MurYiIsJ71CDbHvf"
-                alt="icono bien"
+                alt=""
+                aria-hidden="true"
                 className={`transition-opacity duration-200 max-w-full h-auto ${
                   isVisible ? "opacity-100" : "opacity-0"
                 }`}
               />
-              <div className="text-xl ml-2 mt-4 text-emerald-700">{score}</div>
+              <div className="text-xl ml-2 mt-4 text-emerald-700" aria-live="polite">{score}</div>
             </div>
             <div className="flex flex-row drop-shadow-xl">
               <img
                 src="https://7psafmss5c.ufs.sh/f/OrgeCo8Gum6ey3WEMjroCV7r9FdRGPWb0fMTEh81mkn3egKq"
-                alt="icono mal"
+                alt=""
+                aria-hidden="true"
                 className={`transition-opacity duration-200 max-w-full h-auto ${
                   isVisibleMal ? "opacity-100" : "opacity-0"
                 }`}
               />
-              <div className="text-xl mt-4 ml-2 text-rose-600">{mal}</div>
+              <div className="text-xl mt-4 ml-2 text-rose-600" aria-live="polite">{mal}</div>
             </div>
           </div>
           <div className=" md:justify-end mb-2 align-top pt-1 md:pt-4">

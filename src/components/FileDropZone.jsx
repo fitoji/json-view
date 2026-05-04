@@ -91,12 +91,15 @@ export default function FileDropZone({ onFileDrop }) {
     <div
       className="rounded-md p-4 bg-[#89eae0] bg-linear-to-br from-[#89eae0] to-[#f1e8fb]
        hover:bg-linear-to-br flex justify-center"
+      role="region"
+      aria-label="Cargar cuestionario desde archivo"
     >
       <div className="flex flex-col justify-center w-full max-w-sm items-center gap-2">
+        <Label htmlFor="fileInput" className="sr-only">
+          Cargar archivo JSON de cuestionario
+        </Label>
         <div className="flex flex-row items-center text-wrap px-2">
-          <Label htmlFor="fileInput">
-            Clickea o arrastra y suelta un cuestionario .json aquí
-          </Label>
+          <span id="file-help">Clickea o arrastra un cuestionario .json aquí</span>
           <ArrowDownToLine />
         </div>
         <Input
@@ -104,6 +107,7 @@ export default function FileDropZone({ onFileDrop }) {
           type="file"
           accept=".json, .txt"
           onChange={handleFileUpload}
+          aria-describedby="file-help"
           className="shadow-lg hover:bg-emerald-100 transition-all duration-300"
         />
       </div>

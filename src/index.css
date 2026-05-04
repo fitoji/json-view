@@ -154,3 +154,43 @@
   background-color: #2dd77b;
   background-image: linear-gradient(45deg, #2dd77b 0%, #7dffcc 100%);
 }
+
+/* ♿ ACCESIBILIDAD */
+
+/* Skip link - oculto visualmente pero accesible por teclado */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #005fcc;
+  color: white;
+  padding: 8px 16px;
+  z-index: 100;
+  transition: top 0.2s;
+  font-weight: 600;
+  border-radius: 0 0 8px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Focus visible para teclado */
+:focus-visible {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Reducir movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -6,7 +6,7 @@ import ExpandableButton from "./menu-exp";
 
 const NavBar = () => {
   return (
-    <nav className="navbar-fondo text-slate-50">
+    <nav className="navbar-fondo text-slate-50" aria-label="Navegación principal">
       <div className="flex flex-row items-center justify-between mx-auto px-4 sm:px-6 lg:px-8 pb-2">
         <div className="flex items-center">
           <img
