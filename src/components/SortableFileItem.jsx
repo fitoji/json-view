@@ -1,6 +1,6 @@
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
-import { useTituloOff } from "@/hooks/useTituloOff"; // Añadir este import
+import { useTituloOff } from "@/hooks/useTituloOff";
 
 import {
   HoverCard,
@@ -12,7 +12,7 @@ import { CircleArrowRight, GripVertical, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 
 export function SortableFileItem({ fileName, onSelect, onDelete }) {
-  const { setTituloOff } = useTituloOff(); // Añadir esta línea
+  const { setTituloOff } = useTituloOff();
   const {
     attributes,
     listeners,
@@ -32,18 +32,18 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="flex flex-col mb-2 md:flex-row items-center md:justify-between p-1 rounded-lg border border-gray-200 hover:bg-emerald-200 transition-all ease-out duration-200 shadow-md"
+      className="flex flex-col mb-2 md:flex-row items-center md:justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all ease-out duration-200 shadow-sm"
     >
       <HoverCard>
         <HoverCardTrigger>
           <Button
             {...attributes}
             {...listeners}
-            className="touch-none cursor-grab active:cursor-grabbing p-1 bg-gray-100 hover:bg-emerald-300 rounded mr-2"
+            className="touch-none cursor-grab active:cursor-grabbing p-2 bg-slate-100 dark:bg-slate-700 hover:bg-emerald-200 dark:hover:bg-emerald-600 rounded-lg mr-2"
           >
-            <GripVertical className="w-4 h-4 text-emerald-400 " />
+            <GripVertical className="w-4 h-4 text-slate-600 dark:text-slate-300" />
           </Button>
-          <span className="font-medium text-gray-700">
+          <span className="font-medium text-slate-800 dark:text-slate-100">
             {fileName.replace(".json", "")}
           </span>
         </HoverCardTrigger>
@@ -62,7 +62,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-emerald-300 hover:bg-emerald-100 hover:text-emerald-900"
+              className="bg-emerald-500 hover:bg-emerald-600 text-white dark:text-white"
               size="sm"
             >
               <CircleArrowRight className="w-4 h-4 mr-2" />
@@ -80,7 +80,6 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
               onClick={() => onDelete(fileName)}
               variant="destructive"
               size="sm"
-              className="hover:bg-red-600"
             >
               <Trash2 className="w-4 h-4 mr-2" />
               <span className="hidden md:inline">Eliminar</span>

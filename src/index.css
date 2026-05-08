@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* ✅ Variante dark para Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* 🌞 THEME (esto es lo que reemplaza tailwind.config.js) */
 @theme {
   --radius: 0.5rem;

@@ -134,7 +134,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <a href="#main-content" className="skip-link">
         Saltar al contenido principal
       </a>

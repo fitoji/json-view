@@ -89,8 +89,7 @@ export default function FileDropZone({ onFileDrop }) {
 
   return (
     <div
-      className="rounded-md p-4 bg-[#89eae0] bg-linear-to-br from-[#89eae0] to-[#f1e8fb]
-       hover:bg-linear-to-br flex justify-center"
+      className="rounded-xl p-6 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all"
       role="region"
       aria-label="Cargar cuestionario desde archivo"
     >

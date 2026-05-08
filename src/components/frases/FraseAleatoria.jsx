@@ -17,6 +17,7 @@ export default function FraseAleatoria() {
   useEffect(() => {
     seleccionarFraseAleatoria();
   }, []);
+
   if (!visible) {
     return null;
   }
@@ -25,15 +26,12 @@ export default function FraseAleatoria() {
   }
 
   return (
-    <Card
-      className=" bg-[#89eae0] bg-linear-to-br from-[#89eae0] to-[#f1e8fb]
-       hover:bg-linear-to-br mt-16"
-    >
+    <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 mt-8 max-w-2xl mx-auto">
       <CardHeader className="relative p-4">
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-2 right-2"
+          className="absolute top-2 right-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
           onClick={() => setVisible(false)}
           aria-label="Cerrar"
         >
@@ -41,20 +39,20 @@ export default function FraseAleatoria() {
         </Button>
       </CardHeader>
 
-      <CardContent className="mt-4 px-20">
-        <blockquote className="text-lg font-semibold text-slate-800">
+      <CardContent className="px-6 pb-4">
+        <blockquote className="text-lg font-medium text-slate-800 dark:text-slate-100 italic">
           "{fraseSeleccionada.frase}"
         </blockquote>
-        <p className="text-right text-sm text-gray-600 pt-8">
+        <p className="text-right text-sm text-slate-500 dark:text-slate-400 pt-4">
           - {fraseSeleccionada.autor}
         </p>
       </CardContent>
-      <CardFooter className="flex justify-end p-4">
+      <CardFooter className="flex justify-end p-4 pt-0">
         <Button
           onClick={seleccionarFraseAleatoria}
-          className="w-6 h-6 p-0 bg-emerald-300 hover:bg-emerald-200 hover:text-emerald-900"
+          className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white"
         >
-          <ChevronRight />
+          <ChevronRight className="h-4 w-4" />
         </Button>
       </CardFooter>
     </Card>

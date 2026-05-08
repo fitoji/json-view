@@ -10,34 +10,37 @@ import Cargador from "./components/Cargador";
 
 import { Analytics } from "@vercel/analytics/react";
 import { TituloOffProvider } from "./hooks/useTituloOff";
+import { ThemeProvider } from "./components/providers/ThemeProvider";
 //import Docs from './components/Docs'
 const Docs = lazy(() => import("./components/Docs"));
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
-        <TituloOffProvider>
-          <main className="grow">
-            <Suspense
-              fallback={
-                <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />
-              }
-            >
-              <NavBar />
-              <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/docs" element={<Docs />} />
-              </Routes>
-            </Suspense>
-          </main>
-        </TituloOffProvider>
-        <Toaster />
+      <ThemeProvider>
+        <div className="flex flex-col min-h-screen">
+          <TituloOffProvider>
+            <main className="grow">
+              <Suspense
+                fallback={
+                  <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />
+                }
+              >
+                <NavBar />
+                <Routes>
+                  <Route path="/" element={<Landing />} />
+                  <Route path="/docs" element={<Docs />} />
+                </Routes>
+              </Suspense>
+            </main>
+          </TituloOffProvider>
+          <Toaster />
 
-        <Separator />
-        <Footer className="w-full shrink-0 border-t bg-sky-50" />
-        <Analytics />
-      </div>
+          <Separator />
+          <Footer className="w-full shrink-0 border-t bg-sky-50" />
+          <Analytics />
+        </div>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

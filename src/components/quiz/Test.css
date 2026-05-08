@@ -1,39 +1,179 @@
-.container {
-  width: 95%;
+/* 🎨 Test Quiz - Rediseño Visual Elegante & Moderno */
+
+/* 📱 Container responsive */
+.quiz-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.container ul li {
+/* 📋 Opciones de respuesta */
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quiz-option {
   display: flex;
   align-items: center;
-  height: 40%;
-  padding-left: 10px;
-  border: 1px solid #686868;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 15px;
+  padding: 1rem 1.25rem;
+  border: 2px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  font-size: 1rem;
   cursor: pointer;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: hsl(var(--card));
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover state */
+.quiz-option:not(.right):not(.wrong):hover {
+  background: hsl(var(--accent) / 0.1);
+  border-color: hsl(var(--primary) / 0.3);
+  transform: translateX(4px);
+}
+
+/* Letra de opción */
+.quiz-option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  font-weight: 600;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover .quiz-option-letter {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* ✅ Correcta */
+.quiz-option.right {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-color: #10b981;
+  color: white;
+}
+
+.quiz-option.right .quiz-option-letter {
+  background: white;
+  color: #059669;
+}
+
+/* ❌ Incorrecta */
+.quiz-option.wrong {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border-color: #ef4444;
+  color: white;
+}
+
+.quiz-option.wrong .quiz-option-letter {
+  background: white;
+  color: #dc2626;
+}
+
+/* 🎯 Progreso */
+.quiz-progress {
+  position: relative;
+  height: 6px;
+  background: hsl(var(--muted));
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, hsl(var(--primary)) 100%);
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 📊 Score display */
+.quiz-score {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.quiz-score-correct {
+  background: hsl(150 60% 90% / 0.8);
+  color: hsl(150 60% 25%);
+}
+
+.quiz-score-wrong {
+  background: hsl(0 60% 90% / 0.8);
+  color: hsl(0 60% 35%);
+}
+
+/* 🏷️ Pregunta número */
+.quiz-question-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+}
+
+/* ⏱️ Timer */
+.quiz-timer {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* 🎬 Animaciones */
+@keyframes pulse-success {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes shake-wrong {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+.animate-pulse-success {
+  animation: pulse-success 0.3s ease-in-out;
+}
+
+.animate-shake-wrong {
+  animation: shake-wrong 0.4s ease-in-out;
+}
+
+/* 📱 Responsive */
+@media (min-width: 768px) {
+  .quiz-option {
+    padding: 1.125rem 1.5rem;
+    font-size: 1.0625rem;
+  }
   
+  .quiz-option:hover {
+    transform: translateX(8px);
+  }
 }
 
-/* Efecto hover */
-.container ul li:not(.right):not(.wrong):hover {
-  background-image: linear-gradient(-135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-.container .index {
-  font-size: 18px;
-}
-
-.container .right {
-  background-color: #b6edba;
-  background-image: linear-gradient(75deg, #b6edba 0%, #0de56b 61%);
-  border-color: #4fd4ae;
-}
-
-.container .wrong {
-  background-color: #eb8255;
-  background-image: linear-gradient(90deg, #eb8255 0%, #ffb762 50%, #FF0000 100%);
-  border-color: #ed7f7f;
+/* 🌓 Dark mode ajustes */
+@media (prefers-color-scheme: dark) {
+  .quiz-option:not(.right):not(.wrong):hover {
+    background: hsl(var(--accent) / 0.2);
+  }
 }

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useDriverPreference } from "@/hooks/useDriverPreferences";
 import { useTituloOff } from "@/hooks/useTituloOff";
 import ExpandableButton from "./menu-exp";
+import { ThemeToggle } from "./ui/ThemeToggle";
 
 const NavBar = () => {
   return (
@@ -17,7 +18,8 @@ const NavBar = () => {
           <span className="font-bold text-xl">Visor JsonTest </span>
         </div>
 
-        <div className=" flex justify-end">
+        <div className="flex justify-end items-center gap-2">
+          <ThemeToggle />
           <ExpandableButton />
         </div>
       </div>
