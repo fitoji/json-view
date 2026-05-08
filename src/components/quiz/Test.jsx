@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowBigRightDash,
   CheckCircle,
+  Keyboard as KeyboardIcon,
   Settings,
   TriangleAlert,
   XCircle,
@@ -13,7 +14,13 @@ import Modal from '../Modal'
 import Temporizador from '../Temporizador'
 import BotonJavGpt from '../boton-jav'
 import { Button } from '../ui/button'
-import { Card, CardContent, CardFooter } from '../ui/card'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
 import { Label } from '../ui/label'
 import { Progress } from '../ui/progress'
 import { Separator } from '../ui/separator'
@@ -49,6 +56,7 @@ const Test = ({ data }) => {
   const [score, setScore] = useState(0)
   const [mal, setMal] = useState(0)
   const [result, setResult] = useState(false)
+  const [selectedOption, setSelectedOption] = useState(null) // { ans: number, correct: boolean }
 
   const Option1 = useRef(null)
   const Option2 = useRef(null)
@@ -89,7 +97,9 @@ const Test = ({ data }) => {
 
   const checkAns = (e, ans) => {
     if (!lock) {
-      if (question.ans === ans) {
+      const isCorrect = question.ans === ans
+
+      if (isCorrect) {
         e.target.classList.add('right')
         toast.success('¡Correcto!', {
           duration: 1500,
@@ -126,6 +136,7 @@ const Test = ({ data }) => {
           setEquiv((prev) => [...prev, question])
         }
       }
+      setSelectedOption({ ans, correct: isCorrect })
       setLock(true)
     }
   }
@@ -142,6 +153,7 @@ const Test = ({ data }) => {
       setIndex((i) => i + 1)
       setQuestion(questions[index + 1])
       setLock(false)
+      setSelectedOption(null)
       option_array.forEach((opt) => {
         if (opt.current) {
           opt.current.classList.remove('wrong', 'right')
@@ -149,6 +161,83 @@ const Test = ({ data }) => {
       })
     }
   }
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Don't trigger if user is typing in an input
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')
+        return
+
+      // Space or Enter for next question
+      if ((e.code === 'Space' || e.code === 'Enter') && lock && !result) {
+        e.preventDefault()
+        next()
+      }
+
+      // Keys 1-5 for options
+      const keyNum = parseInt(e.key)
+      const opciones = []
+      const optRefs = [Option1, Option2, Option3, Option4, Option5]
+      const optKeys = ['option1', 'option2', 'option3', 'option4', 'option5']
+
+      optKeys.forEach((key, i) => {
+        if (question[key] && question[key] !== '') {
+          opciones.push({ ans: i + 1, ref: optRefs[i] })
+        }
+      })
+
+      if (keyNum >= 1 && keyNum <= opciones.length && !lock && !result) {
+        const renderOrder = opciones.map(
+          (_, i) => (i + numero) % opciones.length,
+        )
+        const visualIndex = keyNum - 1
+
+        if (visualIndex < renderOrder.length) {
+          const optionIndex = renderOrder[visualIndex]
+          const selectedOptionData = opciones[optionIndex]
+
+          if (selectedOptionData) {
+            const isCorrect = question.ans === selectedOptionData.ans
+
+            if (isCorrect) {
+              toast.success('¡Correcto!', {
+                duration: 1500,
+                icon: <CheckCircle />,
+                style: { background: '#10b981', color: '#fff', border: 'none' },
+              })
+              setScore((s) => s + 1)
+            } else {
+              if (question.ans === 0) {
+                setOpenAlert(true)
+              } else {
+                toast.error('Incorrecto', {
+                  duration: 1500,
+                  icon: <XCircle />,
+                  style: {
+                    background: '#ef4444',
+                    color: '#fff',
+                    border: 'none',
+                  },
+                })
+                setMal((m) => m + 1)
+                setEquiv((prev) => [...prev, question])
+              }
+            }
+
+            setSelectedOption({
+              ans: selectedOptionData.ans,
+              correct: isCorrect,
+            })
+            setLock(true)
+          }
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [lock, result, next, question, numero])
 
   const temporizadorRef = useRef()
   const reset = () => {
@@ -165,6 +254,7 @@ const Test = ({ data }) => {
     setMal(0)
     setLock(false)
     setResult(false)
+    setSelectedOption(null)
     generarNumeroAleatorio()
     setEquiv([])
     if (temporizadorRef.current) {
@@ -182,6 +272,7 @@ const Test = ({ data }) => {
     setNPreguntas(equiv.length)
     setLock(false)
     setResult(false)
+    setSelectedOption(null)
     setEquiv([])
   }
 
@@ -210,19 +301,34 @@ const Test = ({ data }) => {
       { ref: Option5, letra: 'e', texto: question.option5, ans: 5 },
     ].filter((o) => o.texto && o.texto !== '')
 
-    // Reordenar según numero
-    const renderOrder = [0, 1, 2, 3, 4].map(
-      (i) => (i + numero) % opciones.length,
-    )
-    return renderOrder.map((i) => {
+    // Reordenar según numero - solo tantos elementos como opciones haya
+    const renderOrder = opciones.map((_, i) => (i + numero) % opciones.length)
+    return renderOrder.map((i, idx) => {
       const opt = opciones[i]
       if (!opt) return null
+
+      // Determinar la clase según el estado
+      let optionClass = 'quiz-option w-full text-left'
+      if (lock && selectedOption) {
+        if (selectedOption.ans === opt.ans) {
+          optionClass += selectedOption.correct ? ' right' : ' wrong'
+        }
+        // Mostrar la respuesta correcta si es incorrecta
+        if (
+          !selectedOption.correct &&
+          question.ans === opt.ans &&
+          question.ans !== 0
+        ) {
+          optionClass += ' right'
+        }
+      }
+
       return (
-        <li key={opt.ans}>
+        <li key={`option-${index}-${idx}`}>
           <button
             type="button"
             ref={opt.ref}
-            className="quiz-option w-full text-left"
+            className={optionClass}
             onClick={(e) => checkAns(e, opt.ans)}
           >
             <span className="quiz-option-letter">{opt.letra}</span>
@@ -234,7 +340,7 @@ const Test = ({ data }) => {
   }
 
   return (
-    <div className="quiz-wrapper min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
       <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
         {/* Sidebar izq */}
@@ -304,7 +410,7 @@ const Test = ({ data }) => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="min-h-[300px]"
+                  className="min-h-75"
                 >
                   {result ? (
                     <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
@@ -365,6 +471,7 @@ const Test = ({ data }) => {
                       <ul className="quiz-options space-y-3" role="listbox">
                         {renderOpciones(false)}
                       </ul>
+                      <div></div>
                     </div>
                   )}
                 </motion.div>
@@ -382,6 +489,37 @@ const Test = ({ data }) => {
                 </Button>
               </CardFooter>
             )}
+          </Card>
+          {/* Keyboard shortcuts card */}
+          <Card className="flex flex-col bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800 rounded-xl mt-8">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-slate-800 dark:text-slate-200">
+                <KeyboardIcon className="w-4 h-4" />
+                Atajos de teclado
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+              <div className="flex items-center gap-1 flex-wrap justify-center">
+                <span>Usa</span>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  1
+                </kbd>
+                <span> - </span>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  4
+                </kbd>
+                <span>para responder,</span>
+                <br></br>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  Enter
+                </kbd>
+                <span> o </span>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  Espacio
+                </kbd>
+                <span> para continuar.</span>
+              </div>
+            </CardContent>
           </Card>
         </main>
 
@@ -495,6 +633,37 @@ const Test = ({ data }) => {
               </CardFooter>
             )}
           </Card>
+          {/* Keyboard shortcuts card */}
+          <Card className="flex flex-col bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800 rounded-xl mt-8">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-slate-800 dark:text-slate-200">
+                <KeyboardIcon className="w-4 h-4" />
+                Atajos de teclado
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+              <div className="flex items-center gap-1 flex-wrap justify-center">
+                <span>Usa</span>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  1
+                </kbd>
+                <span> - </span>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  4
+                </kbd>
+                <span>para responder,</span>
+                <br></br>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  Enter
+                </kbd>
+                <span> o </span>
+                <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
+                  Espacio
+                </kbd>
+                <span> para continuar.</span>
+              </div>
+            </CardContent>
+          </Card>
         </main>
       </div>
 
@@ -590,6 +759,20 @@ const Test = ({ data }) => {
                 >
                   <ArrowBigRightDash className="mr-2" /> Siguiente
                 </Button>
+                <div className="text-center mt-2 text-xs text-slate-400 flex items-center justify-center gap-3">
+                  <span>
+                    <kbd className="px-1 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-[10px]">
+                      1-5
+                    </kbd>{' '}
+                    opciones
+                  </span>
+                  <span>
+                    <kbd className="px-1 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-[10px]">
+                      Espacio
+                    </kbd>{' '}
+                    siguiente
+                  </span>
+                </div>
               </CardFooter>
             )}
           </Card>
