@@ -70,11 +70,11 @@ export default function MenuExp() {
   ]
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex items-center">
       <div id="driver-step-4" className="relative">
         {/* Main button */}
         <motion.button
-          className="bg-emerald-400 hover:bg-emerald-300 text-white rounded-lg w-10 h-10 mt-2 flex items-center justify-center shadow-lg z-20 relative"
+          className="bg-emerald-400 hover:bg-emerald-300 text-white rounded-lg w-10 h-10 flex items-center justify-center shadow-lg z-20 relative"
           onClick={toggleOpen}
           variants={buttonVariants}
           animate={isOpen ? 'open' : 'closed'}

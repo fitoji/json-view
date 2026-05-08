@@ -4,7 +4,7 @@ import { ThemeToggle } from './ui/ThemeToggle'
 const NavBar = () => {
   return (
     <nav
-      className=" text-slate-600 dark:text-slate-100 dark:bg-emerald-800 backdrop-blur-xl"
+      className=" text-slate-600 dark:text-slate-100 dark:bg-emerald-800 backdrop-blur-xl py-4"
       aria-label="Navegación principal"
     >
       <div className="flex flex-row items-center justify-between mx-auto px-4 sm:px-6 lg:px-8 pb-2">
@@ -17,7 +17,7 @@ const NavBar = () => {
           <span className="font-bold text-xl">Visor JsonTest </span>
         </div>
 
-        <div className="flex justify-end items-center gap-2">
+        <div className="flex items-end gap-2 h-12">
           <ExpandableButton />
           <ThemeToggle />
         </div>
