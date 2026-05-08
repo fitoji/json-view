@@ -1,13 +1,12 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { useDriverPreference } from "@/hooks/useDriverPreferences";
-import { useTituloOff } from "@/hooks/useTituloOff";
-import ExpandableButton from "./menu-exp";
-import { ThemeToggle } from "./ui/ThemeToggle";
+import ExpandableButton from './menu-exp'
+import { ThemeToggle } from './ui/ThemeToggle'
 
 const NavBar = () => {
   return (
-    <nav className="navbar-fondo text-slate-50" aria-label="Navegación principal">
+    <nav
+      className=" text-slate-600 dark:text-slate-100 dark:bg-emerald-800 backdrop-blur-xl"
+      aria-label="Navegación principal"
+    >
       <div className="flex flex-row items-center justify-between mx-auto px-4 sm:px-6 lg:px-8 pb-2">
         <div className="flex items-center">
           <img
@@ -19,12 +18,12 @@ const NavBar = () => {
         </div>
 
         <div className="flex justify-end items-center gap-2">
-          <ThemeToggle />
           <ExpandableButton />
+          <ThemeToggle />
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

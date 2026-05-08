@@ -1,6 +1,6 @@
-import { useTheme } from "next-themes"
-import { Moon, Sun } from "lucide-react"
-import { useEffect, useState } from "react"
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -21,15 +21,19 @@ export function ThemeToggle() {
     )
   }
 
-  const isDark = theme === "dark"
+  const isDark = theme === 'dark'
 
   return (
     <button
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-400 transition-colors"
-      aria-label={isDark ? "Cambiar a modo día" : "Cambiar a modo noche"}
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      className="p-2 rounded-lg bg-amber-100 dark:bg-slate-800 hover:bg-amber-200 dark:hover:bg-slate-500 text-slate-600 dark:text-slate-400 transition-colors"
+      aria-label={isDark ? 'Cambiar a modo día' : 'Cambiar a modo noche'}
     >
-      {isDark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+      {isDark ? (
+        <Moon className="w-5 h-5 text-slate-100" />
+      ) : (
+        <Sun className="w-5 h-5 text-amber-400" />
+      )}
     </button>
   )
 }
