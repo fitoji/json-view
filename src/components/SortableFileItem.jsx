@@ -32,7 +32,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="flex flex-col mb-2 md:flex-row items-center md:justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all ease-out duration-200 shadow-sm"
+      className="flex flex-col mb-2 md:flex-row items-start md:items-center md:justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all ease-out duration-200 shadow-sm"
     >
       <HoverCard>
         <HoverCardTrigger>
@@ -53,7 +53,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
         </HoverCardContent>
       </HoverCard>
 
-      <div className="flex flex-row items-center pr-2 gap-2 mt-2 md:mt-0">
+      <div className="flex flex-row items-center justify-center pr-2 gap-2 mt-2 md:mt-0 md:justify-end">
         <HoverCard>
           <HoverCardTrigger>
             <Button

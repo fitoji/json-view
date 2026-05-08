@@ -91,14 +91,30 @@ const Test = ({ data }) => {
     if (!lock) {
       if (question.ans === ans) {
         e.target.classList.add('right')
-        toast.success('¡Correcto!', { duration: 1200, icon: <CheckCircle /> })
+        toast.success('¡Correcto!', {
+          duration: 1500,
+          icon: <CheckCircle />,
+          style: {
+            background: '#10b981',
+            color: '#fff',
+            border: 'none',
+          },
+        })
         setScore((s) => s + 1)
       } else {
         if (question.ans === 0) {
           setOpenAlert(true)
         } else {
           e.target.classList.add('wrong')
-          toast.error('Incorrecto', { duration: 1200, icon: <XCircle /> })
+          toast.error('Incorrecto', {
+            duration: 1500,
+            icon: <XCircle />,
+            style: {
+              background: '#ef4444',
+              color: '#fff',
+              border: 'none',
+            },
+          })
           if (
             question.ans >= 1 &&
             question.ans <= 5 &&
@@ -219,8 +235,8 @@ const Test = ({ data }) => {
 
   return (
     <div className="quiz-wrapper min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      {/* Desktop Layout */}
-      <div className="hidden md:grid md:grid-cols-12 md:min-h-screen">
+      {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
+      <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
         {/* Sidebar izq */}
         <aside className="col-span-2 p-6 pt-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-r border-slate-200 dark:border-slate-700 overflow-y-auto">
           <div className="sticky top-20 space-y-6">
@@ -262,8 +278,8 @@ const Test = ({ data }) => {
           </div>
         </aside>
 
-        {/* Main card */}
-        <main className="col-span-8 p-4 md:p-8 flex flex-col max-h-screen overflow-hidden">
+        {/* Main card - full width para lg */}
+        <main className="col-span-8 p-4 lg:p-8 flex flex-col max-h-screen overflow-auto">
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
@@ -288,7 +304,7 @@ const Test = ({ data }) => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="h-full"
+                  className="min-h-[300px]"
                 >
                   {result ? (
                     <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
@@ -321,18 +337,19 @@ const Test = ({ data }) => {
                         >
                           <ArrowBigRightDash /> Repetir
                         </Button>
-                        {mal !== 0 && (
+                        {mal > 0 && (
                           <Button
-                            className="bg-slate-200 hover:bg-slate-300 text-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-200 px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                            className="bg-violet-500 hover:bg-violet-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
                             onClick={resetErrores}
                           >
-                            Revisar errores ({mal})
+                            <TriangleAlert className="mr-2" /> Revisar errores (
+                            {mal})
                           </Button>
                         )}
                       </div>
                     </div>
                   ) : (
-                    <div className="h-full flex flex-col">
+                    <div className="flex flex-col">
                       <div className="flex items-center gap-3 mb-4">
                         <span className="quiz-question-number">
                           Pregunta #{question.id}
@@ -391,7 +408,97 @@ const Test = ({ data }) => {
         </aside>
       </div>
 
-      {/* Mobile Layout */}
+      {/* Tablet/Mobile Layout - md to lg (768px-1023px): header + main card only */}
+      <div className="hidden md:block lg:hidden flex flex-col min-h-screen">
+        {/* Header con score + timer */}
+        <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 px-4 py-3 flex-shrink-0">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="quiz-score quiz-score-correct">
+                <CheckCircle size={16} />
+                <span>{score}</span>
+              </div>
+              <div className="quiz-score quiz-score-wrong">
+                <XCircle size={16} />
+                <span>{mal}</span>
+              </div>
+              <div className="text-sm text-slate-500 dark:text-slate-400">
+                <Temporizador
+                  isRunning={isRunning}
+                  setIsRunning={setIsRunning}
+                  ref={temporizadorRef}
+                />
+              </div>
+            </div>
+            <Button
+              size="icon"
+              variant="ghost"
+              onClick={() => setOpen(true)}
+              className="rounded-full"
+            >
+              <Settings size={20} />
+            </Button>
+          </div>
+          <Progress value={progressPercent} className="mt-3 h-1.5" />
+        </header>
+
+        {/* Main card */}
+        <main className="flex-1 p-4 overflow-auto">
+          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+            <CardContent className="p-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.25 }}
+                  className="min-h-[250px]"
+                >
+                  {result ? (
+                    <div className="flex flex-col items-center text-center space-y-4 py-6">
+                      <div className="text-5xl font-bold text-emerald-500">
+                        {score}
+                        <span className="text-xl text-slate-400">
+                          /{npreguntas}
+                        </span>
+                      </div>
+                      <Button className="bg-emerald-500" onClick={reset}>
+                        Repetir
+                      </Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <span className="quiz-question-number text-xs">
+                        #{question.id}
+                      </span>
+                      <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                        {question.question}
+                      </h2>
+                      <ul className="quiz-options space-y-2">
+                        {renderOpciones(false)}
+                      </ul>
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </CardContent>
+            {!result && (
+              <CardFooter className="p-4 pt-0">
+                <Button
+                  className="w-full bg-sky-500"
+                  onClick={next}
+                  disabled={!lock}
+                >
+                  <ArrowBigRightDash /> Siguiente
+                </Button>
+              </CardFooter>
+            )}
+          </Card>
+        </main>
+      </div>
+
+      {/* Mobile Layout - small screens (<768px) */}
       <div className="md:hidden flex flex-col min-h-screen">
         <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 px-4 py-3">
           <div className="flex items-center justify-between">
@@ -417,9 +524,9 @@ const Test = ({ data }) => {
           <Progress value={progressPercent} className="mt-3 h-1.5" />
         </header>
 
-        <main className="flex-1 p-4 pb-24 overflow-y-auto">
-          <Card className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl border-0 min-h-[400px]">
-            <CardContent className="p-5 h-full flex flex-col">
+        <main className="flex-1 p-4 overflow-y-auto">
+          <Card className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl border-0">
+            <CardContent className="p-5 h-full flex flex-col overflow-y-auto max-h-[60vh]">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={index}
@@ -447,8 +554,11 @@ const Test = ({ data }) => {
                         >
                           Repetir
                         </Button>
-                        {mal !== 0 && (
-                          <Button variant="outline" onClick={resetErrores}>
+                        {mal > 0 && (
+                          <Button
+                            className="w-full bg-amber-500 hover:bg-amber-600"
+                            onClick={resetErrores}
+                          >
                             Revisar errores
                           </Button>
                         )}

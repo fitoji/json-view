@@ -110,16 +110,16 @@ export default function StoredFiles({
     <Card
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleFileDrop}
-      className="transition-all duration-200 shadow-md w-full max-w-none md:p-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
+      className="transition-all duration-200 shadow-md w-full max-w-none p-3 md:p-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl"
     >
-      <CardHeader>
-        <CardTitle className="flex justify-center text-slate-800 dark:text-slate-100">
+      <CardHeader className="pb-2 md:pb-3">
+        <CardTitle className="flex justify-center md:justify-start text-base md:text-lg text-slate-800 dark:text-slate-100 text-center md:text-left leading-tight">
           Tests JSON Almacenados
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col relative min-h-[200px]">
+      <CardContent className="flex flex-col relative min-h-[200px] pt-0 md:pt-0">
         {orderedFiles.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-32 text-slate-500 dark:text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg">
+          <div className="flex flex-col items-center justify-center h-32 text-sm text-slate-500 dark:text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-lg px-4">
             <p>No hay cuestionarios almacenados.</p>
           </div>
         ) : (
@@ -128,7 +128,7 @@ export default function StoredFiles({
               items={orderedFiles}
               strategy={verticalListSortingStrategy}
             >
-              <div className="md:space-y-2">
+              <div className="space-y-2 md:space-y-2">
                 {orderedFiles.map((fileName) => (
                   <SortableFileItem
                     key={fileName}
