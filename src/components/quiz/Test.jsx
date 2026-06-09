@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { useAnimationPresence } from '@/hooks/useAnimationPresence'
 import ArrowBigRightDash from 'lucide-react/dist/esm/icons/arrow-big-right-dash'
 import CheckCircle from 'lucide-react/dist/esm/icons/check-circle'
 import KeyboardIcon from 'lucide-react/dist/esm/icons/keyboard'
@@ -404,87 +404,76 @@ const Test = ({ data }) => {
 
           <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
             <CardContent className="p-6 md:p-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="min-h-75"
-                >
-                  {result ? (
-                    <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-6xl font-bold text-emerald-500"
-                      >
-                        {score}
-                        <span className="text-2xl text-slate-400">
-                          /{npreguntas}
+              <div
+                key={index}
+                className="min-h-75 animate-slide-in"
+              >
+                {result ? (
+                  <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
+                    <div className="animate-scale-in text-6xl font-bold text-emerald-500">
+                      {score}
+                      <span className="text-2xl text-slate-400">
+                        /{npreguntas}
+                      </span>
+                    </div>
+                    <p className="text-lg text-slate-600 dark:text-slate-300">
+                      Respuestas correctas
+                    </p>
+                    <div className="px-6 py-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        Tiempo:{' '}
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {temporizadorRef.current?.getTime()}
                         </span>
-                      </motion.div>
-                      <p className="text-lg text-slate-600 dark:text-slate-300">
-                        Respuestas correctas
                       </p>
-                      <div className="px-6 py-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
-                        <p className="text-sm text-slate-500 dark:text-slate-400">
-                          Tiempo:{' '}
-                          <span className="font-semibold text-slate-900 dark:text-white">
-                            {temporizadorRef.current?.getTime()}
-                          </span>
-                        </p>
-                      </div>
-                      <div className="flex gap-3 flex-wrap justify-center">
+                    </div>
+                    <div className="flex gap-3 flex-wrap justify-center">
+                      <Button
+                        className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                        onClick={reset}
+                      >
+                        <ArrowBigRightDash /> Repetir
+                      </Button>
+                      {mal > 0 && (
                         <Button
-                          className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
-                          onClick={reset}
+                          className="bg-violet-500 hover:bg-violet-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                          onClick={resetErrores}
                         >
-                          <ArrowBigRightDash /> Repetir
+                          <TriangleAlert className="mr-2" /> Revisar errores (
+                          {mal})
                         </Button>
-                        {mal > 0 && (
-                          <Button
-                            className="bg-violet-500 hover:bg-violet-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
-                            onClick={resetErrores}
-                          >
-                            <TriangleAlert className="mr-2" /> Revisar errores (
-                            {mal})
-                          </Button>
-                        )}
-                      </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="flex flex-col">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="quiz-question-number">
-                          Pregunta #{question.id}
-                        </span>
-                        <Separator orientation="vertical" className="h-4" />
-                        <span className="text-sm text-slate-500">
-                          {question.tema}
-                        </span>
-                      </div>
-                      <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-6 leading-relaxed">
-                        {question.question}
-                      </h2>
-                      <ul className="quiz-options space-y-3">
-                        <OpcionList
-                          question={question}
-                          numero={numero}
-                          index={index}
-                          lock={lock}
-                          selectedOption={selectedOption}
-                          checkAns={checkAns}
-                          optionRefs={optionRefs}
-                        />
-                      </ul>
-                      <div></div>
+                  </div>
+                ) : (
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="quiz-question-number">
+                        Pregunta #{question.id}
+                      </span>
+                      <Separator orientation="vertical" className="h-4" />
+                      <span className="text-sm text-slate-500">
+                        {question.tema}
+                      </span>
                     </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                    <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-6 leading-relaxed">
+                      {question.question}
+                    </h2>
+                    <ul className="quiz-options space-y-3">
+                      <OpcionList
+                        question={question}
+                        numero={numero}
+                        index={index}
+                        lock={lock}
+                        selectedOption={selectedOption}
+                        checkAns={checkAns}
+                        optionRefs={optionRefs}
+                      />
+                    </ul>
+                    <div></div>
+                  </div>
+                )}
+              </div>
             </CardContent>
 
             {!result && (
@@ -593,50 +582,44 @@ const Test = ({ data }) => {
         <main className="flex-1 p-4 overflow-auto">
           <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
             <CardContent className="p-6">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25 }}
-                  className="min-h-[250px]"
-                >
-                  {result ? (
-                    <div className="flex flex-col items-center text-center space-y-4 py-6">
-                      <div className="text-5xl font-bold text-emerald-500">
-                        {score}
-                        <span className="text-xl text-slate-400">
-                          /{npreguntas}
-                        </span>
-                      </div>
-                      <Button className="bg-emerald-500" onClick={reset}>
-                        Repetir
-                      </Button>
-                    </div>
-                  ) : (
-                    <div>
-                      <span className="quiz-question-number text-xs">
-                        #{question.id}
+              <div
+                key={index}
+                className="min-h-[250px] animate-slide-in"
+              >
+                {result ? (
+                  <div className="flex flex-col items-center text-center space-y-4 py-6">
+                    <div className="text-5xl font-bold text-emerald-500">
+                      {score}
+                      <span className="text-xl text-slate-400">
+                        /{npreguntas}
                       </span>
-                      <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
-                        {question.question}
-                      </h2>
-                      <ul className="quiz-options space-y-2">
-                        <OpcionList
-                          question={question}
-                          numero={numero}
-                          index={index}
-                          lock={lock}
-                          selectedOption={selectedOption}
-                          checkAns={checkAns}
-                          optionRefs={optionRefs}
-                        />
-                      </ul>
                     </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                    <Button className="bg-emerald-500" onClick={reset}>
+                      Repetir
+                    </Button>
+                  </div>
+                ) : (
+                  <div>
+                    <span className="quiz-question-number text-xs">
+                      #{question.id}
+                    </span>
+                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                      {question.question}
+                    </h2>
+                    <ul className="quiz-options space-y-2">
+                      <OpcionList
+                        question={question}
+                        numero={numero}
+                        index={index}
+                        lock={lock}
+                        selectedOption={selectedOption}
+                        checkAns={checkAns}
+                        optionRefs={optionRefs}
+                      />
+                    </ul>
+                  </div>
+                )}
+              </div>
             </CardContent>
             {!result && (
               <CardFooter className="p-4 pt-0">
@@ -713,69 +696,63 @@ const Test = ({ data }) => {
         <main className="flex-1 p-4 overflow-y-auto">
           <Card className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl border-0">
             <CardContent className="p-5 h-full flex flex-col overflow-y-auto max-h-[60vh]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="space-y-4 flex-1 flex flex-col"
-                >
-                  {result ? (
-                    <div className="text-center py-8 space-y-4">
-                      <div className="text-5xl font-bold text-emerald-500">
-                        {score}
-                        <span className="text-xl text-slate-400">
-                          /{npreguntas}
-                        </span>
-                      </div>
-                      <p className="text-slate-600 dark:text-slate-300">
-                        respuestas correctas
-                      </p>
-                      <div className="flex flex-col gap-2">
+              <div
+                key={index}
+                className="space-y-4 flex-1 flex flex-col animate-slide-in"
+              >
+                {result ? (
+                  <div className="text-center py-8 space-y-4">
+                    <div className="text-5xl font-bold text-emerald-500">
+                      {score}
+                      <span className="text-xl text-slate-400">
+                        /{npreguntas}
+                      </span>
+                    </div>
+                    <p className="text-slate-600 dark:text-slate-300">
+                      respuestas correctas
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <Button
+                        className="w-full bg-emerald-500"
+                        onClick={reset}
+                      >
+                        Repetir
+                      </Button>
+                      {mal > 0 && (
                         <Button
-                          className="w-full bg-emerald-500"
-                          onClick={reset}
+                          className="w-full bg-amber-500 hover:bg-amber-600"
+                          onClick={resetErrores}
                         >
-                          Repetir
+                          Revisar errores
                         </Button>
-                        {mal > 0 && (
-                          <Button
-                            className="w-full bg-amber-500 hover:bg-amber-600"
-                            onClick={resetErrores}
-                          >
-                            Revisar errores
-                          </Button>
-                        )}
-                      </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="flex flex-col flex-1">
-                      <div className="flex items-center gap-2 text-xs text-slate-500">
-                        <span className="quiz-question-number">
-                          #{question.id}
-                        </span>
-                        <span>{question.asignatura}</span>
-                      </div>
-                      <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-                        {question.question}
-                      </h2>
-                      <ul className="space-y-2 mt-4">
-                        <OpcionList
-                          question={question}
-                          numero={numero}
-                          index={index}
-                          lock={lock}
-                          selectedOption={selectedOption}
-                          checkAns={checkAns}
-                          optionRefs={optionRefs}
-                        />
-                      </ul>
+                  </div>
+                ) : (
+                  <div className="flex flex-col flex-1">
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <span className="quiz-question-number">
+                        #{question.id}
+                      </span>
+                      <span>{question.asignatura}</span>
                     </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                      {question.question}
+                    </h2>
+                    <ul className="space-y-2 mt-4">
+                      <OpcionList
+                        question={question}
+                        numero={numero}
+                        index={index}
+                        lock={lock}
+                        selectedOption={selectedOption}
+                        checkAns={checkAns}
+                        optionRefs={optionRefs}
+                      />
+                    </ul>
+                  </div>
+                )}
+              </div>
             </CardContent>
             {!result && (
               <CardFooter className="p-4 pt-2">
