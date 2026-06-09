@@ -20,13 +20,14 @@ function App() {
       <ThemeProvider>
         <div className="flex flex-col min-h-screen">
           <TituloOffProvider>
-            <main className="grow">
+            <a href="#main-content" className="skip-link">Saltar al contenido principal</a>
+            <NavBar />
+            <main id="main-content" className="grow">
               <Suspense
                 fallback={
                   <Cargador className="absolute inset-0 flex justify-center items-center h-screen" />
                 }
               >
-                <NavBar />
                 <Routes>
                   <Route path="/" element={<Landing />} />
                   <Route path="/docs" element={<Docs />} />
