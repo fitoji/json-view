@@ -1,13 +1,11 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import {
-  ArrowBigRightDash,
-  CheckCircle,
-  Keyboard as KeyboardIcon,
-  Settings,
-  TriangleAlert,
-  XCircle,
-} from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useAnimationPresence } from '@/hooks/useAnimationPresence'
+import ArrowBigRightDash from 'lucide-react/dist/esm/icons/arrow-big-right-dash'
+import CheckCircle from 'lucide-react/dist/esm/icons/check-circle'
+import KeyboardIcon from 'lucide-react/dist/esm/icons/keyboard'
+import Settings from 'lucide-react/dist/esm/icons/settings'
+import TriangleAlert from 'lucide-react/dist/esm/icons/triangle-alert'
+import XCircle from 'lucide-react/dist/esm/icons/x-circle'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { preguntasAleatorias } from '../../helpers/funcionesTest.mjs'
 import Modal from '../Modal'
@@ -26,6 +24,53 @@ import { Progress } from '../ui/progress'
 import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
 import './Test.css'
+
+const OpcionList = memo(({
+  question, numero, index, lock, selectedOption, checkAns, optionRefs
+}) => {
+  const opciones = [
+    { ref: optionRefs[0], letra: 'a', texto: question.option1, ans: 1 },
+    { ref: optionRefs[1], letra: 'b', texto: question.option2, ans: 2 },
+    { ref: optionRefs[2], letra: 'c', texto: question.option3, ans: 3 },
+    { ref: optionRefs[3], letra: 'd', texto: question.option4, ans: 4 },
+    { ref: optionRefs[4], letra: 'e', texto: question.option5, ans: 5 },
+  ].filter((o) => o.texto && o.texto !== '')
+
+  const renderOrder = opciones.map((_, i) => (i + numero) % opciones.length)
+
+  return renderOrder.map((i, idx) => {
+    const opt = opciones[i]
+    if (!opt) return null
+
+    let optionClass = 'quiz-option w-full text-left'
+    if (lock && selectedOption) {
+      if (selectedOption.ans === opt.ans) {
+        optionClass += selectedOption.correct ? ' right' : ' wrong'
+      }
+      if (
+        !selectedOption.correct &&
+        question.ans === opt.ans &&
+        question.ans !== 0
+      ) {
+        optionClass += ' right'
+      }
+    }
+
+    return (
+      <li key={`option-${index}-${idx}`}>
+        <button
+          type="button"
+          ref={opt.ref}
+          className={optionClass}
+          onClick={(e) => checkAns(e, opt.ans)}
+        >
+          <span className="quiz-option-letter">{opt.letra}</span>
+          {opt.texto}
+        </button>
+      </li>
+    )
+  })
+})
 
 const Test = ({ data }) => {
   useEffect(() => {
@@ -64,6 +109,7 @@ const Test = ({ data }) => {
   const Option4 = useRef(null)
   const Option5 = useRef(null)
   const option_array = [Option1, Option2, Option3, Option4]
+  const optionRefs = [Option1, Option2, Option3, Option4, Option5]
 
   const [scoreFlash, setScoreFlash] = useState('neutral')
   useEffect(() => {
@@ -141,7 +187,7 @@ const Test = ({ data }) => {
     }
   }
 
-  const next = () => {
+  const next = useCallback(() => {
     if (lock) {
       if (index >= npreguntas - 1) {
         setIsRunning(false)
@@ -160,7 +206,7 @@ const Test = ({ data }) => {
         }
       })
     }
-  }
+  }, [lock, index, npreguntas, questions])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -237,7 +283,7 @@ const Test = ({ data }) => {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [lock, result, next, question, numero])
+  }, [lock, result, question, numero])
 
   const temporizadorRef = useRef()
   const reset = () => {
@@ -291,54 +337,6 @@ const Test = ({ data }) => {
 
   const progressPercent = ((index + 1) * 100) / npreguntas
 
-  // Renderiza las opciones según el orden aleatorio
-  const renderOpciones = (isMobile = false) => {
-    const opciones = [
-      { ref: Option1, letra: 'a', texto: question.option1, ans: 1 },
-      { ref: Option2, letra: 'b', texto: question.option2, ans: 2 },
-      { ref: Option3, letra: 'c', texto: question.option3, ans: 3 },
-      { ref: Option4, letra: 'd', texto: question.option4, ans: 4 },
-      { ref: Option5, letra: 'e', texto: question.option5, ans: 5 },
-    ].filter((o) => o.texto && o.texto !== '')
-
-    // Reordenar según numero - solo tantos elementos como opciones haya
-    const renderOrder = opciones.map((_, i) => (i + numero) % opciones.length)
-    return renderOrder.map((i, idx) => {
-      const opt = opciones[i]
-      if (!opt) return null
-
-      // Determinar la clase según el estado
-      let optionClass = 'quiz-option w-full text-left'
-      if (lock && selectedOption) {
-        if (selectedOption.ans === opt.ans) {
-          optionClass += selectedOption.correct ? ' right' : ' wrong'
-        }
-        // Mostrar la respuesta correcta si es incorrecta
-        if (
-          !selectedOption.correct &&
-          question.ans === opt.ans &&
-          question.ans !== 0
-        ) {
-          optionClass += ' right'
-        }
-      }
-
-      return (
-        <li key={`option-${index}-${idx}`}>
-          <button
-            type="button"
-            ref={opt.ref}
-            className={optionClass}
-            onClick={(e) => checkAns(e, opt.ans)}
-          >
-            <span className="quiz-option-letter">{opt.letra}</span>
-            {opt.texto}
-          </button>
-        </li>
-      )
-    })
-  }
-
   return (
     <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
@@ -350,9 +348,9 @@ const Test = ({ data }) => {
               <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Módulo
               </span>
-              <h1 className="text-lg font-semibold text-slate-900 dark:text-white mt-1">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mt-1">
                 {question.asignatura}
-              </h1>
+              </h2>
             </div>
             <div className="text-sm text-slate-600 dark:text-slate-300">
               <p>{question.tema}</p>
@@ -391,6 +389,9 @@ const Test = ({ data }) => {
               <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
                 Pregunta {index + 1} de {npreguntas}
               </span>
+              <div aria-live="polite" aria-atomic="true" className="sr-only">
+                Pregunta {index + 1} de {npreguntas}
+              </div>
               <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
                 {Math.round(progressPercent)}%
               </span>
@@ -403,79 +404,76 @@ const Test = ({ data }) => {
 
           <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
             <CardContent className="p-6 md:p-8">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="min-h-75"
-                >
-                  {result ? (
-                    <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-6xl font-bold text-emerald-500"
-                      >
-                        {score}
-                        <span className="text-2xl text-slate-400">
-                          /{npreguntas}
+              <div
+                key={index}
+                className="min-h-75 animate-slide-in"
+              >
+                {result ? (
+                  <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
+                    <div className="animate-scale-in text-6xl font-bold text-emerald-500">
+                      {score}
+                      <span className="text-2xl text-slate-400">
+                        /{npreguntas}
+                      </span>
+                    </div>
+                    <p className="text-lg text-slate-600 dark:text-slate-300">
+                      Respuestas correctas
+                    </p>
+                    <div className="px-6 py-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                        Tiempo:{' '}
+                        <span className="font-semibold text-slate-900 dark:text-white">
+                          {temporizadorRef.current?.getTime()}
                         </span>
-                      </motion.div>
-                      <p className="text-lg text-slate-600 dark:text-slate-300">
-                        Respuestas correctas
                       </p>
-                      <div className="px-6 py-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
-                        <p className="text-sm text-slate-500 dark:text-slate-400">
-                          Tiempo:{' '}
-                          <span className="font-semibold text-slate-900 dark:text-white">
-                            {temporizadorRef.current?.getTime()}
-                          </span>
-                        </p>
-                      </div>
-                      <div className="flex gap-3 flex-wrap justify-center">
+                    </div>
+                    <div className="flex gap-3 flex-wrap justify-center">
+                      <Button
+                        className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                        onClick={reset}
+                      >
+                        <ArrowBigRightDash /> Repetir
+                      </Button>
+                      {mal > 0 && (
                         <Button
-                          className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
-                          onClick={reset}
+                          className="bg-violet-500 hover:bg-violet-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                          onClick={resetErrores}
                         >
-                          <ArrowBigRightDash /> Repetir
+                          <TriangleAlert className="mr-2" /> Revisar errores (
+                          {mal})
                         </Button>
-                        {mal > 0 && (
-                          <Button
-                            className="bg-violet-500 hover:bg-violet-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
-                            onClick={resetErrores}
-                          >
-                            <TriangleAlert className="mr-2" /> Revisar errores (
-                            {mal})
-                          </Button>
-                        )}
-                      </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="flex flex-col">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="quiz-question-number">
-                          Pregunta #{question.id}
-                        </span>
-                        <Separator orientation="vertical" className="h-4" />
-                        <span className="text-sm text-slate-500">
-                          {question.tema}
-                        </span>
-                      </div>
-                      <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-6 leading-relaxed">
-                        {question.question}
-                      </h2>
-                      <ul className="quiz-options space-y-3" role="listbox">
-                        {renderOpciones(false)}
-                      </ul>
-                      <div></div>
+                  </div>
+                ) : (
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="quiz-question-number">
+                        Pregunta #{question.id}
+                      </span>
+                      <Separator orientation="vertical" className="h-4" />
+                      <span className="text-sm text-slate-500">
+                        {question.tema}
+                      </span>
                     </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                    <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-6 leading-relaxed">
+                      {question.question}
+                    </h2>
+                    <ul className="quiz-options space-y-3">
+                      <OpcionList
+                        question={question}
+                        numero={numero}
+                        index={index}
+                        lock={lock}
+                        selectedOption={selectedOption}
+                        checkAns={checkAns}
+                        optionRefs={optionRefs}
+                      />
+                    </ul>
+                    <div></div>
+                  </div>
+                )}
+              </div>
             </CardContent>
 
             {!result && (
@@ -584,42 +582,44 @@ const Test = ({ data }) => {
         <main className="flex-1 p-4 overflow-auto">
           <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
             <CardContent className="p-6">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25 }}
-                  className="min-h-[250px]"
-                >
-                  {result ? (
-                    <div className="flex flex-col items-center text-center space-y-4 py-6">
-                      <div className="text-5xl font-bold text-emerald-500">
-                        {score}
-                        <span className="text-xl text-slate-400">
-                          /{npreguntas}
-                        </span>
-                      </div>
-                      <Button className="bg-emerald-500" onClick={reset}>
-                        Repetir
-                      </Button>
-                    </div>
-                  ) : (
-                    <div>
-                      <span className="quiz-question-number text-xs">
-                        #{question.id}
+              <div
+                key={index}
+                className="min-h-[250px] animate-slide-in"
+              >
+                {result ? (
+                  <div className="flex flex-col items-center text-center space-y-4 py-6">
+                    <div className="text-5xl font-bold text-emerald-500">
+                      {score}
+                      <span className="text-xl text-slate-400">
+                        /{npreguntas}
                       </span>
-                      <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
-                        {question.question}
-                      </h2>
-                      <ul className="quiz-options space-y-2">
-                        {renderOpciones(false)}
-                      </ul>
                     </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                    <Button className="bg-emerald-500" onClick={reset}>
+                      Repetir
+                    </Button>
+                  </div>
+                ) : (
+                  <div>
+                    <span className="quiz-question-number text-xs">
+                      #{question.id}
+                    </span>
+                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                      {question.question}
+                    </h2>
+                    <ul className="quiz-options space-y-2">
+                      <OpcionList
+                        question={question}
+                        numero={numero}
+                        index={index}
+                        lock={lock}
+                        selectedOption={selectedOption}
+                        checkAns={checkAns}
+                        optionRefs={optionRefs}
+                      />
+                    </ul>
+                  </div>
+                )}
+              </div>
             </CardContent>
             {!result && (
               <CardFooter className="p-4 pt-0">
@@ -696,59 +696,63 @@ const Test = ({ data }) => {
         <main className="flex-1 p-4 overflow-y-auto">
           <Card className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl border-0">
             <CardContent className="p-5 h-full flex flex-col overflow-y-auto max-h-[60vh]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="space-y-4 flex-1 flex flex-col"
-                >
-                  {result ? (
-                    <div className="text-center py-8 space-y-4">
-                      <div className="text-5xl font-bold text-emerald-500">
-                        {score}
-                        <span className="text-xl text-slate-400">
-                          /{npreguntas}
-                        </span>
-                      </div>
-                      <p className="text-slate-600 dark:text-slate-300">
-                        respuestas correctas
-                      </p>
-                      <div className="flex flex-col gap-2">
+              <div
+                key={index}
+                className="space-y-4 flex-1 flex flex-col animate-slide-in"
+              >
+                {result ? (
+                  <div className="text-center py-8 space-y-4">
+                    <div className="text-5xl font-bold text-emerald-500">
+                      {score}
+                      <span className="text-xl text-slate-400">
+                        /{npreguntas}
+                      </span>
+                    </div>
+                    <p className="text-slate-600 dark:text-slate-300">
+                      respuestas correctas
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <Button
+                        className="w-full bg-emerald-500"
+                        onClick={reset}
+                      >
+                        Repetir
+                      </Button>
+                      {mal > 0 && (
                         <Button
-                          className="w-full bg-emerald-500"
-                          onClick={reset}
+                          className="w-full bg-amber-500 hover:bg-amber-600"
+                          onClick={resetErrores}
                         >
-                          Repetir
+                          Revisar errores
                         </Button>
-                        {mal > 0 && (
-                          <Button
-                            className="w-full bg-amber-500 hover:bg-amber-600"
-                            onClick={resetErrores}
-                          >
-                            Revisar errores
-                          </Button>
-                        )}
-                      </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="flex flex-col flex-1">
-                      <div className="flex items-center gap-2 text-xs text-slate-500">
-                        <span className="quiz-question-number">
-                          #{question.id}
-                        </span>
-                        <span>{question.asignatura}</span>
-                      </div>
-                      <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-                        {question.question}
-                      </h2>
-                      <ul className="space-y-2 mt-4">{renderOpciones(true)}</ul>
+                  </div>
+                ) : (
+                  <div className="flex flex-col flex-1">
+                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                      <span className="quiz-question-number">
+                        #{question.id}
+                      </span>
+                      <span>{question.asignatura}</span>
                     </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                      {question.question}
+                    </h2>
+                    <ul className="space-y-2 mt-4">
+                      <OpcionList
+                        question={question}
+                        numero={numero}
+                        index={index}
+                        lock={lock}
+                        selectedOption={selectedOption}
+                        checkAns={checkAns}
+                        optionRefs={optionRefs}
+                      />
+                    </ul>
+                  </div>
+                )}
+              </div>
             </CardContent>
             {!result && (
               <CardFooter className="p-4 pt-2">
