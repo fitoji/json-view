@@ -2,9 +2,6 @@
   "name": "visor-test",
   "private": true,
   "version": "1.0.0",
-  "pnpm": {
-    "onlyBuiltDependencies": ["msgpackr-extract", "msw"]
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
