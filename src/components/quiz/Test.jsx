@@ -1,4 +1,3 @@
-import { useAnimationPresence } from '@/hooks/useAnimationPresence'
 import ArrowBigRightDash from 'lucide-react/dist/esm/icons/arrow-big-right-dash'
 import CheckCircle from 'lucide-react/dist/esm/icons/check-circle'
 import KeyboardIcon from 'lucide-react/dist/esm/icons/keyboard'
@@ -24,6 +23,9 @@ import { Progress } from '../ui/progress'
 import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
 import './Test.css'
+
+const TOAST_SUCCESS = { background: '#10b981', color: '#fff', border: 'none' }
+const TOAST_ERROR = { background: '#ef4444', color: '#fff', border: 'none' }
 
 const OpcionList = memo(({
   question, numero, index, lock, selectedOption, checkAns, optionRefs
@@ -74,15 +76,21 @@ const OpcionList = memo(({
 
 const Test = ({ data }) => {
   useEffect(() => {
-    reset()
     setNPreguntas(data.length)
-    const newQuestions = preguntasAleatorias(
-      data.length,
-      data,
-      preguntaAleatoria,
-    )
+    const newQuestions = preguntasAleatorias(data.length, data, data.length)
     setQuestions(newQuestions)
     setQuestion(newQuestions[0])
+    setScore(0)
+    setMal(0)
+    setLock(false)
+    setResult(false)
+    setSelectedOption(null)
+    setEquiv([])
+    setIndex(0)
+    setNumero(Math.floor(Math.random() * 4))
+    if (temporizadorRef.current) {
+      temporizadorRef.current.handleResetTemp()
+    }
   }, [data])
 
   const [open, setOpen] = useState(false)
@@ -108,7 +116,6 @@ const Test = ({ data }) => {
   const Option3 = useRef(null)
   const Option4 = useRef(null)
   const Option5 = useRef(null)
-  const option_array = [Option1, Option2, Option3, Option4]
   const optionRefs = [Option1, Option2, Option3, Option4, Option5]
 
   const [scoreFlash, setScoreFlash] = useState('neutral')
@@ -150,11 +157,7 @@ const Test = ({ data }) => {
         toast.success('¡Correcto!', {
           duration: 1500,
           icon: <CheckCircle />,
-          style: {
-            background: '#10b981',
-            color: '#fff',
-            border: 'none',
-          },
+          style: TOAST_SUCCESS,
         })
         setScore((s) => s + 1)
       } else {
@@ -165,18 +168,14 @@ const Test = ({ data }) => {
           toast.error('Incorrecto', {
             duration: 1500,
             icon: <XCircle />,
-            style: {
-              background: '#ef4444',
-              color: '#fff',
-              border: 'none',
-            },
+            style: TOAST_ERROR,
           })
           if (
             question.ans >= 1 &&
             question.ans <= 5 &&
-            option_array[question.ans - 1]?.current
+            optionRefs[question.ans - 1]?.current
           ) {
-            option_array[question.ans - 1].current.classList.add('right')
+            optionRefs[question.ans - 1].current.classList.add('right')
           }
           setMal((m) => m + 1)
           setEquiv((prev) => [...prev, question])
@@ -200,7 +199,7 @@ const Test = ({ data }) => {
       setQuestion(questions[index + 1])
       setLock(false)
       setSelectedOption(null)
-      option_array.forEach((opt) => {
+      optionRefs.forEach((opt) => {
         if (opt.current) {
           opt.current.classList.remove('wrong', 'right')
         }
@@ -250,7 +249,7 @@ const Test = ({ data }) => {
               toast.success('¡Correcto!', {
                 duration: 1500,
                 icon: <CheckCircle />,
-                style: { background: '#10b981', color: '#fff', border: 'none' },
+                style: TOAST_SUCCESS,
               })
               setScore((s) => s + 1)
             } else {
@@ -260,11 +259,7 @@ const Test = ({ data }) => {
                 toast.error('Incorrecto', {
                   duration: 1500,
                   icon: <XCircle />,
-                  style: {
-                    background: '#ef4444',
-                    color: '#fff',
-                    border: 'none',
-                  },
+                  style: TOAST_ERROR,
                 })
                 setMal((m) => m + 1)
                 setEquiv((prev) => [...prev, question])
@@ -283,7 +278,7 @@ const Test = ({ data }) => {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [lock, result, question, numero])
+  }, [lock, result, question, numero, next])
 
   const temporizadorRef = useRef()
   const reset = () => {
@@ -324,9 +319,10 @@ const Test = ({ data }) => {
 
   const handleInputChange = (event) => {
     const num = Number(event.target.value)
+    const newQuestions = preguntasAleatorias(num, data, preguntaAleatoria)
     setNPreguntas(num)
-    setQuestions(preguntasAleatorias(num, data, preguntaAleatoria))
-    setQuestion(questions[0])
+    setQuestions(newQuestions)
+    setQuestion(newQuestions[0])
     setIndex(0)
   }
 
@@ -594,9 +590,19 @@ const Test = ({ data }) => {
                         /{npreguntas}
                       </span>
                     </div>
-                    <Button className="bg-emerald-500" onClick={reset}>
-                      Repetir
-                    </Button>
+                    <p className="text-slate-600 dark:text-slate-300">
+                      Respuestas correctas
+                    </p>
+                    <div className="flex gap-3 flex-wrap justify-center">
+                      <Button className="bg-emerald-500 hover:bg-emerald-600" onClick={reset}>
+                        <ArrowBigRightDash /> Repetir
+                      </Button>
+                      {mal > 0 && (
+                        <Button className="bg-violet-500 hover:bg-violet-600" onClick={resetErrores}>
+                          <TriangleAlert className="mr-2" /> Revisar errores ({mal})
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 ) : (
                   <div>
