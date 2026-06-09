@@ -1,45 +1,44 @@
 import { useEffect, useRef } from "react";
 
 export default function Modal({ open, onClose, children, title }) {
-  const modalRef = useRef(null);
+  const dialogRef = useRef(null);
 
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape" && open) {
-        onClose();
-      }
-    };
+    const dialog = dialogRef.current;
+    if (!dialog) return;
 
     if (open) {
-      document.addEventListener("keydown", handleEscape);
-      modalRef.current?.focus();
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+    } else {
+      if (dialog.open) {
+        dialog.close();
+      }
     }
-
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [open, onClose]);
+  }, [open]);
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
+    <dialog
+      ref={dialogRef}
+      onClose={onClose}
+      onClick={(e) => {
+        if (e.target === dialogRef.current) onClose();
+      }}
       aria-labelledby={title ? "modal-title" : undefined}
-      onClick={onClose}
-      className={`fixed inset-0 flex justify-center items-center transition-colors z-50
-        ${open ? "visible bg-black/20" : "invisible"}
-        `}
+      className="
+        fixed inset-0 z-50 m-auto
+        bg-transparent shadow-none
+        open:flex open:items-center open:justify-center
+        backdrop:bg-black/20
+        border-0 p-0
+      "
     >
-      <div
-        ref={modalRef}
-        tabIndex={-1}
-        onClick={(e) => e.stopPropagation()}
-        className={`bg-white rounded-lg shadow p-6 transition-all outline-none
-          ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}
-        `}
-      >
+      <div className="relative bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 min-w-[300px]">
         <button
           onClick={onClose}
           aria-label="Cerrar modal"
-          className="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600"
+          className="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-gray-600"
         >
           X
         </button>
@@ -50,6 +49,6 @@ export default function Modal({ open, onClose, children, title }) {
         )}
         {children}
       </div>
-    </div>
+    </dialog>
   );
 }
