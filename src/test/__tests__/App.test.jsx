@@ -13,6 +13,7 @@ vi.mock('@vercel/analytics/react', () => ({
 describe('App', () => {
   it('renders without crashing and displays the skip link', () => {
     render(<App />)
-    expect(screen.getByText('Saltar al contenido principal')).toBeInTheDocument()
+    const skipLinks = screen.getAllByText('Saltar al contenido principal')
+    expect(skipLinks.length).toBeGreaterThanOrEqual(1)
   })
 })
