@@ -4,13 +4,13 @@ import './cargador.css'
 const Cargador = () => {
   return (
     <div
-    class="spinner"
+    className="spinner"
     role="status"
     aria-live="polite"
     aria-label="Cargando"
   >
     <span
-      class="visually-hidden">
+      className="visually-hidden">
       Cargando...
     </span>
   </div>
