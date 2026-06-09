@@ -1,4 +1,5 @@
-import { Moon, Sun } from 'lucide-react'
+import Moon from 'lucide-react/dist/esm/icons/moon'
+import Sun from 'lucide-react/dist/esm/icons/sun'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
