@@ -22,6 +22,8 @@ import { Label } from '../ui/label'
 import { Progress } from '../ui/progress'
 import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
+import ExamScreen from './ExamScreen'
+import ModeSelectionDialog from './ModeSelectionDialog'
 import './Test.css'
 
 const TOAST_SUCCESS = { background: '#10b981', color: '#fff', border: 'none' }
@@ -74,8 +76,9 @@ const OpcionList = memo(({
   })
 })
 
-const Test = ({ data }) => {
+const Test = ({ data, initialMode }) => {
   useEffect(() => {
+    setMode(initialMode || null)
     setNPreguntas(data.length)
     const newQuestions = preguntasAleatorias(data.length, data, data.length)
     setQuestions(newQuestions)
@@ -91,7 +94,7 @@ const Test = ({ data }) => {
     if (temporizadorRef.current) {
       temporizadorRef.current.handleResetTemp()
     }
-  }, [data])
+  }, [data, initialMode])
 
   const [open, setOpen] = useState(false)
   const [openAlert, setOpenAlert] = useState(false)
@@ -110,6 +113,8 @@ const Test = ({ data }) => {
   const [mal, setMal] = useState(0)
   const [result, setResult] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null) // { ans: number, correct: boolean }
+  const [mode, setMode] = useState(initialMode || null) // null | 'practica' | 'examen'
+  const [savedExam, setSavedExam] = useState(null)
 
   const Option1 = useRef(null)
   const Option2 = useRef(null)
@@ -136,6 +141,21 @@ const Test = ({ data }) => {
     }
   }, [mal])
 
+  // Detect saved exam session on mount
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('quiz-exam-v1')
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (parsed.version === '1') {
+          setSavedExam(parsed)
+        }
+      }
+    } catch {
+      // ignore parse errors
+    }
+  }, [])
+
   const generarNumeroAleatorio = () => {
     setNumero(Math.floor(Math.random() * 4))
   }
@@ -146,6 +166,20 @@ const Test = ({ data }) => {
       setQuestions(preguntasAleatorias(npreguntas, data, newVal))
       return newVal
     })
+  }
+
+  // Mode selection handlers
+  const handleModeSelect = (newMode) => {
+    setMode(newMode)
+  }
+
+  const handleResumeExam = () => {
+    setMode('examen')
+  }
+
+  const handleNewExam = () => {
+    localStorage.removeItem('quiz-exam-v1')
+    setSavedExam(null)
   }
 
   const checkAns = (e, ans) => {
@@ -210,6 +244,9 @@ const Test = ({ data }) => {
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Don't trigger in exam mode
+      if (mode === 'examen') return
+
       // Don't trigger if user is typing in an input
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')
         return
@@ -278,7 +315,7 @@ const Test = ({ data }) => {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [lock, result, question, numero, next])
+  }, [lock, result, question, numero, next, mode])
 
   const temporizadorRef = useRef()
   const reset = () => {
@@ -333,6 +370,64 @@ const Test = ({ data }) => {
 
   const progressPercent = ((index + 1) * 100) / npreguntas
 
+  // ── Mode: null → show mode selection or resume dialog ──
+  if (mode === null) {
+    // If there's a saved exam session, show resume dialog
+    if (savedExam) {
+      return (
+        <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center">
+          <Card className="w-full max-w-md mx-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+            <CardContent className="p-8 text-center">
+              <TriangleAlert className="w-12 h-12 mx-auto text-amber-500 mb-4" />
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+                Examen sin terminar
+              </h2>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
+                Tenés un examen guardado. ¿Querés continuar o empezar uno nuevo?
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button
+                  className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-5 rounded-xl font-semibold"
+                  onClick={handleResumeExam}
+                >
+                  Continuar examen
+                </Button>
+                <Button
+                  className="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-6 py-5 rounded-xl font-semibold"
+                  onClick={handleNewExam}
+                >
+                  Empezar nuevo
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )
+    }
+
+    // No saved session → show mode selection
+    return (
+      <ModeSelectionDialog
+        open={true}
+        onClose={() => {}}
+        onSelect={handleModeSelect}
+      />
+    )
+  }
+
+  // ── Mode: 'examen' → ExamScreen ──
+  if (mode === 'examen') {
+    return (
+      <ExamScreen
+        questions={data}
+        onBackToMenu={() => {
+          window.location.href = '/'
+        }}
+      />
+    )
+  }
+
+  // ── Mode: 'practica' → existing flow (unchanged) ──
   return (
     <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}

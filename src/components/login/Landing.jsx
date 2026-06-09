@@ -74,6 +74,30 @@ export default function Landing() {
               },
             },
             {
+              element: '#driver-step-practicar',
+              popover: {
+                title: 'Modo Practicar',
+                description:
+                  'Este botón te lleva directo al modo Pregunta Respuesta: feedback inmediato después de cada respuesta, ideal para practicar y aprender.',
+              },
+            },
+            {
+              element: '#driver-step-examen',
+              popover: {
+                title: 'Modo Examen',
+                description:
+                  'Este botón te lleva al modo Examen: sin feedback inmediato, navegación libre entre preguntas, y revisión final con todas tus respuestas.',
+              },
+            },
+            {
+              element: '#driver-step-ver',
+              popover: {
+                title: 'Ver cuestionario',
+                description:
+                  'Este botón abre el selector de modo para que elijas cómo quieres realizar el test.',
+              },
+            },
+            {
               element: '#driver-step-4',
               popover: {
                 title: 'Menu general.',
@@ -126,8 +150,11 @@ export default function Landing() {
     updateStorageUsage()
   }
 
-  const handleFileSelect = (fileName) => {
+  const [initialMode, setInitialMode] = useState(null)
+
+  const handleFileSelect = (fileName, mode) => {
     setSelectedFile(files[fileName])
+    setInitialMode(mode || null)
   }
 
   const handleFileDelete = (fileName) => {
@@ -164,7 +191,7 @@ export default function Landing() {
         </div>
         <DataProvider>
           <div className="flex flex-col items-center justify-center gap-4 w-full">
-            {selectedFile && <FileViewer content={selectedFile} />}
+            {selectedFile && <FileViewer content={selectedFile} initialMode={initialMode} />}
             <div id="driver-step-2">
               <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
             </div>

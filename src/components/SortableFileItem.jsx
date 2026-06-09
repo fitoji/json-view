@@ -8,7 +8,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 
-import { CircleArrowRight, GripVertical, Trash2 } from "lucide-react";
+import { BookOpen, CircleArrowRight, GripVertical, Timer, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 
 export function SortableFileItem({ fileName, onSelect, onDelete }) {
@@ -57,6 +57,49 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
         <HoverCard>
           <HoverCardTrigger>
             <Button
+              id="driver-step-practicar"
+              onClick={() => {
+                onSelect(fileName, 'practica');
+                setTituloOff(false);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="bg-sky-500 hover:bg-sky-600 text-white"
+              size="sm"
+            >
+              <BookOpen className="w-4 h-4 mr-2" />
+              <span className="hidden md:inline">Practicar</span>
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent>
+            Inicia el test en modo Pregunta Respuesta
+          </HoverCardContent>
+        </HoverCard>
+
+        <HoverCard>
+          <HoverCardTrigger>
+            <Button
+              id="driver-step-examen"
+              onClick={() => {
+                onSelect(fileName, 'examen');
+                setTituloOff(false);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="bg-amber-500 hover:bg-amber-600 text-white"
+              size="sm"
+            >
+              <Timer className="w-4 h-4 mr-2" />
+              <span className="hidden md:inline">Examen</span>
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent>
+            Inicia el test en modo Examen cronometrado
+          </HoverCardContent>
+        </HoverCard>
+
+        <HoverCard>
+          <HoverCardTrigger>
+            <Button
+              id="driver-step-ver"
               onClick={() => {
                 onSelect(fileName);
                 setTituloOff(false);

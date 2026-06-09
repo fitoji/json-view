@@ -205,3 +205,58 @@
     background: hsl(var(--accent) / 0.2);
   }
 }
+
+/* 🎯 Exam Mode Styles */
+
+/* Exam nav grid button colors */
+.exam-nav-btn {
+  transition: all 0.15s ease;
+}
+
+.exam-nav-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Review card scrolling */
+.exam-review-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Timer warning pulse */
+@keyframes timer-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.exam-timer-warning {
+  animation: timer-pulse 1s ease-in-out infinite;
+}
+
+/* Selected option in exam mode (no right/wrong) */
+.quiz-option.exam-selected {
+  border-color: hsl(38 92% 50%);
+  background: hsl(38 92% 50% / 0.1);
+}
+
+.dark .quiz-option.exam-selected {
+  background: hsl(38 92% 50% / 0.15);
+}
+
+/* Question grid scroll container */
+.exam-grid-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+}
+
+.exam-grid-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.exam-grid-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.exam-grid-scroll::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 2px;
+}
