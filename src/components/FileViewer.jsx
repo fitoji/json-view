@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react'
-import Test from './quiz/Test'
+import React, { Suspense } from 'react'
+
+const Test = React.lazy(() => import('./quiz/Test'))
 
 export default function FileViewer({ content }) {
     
-    useEffect(() => { // {{ edit_2 }}
-       // console.log(content)
-        
-      }, [content]); // {{ edit_2 }}
-    
     return (
-          <Test data={content} />
+    <Suspense fallback={<div className="flex items-center justify-center p-8 text-slate-500">Cargando cuestionario…</div>}>
+      <Test data={content} />
+    </Suspense>
   )
 }
