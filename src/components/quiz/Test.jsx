@@ -1,13 +1,11 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import {
-  ArrowBigRightDash,
-  CheckCircle,
-  Keyboard as KeyboardIcon,
-  Settings,
-  TriangleAlert,
-  XCircle,
-} from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import ArrowBigRightDash from 'lucide-react/dist/esm/icons/arrow-big-right-dash'
+import CheckCircle from 'lucide-react/dist/esm/icons/check-circle'
+import KeyboardIcon from 'lucide-react/dist/esm/icons/keyboard'
+import Settings from 'lucide-react/dist/esm/icons/settings'
+import TriangleAlert from 'lucide-react/dist/esm/icons/triangle-alert'
+import XCircle from 'lucide-react/dist/esm/icons/x-circle'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { preguntasAleatorias } from '../../helpers/funcionesTest.mjs'
 import Modal from '../Modal'
@@ -26,6 +24,53 @@ import { Progress } from '../ui/progress'
 import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
 import './Test.css'
+
+const OpcionList = memo(({
+  question, numero, index, lock, selectedOption, checkAns, optionRefs
+}) => {
+  const opciones = [
+    { ref: optionRefs[0], letra: 'a', texto: question.option1, ans: 1 },
+    { ref: optionRefs[1], letra: 'b', texto: question.option2, ans: 2 },
+    { ref: optionRefs[2], letra: 'c', texto: question.option3, ans: 3 },
+    { ref: optionRefs[3], letra: 'd', texto: question.option4, ans: 4 },
+    { ref: optionRefs[4], letra: 'e', texto: question.option5, ans: 5 },
+  ].filter((o) => o.texto && o.texto !== '')
+
+  const renderOrder = opciones.map((_, i) => (i + numero) % opciones.length)
+
+  return renderOrder.map((i, idx) => {
+    const opt = opciones[i]
+    if (!opt) return null
+
+    let optionClass = 'quiz-option w-full text-left'
+    if (lock && selectedOption) {
+      if (selectedOption.ans === opt.ans) {
+        optionClass += selectedOption.correct ? ' right' : ' wrong'
+      }
+      if (
+        !selectedOption.correct &&
+        question.ans === opt.ans &&
+        question.ans !== 0
+      ) {
+        optionClass += ' right'
+      }
+    }
+
+    return (
+      <li key={`option-${index}-${idx}`}>
+        <button
+          type="button"
+          ref={opt.ref}
+          className={optionClass}
+          onClick={(e) => checkAns(e, opt.ans)}
+        >
+          <span className="quiz-option-letter">{opt.letra}</span>
+          {opt.texto}
+        </button>
+      </li>
+    )
+  })
+})
 
 const Test = ({ data }) => {
   useEffect(() => {
@@ -64,6 +109,7 @@ const Test = ({ data }) => {
   const Option4 = useRef(null)
   const Option5 = useRef(null)
   const option_array = [Option1, Option2, Option3, Option4]
+  const optionRefs = [Option1, Option2, Option3, Option4, Option5]
 
   const [scoreFlash, setScoreFlash] = useState('neutral')
   useEffect(() => {
@@ -141,7 +187,7 @@ const Test = ({ data }) => {
     }
   }
 
-  const next = () => {
+  const next = useCallback(() => {
     if (lock) {
       if (index >= npreguntas - 1) {
         setIsRunning(false)
@@ -160,7 +206,7 @@ const Test = ({ data }) => {
         }
       })
     }
-  }
+  }, [lock, index, npreguntas, questions])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -237,7 +283,7 @@ const Test = ({ data }) => {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [lock, result, next, question, numero])
+  }, [lock, result, question, numero])
 
   const temporizadorRef = useRef()
   const reset = () => {
@@ -291,54 +337,6 @@ const Test = ({ data }) => {
 
   const progressPercent = ((index + 1) * 100) / npreguntas
 
-  // Renderiza las opciones según el orden aleatorio
-  const renderOpciones = (isMobile = false) => {
-    const opciones = [
-      { ref: Option1, letra: 'a', texto: question.option1, ans: 1 },
-      { ref: Option2, letra: 'b', texto: question.option2, ans: 2 },
-      { ref: Option3, letra: 'c', texto: question.option3, ans: 3 },
-      { ref: Option4, letra: 'd', texto: question.option4, ans: 4 },
-      { ref: Option5, letra: 'e', texto: question.option5, ans: 5 },
-    ].filter((o) => o.texto && o.texto !== '')
-
-    // Reordenar según numero - solo tantos elementos como opciones haya
-    const renderOrder = opciones.map((_, i) => (i + numero) % opciones.length)
-    return renderOrder.map((i, idx) => {
-      const opt = opciones[i]
-      if (!opt) return null
-
-      // Determinar la clase según el estado
-      let optionClass = 'quiz-option w-full text-left'
-      if (lock && selectedOption) {
-        if (selectedOption.ans === opt.ans) {
-          optionClass += selectedOption.correct ? ' right' : ' wrong'
-        }
-        // Mostrar la respuesta correcta si es incorrecta
-        if (
-          !selectedOption.correct &&
-          question.ans === opt.ans &&
-          question.ans !== 0
-        ) {
-          optionClass += ' right'
-        }
-      }
-
-      return (
-        <li key={`option-${index}-${idx}`}>
-          <button
-            type="button"
-            ref={opt.ref}
-            className={optionClass}
-            onClick={(e) => checkAns(e, opt.ans)}
-          >
-            <span className="quiz-option-letter">{opt.letra}</span>
-            {opt.texto}
-          </button>
-        </li>
-      )
-    })
-  }
-
   return (
     <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
@@ -350,9 +348,9 @@ const Test = ({ data }) => {
               <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 Módulo
               </span>
-              <h1 className="text-lg font-semibold text-slate-900 dark:text-white mt-1">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mt-1">
                 {question.asignatura}
-              </h1>
+              </h2>
             </div>
             <div className="text-sm text-slate-600 dark:text-slate-300">
               <p>{question.tema}</p>
@@ -391,6 +389,9 @@ const Test = ({ data }) => {
               <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
                 Pregunta {index + 1} de {npreguntas}
               </span>
+              <div aria-live="polite" aria-atomic="true" className="sr-only">
+                Pregunta {index + 1} de {npreguntas}
+              </div>
               <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
                 {Math.round(progressPercent)}%
               </span>
@@ -468,8 +469,16 @@ const Test = ({ data }) => {
                       <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-6 leading-relaxed">
                         {question.question}
                       </h2>
-                      <ul className="quiz-options space-y-3" role="listbox">
-                        {renderOpciones(false)}
+                      <ul className="quiz-options space-y-3">
+                        <OpcionList
+                          question={question}
+                          numero={numero}
+                          index={index}
+                          lock={lock}
+                          selectedOption={selectedOption}
+                          checkAns={checkAns}
+                          optionRefs={optionRefs}
+                        />
                       </ul>
                       <div></div>
                     </div>
@@ -614,7 +623,15 @@ const Test = ({ data }) => {
                         {question.question}
                       </h2>
                       <ul className="quiz-options space-y-2">
-                        {renderOpciones(false)}
+                        <OpcionList
+                          question={question}
+                          numero={numero}
+                          index={index}
+                          lock={lock}
+                          selectedOption={selectedOption}
+                          checkAns={checkAns}
+                          optionRefs={optionRefs}
+                        />
                       </ul>
                     </div>
                   )}
@@ -744,7 +761,17 @@ const Test = ({ data }) => {
                       <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
                         {question.question}
                       </h2>
-                      <ul className="space-y-2 mt-4">{renderOpciones(true)}</ul>
+                      <ul className="space-y-2 mt-4">
+                        <OpcionList
+                          question={question}
+                          numero={numero}
+                          index={index}
+                          lock={lock}
+                          selectedOption={selectedOption}
+                          checkAns={checkAns}
+                          optionRefs={optionRefs}
+                        />
+                      </ul>
                     </div>
                   )}
                 </motion.div>

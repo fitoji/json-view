@@ -1,6 +1,9 @@
 import { useDriverPreference } from '@/hooks/useDriverPreferences'
 import { AnimatePresence, motion } from 'framer-motion'
-import { CircleHelp, Home, Settings, Undo2 } from 'lucide-react'
+import CircleHelp from 'lucide-react/dist/esm/icons/circle-help'
+import Home from 'lucide-react/dist/esm/icons/home'
+import Settings from 'lucide-react/dist/esm/icons/settings'
+import Undo2 from 'lucide-react/dist/esm/icons/undo-2'
 import { useEffect, useState } from 'react'
 
 import { Link, useLocation } from 'react-router-dom'
