@@ -159,6 +159,44 @@
   background-image: linear-gradient(45deg, #2dd77b 0%, #7dffcc 100%);
 }
 
+/* 🎬 STAGGER ANIMATIONS (menu-exp) */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutLeft {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Container animates invisibly just to time the lifecycle hook.
+   Actual stagger lives on the children. */
+.animate-slide-in {
+  animation: fadeIn 0.45s;
+}
+
+.animate-slide-out {
+  animation: fadeIn 0.3s reverse;
+}
+
+/* Children stagger entrance */
+.animate-slide-in > * {
+  animation: slideInRight 0.25s ease-out both;
+  animation-delay: calc(var(--stagger-index, 0) * 65ms);
+}
+
+/* Children stagger exit */
+.animate-slide-out > * {
+  animation: slideOutLeft 0.15s ease-in both;
+  animation-delay: calc(var(--stagger-index, 0) * 30ms);
+}
+
 /* ♿ ACCESIBILIDAD */
 
 /* Skip link - oculto visualmente pero accesible por teclado */

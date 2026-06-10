@@ -66,7 +66,7 @@ export default function MenuExp() {
             className={`absolute top-0 right-16 flex flex-row-reverse gap-2 items-center ${animationClass}`}
             onAnimationEnd={handleAnimationEnd}
           >
-            <div style={{ '--stagger-index': 0 }}>
+            <div style={{ '--stagger-index': 0 }} onAnimationEnd={(e) => e.stopPropagation()}>
               <Link
                 id="driver-step-5"
                 className="bg-emerald-400 hover:bg-emerald-300 text-white w-10 h-10 mt-2 flex items-center justify-center rounded-lg shadow-md"
@@ -79,10 +79,10 @@ export default function MenuExp() {
                 )}
               </Link>
             </div>
-            <div className="mt-2" style={{ '--stagger-index': 1 }}>
+            <div className="mt-2" style={{ '--stagger-index': 1 }} onAnimationEnd={(e) => e.stopPropagation()}>
               <JavBtn />
             </div>
-            <div id="driver-step-7" className="mt-2" style={{ '--stagger-index': 2 }}>
+            <div id="driver-step-7" className="mt-2" style={{ '--stagger-index': 2 }} onAnimationEnd={(e) => e.stopPropagation()}>
               <TourGuideToggle
                 isTourEnabled={isTourEnabled}
                 toggleTour={toggleTour}
