@@ -97,7 +97,7 @@ export default function ExamReview({
                       const isCorrectAnswer = q.ans === opt.num
 
                       let optionClass =
-                        'flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all text-sm md:text-base'
+                        'flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-colors text-sm md:text-base'
 
                       if (isCorrectAnswer) {
                         optionClass +=
@@ -150,7 +150,7 @@ export default function ExamReview({
         {/* Back button */}
         <div className="mt-8 text-center">
           <Button
-            className="bg-primary text-primary-foreground px-8 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+            className="bg-primary text-primary-foreground px-8 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-105"
             onClick={onBackToMenu}
           >
             <ArrowBigRightDash className="mr-2" /> Volver al menú

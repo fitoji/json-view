@@ -56,7 +56,7 @@ function NavSidebar({ active, onSelect, onClose }) {
                       onSelect(section.id)
                       onClose?.()
                     }}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all text-left
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors text-left
                       ${
                         isActive
                           ? "bg-accent text-accent-foreground shadow-xs"
@@ -133,7 +133,7 @@ export default function Docs() {
             </div>
 
             {/* Card con contenido */}
-            <div className="bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 rounded-2xl p-6 md:p-8 transition-all duration-300">
+            <div className="bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 rounded-2xl p-6 md:p-8 transition-colors duration-300">
               <div className="animate-[fadeIn_0.2s_ease-out]" key={activeSection}>
                 {renderContent(activeSection)}
               </div>
