@@ -15,13 +15,13 @@
 - `src/App.jsx` - Main router (Landing + Docs routes)
 - `src/components/login/` - Auth components (incomplete)
 - `src/components/quiz/Test.jsx` - Quiz engine
-- `src/components/chat/` - AI chat (HuggingFace integration)
+- `docs/ai-generation.md` - External-AI workflow for generating questionnaire JSON
 - `src/components/Almacen.jsx` - File storage/management
 - `public/` - Static assets (robots.txt here)
 
 ## Open Tasks (from todo.md)
 - Login implementation (basic structure exists, not wired)
-- Quiz with AI questions
+- In-app AI questions deferred; future direction is BYOK (bring your own key)
 - Toggle to disable random menu options
 - Configurable number of quiz questions
 

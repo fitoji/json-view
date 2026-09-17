@@ -116,14 +116,6 @@ export default function Landing() {
               },
             },
             {
-              element: '#driver-step-6',
-              popover: {
-                title: 'Preguntas a Inteligencia Artificial',
-                description:
-                  'Durante alguna pregunta de un test, cliquea en este botón y podrás preguntarle a la IA',
-              },
-            },
-            {
               element: '#driver-step-7',
               popover: {
                 title: 'Desactivar Tour',

@@ -9,7 +9,6 @@ import { toast } from 'sonner'
 import { preguntasAleatorias } from '../../helpers/funcionesTest.mjs'
 import Modal from '../Modal'
 import Temporizador from '../Temporizador'
-import BotonJavGpt from '../boton-jav'
 import { Button } from '../ui/button'
 import {
   Card,
@@ -563,9 +562,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                 setIsRunning={setIsRunning}
                 ref={temporizadorRef}
               />
-            </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm">
-              <BotonJavGpt question={question} />
             </div>
             <Button
               className="w-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl py-3"

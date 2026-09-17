@@ -23,7 +23,7 @@
 
 ## El deploy en Vercel falla con `pnpm install` exit 1
 
-**Causa:** Paquetes que necesitan build scripts (como `msgpackr-extract` de `@huggingface/inference`).
+**Causa:** Paquetes que necesitan build scripts.
 
 **Solución:**
 En Vercel, cambiá el **Install Command** a:

@@ -20,9 +20,6 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.5)
-      '@huggingface/inference':
-        specifier: 4.13.15
-        version: 4.13.15
       '@radix-ui/react-accordion':
         specifier: ^1.2.2
         version: 1.2.2(@types/react@19.0.8)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -415,17 +412,6 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
-
-  '@huggingface/inference@4.13.15':
-    resolution: {integrity: sha512-V7B13KFDVhYkQqgx8vpMcmtEG+PoePlh65IUvpphTTItHAq6zRLcsS4torh1QavUaT+6nEwho4wFXzBQNGBwKQ==}
-    engines: {node: '>=18'}
-
-  '@huggingface/jinja@0.5.6':
-    resolution: {integrity: sha512-MyMWyLnjqo+KRJYSH7oWNbsOn5onuIvfXYPcc0WOGxU0eHUV7oAYUoQTl2BMdu7ml+ea/bu11UM+EshbeHwtIA==}
-    engines: {node: '>=18'}
-
-  '@huggingface/tasks@0.19.90':
-    resolution: {integrity: sha512-nfV9luJbvwGQ/5oKXkKhCV9h4X7mwh1YaGG3ORd6UMLDSwr1OFSSatcBX0O9OtBtmNK19aGSjbLFqqgcIR6+IA==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -3896,15 +3882,6 @@ snapshots:
       react-dom: 19.2.5(react@19.2.5)
 
   '@floating-ui/utils@0.2.9': {}
-
-  '@huggingface/inference@4.13.15':
-    dependencies:
-      '@huggingface/jinja': 0.5.6
-      '@huggingface/tasks': 0.19.90
-
-  '@huggingface/jinja@0.5.6': {}
-
-  '@huggingface/tasks@0.19.90': {}
 
   '@humanfs/core@0.19.2':
     dependencies:

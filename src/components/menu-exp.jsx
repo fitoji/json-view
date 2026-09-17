@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import { TourGuideToggle } from './TourGuideToggle'
-import JavBtn from './jav-btn-nav'
 
 export default function MenuExp() {
   const location = useLocation()
@@ -79,10 +78,7 @@ export default function MenuExp() {
                 )}
               </Link>
             </div>
-            <div className="mt-2" style={{ '--stagger-index': 1 }} onAnimationEnd={(e) => e.stopPropagation()}>
-              <JavBtn />
-            </div>
-            <div id="driver-step-7" className="mt-2" style={{ '--stagger-index': 2 }} onAnimationEnd={(e) => e.stopPropagation()}>
+            <div id="driver-step-7" className="mt-2" style={{ '--stagger-index': 1 }} onAnimationEnd={(e) => e.stopPropagation()}>
               <TourGuideToggle
                 isTourEnabled={isTourEnabled}
                 toggleTour={toggleTour}

@@ -2,6 +2,8 @@
 
 Cualquier inteligencia artificial (ChatGPT, Claude, Gemini, etc.) puede generar cuestionarios en formato JSON siguiendo las instrucciones de la app.
 
+> La generación de cuestionarios dentro de la app está diferida. La dirección futura prevista es BYOK (usar la clave del proveedor de IA del usuario). Mientras tanto, este flujo con herramientas externas sigue siendo compatible.
+
 ## Prompt básico
 
 Copiá y pegá esto en ChatGPT:
