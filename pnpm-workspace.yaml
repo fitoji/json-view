@@ -3,3 +3,6 @@ packages:
 
 allowBuilds:
   - msw
+
+overrides:
+  js-yaml: 3.15.2
