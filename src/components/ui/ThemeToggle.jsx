@@ -24,9 +24,30 @@ export function ThemeToggle() {
 
   const isDark = theme === 'dark'
 
+  const handleThemeChange = (event) => {
+    const nextTheme = isDark ? 'light' : 'dark'
+    const prefersReducedMotion = window.matchMedia?.(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
+
+    if (
+      prefersReducedMotion ||
+      typeof document.startViewTransition !== 'function'
+    ) {
+      setTheme(nextTheme)
+      return
+    }
+
+    const root = document.documentElement
+    root.style.setProperty('--theme-transition-x', `${event.clientX}px`)
+    root.style.setProperty('--theme-transition-y', `${event.clientY}px`)
+
+    document.startViewTransition(() => setTheme(nextTheme))
+  }
+
   return (
     <button
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={handleThemeChange}
       className="shadow-md w-10 h-10 flex items-center justify-center rounded-lg bg-secondary hover:bg-accent text-secondary-foreground transition-colors"
       aria-label={isDark ? 'Cambiar a modo día' : 'Cambiar a modo noche'}
     >
