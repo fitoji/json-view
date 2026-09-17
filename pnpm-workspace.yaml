@@ -2,7 +2,8 @@ packages:
   - '.'
 
 allowBuilds:
-  - msw
+  msgpackr-extract: false
+  msw: false
 
 overrides:
   js-yaml: 3.15.2
