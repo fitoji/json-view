@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
+import packageJson from '../../package.json'
 
 const Footer = () => {
   return (
     <footer className="flex flex-col justify-center py-4 space-y-1 bg-sky-50 dark:bg-emerald-800">
       <p className="text-xs text-slate-500 dark:text-slate-100 text-center">
-        {new Date().getFullYear()} JsonTest v.Alpha. Una iniciativa de
+        {new Date().getFullYear()} JsonTest v{packageJson.version}. Una iniciativa de
         <a
           className="text-md text-slate-800 dark:text-slate-400 font-bold"
           target="_blank"
