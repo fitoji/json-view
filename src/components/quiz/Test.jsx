@@ -76,7 +76,7 @@ const OpcionList = memo(({
   })
 })
 
-const Test = ({ data, initialMode }) => {
+const Test = ({ data, questionnaireIdentity, initialMode }) => {
   useEffect(() => {
     setMode(initialMode || null)
     setNPreguntas(data.length)
@@ -114,7 +114,6 @@ const Test = ({ data, initialMode }) => {
   const [result, setResult] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null) // { ans: number, correct: boolean }
   const [mode, setMode] = useState(initialMode || null) // null | 'practica' | 'examen'
-  const [savedExam, setSavedExam] = useState(null)
 
   const Option1 = useRef(null)
   const Option2 = useRef(null)
@@ -141,21 +140,6 @@ const Test = ({ data, initialMode }) => {
     }
   }, [mal])
 
-  // Detect saved exam session on mount
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem('quiz-exam-v1')
-      if (raw) {
-        const parsed = JSON.parse(raw)
-        if (parsed.version === '1') {
-          setSavedExam(parsed)
-        }
-      }
-    } catch {
-      // ignore parse errors
-    }
-  }, [])
-
   const generarNumeroAleatorio = () => {
     setNumero(Math.floor(Math.random() * 4))
   }
@@ -171,15 +155,6 @@ const Test = ({ data, initialMode }) => {
   // Mode selection handlers
   const handleModeSelect = (newMode) => {
     setMode(newMode)
-  }
-
-  const handleResumeExam = () => {
-    setMode('examen')
-  }
-
-  const handleNewExam = () => {
-    localStorage.removeItem('quiz-exam-v1')
-    setSavedExam(null)
   }
 
   const checkAns = (e, ans) => {
@@ -372,40 +347,6 @@ const Test = ({ data, initialMode }) => {
 
   // ── Mode: null → show mode selection or resume dialog ──
   if (mode === null) {
-    // If there's a saved exam session, show resume dialog
-    if (savedExam) {
-      return (
-        <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center">
-          <Card className="w-full max-w-md mx-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
-            <CardContent className="p-8 text-center">
-              <TriangleAlert className="w-12 h-12 mx-auto text-amber-500 mb-4" />
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-                Examen sin terminar
-              </h2>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
-                Tenés un examen guardado. ¿Querés continuar o empezar uno nuevo?
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button
-                  className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-5 rounded-xl font-semibold"
-                  onClick={handleResumeExam}
-                >
-                  Continuar examen
-                </Button>
-                <Button
-                  className="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-6 py-5 rounded-xl font-semibold"
-                  onClick={handleNewExam}
-                >
-                  Empezar nuevo
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )
-    }
-
-    // No saved session → show mode selection
     return (
       <ModeSelectionDialog
         open={true}
@@ -420,6 +361,7 @@ const Test = ({ data, initialMode }) => {
     return (
       <ExamScreen
         questions={data}
+        questionnaireIdentity={questionnaireIdentity}
         onBackToMenu={() => {
           window.location.href = '/'
         }}

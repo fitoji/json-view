@@ -3,6 +3,7 @@ import { DataProvider } from '../context/DataContext'
 import FileDropZone from '../FileDropZone'
 import FileViewer from '../FileViewer'
 import StoredFiles from '../StoredFiles'
+import { questionnaireIdentity } from '../../helpers/examSession.mjs'
 
 import { useDriverPreference } from '@/hooks/useDriverPreferences'
 import { useTituloOff } from '@/hooks/useTituloOff'
@@ -15,6 +16,7 @@ const driverPromise = import('driver.js')
 export default function Landing() {
   const [files, setFiles] = useState({})
   const [selectedFile, setSelectedFile] = useState(null)
+  const [selectedQuestionnaireIdentity, setSelectedQuestionnaireIdentity] = useState(null)
   const [storageUsage, setStorageUsage] = useState(0)
   const { tituloOff, setTituloOff } = useTituloOff()
   const { isTourEnabled } = useDriverPreference()
@@ -153,7 +155,9 @@ export default function Landing() {
   const [initialMode, setInitialMode] = useState(null)
 
   const handleFileSelect = (fileName, mode) => {
-    setSelectedFile(files[fileName])
+    const content = files[fileName]
+    setSelectedFile(content)
+    setSelectedQuestionnaireIdentity(questionnaireIdentity(content))
     setInitialMode(mode || null)
   }
 
@@ -165,6 +169,7 @@ export default function Landing() {
     updateStorageUsage()
     if (selectedFile === files[fileName]) {
       setSelectedFile(null)
+      setSelectedQuestionnaireIdentity(null)
     }
   }
 
@@ -191,7 +196,13 @@ export default function Landing() {
         </div>
         <DataProvider>
           <div className="flex flex-col items-center justify-center gap-4 w-full">
-            {selectedFile && <FileViewer content={selectedFile} initialMode={initialMode} />}
+            {selectedFile && (
+              <FileViewer
+                content={selectedFile}
+                questionnaireIdentity={selectedQuestionnaireIdentity}
+                initialMode={initialMode}
+              />
+            )}
             <div id="driver-step-2">
               <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
             </div>

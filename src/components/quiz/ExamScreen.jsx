@@ -16,42 +16,76 @@ import { Separator } from '../ui/separator'
 import Modal from '../Modal'
 import { ExamTimer } from './ExamTimer'
 import ExamReview from './ExamReview'
+import {
+  LEGACY_STORAGE_KEY,
+  canMigrateLegacySession,
+  createExamSession,
+  questionnaireIdentity,
+  sessionStorageKey,
+  validateExamSession,
+  validateQuestionnaire,
+} from '../../helpers/examSession.mjs'
 import './Test.css'
 
-const STORAGE_KEY = 'quiz-exam-v1'
-
-function loadSavedSession() {
+function loadSavedSession(questions, identity) {
+  const storageKey = sessionStorageKey(identity)
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return null
-    const parsed = JSON.parse(raw)
-    if (parsed.version === '1') return parsed
-    localStorage.removeItem(STORAGE_KEY)
-    return null
+    const raw = storageKey && localStorage.getItem(storageKey)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      if (validateExamSession(parsed, questions, identity)) return parsed
+      localStorage.removeItem(storageKey)
+    }
+
+    const legacyRaw = localStorage.getItem(LEGACY_STORAGE_KEY)
+    if (!legacyRaw) return null
+    const legacy = JSON.parse(legacyRaw)
+    if (!canMigrateLegacySession(legacy, questions)) return null
+
+    const migrated = createExamSession({
+      identity,
+      questions,
+      userAnswers: legacy.userAnswers,
+      activeIndex: Number.isInteger(legacy.activeIndex) && legacy.activeIndex >= 0 && legacy.activeIndex < questions.length
+        ? legacy.activeIndex
+        : 0,
+      startTime: Number.isFinite(legacy.startTime) ? legacy.startTime : Date.now(),
+      elapsed: Number.isFinite(legacy.elapsed) ? legacy.elapsed : 0,
+    })
+    if (storageKey) localStorage.setItem(storageKey, JSON.stringify(migrated))
+    localStorage.removeItem(LEGACY_STORAGE_KEY)
+    return migrated
   } catch {
-    localStorage.removeItem(STORAGE_KEY)
+    if (storageKey) localStorage.removeItem(storageKey)
     return null
   }
 }
 
-function saveSession(data) {
+function saveSession(storageKey, data) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+    localStorage.setItem(storageKey, JSON.stringify(data))
   } catch {
     // localStorage might be full or unavailable
   }
 }
 
-function clearSession() {
-  localStorage.removeItem(STORAGE_KEY)
+function clearSession(storageKey) {
+  if (storageKey) localStorage.removeItem(storageKey)
 }
 
-export default function ExamScreen({ questions: rawQuestions, onBackToMenu }) {
+export default function ExamScreen({ questions: rawQuestions, questionnaireIdentity: suppliedIdentity, onBackToMenu }) {
+  const questionnaireValidation = validateQuestionnaire(rawQuestions)
+  const sourceQuestions = questionnaireValidation.valid ? rawQuestions : []
+  const identity = suppliedIdentity || questionnaireIdentity(rawQuestions)
+  const storageKey = sessionStorageKey(identity)
+
   // Sort questions sequentially by id for exam mode
-  const questions = [...rawQuestions].sort((a, b) => a.id - b.id)
+  const questions = [...sourceQuestions].sort((a, b) => a.id - b.id)
 
   // Check for existing saved session
-  const savedSession = useRef(loadSavedSession())
+  const savedSession = useRef(
+    questionnaireValidation.valid ? loadSavedSession(sourceQuestions, identity) : null,
+  )
 
   const [showResumeDialog, setShowResumeDialog] = useState(
     savedSession.current !== null,
@@ -100,29 +134,29 @@ export default function ExamScreen({ questions: rawQuestions, onBackToMenu }) {
   }, [])
 
   const handleNewExam = useCallback(() => {
-    clearSession()
+    clearSession(storageKey)
     savedSession.current = null
     setUserAnswers({})
     setActiveIndex(0)
     setStartTime(Date.now())
     setShowResumeDialog(false)
     setPaused(false)
-  }, [])
+  }, [storageKey])
 
   // Save to localStorage on every answer or navigation change
   useEffect(() => {
     if (!initialized || paused || showResumeDialog) return
 
     const elapsed = Date.now() - startTime
-    saveSession({
-      version: '1',
-      questions: questions,
+    saveSession(storageKey, createExamSession({
+      identity,
+      questions: sourceQuestions,
       userAnswers,
       activeIndex,
       startTime,
       elapsed,
-    })
-  }, [userAnswers, activeIndex, startTime, initialized, paused, showResumeDialog, questions])
+    }))
+  }, [userAnswers, activeIndex, startTime, initialized, paused, showResumeDialog, sourceQuestions, identity, storageKey])
 
   const currentQuestion = questions[activeIndex]
 
@@ -165,8 +199,8 @@ export default function ExamScreen({ questions: rawQuestions, onBackToMenu }) {
     setElapsedMs(timerRef.current?.getElapsedMs() || 0)
     setExamComplete(true)
     setPaused(true)
-    clearSession()
-  }, [questions, userAnswers, paused])
+    clearSession(storageKey)
+  }, [questions, userAnswers, paused, storageKey])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -329,6 +363,16 @@ export default function ExamScreen({ questions: rawQuestions, onBackToMenu }) {
 
   const progressPercent = ((activeIndex + 1) * 100) / questions.length
   const answeredCount = Object.keys(userAnswers).length
+
+  if (!questionnaireValidation.valid) {
+    return (
+      <div className="quiz-wrapper min-h-screen flex items-center justify-center p-6 text-center">
+        <p className="text-slate-600 dark:text-slate-300">
+          No se puede iniciar el examen: {questionnaireValidation.reason}
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
