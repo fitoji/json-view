@@ -1,6 +1,21 @@
 export const THEME_STORAGE_KEY = 'visortests-theme-v1'
 export const THEME_SCHEMA_VERSION = 1
 
+export const THEME_FONTS = Object.freeze({
+  system: 'ui-sans-serif, system-ui, sans-serif',
+  editorial: 'Georgia, Cambria, "Times New Roman", serif',
+  mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+})
+
+export const THEME_SHADOWS = Object.freeze({
+  none: 'none',
+  soft: '0 10px 30px -12px hsl(222 47% 11% / 0.28)',
+  crisp: '0 4px 0 hsl(222 47% 11% / 0.16)',
+})
+
+const MAX_THEME_STRING_LENGTH = 128
+const MAX_THEME_IMPORT_LENGTH = 32 * 1024
+
 const sharedTokens = {
   card: '0 0% 100%',
   cardForeground: '222.2 84% 4.9%',
@@ -59,6 +74,8 @@ export const THEME_PRESETS = [
       accent: '160 45% 22%', accentForeground: '154 70% 88%',
     },
     radius: '0.65rem',
+    font: 'system',
+    shadow: 'soft',
   },
   {
     id: 'ocean',
@@ -77,6 +94,8 @@ export const THEME_PRESETS = [
       accent: '201 45% 24%', accentForeground: '190 80% 88%',
     },
     radius: '0.9rem',
+    font: 'mono',
+    shadow: 'crisp',
   },
   {
     id: 'sunset',
@@ -95,6 +114,8 @@ export const THEME_PRESETS = [
       accent: '28 45% 25%', accentForeground: '35 90% 90%',
     },
     radius: '0.45rem',
+    font: 'editorial',
+    shadow: 'soft',
   },
 ]
 
@@ -105,27 +126,41 @@ export function getThemePreset(id) {
 }
 
 export function createThemeState(presetId = DEFAULT_THEME_ID, overrides = {}) {
+  const preset = getThemePreset(presetId)
   return {
     version: THEME_SCHEMA_VERSION,
-    presetId: getThemePreset(presetId).id,
+    presetId: preset.id,
     overrides: {
-      primary: overrides.primary || null,
-      accent: overrides.accent || null,
-      radius: overrides.radius || null,
+      primary: isSafeThemeString(overrides.primary) ? overrides.primary : null,
+      accent: isSafeThemeString(overrides.accent) ? overrides.accent : null,
+      radius: isSafeRadius(overrides.radius) ? overrides.radius : null,
+      font: isKnownThemeValue(THEME_FONTS, overrides.font) ? overrides.font : null,
+      shadow: isKnownThemeValue(THEME_SHADOWS, overrides.shadow) ? overrides.shadow : null,
     },
   }
 }
 
 export function parseThemeState(raw) {
   try {
+    if (typeof raw !== 'string' || raw.length > MAX_THEME_IMPORT_LENGTH) return createThemeState()
     const parsed = JSON.parse(raw)
-    if (!parsed || parsed.version !== THEME_SCHEMA_VERSION || typeof parsed !== 'object') {
+    if (!isValidThemeObject(parsed)) {
       return createThemeState()
     }
-    const overrides = parsed.overrides && typeof parsed.overrides === 'object' ? parsed.overrides : {}
-    return createThemeState(parsed.presetId, overrides)
+    return createThemeState(parsed.presetId, parsed.overrides)
   } catch {
     return createThemeState()
+  }
+}
+
+export function validateThemeImport(raw) {
+  try {
+    if (typeof raw === 'string' && raw.length > MAX_THEME_IMPORT_LENGTH) return { state: null, error: 'El archivo es demasiado grande.' }
+    const parsed = typeof raw === 'string' ? JSON.parse(raw) : raw
+    if (!isValidThemeObject(parsed)) return { state: null, error: 'El archivo no contiene un tema válido.' }
+    return { state: createThemeState(parsed.presetId, parsed.overrides), error: null }
+  } catch {
+    return { state: null, error: 'El archivo no contiene JSON válido.' }
   }
 }
 
@@ -142,6 +177,39 @@ export function getEffectiveTokens(state, mode) {
   if (primary) tokens.primaryForeground = foregroundFor(primary)
   if (accent) tokens.accentForeground = foregroundFor(accent)
   return tokens
+}
+
+export function getEffectiveStyleTokens(state) {
+  const preset = getThemePreset(state.presetId)
+  const overrides = state.overrides || {}
+  const font = isKnownThemeValue(THEME_FONTS, overrides.font) ? overrides.font : preset.font
+  const shadow = isKnownThemeValue(THEME_SHADOWS, overrides.shadow) ? overrides.shadow : preset.shadow
+  return { font, shadow, fontFamily: THEME_FONTS[font], shadowValue: THEME_SHADOWS[shadow] }
+}
+
+function isKnownThemeValue(allowlist, value) {
+  return typeof value === 'string' && value.length <= MAX_THEME_STRING_LENGTH && Object.hasOwn(allowlist, value)
+}
+
+function isSafeThemeString(value) {
+  return typeof value === 'string' && value.length <= MAX_THEME_STRING_LENGTH && /^[\d.]+(?:\s+\d+(?:\.\d+)?%?){2}$/.test(value)
+}
+
+function isSafeRadius(value) {
+  return typeof value === 'string' && value.length <= MAX_THEME_STRING_LENGTH && /^(?:0|1(?:\.\d+)?|0\.\d+)rem$/.test(value)
+}
+
+function isValidThemeObject(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value) || value.version !== THEME_SCHEMA_VERSION || !getThemePreset(value.presetId)) return false
+  if (Object.keys(value).some((key) => !['version', 'presetId', 'overrides'].includes(key))) return false
+  const overrides = value.overrides
+  if (!overrides || typeof overrides !== 'object' || Array.isArray(overrides)) return false
+  return Object.keys(overrides).every((key) => ['primary', 'accent', 'radius', 'font', 'shadow'].includes(key))
+    && (overrides.primary == null || isSafeThemeString(overrides.primary))
+    && (overrides.accent == null || isSafeThemeString(overrides.accent))
+    && (overrides.radius == null || isSafeRadius(overrides.radius))
+    && (overrides.font == null || isKnownThemeValue(THEME_FONTS, overrides.font))
+    && (overrides.shadow == null || isKnownThemeValue(THEME_SHADOWS, overrides.shadow))
 }
 
 export function foregroundFor(hslChannels) {
