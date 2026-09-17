@@ -14,7 +14,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-700"
+        className="w-10 h-10 flex items-center justify-center rounded-lg bg-secondary text-secondary-foreground"
         aria-label="Cambiar tema"
       >
         <span className="w-5 h-5 block" />
@@ -27,13 +27,13 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="shadow-md w-10 h-10 flex items-center justify-center rounded-lg bg-slate-100 hover:bg-amber-200 text-white transition-colors"
+      className="shadow-md w-10 h-10 flex items-center justify-center rounded-lg bg-secondary hover:bg-accent text-secondary-foreground transition-colors"
       aria-label={isDark ? 'Cambiar a modo día' : 'Cambiar a modo noche'}
     >
       {isDark ? (
-        <Sun className="w-5 h-5 text-amber-500" />
+        <Sun className="w-5 h-5 text-primary" />
       ) : (
-        <Moon className="w-5 h-5 text-slate-700" />
+        <Moon className="w-5 h-5 text-primary" />
       )}
     </button>
   )

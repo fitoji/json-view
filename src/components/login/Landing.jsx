@@ -166,7 +166,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
       <a href="#main-content" className="skip-link">
         Saltar al contenido principal
       </a>
@@ -176,11 +176,11 @@ export default function Landing() {
             <div>
               <h1
                 id="driver-step-1"
-                className="text-2xl pt-4 font-bold tracking-tighter md:text-4xl lg:text-4xl/none text-emerald-700"
+                className="text-2xl pt-4 font-bold tracking-tighter md:text-4xl lg:text-4xl/none text-primary"
               >
                 Visualizador de Tests en formato Json
               </h1>
-              <p className="mx-auto max-w-175 text-gray-600 md:text-xl mb-8 md:mb-18">
+              <p className="mx-auto max-w-175 text-muted-foreground md:text-xl mb-8 md:mb-18">
                 ¡Elegi tu archivo .json hecho con gpt y empieza a practicar!
               </p>
             </div>
