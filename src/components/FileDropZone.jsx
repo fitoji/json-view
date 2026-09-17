@@ -61,8 +61,8 @@ export default function FileDropZone({ onFileDrop }) {
           toast.success("¡El cuestionario ha sido cargado exitosamente!", {
             duration: 3000,
             style: {
-              backgroundColor: "#3399ff",
-              color: "#fff",
+                backgroundColor: "hsl(var(--success))",
+                color: "hsl(var(--success-foreground))",
             },
           });
           setJsonData(jsonContent);
@@ -72,8 +72,8 @@ export default function FileDropZone({ onFileDrop }) {
           toast.error("'El archivo no es un JSON válido'", {
             duration: 5000,
             style: {
-              backgroundColor: "#ff0066",
-              color: "#fff",
+                backgroundColor: "hsl(var(--destructive))",
+                color: "hsl(var(--destructive-foreground))",
             },
           });
         } finally {
@@ -89,7 +89,7 @@ export default function FileDropZone({ onFileDrop }) {
 
   return (
     <div
-      className="rounded-xl p-6 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all"
+      className="rounded-xl p-6 bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 hover:shadow-xl transition-all"
       role="region"
       aria-label="Cargar cuestionario desde archivo"
     >
@@ -107,7 +107,7 @@ export default function FileDropZone({ onFileDrop }) {
           accept=".json, .txt"
           onChange={handleFileUpload}
           aria-describedby="file-help"
-          className="shadow-lg hover:bg-emerald-100 transition-all duration-300"
+          className="shadow-lg hover:bg-accent transition-all duration-300"
         />
       </div>
     </div>

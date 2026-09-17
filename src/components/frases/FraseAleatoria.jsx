@@ -26,12 +26,12 @@ export default function FraseAleatoria() {
   }
 
   return (
-    <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 mt-8 max-w-2xl mx-auto">
+    <Card className="bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 mt-8 max-w-2xl mx-auto">
       <CardHeader className="relative p-4">
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-2 right-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700"
+          className="absolute top-2 right-2 text-muted-foreground hover:bg-accent"
           onClick={() => setVisible(false)}
           aria-label="Cerrar"
         >
@@ -40,17 +40,17 @@ export default function FraseAleatoria() {
       </CardHeader>
 
       <CardContent className="px-6 pb-4">
-        <blockquote className="text-lg font-medium text-slate-800 dark:text-slate-100 italic">
+        <blockquote className="text-lg font-medium text-card-foreground italic">
           "{fraseSeleccionada.frase}"
         </blockquote>
-        <p className="text-right text-sm text-slate-500 dark:text-slate-400 pt-4">
+        <p className="text-right text-sm text-muted-foreground pt-4">
           - {fraseSeleccionada.autor}
         </p>
       </CardContent>
       <CardFooter className="flex justify-end p-4 pt-0">
         <Button
           onClick={seleccionarFraseAleatoria}
-          className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white"
+          className="p-2 bg-success hover:bg-success/90 text-success-foreground"
         >
           <ChevronRight className="h-4 w-4" />
         </Button>

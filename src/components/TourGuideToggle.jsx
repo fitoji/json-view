@@ -4,7 +4,7 @@ import { HelpCircle } from "lucide-react";
 
 export function TourGuideToggle({ isTourEnabled, toggleTour }) {
   return (
-    <div className="flex items-center space-x-2 mt-2 hover:bg-emerald-100 transition-colors ease-in-out duration-400 rounded-md p-2 hover:text-emerald-500">
+    <div className="flex items-center space-x-2 mt-2 hover:bg-accent transition-colors ease-in-out duration-400 rounded-md p-2 hover:text-accent-foreground">
       <Label
         htmlFor="tour-mode"
         className="hidden md:block  items-center cursor-pointer"
@@ -12,7 +12,7 @@ export function TourGuideToggle({ isTourEnabled, toggleTour }) {
         {isTourEnabled ? "Guía Introductoria" : "Tour Off"}
       </Label>
       <Switch
-        className="bg-gray-200 checked:bg-green-500 checked:hover:bg-green-600"
+        className="bg-muted checked:bg-success checked:hover:bg-success/90"
         id="tour-mode"
         checked={isTourEnabled}
         onCheckedChange={toggleTour}
