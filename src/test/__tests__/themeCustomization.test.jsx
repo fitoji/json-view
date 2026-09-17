@@ -4,6 +4,7 @@ import {
   DEFAULT_THEME_ID,
   getEffectiveTokens,
   parseThemeState,
+  THEME_PRESETS,
   THEME_STORAGE_KEY,
 } from '../../theme/themePresets'
 
@@ -34,6 +35,18 @@ describe('theme customization', () => {
   it('recovers malformed or incompatible persistence to the default preset', () => {
     expect(parseThemeState('{not-json').presetId).toBe(DEFAULT_THEME_ID)
     expect(parseThemeState(JSON.stringify({ version: 99, presetId: 'ocean' })).presetId).toBe(DEFAULT_THEME_ID)
+  })
+
+  it('provides semantic success and warning tokens for every theme mode', () => {
+    THEME_PRESETS.forEach((preset) => {
+      for (const mode of ['light', 'dark']) {
+        const tokens = getEffectiveTokens({ presetId: preset.id, overrides: {} }, mode)
+        expect(tokens.success).toBeTruthy()
+        expect(tokens.successForeground).toBeTruthy()
+        expect(tokens.warning).toBeTruthy()
+        expect(tokens.warningForeground).toBeTruthy()
+      }
+    })
   })
 
   it('selects presets, applies tokens, persists, and resets overrides', async () => {

@@ -271,25 +271,25 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
   // If showing resume dialog
   if (showResumeDialog) {
     return (
-      <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center">
-        <Card className="w-full max-w-md mx-4 bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+      <div className="quiz-wrapper min-h-screen bg-linear-to-br from-background via-muted to-background flex items-center justify-center">
+        <Card className="w-full max-w-md mx-4 bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
           <CardContent className="p-8 text-center">
-            <TriangleAlert className="w-12 h-12 mx-auto text-amber-500 mb-4" />
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+            <TriangleAlert className="w-12 h-12 mx-auto text-warning mb-4" />
+            <h2 className="text-xl font-bold text-foreground mb-2">
               Examen sin terminar
             </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mb-6">
+            <p className="text-sm text-muted-foreground mb-6">
               Tenés un examen guardado. ¿Querés continuar o empezar uno nuevo?
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
-                className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-5 rounded-xl font-semibold"
+                className="bg-warning hover:bg-warning/90 text-warning-foreground px-6 py-5 rounded-xl font-semibold"
                 onClick={handleStartExam}
               >
                 Continuar examen
               </Button>
               <Button
-                className="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-6 py-5 rounded-xl font-semibold"
+                className="bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6 py-5 rounded-xl font-semibold"
                 onClick={handleNewExam}
               >
                 Empezar nuevo
@@ -319,27 +319,27 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
   const SubmitConfirmModal = (
     <Modal open={showConfirmSubmit} onClose={() => setShowConfirmSubmit(false)}>
       <div className="text-center w-72 py-4">
-        <TriangleAlert size={48} className="mx-auto text-amber-500 mb-4" />
-        <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+        <TriangleAlert size={48} className="mx-auto text-warning mb-4" />
+        <h3 className="text-lg font-semibold text-foreground mb-2">
           ¿Estás seguro?
         </h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
+        <p className="text-sm text-muted-foreground mb-2">
           Vas a entregar el examen con{' '}
           {Object.keys(userAnswers).length} de {questions.length} preguntas
           respondidas.
         </p>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mb-6">
+        <p className="text-xs text-muted-foreground mb-6">
           Esta acción no se puede deshacer.
         </p>
         <div className="flex gap-3">
           <Button
-            className="flex-1 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 py-5 rounded-xl font-semibold"
+            className="flex-1 bg-secondary hover:bg-secondary/80 text-secondary-foreground py-5 rounded-xl font-semibold"
             onClick={() => setShowConfirmSubmit(false)}
           >
             Seguir respondiendo
           </Button>
           <Button
-            className="flex-1 bg-amber-500 hover:bg-amber-600 text-white py-5 rounded-xl font-semibold"
+            className="flex-1 bg-warning hover:bg-warning/90 text-warning-foreground py-5 rounded-xl font-semibold"
             onClick={() => {
               setShowConfirmSubmit(false)
               handleSubmit()
@@ -367,7 +367,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
   if (!questionnaireValidation.valid) {
     return (
       <div className="quiz-wrapper min-h-screen flex items-center justify-center p-6 text-center">
-        <p className="text-slate-600 dark:text-slate-300">
+        <p className="text-muted-foreground">
           No se puede iniciar el examen: {questionnaireValidation.reason}
         </p>
       </div>
@@ -375,19 +375,19 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
   }
 
   return (
-    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-background via-muted to-background">
       {SubmitConfirmModal}
 
       {/* Desktop Layout - lg+: 3-column */}
       <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
         {/* Left sidebar: Question navigation grid */}
-        <aside className="col-span-3 p-6 pt-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-r border-slate-200 dark:border-slate-700 overflow-y-auto">
+        <aside className="col-span-3 p-6 pt-20 bg-card/50 backdrop-blur-sm border-r border-border overflow-y-auto">
           <div className="sticky top-20 space-y-6">
             <div>
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Navegación
               </span>
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mt-1">
+              <h2 className="text-lg font-semibold text-foreground mt-1">
                 {questions.length} preguntas
               </h2>
             </div>
@@ -402,9 +402,9 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                     onClick={() => goToQuestion(idx)}
                     className={`
                       w-full aspect-square rounded-lg text-sm font-semibold transition-all duration-150
-                      ${isCurrent ? 'ring-2 ring-amber-500 ring-offset-2 dark:ring-offset-slate-800' : ''}
-                      ${isAnswered ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/60' : ''}
-                      ${!isAnswered ? 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600' : ''}
+                       ${isCurrent ? 'ring-2 ring-warning ring-offset-2 ring-offset-background' : ''}
+                       ${isAnswered ? 'bg-warning/15 text-warning-foreground hover:bg-warning/25' : ''}
+                       ${!isAnswered ? 'bg-muted text-muted-foreground hover:bg-secondary' : ''}
                     `}
                     aria-label={`Ir a pregunta ${idx + 1}${isAnswered ? ' (respondida)' : ''}`}
                   >
@@ -413,10 +413,10 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                 )
               })}
             </div>
-            <div className="flex items-center gap-2 text-xs text-slate-500">
-              <span className="w-3 h-3 rounded bg-amber-100 dark:bg-amber-900/40 inline-block" />
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <span className="w-3 h-3 rounded bg-warning/15 inline-block" />
               <span>Respondida</span>
-              <span className="w-3 h-3 rounded bg-slate-100 dark:bg-slate-700 inline-block ml-2" />
+              <span className="w-3 h-3 rounded bg-muted inline-block ml-2" />
               <span>Sin responder</span>
             </div>
           </div>
@@ -426,20 +426,20 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
         <main className="col-span-6 p-4 lg:p-8 flex flex-col max-h-screen overflow-auto">
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+              <span className="text-sm font-medium text-muted-foreground">
                 Pregunta {activeIndex + 1} de {questions.length}
               </span>
-              <span className="text-sm font-semibold text-amber-600 dark:text-amber-400">
+              <span className="text-sm font-semibold text-warning-foreground">
                 {Math.round(progressPercent)}%
               </span>
             </div>
             <Progress
               value={progressPercent}
-              className="h-2 bg-slate-200 dark:bg-slate-700"
+              className="h-2 bg-muted"
             />
           </div>
 
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
             <CardContent className="p-6 md:p-8">
               <div key={activeIndex} className="min-h-75 animate-slide-in">
                 <div className="flex flex-col">
@@ -448,11 +448,11 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                       Pregunta #{currentQuestion.id}
                     </span>
                     <Separator orientation="vertical" className="h-4" />
-                    <span className="text-sm text-slate-500">
+                    <span className="text-sm text-muted-foreground">
                       {currentQuestion.tema}
                     </span>
                   </div>
-                  <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-6 leading-relaxed">
+                  <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-6 leading-relaxed">
                     {currentQuestion.question}
                   </h2>
 
@@ -489,14 +489,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
             <CardFooter className="p-6 pt-0 flex gap-3">
               <Button
-                className="flex-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="flex-1 bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
                 onClick={goPrev}
                 disabled={activeIndex === 0}
               >
                 <ArrowBigLeftDash className="mr-2" /> Anterior
               </Button>
               <Button
-                className="flex-1 bg-sky-500 hover:bg-sky-600 dark:bg-sky-300 dark:text-slate-900 dark:hover:bg-sky-400 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
                 onClick={goNext}
                 disabled={activeIndex === questions.length - 1}
               >
@@ -506,14 +506,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </Card>
 
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800 rounded-xl mt-8">
+          <Card className="flex flex-col bg-accent/50 border-accent rounded-xl mt-8">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm flex justify-center items-center gap-2 text-slate-800 dark:text-slate-200">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-accent-foreground">
                 <KeyboardIcon className="w-4 h-4" />
                 Atajos de teclado
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+            <CardContent className="text-xs space-y-2 text-accent-foreground">
               <div className="flex items-center gap-1 flex-wrap justify-center">
                 <span>Usa</span>
                 <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
@@ -541,11 +541,11 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
         </main>
 
         {/* Right sidebar: Timer + submit */}
-        <aside className="col-span-3 p-6 pt-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-l border-slate-200 dark:border-slate-700 overflow-y-auto">
+        <aside className="col-span-3 p-6 pt-20 bg-card/50 backdrop-blur-sm border-l border-border overflow-y-auto">
           <div className="sticky top-20 space-y-6">
             {/* Timer */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm text-center">
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            <div className="bg-card rounded-xl p-4 shadow-sm text-center">
+              <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Tiempo restante
               </span>
               <div className="mt-2">
@@ -558,23 +558,23 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
             </div>
 
             {/* Stats */}
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm space-y-3">
+            <div className="bg-card rounded-xl p-4 shadow-sm space-y-3">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-500">Respondidas</span>
-                <span className="font-semibold text-amber-600 dark:text-amber-400">
+                <span className="text-muted-foreground">Respondidas</span>
+                <span className="font-semibold text-warning-foreground">
                   {answeredCount}
                 </span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-500">Faltan</span>
-                <span className="font-semibold text-slate-600 dark:text-slate-300">
+                <span className="text-muted-foreground">Faltan</span>
+                <span className="font-semibold text-muted-foreground">
                   {questions.length - answeredCount}
                 </span>
               </div>
               <Separator />
               <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-500">Total</span>
-                <span className="font-semibold text-slate-900 dark:text-white">
+                <span className="text-muted-foreground">Total</span>
+                <span className="font-semibold text-foreground">
                   {questions.length}
                 </span>
               </div>
@@ -582,7 +582,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
             {/* Submit button */}
             <Button
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white py-6 rounded-xl font-semibold text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full bg-warning hover:bg-warning/90 text-warning-foreground py-6 rounded-xl font-semibold text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
               onClick={() => setShowConfirmSubmit(true)}
             >
               Entregar examen
@@ -594,7 +594,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
       {/* Tablet Layout - md to lg */}
       <div className="hidden md:block lg:hidden min-h-screen">
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 px-4 py-3 flex-shrink-0">
+        <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="text-sm">
@@ -604,12 +604,12 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                   paused={paused}
                 />
               </div>
-              <span className="text-sm text-slate-500 dark:text-slate-400">
+              <span className="text-sm text-muted-foreground">
                 {answeredCount}/{questions.length}
               </span>
             </div>
             <Button
-              className="bg-amber-500 hover:bg-amber-600 text-white rounded-xl px-4 py-2 text-sm font-semibold"
+              className="bg-warning hover:bg-warning/90 text-warning-foreground rounded-xl px-4 py-2 text-sm font-semibold"
               onClick={() => setShowConfirmSubmit(true)}
             >
               Entregar
@@ -619,7 +619,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
         </header>
 
         {/* Question nav strip */}
-        <div className="bg-white/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 px-4 py-3 overflow-x-auto">
+        <div className="bg-card/80 border-b border-border px-4 py-3 overflow-x-auto">
           <div className="flex gap-1.5 min-w-max">
             {questions.map((q, idx) => {
               const isAnswered = userAnswers[q.id] !== undefined
@@ -630,9 +630,9 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                   onClick={() => goToQuestion(idx)}
                   className={`
                     w-8 h-8 rounded-lg text-xs font-semibold transition-all flex-shrink-0
-                    ${isCurrent ? 'ring-2 ring-amber-500 ring-offset-1 dark:ring-offset-slate-800' : ''}
-                    ${isAnswered ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300' : ''}
-                    ${!isAnswered ? 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400' : ''}
+                    ${isCurrent ? 'ring-2 ring-warning ring-offset-1 ring-offset-background' : ''}
+                    ${isAnswered ? 'bg-warning/15 text-warning-foreground' : ''}
+                    ${!isAnswered ? 'bg-muted text-muted-foreground' : ''}
                   `}
                 >
                   {idx + 1}
@@ -644,13 +644,13 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
         {/* Main content */}
         <main className="flex-1 p-4 overflow-auto">
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
             <CardContent className="p-6">
               <div key={activeIndex} className="min-h-[250px] animate-slide-in">
                 <span className="quiz-question-number text-xs">
                   #{currentQuestion.id}
                 </span>
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                <h2 className="text-lg font-semibold text-foreground mb-4">
                   {currentQuestion.question}
                 </h2>
                 <ul className="space-y-2">
@@ -682,14 +682,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
             </CardContent>
             <CardFooter className="p-4 pt-0 flex gap-2">
               <Button
-                className="flex-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl"
+                className="flex-1 bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-xl"
                 onClick={goPrev}
                 disabled={activeIndex === 0}
               >
                 <ArrowBigLeftDash /> Anterior
               </Button>
               <Button
-                className="flex-1 bg-sky-500 hover:bg-sky-600 dark:bg-sky-300 dark:text-slate-900 rounded-xl"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl"
                 onClick={goNext}
                 disabled={activeIndex === questions.length - 1}
               >
@@ -702,7 +702,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
       {/* Mobile Layout - <md */}
       <div className="md:hidden flex flex-col min-h-screen">
-        <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 px-4 py-3">
+        <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="text-lg font-bold font-mono tabular-nums">
               <ExamTimer
@@ -713,7 +713,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
             </div>
             <Button
               size="sm"
-              className="bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-semibold"
+              className="bg-warning hover:bg-warning/90 text-warning-foreground rounded-xl text-xs font-semibold"
               onClick={() => setShowConfirmSubmit(true)}
             >
               Entregar
@@ -723,7 +723,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
         </header>
 
         {/* Question nav strip */}
-        <div className="bg-white/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 px-4 py-2 overflow-x-auto">
+        <div className="bg-card/80 border-b border-border px-4 py-2 overflow-x-auto">
           <div className="flex gap-1 min-w-max">
             {questions.map((q, idx) => {
               const isAnswered = userAnswers[q.id] !== undefined
@@ -734,9 +734,9 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                   onClick={() => goToQuestion(idx)}
                   className={`
                     w-7 h-7 rounded text-xs font-semibold transition-all flex-shrink-0
-                    ${isCurrent ? 'ring-2 ring-amber-500 ring-offset-1 dark:ring-offset-slate-800' : ''}
-                    ${isAnswered ? 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300' : ''}
-                    ${!isAnswered ? 'bg-slate-100 dark:bg-slate-700 text-slate-400' : ''}
+                    ${isCurrent ? 'ring-2 ring-warning ring-offset-1 ring-offset-background' : ''}
+                    ${isAnswered ? 'bg-warning/15 text-warning-foreground' : ''}
+                    ${!isAnswered ? 'bg-muted text-muted-foreground' : ''}
                   `}
                 >
                   {idx + 1}
@@ -747,14 +747,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
         </div>
 
         <main className="flex-1 p-4 overflow-y-auto">
-          <Card className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl border-0">
+          <Card className="bg-card shadow-lg rounded-2xl border-0">
             <CardContent className="p-5">
               <div key={activeIndex} className="space-y-4 animate-slide-in">
-                <div className="flex items-center gap-2 text-xs text-slate-500">
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <span className="quiz-question-number">#{currentQuestion.id}</span>
                   <span>{currentQuestion.asignatura}</span>
                 </div>
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                <h2 className="text-lg font-semibold text-foreground">
                   {currentQuestion.question}
                 </h2>
                 <ul className="space-y-2">
@@ -786,14 +786,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
             </CardContent>
             <CardFooter className="p-4 pt-2 flex gap-2">
               <Button
-                className="flex-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 py-4 rounded-xl font-semibold"
+                className="flex-1 bg-secondary text-secondary-foreground py-4 rounded-xl font-semibold"
                 onClick={goPrev}
                 disabled={activeIndex === 0}
               >
                 <ArrowBigLeftDash /> Anterior
               </Button>
               <Button
-                className="flex-1 bg-sky-500 hover:bg-sky-600 dark:bg-sky-300 dark:text-slate-900 text-white py-4 rounded-xl font-semibold"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground py-4 rounded-xl font-semibold"
                 onClick={goNext}
                 disabled={activeIndex === questions.length - 1}
               >
@@ -803,11 +803,11 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </Card>
         </main>
 
-        <footer className="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-4 py-3 flex items-center justify-between z-40 md:hidden">
-          <span className="text-sm text-slate-500">
+        <footer className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-3 flex items-center justify-between z-40 md:hidden">
+          <span className="text-sm text-muted-foreground">
             {answeredCount}/{questions.length} respondidas
           </span>
-          <span className="text-sm text-slate-500">
+          <span className="text-sm text-muted-foreground">
             {activeIndex + 1}/{questions.length}
           </span>
         </footer>
