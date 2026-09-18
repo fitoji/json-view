@@ -55,6 +55,8 @@ function ThemeCustomizationProvider({ children }) {
       const mode = root.classList.contains('dark') ? 'dark' : 'light'
       const tokens = getEffectiveTokens(themeState, mode)
       Object.entries(tokens).forEach(([name, value]) => root.style.setProperty(`--${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
+      const styleTokens = getEffectiveStyleTokens(themeState)
+      root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
     }
     syncModeTokens()
     const observer = new MutationObserver(syncModeTokens)
