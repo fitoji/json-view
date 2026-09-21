@@ -11,6 +11,8 @@ import {
   foregroundFor,
   getEffectiveTokens,
   getEffectiveStyleTokens,
+  isSafeLetterSpacing,
+  isSafeSpacing,
   migrateThemeState,
   normalizeThemeColor,
   parseThemeColor,
@@ -361,5 +363,83 @@ describe('theme customization', () => {
         expect(swatch.style.backgroundColor).not.toBe('')
       }
     })
+  })
+
+  // ── Spacing & letter-spacing style tokens ───────────────────────────────────
+  it('accepts bounded spacing and letterSpacing overrides and applies them', () => {
+    localStorage.setItem(
+      THEME_STORAGE_KEY,
+      JSON.stringify({
+        version: 3,
+        presetId: 'ocean',
+        overrides: { spacing: '0.24rem', letterSpacing: '0.03em' },
+      }),
+    )
+
+    render(<ThemeProvider><Harness /></ThemeProvider>)
+
+    expect(document.documentElement.style.getPropertyValue('--spacing')).toBe('0.24rem')
+    expect(document.documentElement.style.getPropertyValue('--theme-letter-spacing')).toBe('0.03em')
+
+    // Persisted state round-trips the new keys intact
+    const persisted = JSON.parse(localStorage.getItem(THEME_STORAGE_KEY))
+    expect(persisted.overrides.spacing).toBe('0.24rem')
+    expect(persisted.overrides.letterSpacing).toBe('0.03em')
+  })
+
+  it('rejects out-of-range spacing and letterSpacing', () => {
+    expect(isSafeSpacing('0.21rem')).toBe(false)
+    expect(isSafeSpacing('0.29rem')).toBe(false)
+    expect(isSafeSpacing('0.15rem')).toBe(false)
+    expect(isSafeSpacing('0.25rem')).toBe(true)
+    expect(isSafeLetterSpacing('-0.1em')).toBe(false)
+    expect(isSafeLetterSpacing('0.1em')).toBe(false)
+    expect(isSafeLetterSpacing('normal')).toBe(false)
+    expect(isSafeLetterSpacing('1px')).toBe(false)
+    expect(isSafeLetterSpacing('0em')).toBe(true)
+    expect(isSafeLetterSpacing('-0.02em')).toBe(true)
+    expect(isSafeLetterSpacing('0.04em')).toBe(true)
+  })
+
+  it('v3 document with new keys passes validation; legacy v1/v2 migration still works', () => {
+    const result = validateThemeImport(
+      JSON.stringify({
+        version: 3,
+        presetId: 'ocean',
+        overrides: { spacing: '0.27rem', letterSpacing: '0.03em' },
+      }),
+    )
+    expect(result.error).toBeNull()
+    expect(result.state.overrides.spacing).toBe('0.27rem')
+    expect(result.state.overrides.letterSpacing).toBe('0.03em')
+
+    // Existing v1 document (no new keys) still migrates; the new keys normalize to null
+    const v1 = validateThemeImport(
+      JSON.stringify({ version: 1, presetId: 'ocean', overrides: { font: 'editorial', shadow: 'soft' } }),
+    )
+    expect(v1.error).toBeNull()
+    expect(v1.state.overrides.sans).toBe('editorial')
+    expect(v1.state.overrides.spacing).toBeNull()
+    expect(v1.state.overrides.letterSpacing).toBeNull()
+
+    // Same for v2 documents
+    const v2 = validateThemeImport(
+      JSON.stringify({ version: 2, presetId: 'ocean', overrides: { primary: 'hsl(12 80% 55%)', shadow: 'crisp' } }),
+    )
+    expect(v2.error).toBeNull()
+    expect(v2.state.overrides.spacing).toBeNull()
+    expect(v2.state.overrides.letterSpacing).toBeNull()
+  })
+
+  it('default rendering is unchanged', () => {
+    render(<ThemeProvider><Harness /></ThemeProvider>)
+
+    // Defaults are no-ops: Tailwind v4 --spacing and a zero tracking offset
+    expect(document.documentElement.style.getPropertyValue('--spacing')).toBe('0.25rem')
+    expect(document.documentElement.style.getPropertyValue('--theme-letter-spacing')).toBe('0em')
+
+    const tokens = getEffectiveStyleTokens(createThemeState())
+    expect(tokens.spacing).toBe('0.25rem')
+    expect(tokens.letterSpacing).toBe('0em')
   })
 })

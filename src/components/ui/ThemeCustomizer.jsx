@@ -55,6 +55,8 @@ export function ThemeCustomizer() {
 
   // Resolve effective slot values from the single source of truth
   const styleTokens = getEffectiveStyleTokens(themeState)
+  const spacing = themeState.overrides.spacing || styleTokens.spacing
+  const letterSpacing = themeState.overrides.letterSpacing || styleTokens.letterSpacing
 
   const updateColor = (key, value) => {
     // value is a hex from <input type="color"> — normalise and store straight through
@@ -144,6 +146,16 @@ export function ThemeCustomizer() {
           <div className="flex flex-col gap-2">
             <Label htmlFor="theme-radius">Corner radius: {radius}</Label>
             <Input id="theme-radius" type="range" min="0" max="1.25" step="0.05" value={Number.parseFloat(radius)} onChange={(event) => updateOverrides({ radius: `${event.target.value}rem` })} />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="theme-spacing">Espaciado: {spacing}</Label>
+            <Input id="theme-spacing" type="range" min="0.22" max="0.28" step="0.01" value={Number.parseFloat(spacing)} onChange={(event) => updateOverrides({ spacing: `${Number(event.target.value).toFixed(2)}rem` })} />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="theme-letter-spacing">Interletraje: {letterSpacing}</Label>
+            <Input id="theme-letter-spacing" type="range" min="-0.025" max="0.05" step="0.005" value={Number.parseFloat(letterSpacing)} onChange={(event) => updateOverrides({ letterSpacing: `${Number(event.target.value).toFixed(3)}em` })} />
           </div>
 
           <div className="grid grid-cols-3 gap-3">
