@@ -185,8 +185,8 @@ Results: /tmp/jv-closeout/migration-results.json. Awaits user decision on fixing
 - Awaits commit decision.
 
 ### Open
-- Commit COLOR-008 (pending user request).
-- Then the roadmap: letter-spacing + bounded spacing (0.22-0.28rem), WCAG contrast panel, share by URL, CSS export, ~18-preset port (needs camelCase->kebab + hybrid font loader).
+- [x] Commit COLOR-008 — committed as 3b8b3056 `fix(themes): pick up legacy theme keys on boot` (2026-09-21).
+- Roadmap: letter-spacing + bounded spacing (0.22-0.28rem), WCAG contrast panel, share by URL, CSS export, ~18-preset port (needs camelCase->kebab + hybrid font loader).
 
 ### COLOR-004 reopened — the acceptance grep was the wrong instrument
 The independent verifier (background task `mub6cv2m-8-e1ky`) returned green on 15 checks but flagged `ThemeCustomizer.jsx:124-125` as a *pre-existing,
