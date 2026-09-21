@@ -6,10 +6,85 @@ export const THEME_LEGACY_STORAGE_KEYS = Object.freeze(['visortests-theme-v1', '
 
 export const THEME_SCHEMA_VERSION = 3
 
+// Web-family names and order match tweakcn's font catalog. `Source Serif 4`
+// deliberately replaces tweakcn's dead `Source Serif Pro` entry (Google removed
+// Pro from css2; tweakcn's own preload link already loads 4).
 export const THEME_FONTS = Object.freeze({
+  // Local stacks — no network fetch, referenced directly by presets.
   system: 'ui-sans-serif, system-ui, sans-serif',
   editorial: 'Georgia, Cambria, "Times New Roman", serif',
   mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+  // Sans web families (Google Fonts), falling back to the sans category stack.
+  Inter: '"Inter", ui-sans-serif, system-ui, sans-serif',
+  Roboto: '"Roboto", ui-sans-serif, system-ui, sans-serif',
+  'Open Sans': '"Open Sans", ui-sans-serif, system-ui, sans-serif',
+  Poppins: '"Poppins", ui-sans-serif, system-ui, sans-serif',
+  Montserrat: '"Montserrat", ui-sans-serif, system-ui, sans-serif',
+  Outfit: '"Outfit", ui-sans-serif, system-ui, sans-serif',
+  'Plus Jakarta Sans': '"Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif',
+  'DM Sans': '"DM Sans", ui-sans-serif, system-ui, sans-serif',
+  'IBM Plex Sans': '"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif',
+  Geist: '"Geist", ui-sans-serif, system-ui, sans-serif',
+  Oxanium: '"Oxanium", ui-sans-serif, system-ui, sans-serif',
+  'Architects Daughter': '"Architects Daughter", ui-sans-serif, system-ui, sans-serif',
+  // Serif web families (Google Fonts), falling back to the serif category stack.
+  Merriweather: '"Merriweather", ui-serif, Georgia, serif',
+  'Playfair Display': '"Playfair Display", ui-serif, Georgia, serif',
+  Lora: '"Lora", ui-serif, Georgia, serif',
+  'Source Serif 4': '"Source Serif 4", ui-serif, Georgia, serif',
+  'Libre Baskerville': '"Libre Baskerville", ui-serif, Georgia, serif',
+  'Space Grotesk': '"Space Grotesk", ui-serif, Georgia, serif',
+  // Monospace web families (Google Fonts), falling back to the mono category stack.
+  'JetBrains Mono': '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+  'Fira Code': '"Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+  'Source Code Pro': '"Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+  'IBM Plex Mono': '"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+  'Roboto Mono': '"Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+  'Space Mono': '"Space Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+  'Geist Mono': '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+})
+
+// Google Fonts css2 `family=` specs for every web family above. Copied verbatim
+// from tweakcn's own preload link (authoritative), except IBM Plex Sans, which
+// uses the standard spec. Keys are identical to the web-family keys of
+// THEME_FONTS; the local stacks (system/editorial/mono) have no entry here by
+// design — fontLoader.js only builds URLs from this closed map.
+export const WEB_FONT_SPECS = Object.freeze({
+  Inter: 'Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900',
+  Roboto: 'Roboto:ital,wght@0,100..900;1,100..900',
+  'Open Sans': 'Open+Sans:ital,wght@0,300..800;1,300..800',
+  Poppins: 'Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900',
+  Montserrat: 'Montserrat:ital,wght@0,100..900;1,100..900',
+  Outfit: 'Outfit:wght@100..900',
+  'Plus Jakarta Sans': 'Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800',
+  'DM Sans': 'DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000',
+  'IBM Plex Sans': 'IBM+Plex+Sans:ital,wght@0,100..700;1,100..700',
+  Geist: 'Geist:wght@100..900',
+  Oxanium: 'Oxanium:wght@200..800',
+  'Architects Daughter': 'Architects+Daughter',
+  Merriweather: 'Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900',
+  'Playfair Display': 'Playfair+Display:ital,wght@0,400..900;1,400..900',
+  Lora: 'Lora:ital,wght@0,400..700;1,400..700',
+  'Source Serif 4': 'Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900',
+  'Libre Baskerville': 'Libre+Baskerville:ital,wght@0,400;0,700;1,400',
+  'Space Grotesk': 'Space+Grotesk:wght@300..700',
+  'JetBrains Mono': 'JetBrains+Mono:ital,wght@0,100..800;1,100..800',
+  'Fira Code': 'Fira+Code:wght@300..700',
+  'Source Code Pro': 'Source+Code+Pro:ital,wght@0,200..900;1,200..900',
+  'IBM Plex Mono': 'IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700',
+  'Roboto Mono': 'Roboto+Mono:ital,wght@0,100..700;1,100..700',
+  'Space Mono': 'Space+Mono:ital,wght@0,400;0,700;1,400;1,700',
+  'Geist Mono': 'Geist+Mono:wght@100..900',
+})
+
+// Picker grouping: the first entry of each list is the local stack
+// (system/editorial/mono); the rest are Google families loaded on demand.
+// Every name is a THEME_FONTS key, and every non-legacy name has a
+// WEB_FONT_SPECS entry (cross-checked by tests).
+export const THEME_FONT_CATEGORIES = Object.freeze({
+  sans: Object.freeze(['system', 'Inter', 'Roboto', 'Open Sans', 'Poppins', 'Montserrat', 'Outfit', 'Plus Jakarta Sans', 'DM Sans', 'IBM Plex Sans', 'Geist', 'Oxanium', 'Architects Daughter']),
+  serif: Object.freeze(['editorial', 'Merriweather', 'Playfair Display', 'Lora', 'Source Serif 4', 'Libre Baskerville', 'Space Grotesk']),
+  mono: Object.freeze(['mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'IBM Plex Mono', 'Roboto Mono', 'Space Mono', 'Geist Mono']),
 })
 
 export const THEME_SHADOWS = Object.freeze({
