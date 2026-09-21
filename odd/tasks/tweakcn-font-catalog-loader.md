@@ -42,5 +42,5 @@ Use fonts **like tweakcn** (user instruction): port tweakcn's font catalog (24 w
 
 ## Close
 
-- Work-unit commit pending after verification: `feat(themes): port tweakcn font catalog with dynamic Google Fonts loader`
+- Committed: `5daf9d26` feat(themes): port tweakcn font catalog with dynamic Google Fonts loader (7 files, +311/-20)
 - No push/PR (ordinary policy, user-owned).
