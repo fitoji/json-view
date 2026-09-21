@@ -18,20 +18,20 @@
   display: flex;
   align-items: center;
   padding: 1rem 1.25rem;
-  border: 2px solid hsl(var(--border));
+  border: 2px solid var(--border);
   border-radius: 0.75rem;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  background: hsl(var(--card));
+  background: var(--card);
   position: relative;
   overflow: hidden;
 }
 
 /* Hover state */
 .quiz-option:not(.right):not(.wrong):hover {
-  background: hsl(var(--accent) / 0.1);
-  border-color: hsl(var(--primary) / 0.3);
+  background: color-mix(in srgb, var(--accent) 0.1%, transparent);
+  border-color: color-mix(in srgb, var(--primary) 0.3%, transparent);
   transform: translateX(4px);
 }
 
@@ -43,8 +43,8 @@
   width: 2rem;
   height: 2rem;
   border-radius: 0.5rem;
-  background: hsl(var(--muted));
-  color: hsl(var(--muted-foreground));
+  background: var(--muted);
+  color: var(--muted-foreground);
   font-weight: 600;
   margin-right: 0.75rem;
   flex-shrink: 0;
@@ -52,46 +52,46 @@
 }
 
 .quiz-option:hover .quiz-option-letter {
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
+  background: var(--primary);
+  color: var(--primary-foreground);
 }
 
 /* ✅ Correcta */
 .quiz-option.right {
-  background: linear-gradient(135deg, hsl(var(--success)), hsl(var(--success) / 0.85));
-  border-color: hsl(var(--success));
-  color: hsl(var(--success-foreground));
+  background: linear-gradient(135deg, var(--success), var(--success));
+  border-color: var(--success);
+  color: var(--success-foreground);
 }
 
 .quiz-option.right .quiz-option-letter {
-  background: hsl(var(--success-foreground));
-  color: hsl(var(--success));
+  background: var(--success-foreground);
+  color: var(--success);
 }
 
 /* ❌ Incorrecta */
 .quiz-option.wrong {
-  background: linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.85));
-  border-color: hsl(var(--destructive));
-  color: hsl(var(--destructive-foreground));
+  background: linear-gradient(135deg, var(--destructive), var(--destructive));
+  border-color: var(--destructive);
+  color: var(--destructive-foreground);
 }
 
 .quiz-option.wrong .quiz-option-letter {
-  background: hsl(var(--destructive-foreground));
-  color: hsl(var(--destructive));
+  background: var(--destructive-foreground);
+  color: var(--destructive);
 }
 
 /* 🎯 Progreso */
 .quiz-progress {
   position: relative;
   height: 6px;
-  background: hsl(var(--muted));
+  background: var(--muted);
   border-radius: 3px;
   overflow: hidden;
 }
 
 .quiz-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, hsl(var(--primary)) 100%);
+  background: linear-gradient(90deg, var(--primary) 100%);
   border-radius: 3px;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -108,13 +108,13 @@
 }
 
 .quiz-score-correct {
-  background: hsl(var(--success) / 0.15);
-  color: hsl(var(--success));
+  background: color-mix(in srgb, var(--success) 0.15%, transparent);
+  color: var(--success);
 }
 
 .quiz-score-wrong {
-  background: hsl(var(--destructive) / 0.15);
-  color: hsl(var(--destructive));
+  background: color-mix(in srgb, var(--destructive) 0.15%, transparent);
+  color: var(--destructive);
 }
 
 /* 🏷️ Pregunta número */
@@ -128,8 +128,8 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: hsl(var(--primary) / 0.1);
-  color: hsl(var(--primary));
+  background: color-mix(in srgb, var(--primary) 0.1%, transparent);
+  color: var(--primary);
 }
 
 /* ⏱️ Timer */
@@ -202,7 +202,7 @@
 /* 🌓 Dark mode ajustes */
 @media (prefers-color-scheme: dark) {
   .quiz-option:not(.right):not(.wrong):hover {
-    background: hsl(var(--accent) / 0.2);
+    background: color-mix(in srgb, var(--accent) 0.2%, transparent);
   }
 }
 
@@ -234,18 +234,18 @@
 
 /* Selected option in exam mode (no right/wrong) */
 .quiz-option.exam-selected {
-  border-color: hsl(var(--warning));
-  background: hsl(var(--warning) / 0.1);
+  border-color: var(--warning);
+  background: color-mix(in srgb, var(--warning) 0.1%, transparent);
 }
 
 .dark .quiz-option.exam-selected {
-  background: hsl(var(--warning) / 0.15);
+  background: color-mix(in srgb, var(--warning) 0.15%, transparent);
 }
 
 /* Question grid scroll container */
 .exam-grid-scroll {
   scrollbar-width: thin;
-  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  scrollbar-color: color-mix(in srgb, var(--muted-foreground) 30%, transparent) transparent;
 }
 
 .exam-grid-scroll::-webkit-scrollbar {
@@ -257,6 +257,6 @@
 }
 
 .exam-grid-scroll::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground) / 0.3);
+  background: color-mix(in srgb, var(--muted-foreground) 30%, transparent);
   border-radius: 2px;
 }

@@ -31,7 +31,9 @@ function applyTokens(state) {
 
   Object.entries(lightTokens).forEach(([name, value]) => root.style.setProperty(`--${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
   root.style.setProperty('--radius', state.overrides.radius || THEME_PRESETS.find((preset) => preset.id === state.presetId)?.radius || '0.65rem')
-  root.style.setProperty('--font-family', styleTokens.fontFamily)
+  root.style.setProperty('--theme-font-sans', styleTokens.sansFamily)
+  root.style.setProperty('--theme-font-serif', styleTokens.serifFamily)
+  root.style.setProperty('--theme-font-mono', styleTokens.monoFamily)
   root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
 
   Object.entries(darkTokens).forEach(([name, value]) => root.style.setProperty(`--theme-dark-${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
@@ -56,6 +58,9 @@ function ThemeCustomizationProvider({ children }) {
       const tokens = getEffectiveTokens(themeState, mode)
       Object.entries(tokens).forEach(([name, value]) => root.style.setProperty(`--${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
       const styleTokens = getEffectiveStyleTokens(themeState)
+      root.style.setProperty('--theme-font-sans', styleTokens.sansFamily)
+      root.style.setProperty('--theme-font-serif', styleTokens.serifFamily)
+      root.style.setProperty('--theme-font-mono', styleTokens.monoFamily)
       root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
     }
     syncModeTokens()
