@@ -97,8 +97,12 @@ acceptable — out-of-sRGB oklch colours are rare in these presets and a clipped
 - [ ] COLOR-006 Test the guarantees that matter: v2 localStorage migrates to v3 `hsl(...)`; a v1/v2 JSON
   export still imports; an oklch override round-trips through export/import; injection cases rejected;
   `.font-mono`-style compiled-CSS check re-run to prove the font work still holds.
-- [ ] COLOR-007 Independent verification (parent): `pnpm test`, `pnpm build`, compiled-CSS assertion that no
+- [x] COLOR-007 Independent verification (parent): `pnpm test`, `pnpm build`, compiled-CSS assertion that no
   `hsl(h s% l%)` double-wrap survives, and a visual spot check that no preset shifted appearance.
+  Verified: 38/38 tests, build clean. Pixel parity CONFIRMED against HEAD via CDP harness across 48 states
+  (24 presets × light/dark, 12.318 property comparisons): 0 differences, bit-exact computed styles, max
+  rounding delta 0. v1's 32/48 "differences" were mid-`transition-colors` sampling; rounding refuted.
+  Committed as 00d8920 (combined work unit, font slots + flip).
 
 ## Non-goals
 
@@ -152,8 +156,37 @@ Populate as tasks close. Writer self-reports are not evidence; the parent verifi
   `hsl(199 89% 40%)` + sans; v3 oklch preserved verbatim through import.
 
 ### Open
-- COLOR-007 visual parity spot check in a browser (mechanical wrap must render identically to HEAD).
-- Independent verifier running: background task `mub6cv2m-8-e1ky`.
+- [x] Cleanup: kill 4180/4181 servers and `git worktree remove /private/tmp/jv-head` — done 2026-09-21.
+- [x] Real-browser localStorage migration test (v1/v2 user upgrade), end-to-end not just in tests — done 2026-09-21, **GAP found**.
+
+### Migration test finding (2026-09-21, CDP harness /tmp/jv-closeout/migration-test.mjs)
+Real-user upgrade path NOT satisfied by 00d8920: `readThemeState()` (ThemeProvider.jsx:17-23) only reads
+`visortests-theme-v3`. Legacy key that ACTUALLY shipped was `visortests-theme-v1` (verified in git history;
+`visortests-theme-v2` never existed in code, only in docs). A real v1 user's state under `-v1` is silently
+ignored, the legacy key stays orphaned, user boots default and loses their theme. Migration machinery itself
+is proven correct (v1/v2 docs under the v3 key migrate in place sync, and the import path round-trips).
+Fix candidate: in readThemeState, when v3 key absent, fall back to `visortests-theme-v1`, run the chain,
+re-save under v3. Test coverage: 7 cases A-G (v2-under-v3, v1-under-v3, legacy-key, hypothetical-v2-key,
+no-storage, corrupted v3, corrupted legacy); only boot warning is the Vercel insights 404 (env artifact).
+Results: /tmp/jv-closeout/migration-results.json. Awaits user decision on fixing now.
+
+### COLOR-008 fix — IMPLEMENTED and verified (2026-09-21, delegated writer, uncommitted)
+- `ThemeProvider.jsx` readThemeState(): reads `THEME_STORAGE_KEY` then `THEME_LEGACY_STORAGE_KEYS`
+  (['visortests-theme-v1', 'visortests-theme-v2'], frozen constant in themePresets.js). Every key goes
+  through the SAME strict path as imports (`validateThemeImport` → `resolveThemeSource`, per-version
+  validation, migrate, createThemeState). Successful legacy migration re-saves under v3 (best-effort);
+  legacy key LEFT in place so a rollback build still sees it; corrupted data falls back to default, never
+  sanitised. Switched v3 read from `parseThemeState` to `validateThemeImport` because parseThemeState
+  collapses valid-default and invalid-fallback into one object (corrupted-v3 → legacy fallback was
+  otherwise undecidable).
+- Tests: 4 added (legacy v1 boot + v3 rewrite, corrupted v3 + valid v1 recovery, corrupted legacy →
+  default no-throw, empty storage → default). Suite: 42/42 passing; build clean (251ms).
+- Parent spot check re-ran `pnpm test`: 42 passed. Diff confined to 3 files (+93/-2).
+- Awaits commit decision.
+
+### Open
+- Commit COLOR-008 (pending user request).
+- Then the roadmap: letter-spacing + bounded spacing (0.22-0.28rem), WCAG contrast panel, share by URL, CSS export, ~18-preset port (needs camelCase->kebab + hybrid font loader).
 
 ### COLOR-004 reopened — the acceptance grep was the wrong instrument
 The independent verifier (background task `mub6cv2m-8-e1ky`) returned green on 15 checks but flagged `ThemeCustomizer.jsx:124-125` as a *pre-existing,

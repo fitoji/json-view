@@ -1,4 +1,9 @@
 export const THEME_STORAGE_KEY = 'visortests-theme-v3'
+// Pre-v3 storage keys that shipped historically. Read as a boot fallback so a
+// saved theme migrates to the current key instead of being silently lost. v2
+// never shipped in code, but probing an absent key costs nothing.
+export const THEME_LEGACY_STORAGE_KEYS = Object.freeze(['visortests-theme-v1', 'visortests-theme-v2'])
+
 export const THEME_SCHEMA_VERSION = 3
 
 export const THEME_FONTS = Object.freeze({

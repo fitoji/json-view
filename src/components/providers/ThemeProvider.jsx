@@ -6,17 +6,38 @@ import {
   createThemeState,
   getEffectiveTokens,
   getEffectiveStyleTokens,
-  parseThemeState,
   serializeThemeState,
+  THEME_LEGACY_STORAGE_KEYS,
   THEME_PRESETS,
   THEME_STORAGE_KEY,
+  validateThemeImport,
 } from "@/theme/themePresets"
 
 const ThemeCustomizationContext = React.createContext(null)
 
 function readThemeState() {
   try {
-    return parseThemeState(window.localStorage.getItem(THEME_STORAGE_KEY) || '')
+    const storage = window.localStorage
+    // Current key first, then legacy keys (same strict validation path as the file
+    // import). A legacy document valid for its own schema version is migrated and
+    // re-persisted under the current key; invalid or corrupted data falls through
+    // to the default state, never sanitised into acceptability.
+    for (const key of [THEME_STORAGE_KEY, ...THEME_LEGACY_STORAGE_KEYS]) {
+      const raw = storage.getItem(key)
+      if (!raw) continue
+      const result = validateThemeImport(raw)
+      if (!result.state) continue
+      if (key !== THEME_STORAGE_KEY) {
+        try {
+          storage.setItem(THEME_STORAGE_KEY, serializeThemeState(result.state))
+        } catch {
+          // Re-persisting the migrated theme is best-effort; the in-memory state
+          // is still returned and the mount effect retries the write.
+        }
+      }
+      return result.state
+    }
+    return createThemeState()
   } catch {
     return createThemeState()
   }

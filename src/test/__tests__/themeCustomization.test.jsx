@@ -5,6 +5,7 @@ import { ThemeProvider, useThemeCustomization } from '../../components/providers
 import {
   DEFAULT_THEME_ID,
   THEME_FONTS,
+  THEME_LEGACY_STORAGE_KEYS,
   contrastRatio,
   createThemeState,
   foregroundFor,
@@ -50,6 +51,70 @@ describe('theme customization', () => {
   it('recovers malformed or incompatible persistence to the default preset', () => {
     expect(parseThemeState('{not-json').presetId).toBe(DEFAULT_THEME_ID)
     expect(parseThemeState(JSON.stringify({ version: 99, presetId: 'ocean' })).presetId).toBe(DEFAULT_THEME_ID)
+  })
+
+  // ── COLOR-008: read-time pickup of the shipped legacy storage key ─────────────
+  describe('legacy storage pickup', () => {
+    it('boots from a v1 document under the legacy key and rewrites the v3 key', () => {
+      localStorage.setItem(
+        THEME_LEGACY_STORAGE_KEYS[0],
+        JSON.stringify({
+          version: 1,
+          presetId: 'ocean',
+          overrides: { primary: '12 80% 55%', accent: '220 80% 18%', radius: '1rem', font: 'editorial', shadow: 'soft' },
+        }),
+      )
+
+      render(<ThemeProvider><Harness /></ThemeProvider>)
+
+      expect(screen.getByTestId('preset')).toHaveTextContent('ocean')
+      // Channel triple migrated to a complete CSS colour
+      expect(screen.getByTestId('primary')).toHaveTextContent('hsl(12 80% 55%)')
+
+      const persisted = JSON.parse(localStorage.getItem(THEME_STORAGE_KEY))
+      expect(persisted.version).toBe(THEME_SCHEMA_VERSION)
+      expect(persisted.presetId).toBe('ocean')
+      // v1 overrides.font carried into v3 overrides.sans
+      expect(persisted.overrides.sans).toBe('editorial')
+      expect(persisted.overrides.primary).toBe('hsl(12 80% 55%)')
+
+      // Legacy key is left in place: removing it would destroy the theme for a
+      // rollback to a v1-reading build.
+      expect(localStorage.getItem(THEME_LEGACY_STORAGE_KEYS[0])).toBeTruthy()
+    })
+
+    it('recovers a valid legacy theme when the v3 key is corrupted', () => {
+      localStorage.setItem(THEME_STORAGE_KEY, '{not-json')
+      localStorage.setItem(
+        THEME_LEGACY_STORAGE_KEYS[0],
+        JSON.stringify({ version: 1, presetId: 'sunset', overrides: { font: 'mono', shadow: 'crisp' } }),
+      )
+
+      render(<ThemeProvider><Harness /></ThemeProvider>)
+
+      expect(screen.getByTestId('preset')).toHaveTextContent('sunset')
+      const persisted = JSON.parse(localStorage.getItem(THEME_STORAGE_KEY))
+      expect(persisted.version).toBe(THEME_SCHEMA_VERSION)
+      expect(persisted.overrides.sans).toBe('mono')
+    })
+
+    it('falls back to the default state on corrupted legacy data, without throwing', () => {
+      localStorage.setItem(THEME_LEGACY_STORAGE_KEYS[0], '{not-json')
+
+      render(<ThemeProvider><Harness /></ThemeProvider>)
+
+      expect(screen.getByTestId('preset')).toHaveTextContent(DEFAULT_THEME_ID)
+      // Whatever the mount effect persisted is a clean, valid v3 default — the
+      // corrupted document is rejected, never sanitised into acceptability.
+      expect(JSON.parse(localStorage.getItem(THEME_STORAGE_KEY))).toEqual(createThemeState())
+    })
+
+    it('returns the default state when nothing is stored at all', () => {
+      render(<ThemeProvider><Harness /></ThemeProvider>)
+
+      expect(screen.getByTestId('preset')).toHaveTextContent(DEFAULT_THEME_ID)
+      expect(screen.getByTestId('primary')).toBeEmptyDOMElement()
+    })
   })
 
   it('provides semantic success and warning tokens for every theme mode', () => {
