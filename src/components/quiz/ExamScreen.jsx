@@ -272,7 +272,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
   if (showResumeDialog) {
     return (
       <div className="quiz-wrapper min-h-screen bg-transparent flex items-center justify-center">
-        <Card className="w-full max-w-md mx-4 bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
+        <Card className="w-full max-w-md mx-4 rounded-2xl">
           <CardContent className="p-8 text-center">
             <TriangleAlert className="w-12 h-12 mx-auto text-warning mb-4" />
             <h2 className="text-xl font-bold text-foreground mb-2">
@@ -439,7 +439,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
             />
           </div>
 
-          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
+          <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6 md:p-8">
               <div key={activeIndex} className="min-h-75 animate-slide-in">
                 <div className="flex flex-col">
@@ -506,14 +506,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </Card>
 
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col bg-accent/50 border-accent rounded-xl mt-8">
+          <Card className="flex flex-col rounded-xl mt-8">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm flex justify-center items-center gap-2 text-accent-foreground">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-card-foreground">
                 <KeyboardIcon className="w-4 h-4" />
                 Atajos de teclado
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-xs space-y-2 text-accent-foreground">
+            <CardContent className="text-xs space-y-2 text-card-foreground">
               <div className="flex items-center gap-1 flex-wrap justify-center">
                 <span>Usa</span>
                 <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
@@ -644,7 +644,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
         {/* Main content */}
         <main className="flex-1 p-4 overflow-auto">
-          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
+          <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6">
               <div key={activeIndex} className="min-h-[250px] animate-slide-in">
                 <span className="quiz-question-number text-xs">

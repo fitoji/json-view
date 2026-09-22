@@ -133,7 +133,7 @@ export default function Docs() {
             </div>
 
             {/* Card con contenido */}
-            <div className="bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 rounded-2xl p-6 md:p-8 transition-colors duration-300">
+            <div className="bg-card border border-border rounded-2xl p-6 md:p-8 transition-colors duration-300">
               <div className="animate-[fadeIn_0.2s_ease-out]" key={activeSection}>
                 {renderContent(activeSection)}
               </div>

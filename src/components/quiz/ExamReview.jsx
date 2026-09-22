@@ -19,7 +19,7 @@ export default function ExamReview({
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Resultado del Examen
           </h1>
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-card/80 shadow-lg border border-border/50">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-card border border-border">
             <span className="text-5xl font-bold text-success">{score}</span>
             <span className="text-2xl text-muted-foreground">/ {total}</span>
             <span className="text-sm text-muted-foreground ml-2">
@@ -53,7 +53,7 @@ export default function ExamReview({
               <Card
                 key={q.id}
                 className={`
-                  bg-card/80 backdrop-blur-xl shadow-md border rounded-2xl
+                  bg-card border rounded-2xl
                   ${isCorrect ? 'border-success/40' : ''}
                   ${isWrong ? 'border-destructive/40' : ''}
                   ${isUnanswered ? 'border-border' : ''}
