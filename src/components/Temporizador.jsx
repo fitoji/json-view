@@ -48,7 +48,7 @@ const Temporizador = forwardRef(({ isRunning, setIsRunning }, ref) => {
   return (
     <Card className="bg-card">
       <CardContent className="flex flex-col items-center space-y-1 p-3">
-        <div className="text-xl md:text-2xl text-card-foreground font-bold" >
+        <div className="text-xl md:text-2xl text-card-foreground font-bold tabular-nums" >
           {formatTime(time)}
         </div>
       </CardContent>
