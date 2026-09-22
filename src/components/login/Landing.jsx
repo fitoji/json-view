@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { DataProvider } from '../context/DataContext'
 import FileDropZone from '../FileDropZone'
 import FileViewer from '../FileViewer'
 import StoredFiles from '../StoredFiles'
@@ -188,35 +187,33 @@ export default function Landing() {
             </div>
           )}
         </div>
-        <DataProvider>
-          <div className="flex flex-col items-center justify-center gap-4 w-full">
-            {selectedFile && (
-              <FileViewer
-                content={selectedFile}
-                questionnaireIdentity={selectedQuestionnaireIdentity}
-                initialMode={initialMode}
-              />
-            )}
-            <div id="driver-step-2">
-              <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
-            </div>
-            <div id="driver-step-3" className="mt-8 w-full px-4">
-              <StoredFiles
-                files={files || {}}
-                onSelect={handleFileSelect}
-                onDelete={handleFileDelete}
-                setTituloOff={setTituloOff}
-                onFileAdd={handleFileDrop}
-              />
-            </div>
-            <Suspense fallback={null}>
-              <FraseAleatoria />
-            </Suspense>
-            <Suspense fallback={null}>
-              <StorageUsage usage={storageUsage} />
-            </Suspense>
+        <div className="flex flex-col items-center justify-center gap-4 w-full">
+          {selectedFile && (
+            <FileViewer
+              content={selectedFile}
+              questionnaireIdentity={selectedQuestionnaireIdentity}
+              initialMode={initialMode}
+            />
+          )}
+          <div id="driver-step-2">
+            <FileDropZone onFileDrop={handleFileDrop} />
           </div>
-        </DataProvider>
+          <div id="driver-step-3" className="mt-8 w-full px-4">
+            <StoredFiles
+              files={files || {}}
+              onSelect={handleFileSelect}
+              onDelete={handleFileDelete}
+              setTituloOff={setTituloOff}
+              onFileAdd={handleFileDrop}
+            />
+          </div>
+          <Suspense fallback={null}>
+            <FraseAleatoria />
+          </Suspense>
+          <Suspense fallback={null}>
+            <StorageUsage usage={storageUsage} />
+          </Suspense>
+        </div>
       </div>
     </div>
   )
