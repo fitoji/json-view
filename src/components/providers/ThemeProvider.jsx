@@ -12,6 +12,7 @@ import {
   THEME_STORAGE_KEY,
   validateThemeImport,
 } from "@/theme/themePresets"
+import { ensureWebFonts } from "@/theme/fontLoader"
 
 const ThemeCustomizationContext = React.createContext(null)
 
@@ -55,6 +56,7 @@ function applyTokens(state) {
   root.style.setProperty('--theme-font-sans', styleTokens.sansFamily)
   root.style.setProperty('--theme-font-serif', styleTokens.serifFamily)
   root.style.setProperty('--theme-font-mono', styleTokens.monoFamily)
+  ensureWebFonts([styleTokens.sans, styleTokens.serif, styleTokens.mono])
   root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
   root.style.setProperty('--spacing', styleTokens.spacing)
   root.style.setProperty('--theme-letter-spacing', styleTokens.letterSpacing)
@@ -84,6 +86,7 @@ function ThemeCustomizationProvider({ children }) {
       root.style.setProperty('--theme-font-sans', styleTokens.sansFamily)
       root.style.setProperty('--theme-font-serif', styleTokens.serifFamily)
       root.style.setProperty('--theme-font-mono', styleTokens.monoFamily)
+      ensureWebFonts([styleTokens.sans, styleTokens.serif, styleTokens.mono])
       root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
       root.style.setProperty('--spacing', styleTokens.spacing)
       root.style.setProperty('--theme-letter-spacing', styleTokens.letterSpacing)

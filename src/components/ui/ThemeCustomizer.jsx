@@ -17,7 +17,7 @@ import {
 } from './dialog'
 import { Input } from './input'
 import { Label } from './label'
-import { getEffectiveStyleTokens, normalizeThemeColor, parseThemeColor, rgbToHex, serializeThemeState, THEME_FONTS, THEME_SHADOWS, validateThemeImport } from '@/theme/themePresets'
+import { getEffectiveStyleTokens, normalizeThemeColor, parseThemeColor, rgbToHex, serializeThemeState, THEME_FONT_CATEGORIES, THEME_SHADOWS, validateThemeImport } from '@/theme/themePresets'
 
 const colorValue = (value, fallback) => {
   const norm = normalizeThemeColor(value || fallback)
@@ -28,21 +28,36 @@ const colorValue = (value, fallback) => {
 
 const FONT_LABELS = { system: 'Sistema', editorial: 'Editorial', mono: 'Monoespaciada' }
 
-const fontSelect = (id, label, value, onChange) => (
-  <div className="flex flex-col gap-2">
-    <Label htmlFor={id}>{label}</Label>
-    <select
-      id={id}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="h-10 rounded-md border border-input bg-background px-3 text-sm"
-    >
-      {Object.keys(THEME_FONTS).map((key) => (
-        <option key={key} value={key}>{FONT_LABELS[key]}</option>
-      ))}
-    </select>
-  </div>
-)
+// Keys of the local stacks; everything else in a category list is a Google family
+// shown under its verbatim name.
+const LEGACY_FONT_KEYS = Object.keys(FONT_LABELS)
+
+const fontSelect = (id, label, value, onChange, options) => {
+  const legacy = options.filter((key) => LEGACY_FONT_KEYS.includes(key))
+  const google = options.filter((key) => !LEGACY_FONT_KEYS.includes(key))
+  return (
+    <div className="flex flex-col gap-2">
+      <Label htmlFor={id}>{label}</Label>
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+      >
+        <optgroup label="Sistema">
+          {legacy.map((key) => (
+            <option key={key} value={key}>{FONT_LABELS[key]}</option>
+          ))}
+        </optgroup>
+        <optgroup label="Google">
+          {google.map((key) => (
+            <option key={key} value={key}>{key}</option>
+          ))}
+        </optgroup>
+      </select>
+    </div>
+  )
+}
 
 export function ThemeCustomizer() {
   const { themeState, presets, selectPreset, updateOverrides, resetTheme } = useThemeCustomization()
@@ -159,9 +174,9 @@ export function ThemeCustomizer() {
           </div>
 
           <div className="grid grid-cols-3 gap-3">
-            {fontSelect('theme-sans', 'Tipografía base', styleTokens.sans, (val) => updateOverrides({ sans: val }))}
-            {fontSelect('theme-serif', 'Serif', styleTokens.serif, (val) => updateOverrides({ serif: val }))}
-            {fontSelect('theme-mono', 'Monoespaciada', styleTokens.mono, (val) => updateOverrides({ mono: val }))}
+            {fontSelect('theme-sans', 'Tipografía base', styleTokens.sans, (val) => updateOverrides({ sans: val }), THEME_FONT_CATEGORIES.sans)}
+            {fontSelect('theme-serif', 'Serif', styleTokens.serif, (val) => updateOverrides({ serif: val }), THEME_FONT_CATEGORIES.serif)}
+            {fontSelect('theme-mono', 'Monoespaciada', styleTokens.mono, (val) => updateOverrides({ mono: val }), THEME_FONT_CATEGORIES.mono)}
             <div className="flex flex-col gap-2">
               <Label htmlFor="theme-shadow">Sombra</Label>
               <select id="theme-shadow" value={shadow} onChange={(event) => updateOverrides({ shadow: event.target.value })} className="h-10 rounded-md border border-input bg-background px-3 text-sm">
