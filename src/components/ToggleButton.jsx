@@ -9,8 +9,8 @@ function ToggleButton() {
       className={`
         px-6 py-3 rounded-lg font-semibold transition-colors duration-200
         ${isActive 
-          ? 'bg-blue-600 text-white hover:bg-blue-700' 
-          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}
+          ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+          : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'}
       `}
     >
       {isActive ? 'Active' : 'Inactive'}

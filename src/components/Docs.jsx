@@ -42,7 +42,7 @@ function NavSidebar({ active, onSelect, onClose }) {
         const items = SECTIONS.filter((s) => s.category === cat.id)
         return (
           <div key={cat.id}>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-3">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2 px-3">
               {cat.label}
             </h4>
             <div className="space-y-0.5">
@@ -59,8 +59,8 @@ function NavSidebar({ active, onSelect, onClose }) {
                     className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all text-left
                       ${
                         isActive
-                          ? "bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 shadow-xs"
-                          : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200"
+                          ? "bg-accent text-accent-foreground shadow-xs"
+                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                       }`}
                   >
                     <Icon className="size-4 shrink-0" />
@@ -84,17 +84,17 @@ export default function Docs() {
   const ActiveIcon = activeData?.icon
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-sky-50 to-emerald-50 dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-br from-background to-accent">
       {/* ── MOBILE HEADER ── */}
-      <header className="sticky top-0 z-40 flex items-center gap-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-4 py-3 md:hidden">
+      <header className="sticky top-0 z-40 flex items-center gap-3 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-3 md:hidden">
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="p-1.5 rounded-lg hover:bg-accent transition-colors"
           aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
         >
-          {mobileOpen ? <X className="size-5 text-slate-700 dark:text-slate-300" /> : <Menu className="size-5 text-slate-700 dark:text-slate-300" />}
+          {mobileOpen ? <X className="size-5 text-foreground" /> : <Menu className="size-5 text-foreground" />}
         </button>
-        <div className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300">
+        <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
           {ActiveIcon && <ActiveIcon className="size-4" />}
           {activeData?.label}
         </div>
@@ -103,8 +103,8 @@ export default function Docs() {
       {/* ── MOBILE SIDEBAR OVERLAY ── */}
       {mobileOpen && (
         <>
-          <div className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm md:hidden" onClick={() => setMobileOpen(false)} />
-          <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 pt-16 overflow-y-auto md:hidden shadow-xl">
+          <div className="fixed inset-0 z-30 bg-foreground/20 backdrop-blur-sm md:hidden" onClick={() => setMobileOpen(false)} />
+          <aside className="fixed inset-y-0 left-0 z-40 w-64 bg-background border-r border-border p-4 pt-16 overflow-y-auto md:hidden shadow-xl">
             <NavSidebar active={activeSection} onSelect={setActiveSection} onClose={() => setMobileOpen(false)} />
           </aside>
         </>
@@ -113,7 +113,7 @@ export default function Docs() {
       <div className="max-w-6xl mx-auto flex">
         {/* ── DESKTOP SIDEBAR ── */}
         <aside className="hidden md:block w-56 shrink-0 sticky top-0 self-start h-screen overflow-y-auto p-4 pt-8">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-6 px-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-6 px-3">
             Documentación
           </h2>
           <NavSidebar active={activeSection} onSelect={setActiveSection} />
@@ -124,16 +124,16 @@ export default function Docs() {
           <div className="max-w-3xl">
             {/* Título */}
             <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-emerald-700 dark:text-emerald-400">
+              <h1 className="text-3xl md:text-4xl font-bold text-primary">
                 Visor JsonTests - Documentación
               </h1>
-              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              <p className="mt-1 text-sm text-muted-foreground">
                 {activeData?.label}
               </p>
             </div>
 
             {/* Card con contenido */}
-            <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 md:p-8 transition-all duration-300">
+            <div className="bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 rounded-2xl p-6 md:p-8 transition-all duration-300">
               <div className="animate-[fadeIn_0.2s_ease-out]" key={activeSection}>
                 {renderContent(activeSection)}
               </div>
@@ -176,7 +176,7 @@ function renderContent(section) {
             inmediato ideal para aprender) y <strong>Examen</strong> (simulación
             real sin feedback, revisión al final).
           </p>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             Quick start
           </h3>
           <ol className="list-decimal pl-5 space-y-1">
@@ -197,7 +197,7 @@ function renderContent(section) {
     case "primeros-pasos":
       return (
         <div>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             Cargar un cuestionario
           </h3>
           <ol className="list-decimal pl-5 space-y-1 mb-4">
@@ -213,7 +213,7 @@ function renderContent(section) {
               <strong>Ver</strong> para empezar
             </li>
           </ol>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             Elegir el modo
           </h3>
           <p className="mb-2">
@@ -229,7 +229,7 @@ function renderContent(section) {
               final con todas las respuestas y tiempo transcurrido.
             </li>
           </ul>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             En modo Pregunta Respuesta
           </h3>
           <ol className="list-decimal pl-5 space-y-1 mb-4">
@@ -245,7 +245,7 @@ function renderContent(section) {
               Al final: repetir todo o repasar solo los errores
             </li>
           </ol>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             En modo Examen
           </h3>
           <ol className="list-decimal pl-5 space-y-1">
@@ -271,7 +271,7 @@ function renderContent(section) {
           <p className="mb-3">
             Cada pregunta se estructura así:
           </p>
-          <pre className="bg-emerald-100 dark:bg-emerald-900/50 p-4 rounded-md mb-4 overflow-x-auto text-sm">
+          <pre className="bg-muted p-4 rounded-md mb-4 overflow-x-auto text-sm">
 {`{
   "id": 1,
   "question": "¿Cuál es la capital de Francia?",
@@ -285,53 +285,53 @@ function renderContent(section) {
   "tema": "Europa"
 }`}
           </pre>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             Campos
           </h3>
           <div className="overflow-x-auto mb-4">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-emerald-100 dark:bg-emerald-900/50">
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Campo</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Tipo</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Descripción</th>
+                <tr className="bg-muted">
+                   <th className="border border-border p-2 text-left">Campo</th>
+                   <th className="border border-border p-2 text-left">Tipo</th>
+                   <th className="border border-border p-2 text-left">Descripción</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">id</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">number</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Identificador único de la pregunta</td>
+                   <td className="border border-border p-2 font-mono">id</td>
+                   <td className="border border-border p-2">number</td>
+                   <td className="border border-border p-2">Identificador único de la pregunta</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">question</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">string</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Texto de la pregunta</td>
+                   <td className="border border-border p-2 font-mono">question</td>
+                   <td className="border border-border p-2">string</td>
+                   <td className="border border-border p-2">Texto de la pregunta</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">option1 - option5</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">string</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Opciones de respuesta</td>
+                   <td className="border border-border p-2 font-mono">option1 - option5</td>
+                   <td className="border border-border p-2">string</td>
+                   <td className="border border-border p-2">Opciones de respuesta</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">ans</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">number</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Índice de la respuesta correcta (1-4). 0 = ambigua</td>
+                   <td className="border border-border p-2 font-mono">ans</td>
+                   <td className="border border-border p-2">number</td>
+                   <td className="border border-border p-2">Índice de la respuesta correcta (1-4). 0 = ambigua</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">asignatura</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">string</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Código de la asignatura (ej: "COA")</td>
+                   <td className="border border-border p-2 font-mono">asignatura</td>
+                   <td className="border border-border p-2">string</td>
+                   <td className="border border-border p-2">Código de la asignatura (ej: "COA")</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">tema</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">string</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Tema o capítulo</td>
+                   <td className="border border-border p-2 font-mono">tema</td>
+                   <td className="border border-border p-2">string</td>
+                   <td className="border border-border p-2">Tema o capítulo</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">Notas</h3>
+          <h3 className="text-lg font-semibold text-primary mb-2">Notas</h3>
           <ul className="list-disc pl-5 space-y-1">
             <li>Se aceptan <code>.json</code> o <code>.txt</code> (contenido JSON válido)</li>
             <li><code>option5</code> vacío = 4 opciones. Con contenido = 5 opciones</li>
@@ -346,36 +346,36 @@ function renderContent(section) {
           <div className="overflow-x-auto mb-4">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-emerald-100 dark:bg-emerald-900/50">
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Modo</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Feedback</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Orden</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Timer</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Navegación</th>
+                <tr className="bg-muted">
+                   <th className="border border-border p-2 text-left">Modo</th>
+                   <th className="border border-border p-2 text-left">Feedback</th>
+                   <th className="border border-border p-2 text-left">Orden</th>
+                   <th className="border border-border p-2 text-left">Timer</th>
+                   <th className="border border-border p-2 text-left">Navegación</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-semibold">Pregunta Respuesta</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">✅ Inmediato</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Aleatorio*</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">No</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Lineal</td>
+                   <td className="border border-border p-2 font-semibold">Pregunta Respuesta</td>
+                   <td className="border border-border p-2">✅ Inmediato</td>
+                   <td className="border border-border p-2">Aleatorio*</td>
+                   <td className="border border-border p-2">No</td>
+                   <td className="border border-border p-2">Lineal</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-semibold">Examen</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">❌ No</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Correlativo (1→N)</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Count-up</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Libre</td>
+                   <td className="border border-border p-2 font-semibold">Examen</td>
+                   <td className="border border-border p-2">❌ No</td>
+                   <td className="border border-border p-2">Correlativo (1→N)</td>
+                   <td className="border border-border p-2">Count-up</td>
+                   <td className="border border-border p-2">Libre</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+          <p className="text-xs text-muted-foreground mb-4">
             *El orden aleatorio puede desactivarse desde el menú.
           </p>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             Pregunta Respuesta (práctica)
           </h3>
           <p className="mb-2">Modo de aprendizaje con feedback inmediato.</p>
@@ -385,11 +385,11 @@ function renderContent(section) {
             <li>Puntuación en tiempo real</li>
             <li>Al final: opción de Repetir o Revisar errores</li>
           </ul>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             <strong>Flujo:</strong> Seleccionar modo → Responder → Feedback →
             Siguiente → ... → Resultado
           </p>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">Examen</h3>
+          <h3 className="text-lg font-semibold text-primary mb-2">Examen</h3>
           <p className="mb-2">Simulación de examen real.</p>
           <ul className="list-disc pl-5 space-y-1 mb-4">
             <li>Orden correlativo (1→N), sin aleatoriedad</li>
@@ -399,7 +399,7 @@ function renderContent(section) {
             <li>Persistencia automática</li>
             <li>Revisión final al entregar</li>
           </ul>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-muted-foreground">
             <strong>Timer:</strong> Count-up, se muestra como MM:SS. Sin límite.
           </p>
         </div>
@@ -412,10 +412,10 @@ function renderContent(section) {
             Cualquier IA (ChatGPT, Claude, Gemini) puede generar cuestionarios en
             el formato correcto.
           </p>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             Prompt básico
           </h3>
-          <pre className="bg-emerald-100 dark:bg-emerald-900/50 p-4 rounded-md mb-4 overflow-x-auto text-sm whitespace-pre-wrap">
+          <pre className="bg-muted p-4 rounded-md mb-4 overflow-x-auto text-sm whitespace-pre-wrap">
 {`Considerando la siguiente documentación:
 https://visortests-gpt.vercel.app/docs
 
@@ -437,7 +437,7 @@ Usa este formato para cada pregunta:
 
 Guarda el resultado como un archivo .json.`}
           </pre>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">Tips</h3>
+          <h3 className="text-lg font-semibold text-primary mb-2">Tips</h3>
           <ol className="list-decimal pl-5 space-y-1 mb-4">
             <li><strong>Sé específico</strong> con el tema</li>
             <li><strong>Indicá cantidad</strong> de preguntas</li>
@@ -445,31 +445,31 @@ Guarda el resultado como un archivo .json.`}
             <li><strong>Pedí que evite</strong> respuestas ambiguas</li>
             <li><strong>Si tiene errores</strong> pedí que lo corrija</li>
           </ol>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">Errores comunes</h3>
+          <h3 className="text-lg font-semibold text-primary mb-2">Errores comunes</h3>
           <div className="overflow-x-auto mb-4">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-emerald-100 dark:bg-emerald-900/50">
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Problema</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Solución</th>
+                <tr className="bg-muted">
+                   <th className="border border-border p-2 text-left">Problema</th>
+                   <th className="border border-border p-2 text-left">Solución</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">No guarda como archivo</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Copiá el JSON, creá el archivo manualmente</td>
+                   <td className="border border-border p-2">No guarda como archivo</td>
+                   <td className="border border-border p-2">Copiá el JSON, creá el archivo manualmente</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Errores de sintaxis</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Pedí que lo corrija o usá un validator online</td>
+                   <td className="border border-border p-2">Errores de sintaxis</td>
+                   <td className="border border-border p-2">Pedí que lo corrija o usá un validator online</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Opciones con números (1. opción)</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Pedí que quite los números</td>
+                   <td className="border border-border p-2">Opciones con números (1. opción)</td>
+                   <td className="border border-border p-2">Pedí que quite los números</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Texto extra en la respuesta</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Pedí solo JSON puro</td>
+                   <td className="border border-border p-2">Texto extra en la respuesta</td>
+                   <td className="border border-border p-2">Pedí solo JSON puro</td>
                 </tr>
               </tbody>
             </table>
@@ -480,59 +480,59 @@ Guarda el resultado como un archivo .json.`}
     case "atajos":
       return (
         <div>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
+          <h3 className="text-lg font-semibold text-primary mb-2">
             Pregunta Respuesta
           </h3>
           <div className="overflow-x-auto mb-4">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-emerald-100 dark:bg-emerald-900/50">
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Tecla</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Acción</th>
+                <tr className="bg-muted">
+                   <th className="border border-border p-2 text-left">Tecla</th>
+                   <th className="border border-border p-2 text-left">Acción</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">1-5</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Seleccionar opción</td>
+                   <td className="border border-border p-2 font-mono">1-5</td>
+                   <td className="border border-border p-2">Seleccionar opción</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">Space / Enter</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Siguiente pregunta</td>
+                   <td className="border border-border p-2 font-mono">Space / Enter</td>
+                   <td className="border border-border p-2">Siguiente pregunta</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <h3 className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">Examen</h3>
+          <h3 className="text-lg font-semibold text-primary mb-2">Examen</h3>
           <div className="overflow-x-auto mb-4">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-emerald-100 dark:bg-emerald-900/50">
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Tecla</th>
-                  <th className="border border-emerald-200 dark:border-emerald-800 p-2 text-left">Acción</th>
+                <tr className="bg-muted">
+                   <th className="border border-border p-2 text-left">Tecla</th>
+                   <th className="border border-border p-2 text-left">Acción</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">1-5</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Seleccionar opción</td>
+                   <td className="border border-border p-2 font-mono">1-5</td>
+                   <td className="border border-border p-2">Seleccionar opción</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">← / →</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Anterior/Siguiente</td>
+                   <td className="border border-border p-2 font-mono">← / →</td>
+                   <td className="border border-border p-2">Anterior/Siguiente</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">Space / Enter</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Ir a siguiente</td>
+                   <td className="border border-border p-2 font-mono">Space / Enter</td>
+                   <td className="border border-border p-2">Ir a siguiente</td>
                 </tr>
                 <tr>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2 font-mono">Ctrl+Enter</td>
-                  <td className="border border-emerald-200 dark:border-emerald-800 p-2">Confirmar entrega</td>
+                   <td className="border border-border p-2 font-mono">Ctrl+Enter</td>
+                   <td className="border border-border p-2">Confirmar entrega</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-muted-foreground">
             Los atajos se ignoran si el cursor está en un campo de texto.
           </p>
         </div>

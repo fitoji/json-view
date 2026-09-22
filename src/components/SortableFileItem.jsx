@@ -32,18 +32,18 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="flex flex-col mb-2 md:flex-row items-start md:items-center md:justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all ease-out duration-200 shadow-sm"
+      className="flex flex-col mb-2 md:flex-row items-start md:items-center md:justify-between p-3 rounded-lg border border-border hover:bg-accent transition-all ease-out duration-200 shadow-sm"
     >
       <HoverCard>
         <HoverCardTrigger>
           <Button
             {...attributes}
             {...listeners}
-            className="touch-none cursor-grab active:cursor-grabbing p-2 bg-slate-100 dark:bg-slate-700 hover:bg-emerald-200 dark:hover:bg-emerald-600 rounded-lg mr-2"
+            className="touch-none cursor-grab active:cursor-grabbing p-2 bg-secondary hover:bg-accent rounded-lg mr-2"
           >
-            <GripVertical className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+            <GripVertical className="w-4 h-4 text-secondary-foreground" />
           </Button>
-          <span className="font-medium text-slate-800 dark:text-slate-100">
+          <span className="font-medium text-foreground">
             {fileName.replace(".json", "")}
           </span>
         </HoverCardTrigger>
@@ -63,7 +63,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-sky-500 hover:bg-sky-600 text-white"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
               size="sm"
             >
               <BookOpen className="w-4 h-4 mr-2" />
@@ -84,7 +84,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-amber-500 hover:bg-amber-600 text-white"
+              className="bg-warning hover:bg-warning/90 text-warning-foreground"
               size="sm"
             >
               <Timer className="w-4 h-4 mr-2" />
@@ -105,7 +105,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white dark:text-white"
+              className="bg-success hover:bg-success/90 text-success-foreground"
               size="sm"
             >
               <CircleArrowRight className="w-4 h-4 mr-2" />

@@ -30,15 +30,15 @@ export default function Modal({ open, onClose, children, title }) {
         fixed inset-0 z-50 m-auto
         bg-transparent shadow-none
         open:flex open:items-center open:justify-center
-        backdrop:bg-black/20
+        backdrop:bg-foreground/20
         border-0 p-0
       "
     >
-      <div className="relative bg-white dark:bg-slate-800 rounded-lg shadow-lg p-6 min-w-[300px]">
+      <div className="relative bg-card text-card-foreground rounded-lg shadow-lg p-6 min-w-[300px]">
         <button
           onClick={onClose}
           aria-label="Cerrar modal"
-          className="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-gray-600"
+          className="absolute top-2 right-2 p-1 rounded-lg text-muted-foreground bg-card hover:bg-accent hover:text-accent-foreground"
         >
           X
         </button>
