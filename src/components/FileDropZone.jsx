@@ -61,8 +61,8 @@ export default function FileDropZone({ onFileDrop }) {
           toast.success("¡El cuestionario ha sido cargado exitosamente!", {
             duration: 3000,
             style: {
-                backgroundColor: "hsl(var(--success))",
-                color: "hsl(var(--success-foreground))",
+                backgroundColor: "var(--success)",
+                color: "var(--success-foreground)",
             },
           });
           setJsonData(jsonContent);
@@ -72,8 +72,8 @@ export default function FileDropZone({ onFileDrop }) {
           toast.error("'El archivo no es un JSON válido'", {
             duration: 5000,
             style: {
-                backgroundColor: "hsl(var(--destructive))",
-                color: "hsl(var(--destructive-foreground))",
+                backgroundColor: "var(--destructive)",
+                color: "var(--destructive-foreground)",
             },
           });
         } finally {

@@ -17,15 +17,32 @@ import {
 } from './dialog'
 import { Input } from './input'
 import { Label } from './label'
-import { hexToHsl, hslToHex, serializeThemeState, THEME_FONTS, THEME_SHADOWS, validateThemeImport } from '@/theme/themePresets'
+import { getEffectiveStyleTokens, normalizeThemeColor, parseThemeColor, rgbToHex, serializeThemeState, THEME_FONTS, THEME_SHADOWS, validateThemeImport } from '@/theme/themePresets'
 
 const colorValue = (value, fallback) => {
-  try {
-    return hslToHex(value || fallback)
-  } catch {
-    return fallback
-  }
+  const norm = normalizeThemeColor(value || fallback)
+  const rgb = parseThemeColor(norm)
+  if (!rgb) return fallback
+  return rgbToHex(rgb)
 }
+
+const FONT_LABELS = { system: 'Sistema', editorial: 'Editorial', mono: 'Monoespaciada' }
+
+const fontSelect = (id, label, value, onChange) => (
+  <div className="flex flex-col gap-2">
+    <Label htmlFor={id}>{label}</Label>
+    <select
+      id={id}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+    >
+      {Object.keys(THEME_FONTS).map((key) => (
+        <option key={key} value={key}>{FONT_LABELS[key]}</option>
+      ))}
+    </select>
+  </div>
+)
 
 export function ThemeCustomizer() {
   const { themeState, presets, selectPreset, updateOverrides, resetTheme } = useThemeCustomization()
@@ -34,12 +51,15 @@ export function ThemeCustomizer() {
   const primary = colorValue(themeState.overrides.primary, preset.light.primary)
   const accent = colorValue(themeState.overrides.accent, preset.light.accent)
   const radius = themeState.overrides.radius || preset.radius
-  const font = themeState.overrides.font || preset.font
   const shadow = themeState.overrides.shadow || preset.shadow
 
+  // Resolve effective slot values from the single source of truth
+  const styleTokens = getEffectiveStyleTokens(themeState)
+
   const updateColor = (key, value) => {
-    const hsl = hexToHsl(value)
-    if (hsl) updateOverrides({ [key]: hsl })
+    // value is a hex from <input type="color"> — normalise and store straight through
+    const normalised = normalizeThemeColor(value)
+    if (normalised) updateOverrides({ [key]: normalised })
   }
 
   const exportTheme = () => {
@@ -101,8 +121,8 @@ export function ThemeCustomizer() {
                   className="flex min-h-16 flex-col items-start gap-1 rounded-lg border border-border bg-card p-2 text-left text-xs transition-colors hover:bg-accent hover:text-accent-foreground aria-pressed:border-primary aria-pressed:ring-2 aria-pressed:ring-ring"
                 >
                   <span className="flex gap-1">
-                    <span className="size-3 rounded-full" style={{ backgroundColor: `hsl(${item.light.primary})` }} />
-                    <span className="size-3 rounded-full" style={{ backgroundColor: `hsl(${item.light.accent})` }} />
+                    <span className="size-3 rounded-full" style={{ backgroundColor: item.light.primary }} />
+                    <span className="size-3 rounded-full" style={{ backgroundColor: item.light.accent }} />
                   </span>
                   <span className="font-semibold">{item.name}</span>
                 </button>
@@ -126,13 +146,10 @@ export function ThemeCustomizer() {
             <Input id="theme-radius" type="range" min="0" max="1.25" step="0.05" value={Number.parseFloat(radius)} onChange={(event) => updateOverrides({ radius: `${event.target.value}rem` })} />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="theme-font">Tipografía</Label>
-              <select id="theme-font" value={font} onChange={(event) => updateOverrides({ font: event.target.value })} className="h-10 rounded-md border border-input bg-background px-3 text-sm">
-                {Object.keys(THEME_FONTS).map((key) => <option key={key} value={key}>{key === 'system' ? 'Sistema' : key === 'editorial' ? 'Editorial' : 'Monoespaciada'}</option>)}
-              </select>
-            </div>
+          <div className="grid grid-cols-3 gap-3">
+            {fontSelect('theme-sans', 'Tipografía base', styleTokens.sans, (val) => updateOverrides({ sans: val }))}
+            {fontSelect('theme-serif', 'Serif', styleTokens.serif, (val) => updateOverrides({ serif: val }))}
+            {fontSelect('theme-mono', 'Monoespaciada', styleTokens.mono, (val) => updateOverrides({ mono: val }))}
             <div className="flex flex-col gap-2">
               <Label htmlFor="theme-shadow">Sombra</Label>
               <select id="theme-shadow" value={shadow} onChange={(event) => updateOverrides({ shadow: event.target.value })} className="h-10 rounded-md border border-input bg-background px-3 text-sm">

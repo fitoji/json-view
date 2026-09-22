@@ -25,8 +25,8 @@ import ExamScreen from './ExamScreen'
 import ModeSelectionDialog from './ModeSelectionDialog'
 import './Test.css'
 
-const TOAST_SUCCESS = { background: 'hsl(var(--success))', color: 'hsl(var(--success-foreground))', border: 'none' }
-const TOAST_ERROR = { background: 'hsl(var(--destructive))', color: 'hsl(var(--destructive-foreground))', border: 'none' }
+const TOAST_SUCCESS = { background: 'var(--success)', color: 'var(--success-foreground)', border: 'none' }
+const TOAST_ERROR = { background: 'var(--destructive)', color: 'var(--destructive-foreground)', border: 'none' }
 
 const OpcionList = memo(({
   question, numero, index, lock, selectedOption, checkAns, optionRefs
@@ -328,15 +328,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
     setEquiv([])
   }
 
-  const handleInputChange = (event) => {
-    const num = Number(event.target.value)
-    const newQuestions = preguntasAleatorias(num, data, preguntaAleatoria)
-    setNPreguntas(num)
-    setQuestions(newQuestions)
-    setQuestion(newQuestions[0])
-    setIndex(0)
-  }
-
   const handleSubmit = () => {
     setOpen(false)
     reset()
@@ -362,7 +353,8 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         questions={data}
         questionnaireIdentity={questionnaireIdentity}
         onBackToMenu={() => {
-          window.location.href = '/'
+          // Safe: hardcoded root path, no user-supplied input
+          window.location.replace('/')
         }}
       />
     )

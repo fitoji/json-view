@@ -6,17 +6,38 @@ import {
   createThemeState,
   getEffectiveTokens,
   getEffectiveStyleTokens,
-  parseThemeState,
   serializeThemeState,
+  THEME_LEGACY_STORAGE_KEYS,
   THEME_PRESETS,
   THEME_STORAGE_KEY,
+  validateThemeImport,
 } from "@/theme/themePresets"
 
 const ThemeCustomizationContext = React.createContext(null)
 
 function readThemeState() {
   try {
-    return parseThemeState(window.localStorage.getItem(THEME_STORAGE_KEY) || '')
+    const storage = window.localStorage
+    // Current key first, then legacy keys (same strict validation path as the file
+    // import). A legacy document valid for its own schema version is migrated and
+    // re-persisted under the current key; invalid or corrupted data falls through
+    // to the default state, never sanitised into acceptability.
+    for (const key of [THEME_STORAGE_KEY, ...THEME_LEGACY_STORAGE_KEYS]) {
+      const raw = storage.getItem(key)
+      if (!raw) continue
+      const result = validateThemeImport(raw)
+      if (!result.state) continue
+      if (key !== THEME_STORAGE_KEY) {
+        try {
+          storage.setItem(THEME_STORAGE_KEY, serializeThemeState(result.state))
+        } catch {
+          // Re-persisting the migrated theme is best-effort; the in-memory state
+          // is still returned and the mount effect retries the write.
+        }
+      }
+      return result.state
+    }
+    return createThemeState()
   } catch {
     return createThemeState()
   }
@@ -31,7 +52,9 @@ function applyTokens(state) {
 
   Object.entries(lightTokens).forEach(([name, value]) => root.style.setProperty(`--${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
   root.style.setProperty('--radius', state.overrides.radius || THEME_PRESETS.find((preset) => preset.id === state.presetId)?.radius || '0.65rem')
-  root.style.setProperty('--font-family', styleTokens.fontFamily)
+  root.style.setProperty('--theme-font-sans', styleTokens.sansFamily)
+  root.style.setProperty('--theme-font-serif', styleTokens.serifFamily)
+  root.style.setProperty('--theme-font-mono', styleTokens.monoFamily)
   root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
 
   Object.entries(darkTokens).forEach(([name, value]) => root.style.setProperty(`--theme-dark-${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
@@ -56,6 +79,9 @@ function ThemeCustomizationProvider({ children }) {
       const tokens = getEffectiveTokens(themeState, mode)
       Object.entries(tokens).forEach(([name, value]) => root.style.setProperty(`--${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
       const styleTokens = getEffectiveStyleTokens(themeState)
+      root.style.setProperty('--theme-font-sans', styleTokens.sansFamily)
+      root.style.setProperty('--theme-font-serif', styleTokens.serifFamily)
+      root.style.setProperty('--theme-font-mono', styleTokens.monoFamily)
       root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
     }
     syncModeTokens()
