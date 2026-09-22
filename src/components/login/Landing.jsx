@@ -168,11 +168,9 @@ export default function Landing() {
 
   return (
     // No background class here: body.fito-fondo is the single background owner.
+    // Skip link and #main-content landmark are owned by the App shell.
     <div className="flex flex-col min-h-dvh text-foreground">
-      <a href="#main-content" className="skip-link">
-        Saltar al contenido principal
-      </a>
-      <main id="main-content" className="flex-1">
+      <div className="flex-1">
         <div className="flex flex-col w-full max-w-3xl mx-auto px-4 space-y-4">
           {tituloOff && (
             <div>
@@ -217,7 +215,7 @@ export default function Landing() {
             </Suspense>
           </div>
         </DataProvider>
-      </main>
+      </div>
     </div>
   )
 }
