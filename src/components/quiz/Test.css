@@ -200,11 +200,9 @@
   }
 }
 
-/* 🌓 Dark mode ajustes */
-@media (prefers-color-scheme: dark) {
-  .quiz-option:not(.right):not(.wrong):hover {
-    background: color-mix(in srgb, var(--accent) 20%, transparent);
-  }
+/* 🌓 Dark mode ajustes — sigue el toggle de tema de la app (.dark) */
+.dark .quiz-option:not(.right):not(.wrong):hover {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 /* 🎯 Exam Mode Styles */
