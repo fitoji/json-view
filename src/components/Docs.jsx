@@ -124,7 +124,7 @@ export default function Docs() {
           <div className="max-w-3xl">
             {/* Título */}
             <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-primary">
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground">
                 Visor JsonTests - Documentación
               </h1>
               <p className="mt-1 text-sm text-muted-foreground">

@@ -101,10 +101,10 @@ export default function ExamReview({
 
                       if (isCorrectAnswer) {
                         optionClass +=
-                          ' border-success bg-success/10 text-success'
+                          ' border-success bg-success/10 text-foreground'
                       } else if (isUserSelected && isWrong) {
                         optionClass +=
-                          ' border-destructive bg-destructive/10 text-destructive'
+                          ' border-destructive bg-destructive/10 text-foreground'
                       } else {
                         optionClass +=
                           ' border-border bg-card text-card-foreground'

@@ -430,7 +430,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               <div aria-live="polite" aria-atomic="true" className="sr-only">
                 Pregunta {index + 1} de {npreguntas}
               </div>
-              <span className="text-sm font-semibold text-success">
+              <span className="text-sm font-semibold text-foreground">
                 {Math.round(progressPercent)}%
               </span>
             </div>

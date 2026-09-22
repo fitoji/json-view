@@ -178,7 +178,7 @@ export default function Landing() {
             <div>
               <h1
                 id="driver-step-1"
-                className="text-2xl pt-4 font-bold tracking-tighter md:text-4xl lg:text-4xl/none text-primary"
+                className="text-2xl pt-4 font-bold tracking-tighter md:text-4xl lg:text-4xl/none text-foreground"
               >
                 Visualizador de Tests en formato Json
               </h1>
