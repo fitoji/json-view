@@ -609,8 +609,8 @@ Guarda el resultado como un archivo .json.`}
             body="En modo examen, click en otra opción — se reemplaza automáticamente."
           />
           <ProblemItem
-            title="El tour aparece cada vez"
-            body="Desactivá el tour desde el botón de ayuda al lado del menú."
+            title="Quiero ver o volver a ver el tour"
+            body="El tour guía se muestra una sola vez. Activá 'Guía Introductoria' desde el botón de ayuda al lado del menú para volver a verla."
           />
           <ProblemItem
             title="Examen guardado no aparece al volver"

@@ -19,7 +19,7 @@ export default function Landing() {
   const [selectedQuestionnaireIdentity, setSelectedQuestionnaireIdentity] = useState(null)
   const [storageUsage, setStorageUsage] = useState(0)
   const { tituloOff, setTituloOff } = useTituloOff()
-  const { isTourEnabled } = useDriverPreference()
+  const { isTourEnabled, hasSeenTour, markTourSeen } = useDriverPreference()
 
   useEffect(() => {
     const storedFiles = JSON.parse(localStorage.getItem('jsonFiles') || '{}')
@@ -39,10 +39,12 @@ export default function Landing() {
   }, [files])
 
   useEffect(() => {
-    if (isTourEnabled) {
+    // Auto-start runs once per user; re-enabling the tour via the menu switch clears the seen flag.
+    if (isTourEnabled && !hasSeenTour) {
       driverPromise.then(({ driver }) => {
         import('driver.js/dist/driver.css')
         import('./driverjs.css')
+        markTourSeen()
         const driverObj = driver({
           prevBtnText: 'Anterior',
           nextBtnText: 'Siguiente',
@@ -129,7 +131,7 @@ export default function Landing() {
         driverObj.drive()
       })
     }
-  }, [isTourEnabled])
+  }, [isTourEnabled, hasSeenTour])
 
   const updateStorageUsage = () => {
     const totalSpace = 5 * 1024 * 1024
