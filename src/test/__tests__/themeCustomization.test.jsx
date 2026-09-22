@@ -3,9 +3,12 @@ import { ThemeProvider, useThemeCustomization } from '../../components/providers
 import {
   DEFAULT_THEME_ID,
   getEffectiveTokens,
+  getEffectiveStyleTokens,
   parseThemeState,
   THEME_PRESETS,
   THEME_STORAGE_KEY,
+  serializeThemeState,
+  validateThemeImport,
 } from '../../theme/themePresets'
 
 vi.mock('next-themes', () => ({
@@ -20,6 +23,7 @@ function Harness() {
       <output data-testid="primary">{themeState.overrides.primary}</output>
       <button onClick={() => selectPreset('ocean')}>Ocean</button>
       <button onClick={() => updateOverrides({ primary: '12 80% 55%', radius: '1rem' })}>Customize</button>
+      <button onClick={() => updateOverrides({ font: 'editorial', shadow: 'none' })}>Typography</button>
       <button onClick={resetTheme}>Reset</button>
     </div>
   )
@@ -49,6 +53,18 @@ describe('theme customization', () => {
     })
   })
 
+  it('applies allowlisted font and shadow tokens and round-trips them', () => {
+    const imported = validateThemeImport(serializeThemeState({ presetId: 'ocean', overrides: { font: 'editorial', shadow: 'none' } }))
+    expect(imported.error).toBeNull()
+    expect(imported.state.overrides).toMatchObject({ font: 'editorial', shadow: 'none' })
+  })
+
+  it('rejects malformed, unknown, and oversized import values', () => {
+    expect(validateThemeImport(JSON.stringify({ version: 1, presetId: 'ocean', overrides: { font: 'url(evil)' } })).state).toBeNull()
+    expect(validateThemeImport(JSON.stringify({ version: 1, presetId: 'ocean', overrides: { unknown: 'value' } })).state).toBeNull()
+    expect(validateThemeImport(`{"version":1,"presetId":"ocean","overrides":{"radius":"${'x'.repeat(129)}"}}`).state).toBeNull()
+  })
+
   it('selects presets, applies tokens, persists, and resets overrides', async () => {
     render(<ThemeProvider><Harness /></ThemeProvider>)
 
@@ -64,6 +80,14 @@ describe('theme customization', () => {
     await act(async () => screen.getByRole('button', { name: 'Reset' }).click())
     expect(screen.getByTestId('primary')).toBeEmptyDOMElement()
     expect(document.documentElement.style.getPropertyValue('--primary')).toBe('199 89% 40%')
+  })
+
+  it('applies the selected font and shadow CSS variables live', async () => {
+    render(<ThemeProvider><Harness /></ThemeProvider>)
+    expect(getEffectiveStyleTokens({ presetId: 'verdant', overrides: {} }).font).toBe('system')
+    await act(async () => screen.getByRole('button', { name: 'Typography' }).click())
+    expect(document.documentElement.style.getPropertyValue('--font-family')).toContain('Georgia')
+    expect(document.documentElement.style.getPropertyValue('--theme-shadow')).toBe('none')
   })
 
   it('keeps independent dark tokens when next-themes switches class', async () => {

@@ -5,6 +5,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes"
 import {
   createThemeState,
   getEffectiveTokens,
+  getEffectiveStyleTokens,
   parseThemeState,
   serializeThemeState,
   THEME_PRESETS,
@@ -26,9 +27,12 @@ function applyTokens(state) {
   const root = document.documentElement
   const lightTokens = getEffectiveTokens(state, 'light')
   const darkTokens = getEffectiveTokens(state, 'dark')
+  const styleTokens = getEffectiveStyleTokens(state)
 
   Object.entries(lightTokens).forEach(([name, value]) => root.style.setProperty(`--${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
   root.style.setProperty('--radius', state.overrides.radius || THEME_PRESETS.find((preset) => preset.id === state.presetId)?.radius || '0.65rem')
+  root.style.setProperty('--font-family', styleTokens.fontFamily)
+  root.style.setProperty('--theme-shadow', styleTokens.shadowValue)
 
   Object.entries(darkTokens).forEach(([name, value]) => root.style.setProperty(`--theme-dark-${name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}`, value))
 }

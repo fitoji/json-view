@@ -1,6 +1,9 @@
 import Palette from 'lucide-react/dist/esm/icons/palette'
 import RotateCcw from 'lucide-react/dist/esm/icons/rotate-ccw'
+import Download from 'lucide-react/dist/esm/icons/download'
+import Upload from 'lucide-react/dist/esm/icons/upload'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 import { useThemeCustomization } from '../providers/ThemeProvider'
 import { Button } from './button'
@@ -14,7 +17,7 @@ import {
 } from './dialog'
 import { Input } from './input'
 import { Label } from './label'
-import { hexToHsl, hslToHex } from '@/theme/themePresets'
+import { hexToHsl, hslToHex, serializeThemeState, THEME_FONTS, THEME_SHADOWS, validateThemeImport } from '@/theme/themePresets'
 
 const colorValue = (value, fallback) => {
   try {
@@ -31,10 +34,45 @@ export function ThemeCustomizer() {
   const primary = colorValue(themeState.overrides.primary, preset.light.primary)
   const accent = colorValue(themeState.overrides.accent, preset.light.accent)
   const radius = themeState.overrides.radius || preset.radius
+  const font = themeState.overrides.font || preset.font
+  const shadow = themeState.overrides.shadow || preset.shadow
 
   const updateColor = (key, value) => {
     const hsl = hexToHsl(value)
     if (hsl) updateOverrides({ [key]: hsl })
+  }
+
+  const exportTheme = () => {
+    const blob = new Blob([serializeThemeState(themeState)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'visortests-theme.json'
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const importTheme = async (event) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file || file.size > 32 * 1024) {
+      toast.error('El archivo es demasiado grande o no es válido.')
+      return
+    }
+    let result
+    try {
+      result = validateThemeImport(await file.text())
+    } catch {
+      toast.error('No se pudo leer el archivo.')
+      return
+    }
+    if (!result.state) {
+      toast.error(result.error)
+      return
+    }
+    selectPreset(result.state.presetId)
+    updateOverrides(result.state.overrides)
+    toast.success('Tema importado correctamente.')
   }
 
   return (
@@ -86,6 +124,27 @@ export function ThemeCustomizer() {
           <div className="flex flex-col gap-2">
             <Label htmlFor="theme-radius">Corner radius: {radius}</Label>
             <Input id="theme-radius" type="range" min="0" max="1.25" step="0.05" value={Number.parseFloat(radius)} onChange={(event) => updateOverrides({ radius: `${event.target.value}rem` })} />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="theme-font">Tipografía</Label>
+              <select id="theme-font" value={font} onChange={(event) => updateOverrides({ font: event.target.value })} className="h-10 rounded-md border border-input bg-background px-3 text-sm">
+                {Object.keys(THEME_FONTS).map((key) => <option key={key} value={key}>{key === 'system' ? 'Sistema' : key === 'editorial' ? 'Editorial' : 'Monoespaciada'}</option>)}
+              </select>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="theme-shadow">Sombra</Label>
+              <select id="theme-shadow" value={shadow} onChange={(event) => updateOverrides({ shadow: event.target.value })} className="h-10 rounded-md border border-input bg-background px-3 text-sm">
+                {Object.keys(THEME_SHADOWS).map((key) => <option key={key} value={key}>{key === 'none' ? 'Sin sombra' : key === 'soft' ? 'Suave' : 'Nítida'}</option>)}
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Button variant="outline" onClick={exportTheme}><Download data-icon="inline-start" />Exportar JSON</Button>
+            <Button variant="outline" asChild><label htmlFor="theme-import"><Upload data-icon="inline-start" />Importar JSON</label></Button>
+            <Input id="theme-import" type="file" accept="application/json,.json" onChange={importTheme} className="sr-only" />
           </div>
 
           <Button variant="outline" onClick={resetTheme}>
