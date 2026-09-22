@@ -167,12 +167,13 @@ export default function Landing() {
   }
 
   return (
-    <div className="fito-fondo flex flex-col min-h-screen text-foreground">
+    // No background class here: body.fito-fondo is the single background owner.
+    <div className="flex flex-col min-h-dvh text-foreground">
       <a href="#main-content" className="skip-link">
         Saltar al contenido principal
       </a>
       <main id="main-content" className="flex-1">
-        <div className="flex flex-col items-center space-y-4 text-center">
+        <div className="flex flex-col w-full max-w-3xl mx-auto px-4 space-y-4">
           {tituloOff && (
             <div>
               <h1
@@ -181,7 +182,7 @@ export default function Landing() {
               >
                 Visualizador de Tests en formato Json
               </h1>
-              <p className="mx-auto max-w-175 text-muted-foreground md:text-xl mb-8 md:mb-18">
+              <p className="max-w-175 text-muted-foreground md:text-xl mb-8 md:mb-18">
                 ¡Elegi tu archivo .json hecho con gpt y empieza a practicar!
               </p>
             </div>
