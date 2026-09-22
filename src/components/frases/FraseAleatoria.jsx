@@ -22,7 +22,7 @@ export default function FraseAleatoria() {
     return null;
   }
   if (!fraseSeleccionada) {
-    return <div>Cargando...</div>;
+    return <div>Cargando…</div>;
   }
 
   return (
@@ -41,7 +41,7 @@ export default function FraseAleatoria() {
 
       <CardContent className="px-6 pb-4">
         <blockquote className="text-lg font-medium text-card-foreground italic">
-          "{fraseSeleccionada.frase}"
+          “{fraseSeleccionada.frase}”
         </blockquote>
         <p className="text-right text-sm text-muted-foreground pt-4">
           - {fraseSeleccionada.autor}
