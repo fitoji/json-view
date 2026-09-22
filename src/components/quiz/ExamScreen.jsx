@@ -433,7 +433,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
               <span className="text-sm font-medium text-muted-foreground">
                 Pregunta {activeIndex + 1} de {questions.length}
               </span>
-              <span className="text-sm font-semibold text-warning-foreground">
+              <span className="text-sm font-semibold text-warning">
                 {Math.round(progressPercent)}%
               </span>
             </div>
@@ -565,7 +565,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
             <div className="bg-card rounded-xl p-4 shadow-sm space-y-3">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Respondidas</span>
-                <span className="font-semibold text-warning-foreground">
+                <span className="font-semibold text-warning">
                   {answeredCount}
                 </span>
               </div>
