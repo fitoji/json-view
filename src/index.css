@@ -9,6 +9,25 @@
   --font-family: ui-sans-serif, system-ui, sans-serif;
   --shadow-theme: var(--theme-shadow);
 
+  /* Tailwind radius scale driven by --radius so preset radius propagates everywhere */
+  --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
+
+  /* Tailwind shadow scale driven by --theme-shadow so preset shadow propagates everywhere */
+  --shadow-2xs: var(--theme-shadow);
+  --shadow-xs: var(--theme-shadow);
+  --shadow-sm: var(--theme-shadow);
+  --shadow-md: var(--theme-shadow);
+  --shadow-lg: var(--theme-shadow);
+  --shadow-xl: var(--theme-shadow);
+  --shadow-2xl: var(--theme-shadow);
+
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
@@ -76,6 +95,9 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
+
+    /* Default preset (verdant) style tokens, applied until React mounts */
+    --theme-shadow: 0 10px 30px -12px hsl(222 47% 11% / 0.28);
 }
 
 .dark {
@@ -111,6 +133,9 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    /* Softer cast default so shadows stay visible on dark before React mounts */
+    --theme-shadow: 0 10px 30px -12px hsl(222 47% 91% / 0.16);
 }
 
 @layer base {
