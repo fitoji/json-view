@@ -158,6 +158,12 @@
     border-color: var(--border);
   }
 
+  /* Single horizontal overflow guard so no screen can widen the viewport */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
