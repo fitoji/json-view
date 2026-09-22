@@ -53,7 +53,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
         </HoverCardContent>
       </HoverCard>
 
-      <div className="flex flex-row items-center justify-center pr-2 gap-2 mt-2 md:mt-0 md:justify-end">
+      <div className="flex flex-row flex-wrap items-center justify-center pr-2 gap-2 mt-2 md:mt-0 md:justify-end">
         <HoverCard>
           <HoverCardTrigger>
             <Button
@@ -67,7 +67,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
               size="sm"
             >
               <BookOpen className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Practicar</span>
+              <span>Practicar</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>
@@ -88,7 +88,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
               size="sm"
             >
               <Timer className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Examen</span>
+              <span>Examen</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>
@@ -109,7 +109,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
               size="sm"
             >
               <CircleArrowRight className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Ver</span>
+              <span>Ver</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>
@@ -126,7 +126,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
               size="sm"
             >
               <Trash2 className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Eliminar</span>
+              <span>Eliminar</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>
