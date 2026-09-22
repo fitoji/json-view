@@ -13,6 +13,7 @@ import {
   Star,
   Heart,
   Menu,
+  Check,
   X,
 } from "lucide-react"
 
@@ -357,14 +358,14 @@ function renderContent(section) {
               <tbody>
                 <tr>
                    <td className="border border-border p-2 font-semibold">Pregunta Respuesta</td>
-                   <td className="border border-border p-2">✅ Inmediato</td>
+                   <td className="border border-border p-2"><span className="inline-flex items-center gap-1.5"><Check className="size-4 text-success" aria-hidden="true" /> Inmediato</span></td>
                    <td className="border border-border p-2">Aleatorio*</td>
                    <td className="border border-border p-2">No</td>
                    <td className="border border-border p-2">Lineal</td>
                 </tr>
                 <tr>
                    <td className="border border-border p-2 font-semibold">Examen</td>
-                   <td className="border border-border p-2">❌ No</td>
+                   <td className="border border-border p-2"><span className="inline-flex items-center gap-1.5"><X className="size-4 text-destructive" aria-hidden="true" /> No</span></td>
                    <td className="border border-border p-2">Correlativo (1→N)</td>
                    <td className="border border-border p-2">Count-up</td>
                    <td className="border border-border p-2">Libre</td>
