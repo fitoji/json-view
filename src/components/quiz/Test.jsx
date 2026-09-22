@@ -882,7 +882,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             Atención
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Pregunta con respuesta cuestionable. Consultá en documentation.
+            Pregunta con respuesta cuestionable. Consultá la documentación.
           </p>
           <Button
             className="w-full bg-primary text-primary-foreground"

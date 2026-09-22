@@ -550,7 +550,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
             {/* Timer */}
             <div className="bg-card rounded-xl p-4 shadow-sm text-center">
               <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                Tiempo restante
+                Tiempo transcurrido
               </span>
               <div className="mt-2">
                 <ExamTimer
