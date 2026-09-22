@@ -271,7 +271,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
   // If showing resume dialog
   if (showResumeDialog) {
     return (
-      <div className="quiz-wrapper min-h-screen bg-linear-to-br from-background via-muted to-background flex items-center justify-center">
+      <div className="quiz-wrapper min-h-screen bg-transparent flex items-center justify-center">
         <Card className="w-full max-w-md mx-4 bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
           <CardContent className="p-8 text-center">
             <TriangleAlert className="w-12 h-12 mx-auto text-warning mb-4" />
@@ -375,7 +375,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
   }
 
   return (
-    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-background via-muted to-background">
+    <div className="quiz-wrapper min-h-screen bg-transparent">
       {SubmitConfirmModal}
 
       {/* Desktop Layout - lg+: 3-column */}

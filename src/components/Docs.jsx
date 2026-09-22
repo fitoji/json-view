@@ -84,7 +84,7 @@ export default function Docs() {
   const ActiveIcon = activeData?.icon
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-background to-accent">
+    <div className="min-h-screen bg-transparent">
       {/* ── MOBILE HEADER ── */}
       <header className="sticky top-0 z-40 flex items-center gap-3 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-3 md:hidden">
         <button

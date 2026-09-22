@@ -12,7 +12,7 @@ export default function ExamReview({
   onBackToMenu,
 }) {
   return (
-    <div className="min-h-screen bg-linear-to-br from-background via-muted to-background">
+    <div className="min-h-screen bg-transparent">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Score header */}
         <div className="text-center mb-8">

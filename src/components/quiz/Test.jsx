@@ -362,7 +362,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
   // ── Mode: 'practica' → existing flow (unchanged) ──
   return (
-    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-background via-muted to-background">
+    <div className="quiz-wrapper min-h-screen bg-transparent">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
       <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
         {/* Sidebar izq */}
