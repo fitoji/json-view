@@ -354,7 +354,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
     return (
       <ModeSelectionDialog
         open={true}
-        onClose={() => {}}
+        onClose={() => {
+          // Real dismiss: leave the quiz view, same exit as exam back-to-menu.
+          // Safe: hardcoded root path, no user-supplied input
+          window.location.replace('/')
+        }}
         onSelect={handleModeSelect}
       />
     )
