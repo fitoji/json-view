@@ -89,7 +89,7 @@ export default function FileDropZone({ onFileDrop }) {
 
   return (
     <div
-      className="rounded-xl p-6 bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 hover:shadow-xl transition-all"
+      className="rounded-xl p-6 bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 hover:shadow-xl transition-shadow"
       role="region"
       aria-label="Cargar cuestionario desde archivo"
     >
@@ -107,7 +107,7 @@ export default function FileDropZone({ onFileDrop }) {
           accept=".json, .txt"
           onChange={handleFileUpload}
           aria-describedby="file-help"
-          className="shadow-lg hover:bg-accent transition-all duration-300"
+          className="shadow-lg hover:bg-accent transition-colors duration-300"
         />
       </div>
     </div>

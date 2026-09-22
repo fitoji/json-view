@@ -401,7 +401,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                     key={q.id}
                     onClick={() => goToQuestion(idx)}
                     className={`
-                      w-full aspect-square rounded-lg text-sm font-semibold transition-all duration-150
+                      w-full aspect-square rounded-lg text-sm font-semibold transition-colors duration-150
                        ${isCurrent ? 'ring-2 ring-warning ring-offset-2 ring-offset-background' : ''}
                        ${isAnswered ? 'bg-warning/15 text-warning-foreground hover:bg-warning/25' : ''}
                        ${!isAnswered ? 'bg-muted text-muted-foreground hover:bg-secondary' : ''}
@@ -489,14 +489,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
             <CardFooter className="p-6 pt-0 flex gap-3">
               <Button
-                className="flex-1 bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="flex-1 bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 onClick={goPrev}
                 disabled={activeIndex === 0}
               >
                 <ArrowBigLeftDash className="mr-2" /> Anterior
               </Button>
               <Button
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 onClick={goNext}
                 disabled={activeIndex === questions.length - 1}
               >
@@ -582,7 +582,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
             {/* Submit button */}
             <Button
-              className="w-full bg-warning hover:bg-warning/90 text-warning-foreground py-6 rounded-xl font-semibold text-base transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full bg-warning hover:bg-warning/90 text-warning-foreground py-6 rounded-xl font-semibold text-base transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
               onClick={() => setShowConfirmSubmit(true)}
             >
               Entregar examen
@@ -629,7 +629,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                   key={q.id}
                   onClick={() => goToQuestion(idx)}
                   className={`
-                    w-8 h-8 rounded-lg text-xs font-semibold transition-all flex-shrink-0
+                    w-8 h-8 rounded-lg text-xs font-semibold transition-colors flex-shrink-0
                     ${isCurrent ? 'ring-2 ring-warning ring-offset-1 ring-offset-background' : ''}
                     ${isAnswered ? 'bg-warning/15 text-warning-foreground' : ''}
                     ${!isAnswered ? 'bg-muted text-muted-foreground' : ''}
@@ -733,7 +733,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                   key={q.id}
                   onClick={() => goToQuestion(idx)}
                   className={`
-                    w-7 h-7 rounded text-xs font-semibold transition-all flex-shrink-0
+                    w-7 h-7 rounded text-xs font-semibold transition-colors flex-shrink-0
                     ${isCurrent ? 'ring-2 ring-warning ring-offset-1 ring-offset-background' : ''}
                     ${isAnswered ? 'bg-warning/15 text-warning-foreground' : ''}
                     ${!isAnswered ? 'bg-muted text-muted-foreground' : ''}

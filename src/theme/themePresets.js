@@ -213,8 +213,49 @@ function isValidThemeObject(value) {
 }
 
 export function foregroundFor(hslChannels) {
-  const lightness = Number.parseFloat(hslChannels.split(/\s+/).at(-1))
-  return lightness > 58 ? '222.2 47.4% 11.2%' : '0 0% 100%'
+  const lightForeground = '0 0% 100%'
+  const darkForeground = '222.2 47.4% 11.2%'
+  return contrastRatio(hslChannels, lightForeground) >= contrastRatio(hslChannels, darkForeground)
+    ? lightForeground
+    : darkForeground
+}
+
+export function contrastRatio(background, foreground) {
+  const backgroundLuminance = relativeLuminance(hslToRgb(background))
+  const foregroundLuminance = relativeLuminance(hslToRgb(foreground))
+  const lighter = Math.max(backgroundLuminance, foregroundLuminance)
+  const darker = Math.min(backgroundLuminance, foregroundLuminance)
+  return (lighter + 0.05) / (darker + 0.05)
+}
+
+function hslToRgb(hslChannels) {
+  const [hue, saturation, lightness] = hslChannels.match(/[\d.]+/g).map(Number)
+  const h = (hue % 360) / 360
+  const s = saturation / 100
+  const l = lightness / 100
+  const chroma = (1 - Math.abs(2 * l - 1)) * s
+  const x = chroma * (1 - Math.abs((h * 6) % 2 - 1))
+  const m = l - chroma / 2
+  const rgb = h < 1 / 6
+    ? [chroma, x, 0]
+    : h < 2 / 6
+      ? [x, chroma, 0]
+      : h < 3 / 6
+        ? [0, chroma, x]
+        : h < 4 / 6
+          ? [0, x, chroma]
+          : h < 5 / 6
+            ? [x, 0, chroma]
+            : [chroma, 0, x]
+  return rgb.map((channel) => channel + m)
+}
+
+function relativeLuminance([red, green, blue]) {
+  const toLinear = (channel) => channel <= 0.03928
+    ? channel / 12.92
+    : ((channel + 0.055) / 1.055) ** 2.4
+  const [r, g, b] = [red, green, blue].map(toLinear)
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
 
 export function hexToHsl(hex) {

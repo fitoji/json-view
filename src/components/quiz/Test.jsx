@@ -461,14 +461,14 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                     </div>
                     <div className="flex gap-3 flex-wrap justify-center">
                       <Button
-                        className="bg-success hover:bg-success/90 text-success-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                        className="bg-success hover:bg-success/90 text-success-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-105"
                         onClick={reset}
                       >
                         <ArrowBigRightDash /> Repetir
                       </Button>
                       {mal > 0 && (
                         <Button
-                          className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                          className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-105"
                           onClick={resetErrores}
                         >
                           <TriangleAlert className="mr-2" /> Revisar errores (
@@ -511,7 +511,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             {!result && (
               <CardFooter className="p-6 pt-0">
                 <Button
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
                   onClick={next}
                   disabled={!lock}
                 >

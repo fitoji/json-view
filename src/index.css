@@ -125,6 +125,26 @@
   }
 }
 
+/* Circular View Transition reveal for the light/dark theme toggle. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: theme-transition-reveal 500ms ease-out both;
+}
+
+@keyframes theme-transition-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-transition-x) var(--theme-transition-y));
+  }
+  to {
+    clip-path: circle(150vmax at var(--theme-transition-x) var(--theme-transition-y));
+  }
+}
+
 /* 🧼 RESET (compatible con Tailwind v4) */
 * {
   box-sizing: border-box;

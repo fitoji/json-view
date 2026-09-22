@@ -16,7 +16,7 @@ export default function ModeSelectionDialog({ open, onClose, onSelect }) {
           {/* Practice mode card */}
           <button
             onClick={() => onSelect('practica')}
-            className="group flex flex-col items-center text-center p-5 rounded-2xl border-2 border-primary/30 bg-primary/5 hover:border-primary/60 hover:bg-primary/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+            className="group flex flex-col items-center text-center p-5 rounded-2xl border-2 border-primary/30 bg-primary/5 hover:border-primary/60 hover:bg-primary/10 hover:shadow-lg hover:-translate-y-1 transition-colors transition-shadow transition-transform duration-200"
           >
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <BookOpen className="w-7 h-7 text-primary" />
@@ -32,7 +32,7 @@ export default function ModeSelectionDialog({ open, onClose, onSelect }) {
           {/* Exam mode card */}
           <button
             onClick={() => onSelect('examen')}
-            className="group flex flex-col items-center text-center p-5 rounded-2xl border-2 border-warning/30 bg-warning/5 hover:border-warning/60 hover:bg-warning/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+            className="group flex flex-col items-center text-center p-5 rounded-2xl border-2 border-warning/30 bg-warning/5 hover:border-warning/60 hover:bg-warning/10 hover:shadow-lg hover:-translate-y-1 transition-colors transition-shadow transition-transform duration-200"
           >
             <div className="w-14 h-14 rounded-full bg-warning/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
               <Timer className="w-7 h-7 text-warning" />

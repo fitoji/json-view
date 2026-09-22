@@ -2,6 +2,8 @@ import { act, render, screen } from '@testing-library/react'
 import { ThemeProvider, useThemeCustomization } from '../../components/providers/ThemeProvider'
 import {
   DEFAULT_THEME_ID,
+  contrastRatio,
+  foregroundFor,
   getEffectiveTokens,
   getEffectiveStyleTokens,
   parseThemeState,
@@ -51,6 +53,16 @@ describe('theme customization', () => {
         expect(tokens.warningForeground).toBeTruthy()
       }
     })
+  })
+
+  it('chooses the higher-contrast foreground for light and dark custom colors', () => {
+    const lightColor = '45 100% 85%'
+    const darkColor = '220 80% 18%'
+
+    expect(foregroundFor(lightColor)).toBe('222.2 47.4% 11.2%')
+    expect(foregroundFor(darkColor)).toBe('0 0% 100%')
+    expect(contrastRatio(lightColor, foregroundFor(lightColor))).toBeGreaterThan(4.5)
+    expect(contrastRatio(darkColor, foregroundFor(darkColor))).toBeGreaterThan(4.5)
   })
 
   it('applies allowlisted font and shadow tokens and round-trips them', () => {
