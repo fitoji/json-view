@@ -55,14 +55,14 @@
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.13.0",
-    "@vitest/coverage-v8": "^4.1.8",
-    "@vitest/ui": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.11",
+    "@vitest/ui": "^4.1.11",
     "depcheck": "^1.4.7",
     "jsdom": "^29.1.1",
     "msw": "^2.14.6",
     "react-doctor": "^0.4.2",
     "rollup-plugin-visualizer": "^5.14.0",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.11"
   },
   "type": "module"
 }
