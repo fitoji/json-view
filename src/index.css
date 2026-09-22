@@ -22,6 +22,12 @@
   --radius-3xl: calc(var(--radius) * 3);
   --radius-4xl: calc(var(--radius) * 4);
 
+  /* Tracking scale driven by --theme-letter-spacing: additive offset, default 0em = no-op */
+  --tracking-tighter: calc(var(--theme-letter-spacing, 0em) + -0.05em);
+  --tracking-tight: calc(var(--theme-letter-spacing, 0em) + -0.025em);
+  --tracking-wide: calc(var(--theme-letter-spacing, 0em) + 0.025em);
+  --tracking-wider: calc(var(--theme-letter-spacing, 0em) + 0.05em);
+
   /* Tailwind shadow scale driven by --theme-shadow so preset shadow propagates everywhere */
   --shadow-2xs: var(--theme-shadow);
   --shadow-xs: var(--theme-shadow);

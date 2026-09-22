@@ -18,6 +18,12 @@ export const THEME_SHADOWS = Object.freeze({
   crisp: '0 4px 0 hsl(222 47% 11% / 0.16)',
 })
 
+// Default no-op values for the optional v3 style tokens. Every preset renders
+// identically when the overrides are absent: spacing matches Tailwind v4's
+// default --spacing and letterSpacing adds nothing to the tracking scale.
+export const THEME_DEFAULT_SPACING = '0.25rem'
+export const THEME_DEFAULT_LETTER_SPACING = '0em'
+
 const MAX_THEME_STRING_LENGTH = 128
 const MAX_THEME_IMPORT_LENGTH = 32 * 1024
 
@@ -954,6 +960,28 @@ function isSafeRadius(value) {
     /^(?:0|1(?:\.\d+)?|0\.\d+)rem$/.test(value)
 }
 
+/**
+ * Strict bounded spacing grammar. Only `0.22rem`..`0.28rem` is accepted: the
+ * value travels verbatim to setProperty as an inline `--spacing` on :root, so
+ * the grammar itself must cap what can ever reach the declaration.
+ */
+export function isSafeSpacing(value) {
+  return typeof value === 'string' && value.length <= MAX_THEME_STRING_LENGTH &&
+    /^(?:0\.2[2-8])rem$/.test(value)
+}
+
+/**
+ * Strict bounded letter-spacing grammar. Em units only (no bare numbers) plus a
+ * numeric bound check (-0.025..0.05em). Strict because the value travels
+ * verbatim to setProperty as an inline `--theme-letter-spacing`.
+ */
+export function isSafeLetterSpacing(value) {
+  if (typeof value !== 'string' || value.length > MAX_THEME_STRING_LENGTH) return false
+  if (!/^-?\d+(?:\.\d+)?em$/.test(value)) return false
+  const n = Number.parseFloat(value)
+  return n >= -0.025 && n <= 0.05
+}
+
 function isKnownThemeValue(allowlist, value) {
   return typeof value === 'string' && value.length <= MAX_THEME_STRING_LENGTH &&
     Object.hasOwn(allowlist, value)
@@ -1016,6 +1044,9 @@ function isValidV2ThemeObject(value) {
 }
 
 /** Validate a v3 theme object (native validation — no migration needed). */
+// spacing/letterSpacing are optional additive keys of the v3 overrides envelope:
+// strict per-build validation is retained and no migration is needed because old
+// v3 documents simply lack the keys and normalize to null/default on read.
 function isValidThemeObject(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value) ||
     value.version !== THEME_SCHEMA_VERSION || !isKnownThemePreset(value.presetId)) return false
@@ -1023,7 +1054,7 @@ function isValidThemeObject(value) {
   const overrides = value.overrides
   if (!overrides || typeof overrides !== 'object' || Array.isArray(overrides)) return false
   return Object.keys(overrides).every((key) =>
-    ['primary', 'accent', 'radius', 'sans', 'serif', 'mono', 'shadow'].includes(key)
+    ['primary', 'accent', 'radius', 'sans', 'serif', 'mono', 'shadow', 'spacing', 'letterSpacing'].includes(key)
   ) && (
     (overrides.primary == null || isSafeThemeColor(overrides.primary)) &&
     (overrides.accent == null || isSafeThemeColor(overrides.accent)) &&
@@ -1031,7 +1062,9 @@ function isValidThemeObject(value) {
     (overrides.sans == null || isKnownThemeValue(THEME_FONTS, overrides.sans)) &&
     (overrides.serif == null || isKnownThemeValue(THEME_FONTS, overrides.serif)) &&
     (overrides.mono == null || isKnownThemeValue(THEME_FONTS, overrides.mono)) &&
-    (overrides.shadow == null || isKnownThemeValue(THEME_SHADOWS, overrides.shadow))
+    (overrides.shadow == null || isKnownThemeValue(THEME_SHADOWS, overrides.shadow)) &&
+    (overrides.spacing == null || isSafeSpacing(overrides.spacing)) &&
+    (overrides.letterSpacing == null || isSafeLetterSpacing(overrides.letterSpacing))
   )
 }
 
@@ -1070,6 +1103,8 @@ export function createThemeState(presetId = DEFAULT_THEME_ID, overrides = {}) {
       serif: isKnownThemeValue(THEME_FONTS, overrides.serif) ? overrides.serif : null,
       mono: isKnownThemeValue(THEME_FONTS, overrides.mono) ? overrides.mono : null,
       shadow: isKnownThemeValue(THEME_SHADOWS, overrides.shadow) ? overrides.shadow : null,
+      spacing: isSafeSpacing(overrides.spacing) ? overrides.spacing : null,
+      letterSpacing: isSafeLetterSpacing(overrides.letterSpacing) ? overrides.letterSpacing : null,
     },
   }
 }
@@ -1145,6 +1180,8 @@ export function getEffectiveStyleTokens(state) {
     monoFamily: THEME_FONTS[mono],
     shadow,
     shadowValue: THEME_SHADOWS[shadow],
+    spacing: isSafeSpacing(overrides.spacing) ? overrides.spacing : THEME_DEFAULT_SPACING,
+    letterSpacing: isSafeLetterSpacing(overrides.letterSpacing) ? overrides.letterSpacing : THEME_DEFAULT_LETTER_SPACING,
   }
 }
 
