@@ -11,8 +11,10 @@ const NavBar = () => {
         <div className="flex items-center">
           <img
             className="h-12"
+            width={512}
+            height={512}
             src="https://utfs.io/f/OrgeCo8Gum6ew8Je4bkx3j7VtxfKkAlXC98D0ovYap6nHgwh"
-            alt="SuperTest Mascota"
+            alt="Mascota de Visor JsonTest"
           />
           <span className="font-bold text-xl">Visor JsonTest </span>
         </div>
