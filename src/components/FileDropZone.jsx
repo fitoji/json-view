@@ -31,9 +31,6 @@ export default function FileDropZone({ onFileDrop }) {
     reader.onload = (event) => {
       try {
         const jsonContent = JSON.parse(event.target.result);
-        toast.success("¡El cuestionario ha sido cargado exitosamente!", {
-          duration: 3000,
-        });
         onFileDrop(file.name, jsonContent);
       } catch (error) {
         console.error("Error al parsear el JSON:", error);

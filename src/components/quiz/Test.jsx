@@ -174,10 +174,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
       if (isCorrect) {
         e.target.classList.add('right')
-        toast.success('¡Correcto!', {
-          duration: 1500,
-          icon: <CheckCircle />,
-        })
         setScore((s) => s + 1)
       } else {
         if (question.ans === 0) {
@@ -267,10 +263,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             const isCorrect = question.ans === selectedOptionData.ans
 
             if (isCorrect) {
-              toast.success('¡Correcto!', {
-                duration: 1500,
-                icon: <CheckCircle />,
-              })
               setScore((s) => s + 1)
             } else {
               if (question.ans === 0) {
