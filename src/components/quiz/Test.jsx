@@ -27,8 +27,6 @@ import ExamScreen from './ExamScreen'
 import ModeSelectionDialog from './ModeSelectionDialog'
 import './Test.css'
 
-const TOAST_SUCCESS = { background: 'var(--success)', color: 'var(--success-foreground)', border: 'none' }
-const TOAST_ERROR = { background: 'var(--destructive)', color: 'var(--destructive-foreground)', border: 'none' }
 
 const OpcionList = memo(({
   question, numero, index, lock, selectedOption, checkAns, optionRefs
@@ -179,7 +177,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         toast.success('¡Correcto!', {
           duration: 1500,
           icon: <CheckCircle />,
-          style: TOAST_SUCCESS,
         })
         setScore((s) => s + 1)
       } else {
@@ -190,7 +187,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           toast.error('Incorrecto', {
             duration: 1500,
             icon: <XCircle />,
-            style: TOAST_ERROR,
           })
           if (
             question.ans >= 1 &&
@@ -274,7 +270,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               toast.success('¡Correcto!', {
                 duration: 1500,
                 icon: <CheckCircle />,
-                style: TOAST_SUCCESS,
               })
               setScore((s) => s + 1)
             } else {
@@ -284,7 +279,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                 toast.error('Incorrecto', {
                   duration: 1500,
                   icon: <XCircle />,
-                  style: TOAST_ERROR,
                 })
                 setMal((m) => m + 1)
                 setEquiv((prev) => [...prev, question])
