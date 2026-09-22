@@ -634,7 +634,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                   onClick={() => goToQuestion(idx)}
                   aria-label={`Ir a pregunta ${idx + 1}${isAnswered ? ' (respondida)' : ''}`}
                   className={`
-                    flex items-center justify-center gap-0.5 w-8 h-8 rounded-lg text-xs font-semibold transition-colors flex-shrink-0
+                    flex items-center justify-center gap-0.5 size-11 rounded-lg text-xs font-semibold transition-colors flex-shrink-0
                     ${isCurrent ? 'ring-2 ring-warning ring-offset-1 ring-offset-background' : ''}
                     ${isAnswered ? 'bg-warning/25 text-foreground' : ''}
                     ${!isAnswered ? 'bg-muted text-muted-foreground' : ''}
@@ -740,14 +740,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
                   onClick={() => goToQuestion(idx)}
                   aria-label={`Ir a pregunta ${idx + 1}${isAnswered ? ' (respondida)' : ''}`}
                   className={`
-                    flex items-center justify-center gap-0.5 w-7 h-7 rounded text-xs font-semibold transition-colors flex-shrink-0
+                    flex items-center justify-center gap-0.5 size-11 rounded-lg text-xs font-semibold transition-colors flex-shrink-0
                     ${isCurrent ? 'ring-2 ring-warning ring-offset-1 ring-offset-background' : ''}
                     ${isAnswered ? 'bg-warning/25 text-foreground' : ''}
                     ${!isAnswered ? 'bg-muted text-muted-foreground' : ''}
                   `}
                 >
                   {idx + 1}
-                  {isAnswered && <Check className="size-2.5" aria-hidden="true" />}
+                  {isAnswered && <Check className="size-3" aria-hidden="true" />}
                 </button>
               )
             })}

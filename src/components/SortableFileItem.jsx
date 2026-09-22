@@ -39,7 +39,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
           <Button
             {...attributes}
             {...listeners}
-            className="touch-none cursor-grab active:cursor-grabbing p-2 bg-secondary hover:bg-accent rounded-lg mr-2"
+            className="touch-none cursor-grab active:cursor-grabbing p-2 min-h-11 min-w-11 bg-secondary hover:bg-accent rounded-lg mr-2"
           >
             <GripVertical className="w-4 h-4 text-secondary-foreground" />
           </Button>
@@ -63,7 +63,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="min-h-11 min-w-11 bg-primary hover:bg-primary/90 text-primary-foreground"
               size="sm"
             >
               <BookOpen className="w-4 h-4 mr-2" />
@@ -84,7 +84,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-warning hover:bg-warning/90 text-warning-foreground"
+              className="min-h-11 min-w-11 bg-warning hover:bg-warning/90 text-warning-foreground"
               size="sm"
             >
               <Timer className="w-4 h-4 mr-2" />
@@ -105,7 +105,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-success hover:bg-success/90 text-success-foreground"
+              className="min-h-11 min-w-11 bg-success hover:bg-success/90 text-success-foreground"
               size="sm"
             >
               <CircleArrowRight className="w-4 h-4 mr-2" />
@@ -121,6 +121,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
           <HoverCardTrigger>
             <Button
               onClick={() => onDelete(fileName)}
+              className="min-h-11 min-w-11"
               variant="destructive"
               size="sm"
             >
