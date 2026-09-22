@@ -42,6 +42,7 @@ export default function Landing() {
     if (isTourEnabled) {
       driverPromise.then(({ driver }) => {
         import('driver.js/dist/driver.css')
+        import('./driverjs.css')
         const driverObj = driver({
           prevBtnText: 'Anterior',
           nextBtnText: 'Siguiente',
