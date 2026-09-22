@@ -25,8 +25,8 @@ import ExamScreen from './ExamScreen'
 import ModeSelectionDialog from './ModeSelectionDialog'
 import './Test.css'
 
-const TOAST_SUCCESS = { background: '#10b981', color: '#fff', border: 'none' }
-const TOAST_ERROR = { background: '#ef4444', color: '#fff', border: 'none' }
+const TOAST_SUCCESS = { background: 'hsl(var(--success))', color: 'hsl(var(--success-foreground))', border: 'none' }
+const TOAST_ERROR = { background: 'hsl(var(--destructive))', color: 'hsl(var(--destructive-foreground))', border: 'none' }
 
 const OpcionList = memo(({
   question, numero, index, lock, selectedOption, checkAns, optionRefs
@@ -370,23 +370,23 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
   // ── Mode: 'practica' → existing flow (unchanged) ──
   return (
-    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-slate-50 via-slate-100 to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-background via-muted to-background">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
       <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
         {/* Sidebar izq */}
-        <aside className="col-span-2 p-6 pt-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-r border-slate-200 dark:border-slate-700 overflow-y-auto">
+        <aside className="col-span-2 p-6 pt-20 bg-card/50 backdrop-blur-sm border-r border-border overflow-y-auto">
           <div className="sticky top-20 space-y-6">
             <div>
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Módulo
               </span>
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mt-1">
+              <h2 className="text-lg font-semibold text-foreground mt-1">
                 {question.asignatura}
               </h2>
             </div>
-            <div className="text-sm text-slate-600 dark:text-slate-300">
+            <div className="text-sm text-muted-foreground">
               <p>{question.tema}</p>
-              <p className="text-slate-400 dark:text-slate-500 text-xs mt-2">
+              <p className="text-muted-foreground/70 text-xs mt-2">
                 {npreguntas} preguntas
               </p>
             </div>
@@ -399,7 +399,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                   <CheckCircle size={18} />
                   <span>{score}</span>
                 </div>
-                <span className="text-sm text-slate-500">Correctas</span>
+                <span className="text-sm text-muted-foreground">Correctas</span>
               </div>
               <div className="flex items-center gap-3">
                 <div
@@ -408,7 +408,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                   <XCircle size={18} />
                   <span>{mal}</span>
                 </div>
-                <span className="text-sm text-slate-500">Incorrectas</span>
+                <span className="text-sm text-muted-foreground">Incorrectas</span>
               </div>
             </div>
           </div>
@@ -418,23 +418,23 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         <main className="col-span-8 p-4 lg:p-8 flex flex-col max-h-screen overflow-auto">
           <div className="mb-6">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+              <span className="text-sm font-medium text-muted-foreground">
                 Pregunta {index + 1} de {npreguntas}
               </span>
               <div aria-live="polite" aria-atomic="true" className="sr-only">
                 Pregunta {index + 1} de {npreguntas}
               </div>
-              <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="text-sm font-semibold text-success">
                 {Math.round(progressPercent)}%
               </span>
             </div>
             <Progress
               value={progressPercent}
-              className="h-2 bg-slate-200 dark:bg-slate-700"
+              className="h-2 bg-muted"
             />
           </div>
 
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
             <CardContent className="p-6 md:p-8">
               <div
                 key={index}
@@ -442,33 +442,33 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               >
                 {result ? (
                   <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
-                    <div className="animate-scale-in text-6xl font-bold text-emerald-500">
+                    <div className="animate-scale-in text-6xl font-bold text-success">
                       {score}
-                      <span className="text-2xl text-slate-400">
+                      <span className="text-2xl text-muted-foreground">
                         /{npreguntas}
                       </span>
                     </div>
-                    <p className="text-lg text-slate-600 dark:text-slate-300">
+                    <p className="text-lg text-muted-foreground">
                       Respuestas correctas
                     </p>
-                    <div className="px-6 py-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
+                    <div className="px-6 py-3 bg-muted rounded-xl">
+                      <p className="text-sm text-muted-foreground">
                         Tiempo:{' '}
-                        <span className="font-semibold text-slate-900 dark:text-white">
+                          <span className="font-semibold text-foreground">
                           {temporizadorRef.current?.getTime()}
                         </span>
                       </p>
                     </div>
                     <div className="flex gap-3 flex-wrap justify-center">
                       <Button
-                        className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                        className="bg-success hover:bg-success/90 text-success-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
                         onClick={reset}
                       >
                         <ArrowBigRightDash /> Repetir
                       </Button>
                       {mal > 0 && (
                         <Button
-                          className="bg-violet-500 hover:bg-violet-600 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
+                          className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-105"
                           onClick={resetErrores}
                         >
                           <TriangleAlert className="mr-2" /> Revisar errores (
@@ -484,11 +484,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                         Pregunta #{question.id}
                       </span>
                       <Separator orientation="vertical" className="h-4" />
-                      <span className="text-sm text-slate-500">
+                        <span className="text-sm text-muted-foreground">
                         {question.tema}
                       </span>
                     </div>
-                    <h2 className="text-xl md:text-2xl font-semibold text-slate-900 dark:text-white mb-6 leading-relaxed">
+                    <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-6 leading-relaxed">
                       {question.question}
                     </h2>
                     <ul className="quiz-options space-y-3">
@@ -511,7 +511,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             {!result && (
               <CardFooter className="p-6 pt-0">
                 <Button
-                  className="w-full bg-sky-500 hover:bg-sky-600 dark:bg-sky-300 dark:text-slate-900 dark:hover:bg-sky-400 text-white px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
                   onClick={next}
                   disabled={!lock}
                 >
@@ -521,14 +521,14 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             )}
           </Card>
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800 rounded-xl mt-8">
+          <Card className="flex flex-col bg-accent/50 border-accent rounded-xl mt-8">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm flex justify-center items-center gap-2 text-slate-800 dark:text-slate-200">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-accent-foreground">
                 <KeyboardIcon className="w-4 h-4" />
                 Atajos de teclado
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+            <CardContent className="text-xs space-y-2 text-accent-foreground">
               <div className="flex items-center gap-1 flex-wrap justify-center">
                 <span>Usa</span>
                 <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
@@ -554,9 +554,9 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         </main>
 
         {/* Sidebar der */}
-        <aside className="col-span-2 p-6 pt-20 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-l border-slate-200 dark:border-slate-700 overflow-y-auto">
+        <aside className="col-span-2 p-6 pt-20 bg-card/50 backdrop-blur-sm border-l border-border overflow-y-auto">
           <div className="sticky top-20 space-y-6">
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm">
+            <div className="bg-card rounded-xl p-4 shadow-sm">
               <Temporizador
                 isRunning={isRunning}
                 setIsRunning={setIsRunning}
@@ -564,7 +564,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               />
             </div>
             <Button
-              className="w-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-xl py-3"
+              className="w-full bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-xl py-3"
               onClick={() => setOpen(true)}
             >
               <Settings className="mr-2" /> Configuración
@@ -576,7 +576,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
       {/* Tablet/Mobile Layout - md to lg (768px-1023px): header + main card only */}
       <div className="hidden md:block lg:hidden flex flex-col min-h-screen">
         {/* Header con score + timer */}
-        <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 px-4 py-3 flex-shrink-0">
+        <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="quiz-score quiz-score-correct">
@@ -587,7 +587,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                 <XCircle size={16} />
                 <span>{mal}</span>
               </div>
-              <div className="text-sm text-slate-500 dark:text-slate-400">
+              <div className="text-sm text-muted-foreground">
                 <Temporizador
                   isRunning={isRunning}
                   setIsRunning={setIsRunning}
@@ -609,7 +609,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
         {/* Main card */}
         <main className="flex-1 p-4 overflow-auto">
-          <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-xl shadow-xl border border-slate-200/50 dark:border-slate-700/50 rounded-2xl">
+          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
             <CardContent className="p-6">
               <div
                 key={index}
@@ -617,21 +617,21 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               >
                 {result ? (
                   <div className="flex flex-col items-center text-center space-y-4 py-6">
-                    <div className="text-5xl font-bold text-emerald-500">
+                    <div className="text-5xl font-bold text-success">
                       {score}
-                      <span className="text-xl text-slate-400">
+                      <span className="text-xl text-muted-foreground">
                         /{npreguntas}
                       </span>
                     </div>
-                    <p className="text-slate-600 dark:text-slate-300">
+                    <p className="text-muted-foreground">
                       Respuestas correctas
                     </p>
                     <div className="flex gap-3 flex-wrap justify-center">
-                      <Button className="bg-emerald-500 hover:bg-emerald-600" onClick={reset}>
+                      <Button className="bg-success hover:bg-success/90 text-success-foreground" onClick={reset}>
                         <ArrowBigRightDash /> Repetir
                       </Button>
                       {mal > 0 && (
-                        <Button className="bg-violet-500 hover:bg-violet-600" onClick={resetErrores}>
+                        <Button className="bg-accent hover:bg-accent/90 text-accent-foreground" onClick={resetErrores}>
                           <TriangleAlert className="mr-2" /> Revisar errores ({mal})
                         </Button>
                       )}
@@ -642,7 +642,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                     <span className="quiz-question-number text-xs">
                       #{question.id}
                     </span>
-                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+                    <h2 className="text-lg font-semibold text-foreground mb-4">
                       {question.question}
                     </h2>
                     <ul className="quiz-options space-y-2">
@@ -663,7 +663,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             {!result && (
               <CardFooter className="p-4 pt-0">
                 <Button
-                  className="w-full bg-sky-500"
+                  className="w-full bg-primary text-primary-foreground"
                   onClick={next}
                   disabled={!lock}
                 >
@@ -673,14 +673,14 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             )}
           </Card>
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800 rounded-xl mt-8">
+          <Card className="flex flex-col bg-accent/50 border-accent rounded-xl mt-8">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm flex justify-center items-center gap-2 text-slate-800 dark:text-slate-200">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-accent-foreground">
                 <KeyboardIcon className="w-4 h-4" />
                 Atajos de teclado
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-xs space-y-2 text-slate-700 dark:text-slate-300">
+            <CardContent className="text-xs space-y-2 text-accent-foreground">
               <div className="flex items-center gap-1 flex-wrap justify-center">
                 <span>Usa</span>
                 <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
@@ -708,7 +708,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
       {/* Mobile Layout - small screens (<768px) */}
       <div className="md:hidden flex flex-col min-h-screen">
-        <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 px-4 py-3">
+        <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="quiz-score quiz-score-correct">
@@ -733,7 +733,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         </header>
 
         <main className="flex-1 p-4 overflow-y-auto">
-          <Card className="bg-white dark:bg-slate-800 shadow-lg rounded-2xl border-0">
+          <Card className="bg-card shadow-lg rounded-2xl border-0">
             <CardContent className="p-5 h-full flex flex-col overflow-y-auto max-h-[60vh]">
               <div
                 key={index}
@@ -741,25 +741,25 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               >
                 {result ? (
                   <div className="text-center py-8 space-y-4">
-                    <div className="text-5xl font-bold text-emerald-500">
+                    <div className="text-5xl font-bold text-success">
                       {score}
-                      <span className="text-xl text-slate-400">
+                      <span className="text-xl text-muted-foreground">
                         /{npreguntas}
                       </span>
                     </div>
-                    <p className="text-slate-600 dark:text-slate-300">
+                    <p className="text-muted-foreground">
                       respuestas correctas
                     </p>
                     <div className="flex flex-col gap-2">
                       <Button
-                        className="w-full bg-emerald-500"
+                        className="w-full bg-success text-success-foreground"
                         onClick={reset}
                       >
                         Repetir
                       </Button>
                       {mal > 0 && (
                         <Button
-                          className="w-full bg-amber-500 hover:bg-amber-600"
+                          className="w-full bg-warning hover:bg-warning/90 text-warning-foreground"
                           onClick={resetErrores}
                         >
                           Revisar errores
@@ -769,13 +769,13 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                   </div>
                 ) : (
                   <div className="flex flex-col flex-1">
-                    <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span className="quiz-question-number">
                         #{question.id}
                       </span>
                       <span>{question.asignatura}</span>
                     </div>
-                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    <h2 className="text-lg font-semibold text-foreground">
                       {question.question}
                     </h2>
                     <ul className="space-y-2 mt-4">
@@ -796,21 +796,21 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             {!result && (
               <CardFooter className="p-4 pt-2">
                 <Button
-                  className="w-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 py-4 rounded-xl font-semibold"
+                  className="w-full bg-primary text-primary-foreground py-4 rounded-xl font-semibold"
                   onClick={next}
                   disabled={!lock}
                 >
                   <ArrowBigRightDash className="mr-2" /> Siguiente
                 </Button>
-                <div className="text-center mt-2 text-xs text-slate-400 flex items-center justify-center gap-3">
+                <div className="text-center mt-2 text-xs text-muted-foreground flex items-center justify-center gap-3">
                   <span>
-                    <kbd className="px-1 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-[10px]">
+                    <kbd className="px-1 py-0.5 bg-muted rounded text-[10px]">
                       1-5
                     </kbd>{' '}
                     opciones
                   </span>
                   <span>
-                    <kbd className="px-1 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-[10px]">
+                    <kbd className="px-1 py-0.5 bg-muted rounded text-[10px]">
                       Espacio
                     </kbd>{' '}
                     siguiente
@@ -821,13 +821,13 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           </Card>
         </main>
 
-        <footer className="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 px-4 py-3 flex items-center justify-between z-40 md:hidden">
+        <footer className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-3 flex items-center justify-between z-40 md:hidden">
           <Temporizador
             isRunning={isRunning}
             setIsRunning={setIsRunning}
             ref={temporizadorRef}
           />
-          <span className="text-sm text-slate-500">
+          <span className="text-sm text-muted-foreground">
             {index + 1}/{npreguntas}
           </span>
         </footer>
@@ -838,9 +838,9 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         <div className="w-80 flex flex-col items-center p-4">
           <Settings
             size={40}
-            className="text-slate-600 dark:text-slate-300 mb-4"
+            className="text-muted-foreground mb-4"
           />
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+          <h3 className="text-lg font-semibold text-foreground mb-4">
             Configuración
           </h3>
           <Separator className="w-full mb-4" />
@@ -857,7 +857,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             </div>
           </div>
           <Button
-            className="w-full mt-6 bg-emerald-500 hover:bg-emerald-600"
+            className="w-full mt-6 bg-success hover:bg-success/90 text-success-foreground"
             onClick={handleSubmit}
           >
             Guardar
@@ -867,15 +867,15 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
       <Modal open={openAlert} onClose={() => setOpenAlert(false)}>
         <div className="text-center w-64 py-4">
-          <TriangleAlert size={48} className="mx-auto text-amber-500 mb-4" />
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+          <TriangleAlert size={48} className="mx-auto text-warning mb-4" />
+          <h3 className="text-lg font-semibold text-foreground mb-2">
             Atención
           </h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             Pregunta con respuesta cuestionable. Consultá en documentation.
           </p>
           <Button
-            className="w-full bg-slate-900 dark:bg-white"
+            className="w-full bg-primary text-primary-foreground"
             onClick={() => setOpenAlert(false)}
           >
             Continuar

@@ -58,26 +58,26 @@
 
 /* ✅ Correcta */
 .quiz-option.right {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  border-color: #10b981;
-  color: white;
+  background: linear-gradient(135deg, hsl(var(--success)), hsl(var(--success) / 0.85));
+  border-color: hsl(var(--success));
+  color: hsl(var(--success-foreground));
 }
 
 .quiz-option.right .quiz-option-letter {
-  background: white;
-  color: #059669;
+  background: hsl(var(--success-foreground));
+  color: hsl(var(--success));
 }
 
 /* ❌ Incorrecta */
 .quiz-option.wrong {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  border-color: #ef4444;
-  color: white;
+  background: linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.85));
+  border-color: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
 }
 
 .quiz-option.wrong .quiz-option-letter {
-  background: white;
-  color: #dc2626;
+  background: hsl(var(--destructive-foreground));
+  color: hsl(var(--destructive));
 }
 
 /* 🎯 Progreso */
@@ -108,13 +108,13 @@
 }
 
 .quiz-score-correct {
-  background: hsl(150 60% 90% / 0.8);
-  color: hsl(150 60% 25%);
+  background: hsl(var(--success) / 0.15);
+  color: hsl(var(--success));
 }
 
 .quiz-score-wrong {
-  background: hsl(0 60% 90% / 0.8);
-  color: hsl(0 60% 35%);
+  background: hsl(var(--destructive) / 0.15);
+  color: hsl(var(--destructive));
 }
 
 /* 🏷️ Pregunta número */
@@ -234,12 +234,12 @@
 
 /* Selected option in exam mode (no right/wrong) */
 .quiz-option.exam-selected {
-  border-color: hsl(38 92% 50%);
-  background: hsl(38 92% 50% / 0.1);
+  border-color: hsl(var(--warning));
+  background: hsl(var(--warning) / 0.1);
 }
 
 .dark .quiz-option.exam-selected {
-  background: hsl(38 92% 50% / 0.15);
+  background: hsl(var(--warning) / 0.15);
 }
 
 /* Question grid scroll container */

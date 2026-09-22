@@ -166,7 +166,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="fito-fondo flex flex-col min-h-screen text-foreground">
       <a href="#main-content" className="skip-link">
         Saltar al contenido principal
       </a>

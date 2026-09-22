@@ -24,7 +24,7 @@ const ExamTimer = forwardRef(({ startTime, paused }, ref) => {
   const seconds = Math.floor((elapsedMs % 60000) / 1000)
 
   return (
-    <div className="font-bold font-mono tracking-wider tabular-nums text-xl md:text-2xl text-slate-700 dark:text-slate-300">
+    <div className="font-bold font-mono tracking-wider tabular-nums text-xl md:text-2xl text-foreground">
       {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
     </div>
   )
