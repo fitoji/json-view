@@ -59,6 +59,6 @@ Roadmap said "~17 presets" — tweakcn main today has **25** (verified by key en
 
 ## Close
 
-- Committed as ONE work-unit commit (engine + data inseparable in one file's diff; the split was a
+- Committed as `2f5b0f3f` — one work-unit commit (engine + data inseparable in one file's diff; the split was a
   size heuristic only, deferred to the PR-strategy decision).
 - No push/PR (user-owned).
