@@ -1,5 +1,7 @@
 import ArrowBigRightDash from 'lucide-react/dist/esm/icons/arrow-big-right-dash'
 import CheckCircle from 'lucide-react/dist/esm/icons/check-circle'
+import Check from 'lucide-react/dist/esm/icons/check'
+import X from 'lucide-react/dist/esm/icons/x'
 import KeyboardIcon from 'lucide-react/dist/esm/icons/keyboard'
 import Settings from 'lucide-react/dist/esm/icons/settings'
 import TriangleAlert from 'lucide-react/dist/esm/icons/triangle-alert'
@@ -69,6 +71,18 @@ const OpcionList = memo(({
         >
           <span className="quiz-option-letter">{opt.letra}</span>
           {opt.texto}
+          {optionClass.includes(' right') && (
+            <>
+              <Check className="ms-auto size-5 shrink-0" aria-hidden="true" />
+              <span className="sr-only">Respuesta correcta</span>
+            </>
+          )}
+          {optionClass.includes(' wrong') && (
+            <>
+              <X className="ms-auto size-5 shrink-0" aria-hidden="true" />
+              <span className="sr-only">Respuesta incorrecta</span>
+            </>
+          )}
         </button>
       </li>
     )
