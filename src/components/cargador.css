@@ -2,8 +2,8 @@
     width: 36px;
     height: 36px;
   
-    border: 5px solid #fffc;
-    border-top-color: rgb(16 185 129);
+    border: 5px solid var(--muted);
+    border-top-color: var(--primary);
     border-radius: 100%;
   
     animation: spin 1s infinite;
