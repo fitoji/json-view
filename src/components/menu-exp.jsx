@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import { TourGuideToggle } from './TourGuideToggle'
+import { ThemeCustomizer } from './ui/ThemeCustomizer'
 
 export default function MenuExp() {
   const location = useLocation()
@@ -34,13 +35,13 @@ export default function MenuExp() {
     {
       icon: <Home size={20} />,
       href: '/',
-      color: 'bg-sky-400 hover:bg-sky-300',
+      color: 'bg-primary hover:bg-primary/90',
     },
 
     {
       icon: <CircleHelp size={20} />,
       href: '/docs',
-      color: 'bg-emerald-400 hover:bg-emerald-300',
+      color: 'bg-primary hover:bg-primary/90',
     },
   ]
 
@@ -49,7 +50,7 @@ export default function MenuExp() {
       <div id="driver-step-4" className="relative">
         {/* Main button */}
         <button
-          className="bg-emerald-400 hover:bg-emerald-300 text-white rounded-lg w-10 h-10 flex items-center justify-center shadow-lg z-20 relative transition-transform duration-150 active:scale-95"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg w-10 h-10 flex items-center justify-center shadow-lg z-20 relative transition-transform duration-150 active:scale-95"
           onClick={toggleOpen}
         >
           <span
@@ -68,7 +69,7 @@ export default function MenuExp() {
             <div style={{ '--stagger-index': 0 }} onAnimationEnd={(e) => e.stopPropagation()}>
               <Link
                 id="driver-step-5"
-                className="bg-emerald-400 hover:bg-emerald-300 text-white w-10 h-10 mt-2 flex items-center justify-center rounded-lg shadow-md"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground w-10 h-10 mt-2 flex items-center justify-center rounded-lg shadow-md"
                 to={location.pathname === '/' ? '/docs' : '/'}
               >
                 {location.pathname === '/' ? (
@@ -83,6 +84,9 @@ export default function MenuExp() {
                 isTourEnabled={isTourEnabled}
                 toggleTour={toggleTour}
               />
+            </div>
+            <div className="mt-2 rounded-lg bg-card text-card-foreground shadow-md" style={{ '--stagger-index': 2 }} onAnimationEnd={(e) => e.stopPropagation()}>
+              <ThemeCustomizer />
             </div>
           </div>
         )}

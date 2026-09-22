@@ -3,11 +3,11 @@ import packageJson from '../../package.json'
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col justify-center py-4 space-y-1 bg-sky-50 dark:bg-emerald-800">
-      <p className="text-xs text-slate-500 dark:text-slate-100 text-center">
+    <footer className="flex flex-col justify-center py-4 gap-1 bg-muted text-muted-foreground">
+      <p className="text-xs text-center">
         {new Date().getFullYear()} JsonTest v{packageJson.version}. Una iniciativa de
         <a
-          className="text-md text-slate-800 dark:text-slate-400 font-bold"
+          className="text-md text-foreground font-bold"
           target="_blank"
           href="https://fitoji.dev.ar/"
         >
@@ -16,15 +16,15 @@ const Footer = () => {
         </a>
       </p>
 
-      <div className="flex flex-row justify-center text-xs text-slate-500 dark:text-slate-100">
+      <div className="flex flex-row justify-center text-xs">
         <Link
-          className="text-xs hover:text-emerald-600 transition-colors"
+          className="text-xs hover:text-primary transition-colors"
           to="#"
         >
           Términos de servicio
         </Link>
         <Link
-          className="text-xs hover:text-emerald-600 transition-colors mx-2"
+          className="text-xs hover:text-primary transition-colors mx-2"
           to="#"
         >
           Privacidad
