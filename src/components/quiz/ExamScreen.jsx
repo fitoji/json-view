@@ -489,14 +489,14 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
             <CardFooter className="p-6 pt-0 flex gap-3">
               <Button
-                className="flex-1 bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="flex-1 bg-secondary hover:bg-secondary/80 text-secondary-foreground px-6 py-6 rounded-xl font-semibold transition-colors"
                 onClick={goPrev}
                 disabled={activeIndex === 0}
               >
                 <ArrowBigLeftDash className="mr-2" /> Anterior
               </Button>
               <Button
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-colors"
                 onClick={goNext}
                 disabled={activeIndex === questions.length - 1}
               >
@@ -582,7 +582,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
             {/* Submit button */}
             <Button
-              className="w-full bg-warning hover:bg-warning/90 text-warning-foreground py-6 rounded-xl font-semibold text-base transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full bg-warning hover:bg-warning/90 text-warning-foreground py-6 rounded-xl font-semibold text-base transition-colors"
               onClick={() => setShowConfirmSubmit(true)}
             >
               Entregar examen

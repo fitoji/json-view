@@ -22,18 +22,19 @@
   border-radius: calc(var(--radius) * 1.5);
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   background: var(--card);
   position: relative;
   overflow: hidden;
 }
 
-/* Hover state */
+/* Hover state — one signal: border/background tint */
 .quiz-option:not(.right):not(.wrong):hover {
-  /* hover tint */
   background: color-mix(in srgb, var(--accent) 10%, transparent);
   border-color: color-mix(in srgb, var(--primary) 30%, transparent);
-  transform: translateX(4px);
 }
 
 /* Letra de opción */
@@ -49,12 +50,9 @@
   font-weight: 600;
   margin-right: 0.75rem;
   flex-shrink: 0;
-  transition: all 0.2s ease;
-}
-
-.quiz-option:hover .quiz-option-letter {
-  background: var(--primary);
-  color: var(--primary-foreground);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 /* ✅ Correcta */
@@ -194,10 +192,6 @@
     padding: 1.125rem 1.5rem;
     font-size: 1.0625rem;
   }
-  
-  .quiz-option:hover {
-    transform: translateX(8px);
-  }
 }
 
 /* 🌓 Dark mode ajustes — sigue el toggle de tema de la app (.dark) */
@@ -206,15 +200,6 @@
 }
 
 /* 🎯 Exam Mode Styles */
-
-/* Exam nav grid button colors */
-.exam-nav-btn {
-  transition: all 0.15s ease;
-}
-
-.exam-nav-btn:hover {
-  transform: scale(1.1);
-}
 
 /* Review card scrolling */
 .exam-review-scroll {

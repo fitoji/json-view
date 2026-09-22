@@ -150,7 +150,7 @@ export default function ExamReview({
         {/* Back button */}
         <div className="mt-8 text-center">
           <Button
-            className="bg-primary text-primary-foreground px-8 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-105"
+            className="bg-primary text-primary-foreground px-8 py-6 rounded-xl font-semibold transition-colors hover:bg-primary/90"
             onClick={onBackToMenu}
           >
             <ArrowBigRightDash className="mr-2" /> Volver al menú
