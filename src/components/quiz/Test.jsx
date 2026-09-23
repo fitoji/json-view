@@ -445,13 +445,17 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
           <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6 md:p-8">
+              {/* The result view needs its own remount identity: when
+                  setResult(true) fires on the last question, `index` does not
+                  advance, so key={index} alone never re-triggers the CSS
+                  entrance. Same pattern in the tablet and mobile trees. */}
               <div
-                key={index}
+                key={result ? "result" : index}
                 className="min-h-75 animate-slide-in"
               >
                 {result ? (
-                  <div className="flex flex-col items-center justify-center text-center space-y-6 py-8">
-                    <div className="animate-scale-in text-6xl font-bold text-success">
+                  <div className="animate-scale-in flex flex-col items-center justify-center text-center space-y-6 py-8">
+                    <div className="text-6xl font-bold text-success">
                       {score}
                       <span className="text-2xl text-muted-foreground">
                         /{npreguntas}
@@ -626,11 +630,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6">
               <div
-                key={index}
+                key={result ? "result" : index}
                 className="min-h-[250px] animate-slide-in"
               >
                 {result ? (
-                  <div className="flex flex-col items-center text-center space-y-4 py-6">
+                  <div className="animate-scale-in flex flex-col items-center text-center space-y-4 py-6">
                     <div className="text-5xl font-bold text-success">
                       {score}
                       <span className="text-xl text-muted-foreground">
@@ -752,11 +756,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           <Card className="bg-card shadow-lg rounded-2xl border-0">
             <CardContent className="p-5 h-full flex flex-col overflow-y-auto max-h-[60vh]">
               <div
-                key={index}
+                key={result ? "result" : index}
                 className="space-y-4 flex-1 flex flex-col animate-slide-in"
               >
                 {result ? (
-                  <div className="text-center py-8 space-y-4">
+                  <div className="animate-scale-in text-center py-8 space-y-4">
                     <div className="text-5xl font-bold text-success">
                       {score}
                       <span className="text-xl text-muted-foreground">

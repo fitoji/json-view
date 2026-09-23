@@ -11,8 +11,11 @@ export default function ExamReview({
   elapsedMs,
   onBackToMenu,
 }) {
+  // Entrance: scaleIn fires on mount when ExamScreen swaps to the review
+  // (fresh component tree). Class is defined in Test.css, imported by
+  // ExamScreen.jsx, so it is in global scope wherever this renders.
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="animate-scale-in min-h-screen bg-transparent">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Score header */}
         <div className="text-center mb-8">
