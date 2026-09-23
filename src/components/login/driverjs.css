@@ -6,6 +6,7 @@
     color-mix(in srgb, var(--accent) 25%, var(--card))
   ); /* Gradiente */
   color: var(--popover-foreground);
+  font-family: var(--theme-font-sans, ui-sans-serif, system-ui, sans-serif);
 }
 
 .driver-popover.driverjs-theme .driver-popover-title {

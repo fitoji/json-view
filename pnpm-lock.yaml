@@ -72,8 +72,8 @@ importers:
         specifier: ^16.4.7
         version: 16.4.7
       driver.js:
-        specifier: 1.4.0
-        version: 1.4.0
+        specifier: 1.8.0
+        version: 1.8.0
       lucide:
         specifier: ^0.427.0
         version: 0.427.0
@@ -2055,8 +2055,8 @@ packages:
     resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
     engines: {node: '>=12'}
 
-  driver.js@1.4.0:
-    resolution: {integrity: sha512-Gm64jm6PmcU+si21sQhBrTAM1JvUrR0QhNmjkprNLxohOBzul9+pNHXgQaT9lW84gwg9GMLB3NZGuGolsz5uew==}
+  driver.js@1.8.0:
+    resolution: {integrity: sha512-+8/IO7h1v14IzWh2GP60N7T3PFZweXwdn5e5POuxRSBoCYUojsBxzqawPeXh3YZIibRy7EehYNEyxe7slwwtdg==}
 
   effect@4.0.0-beta.70:
     resolution: {integrity: sha512-8AwGTRiNriirHGEYHrOS0E9fzdhIqCdZjiHP1YXmNo2UyPGS43ILsymsSHT7V0DJS+8dvlKq2RxnrDBUhDNZHg==}
@@ -5287,7 +5287,7 @@ snapshots:
 
   dotenv@16.4.7: {}
 
-  driver.js@1.4.0: {}
+  driver.js@1.8.0: {}
 
   effect@4.0.0-beta.70:
     dependencies:

@@ -51,6 +51,7 @@ export default function Landing() {
           showProgress: true,
           showButtons: ['next', 'done', 'previous'],
           popoverClass: 'driverjs-theme',
+          skipMissingElement: true,
           steps: [
             {
               element: '#driver-step-1',
@@ -102,11 +103,35 @@ export default function Landing() {
               },
             },
             {
+              element: '#driver-step-eliminar',
+              popover: {
+                title: 'Eliminar cuestionario',
+                description:
+                  'Este botón borra el cuestionario del almacén del navegador. ¡No lo elimina de tu disco duro!',
+              },
+            },
+            {
               element: '#driver-step-4',
               popover: {
                 title: 'Menu general.',
                 description:
                   'Haciendo Click aquí se expandira un menu con opciones.',
+              },
+            },
+            {
+              element: '#driver-step-darkmode',
+              popover: {
+                title: 'Modo oscuro / claro',
+                description:
+                  'Este botón alterna entre el modo oscuro y el modo claro. Prueba el que más te guste.',
+              },
+            },
+            {
+              element: '#driver-step-temas',
+              popover: {
+                title: 'Personaliza los temas',
+                description:
+                  'Aquí podrás elegir entre más de 49 temas de color, cambiar las fuentes y el estilo de la aplicación.',
               },
             },
             {
