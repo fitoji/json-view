@@ -1,5 +1,7 @@
 import ArrowBigRightDash from 'lucide-react/dist/esm/icons/arrow-big-right-dash'
 import CheckCircle from 'lucide-react/dist/esm/icons/check-circle'
+import Check from 'lucide-react/dist/esm/icons/check'
+import X from 'lucide-react/dist/esm/icons/x'
 import KeyboardIcon from 'lucide-react/dist/esm/icons/keyboard'
 import Settings from 'lucide-react/dist/esm/icons/settings'
 import TriangleAlert from 'lucide-react/dist/esm/icons/triangle-alert'
@@ -25,8 +27,6 @@ import ExamScreen from './ExamScreen'
 import ModeSelectionDialog from './ModeSelectionDialog'
 import './Test.css'
 
-const TOAST_SUCCESS = { background: 'var(--success)', color: 'var(--success-foreground)', border: 'none' }
-const TOAST_ERROR = { background: 'var(--destructive)', color: 'var(--destructive-foreground)', border: 'none' }
 
 const OpcionList = memo(({
   question, numero, index, lock, selectedOption, checkAns, optionRefs
@@ -69,6 +69,18 @@ const OpcionList = memo(({
         >
           <span className="quiz-option-letter">{opt.letra}</span>
           {opt.texto}
+          {optionClass.includes(' right') && (
+            <>
+              <Check className="ms-auto size-5 shrink-0" aria-hidden="true" />
+              <span className="sr-only">Respuesta correcta</span>
+            </>
+          )}
+          {optionClass.includes(' wrong') && (
+            <>
+              <X className="ms-auto size-5 shrink-0" aria-hidden="true" />
+              <span className="sr-only">Respuesta incorrecta</span>
+            </>
+          )}
         </button>
       </li>
     )
@@ -162,11 +174,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
       if (isCorrect) {
         e.target.classList.add('right')
-        toast.success('¡Correcto!', {
-          duration: 1500,
-          icon: <CheckCircle />,
-          style: TOAST_SUCCESS,
-        })
         setScore((s) => s + 1)
       } else {
         if (question.ans === 0) {
@@ -176,7 +183,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           toast.error('Incorrecto', {
             duration: 1500,
             icon: <XCircle />,
-            style: TOAST_ERROR,
           })
           if (
             question.ans >= 1 &&
@@ -257,11 +263,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             const isCorrect = question.ans === selectedOptionData.ans
 
             if (isCorrect) {
-              toast.success('¡Correcto!', {
-                duration: 1500,
-                icon: <CheckCircle />,
-                style: TOAST_SUCCESS,
-              })
               setScore((s) => s + 1)
             } else {
               if (question.ans === 0) {
@@ -270,7 +271,6 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                 toast.error('Incorrecto', {
                   duration: 1500,
                   icon: <XCircle />,
-                  style: TOAST_ERROR,
                 })
                 setMal((m) => m + 1)
                 setEquiv((prev) => [...prev, question])
@@ -340,7 +340,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
     return (
       <ModeSelectionDialog
         open={true}
-        onClose={() => {}}
+        onClose={() => {
+          // Real dismiss: leave the quiz view, same exit as exam back-to-menu.
+          // Safe: hardcoded root path, no user-supplied input
+          window.location.replace('/')
+        }}
         onSelect={handleModeSelect}
       />
     )
@@ -362,7 +366,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
   // ── Mode: 'practica' → existing flow (unchanged) ──
   return (
-    <div className="quiz-wrapper min-h-screen bg-linear-to-br from-background via-muted to-background">
+    <div className="quiz-wrapper min-h-screen bg-transparent">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
       <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
         {/* Sidebar izq */}
@@ -416,7 +420,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               <div aria-live="polite" aria-atomic="true" className="sr-only">
                 Pregunta {index + 1} de {npreguntas}
               </div>
-              <span className="text-sm font-semibold text-success">
+              <span className="text-sm font-semibold text-foreground">
                 {Math.round(progressPercent)}%
               </span>
             </div>
@@ -426,7 +430,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             />
           </div>
 
-          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
+          <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6 md:p-8">
               <div
                 key={index}
@@ -453,14 +457,14 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                     </div>
                     <div className="flex gap-3 flex-wrap justify-center">
                       <Button
-                        className="bg-success hover:bg-success/90 text-success-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-105"
+                        className="bg-success hover:bg-success/90 text-success-foreground px-6 py-6 rounded-xl font-semibold transition-colors"
                         onClick={reset}
                       >
                         <ArrowBigRightDash /> Repetir
                       </Button>
                       {mal > 0 && (
                         <Button
-                          className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-105"
+                          className="bg-accent hover:bg-accent/90 text-accent-foreground px-6 py-6 rounded-xl font-semibold transition-colors"
                           onClick={resetErrores}
                         >
                           <TriangleAlert className="mr-2" /> Revisar errores (
@@ -503,7 +507,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             {!result && (
               <CardFooter className="p-6 pt-0">
                 <Button
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 rounded-xl font-semibold transition-colors"
                   onClick={next}
                   disabled={!lock}
                 >
@@ -513,14 +517,14 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             )}
           </Card>
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col bg-accent/50 border-accent rounded-xl mt-8">
+          <Card className="flex flex-col rounded-xl mt-8">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm flex justify-center items-center gap-2 text-accent-foreground">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-card-foreground">
                 <KeyboardIcon className="w-4 h-4" />
                 Atajos de teclado
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-xs space-y-2 text-accent-foreground">
+            <CardContent className="text-xs space-y-2 text-card-foreground">
               <div className="flex items-center gap-1 flex-wrap justify-center">
                 <span>Usa</span>
                 <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
@@ -601,7 +605,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
 
         {/* Main card */}
         <main className="flex-1 p-4 overflow-auto">
-          <Card className="bg-card/80 backdrop-blur-xl shadow-xl border border-border/50 rounded-2xl">
+          <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6">
               <div
                 key={index}
@@ -665,14 +669,14 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             )}
           </Card>
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col bg-accent/50 border-accent rounded-xl mt-8">
+          <Card className="flex flex-col rounded-xl mt-8">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm flex justify-center items-center gap-2 text-accent-foreground">
+              <CardTitle className="text-sm flex justify-center items-center gap-2 text-card-foreground">
                 <KeyboardIcon className="w-4 h-4" />
                 Atajos de teclado
               </CardTitle>
             </CardHeader>
-            <CardContent className="text-xs space-y-2 text-accent-foreground">
+            <CardContent className="text-xs space-y-2 text-card-foreground">
               <div className="flex items-center gap-1 flex-wrap justify-center">
                 <span>Usa</span>
                 <kbd className="inline-flex h-6 min-w-6 items-center justify-center rounded border border-border bg-muted px-1.5 font-mono text-xs font-medium text-foreground shadow-sm">
@@ -864,7 +868,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             Atención
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Pregunta con respuesta cuestionable. Consultá en documentation.
+            Pregunta con respuesta cuestionable. Consultá la documentación.
           </p>
           <Button
             className="w-full bg-primary text-primary-foreground"

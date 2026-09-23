@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ✅ Variante dark para Tailwind v4 */
+/* Variante dark para Tailwind v4 */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Semantic Tailwind v4/shadcn tokens. Custom properties now hold complete CSS colours (hsl / hex / oklch) so runtime themes are format-agnostic. */
@@ -158,6 +158,12 @@
     border-color: var(--border);
   }
 
+  /* Single horizontal overflow guard so no screen can widen the viewport */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -211,7 +217,7 @@
 }
 
 .fito-fondo {
-  min-height: 100vh;
+  min-height: 100dvh;
   background-color: var(--background);
   background-image:
     radial-gradient(
@@ -233,7 +239,6 @@
 
 .navbar-fondo {
   background-color: var(--primary);
-  background-image: linear-gradient(45deg, var(--primary), var(--accent));
 }
 
 /* 🎬 STAGGER ANIMATIONS (menu-exp) */
@@ -279,19 +284,20 @@
 /* Skip link - oculto visualmente pero accesible por teclado */
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 0;
-  background: var(--primary);
+  background-color: var(--primary);
   color: var(--primary-foreground);
-  padding: 8px 16px;
-  z-index: 100;
-  transition: top 0.2s;
+  padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
+  z-index: 50;
+  transform: translateY(-100%);
+  transition: transform 0.2s;
   font-weight: 600;
   border-radius: 0 0 var(--radius) 0;
 }
 
 .skip-link:focus {
-  top: 0;
+  transform: translateY(0);
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }

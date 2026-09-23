@@ -3,48 +3,61 @@ import Modal from '../Modal'
 
 export default function ModeSelectionDialog({ open, onClose, onSelect }) {
   return (
-    <Modal open={open} onClose={onClose}>
-      <div className="w-80 sm:w-96 flex flex-col items-center p-2">
-        <h2 className="text-xl font-bold text-foreground mb-2">
+    <Modal open={open} onClose={onClose} title="Seleccionar modo">
+      <div className="w-80 sm:w-96 flex flex-col p-2">
+        <h2 className="text-xl font-bold text-foreground mb-1">
           Seleccionar modo
         </h2>
-        <p className="text-sm text-muted-foreground mb-6 text-center">
+        <p className="text-sm text-muted-foreground mb-4">
           Elegí cómo querés practicar hoy
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-          {/* Practice mode card */}
-          <button
-            onClick={() => onSelect('practica')}
-            className="group flex flex-col items-center text-center p-5 rounded-2xl border-2 border-primary/30 bg-primary/5 hover:border-primary/60 hover:bg-primary/10 hover:shadow-lg hover:-translate-y-1 transition-colors transition-shadow transition-transform duration-200"
-          >
-            <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-              <BookOpen className="w-7 h-7 text-primary" />
-            </div>
-            <h3 className="font-semibold text-foreground text-base mb-1">
-              Pregunta Respuesta
-            </h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Preguntas aleatorias con corrección inmediata. Ideal para practicar.
-            </p>
-          </button>
+        <fieldset className="border-0 p-0 m-0">
+          <legend className="sr-only">Modo del cuestionario</legend>
 
-          {/* Exam mode card */}
-          <button
-            onClick={() => onSelect('examen')}
-            className="group flex flex-col items-center text-center p-5 rounded-2xl border-2 border-warning/30 bg-warning/5 hover:border-warning/60 hover:bg-warning/10 hover:shadow-lg hover:-translate-y-1 transition-colors transition-shadow transition-transform duration-200"
-          >
-            <div className="w-14 h-14 rounded-full bg-warning/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-              <Timer className="w-7 h-7 text-warning" />
-            </div>
-            <h3 className="font-semibold text-foreground text-base mb-1">
-              Examen
-            </h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Modo cronometrado sin retroalimentación. Revisión al finalizar.
-            </p>
-          </button>
-        </div>
+          <label className="flex items-start gap-3 py-3 border-b border-border cursor-pointer hover:bg-accent/60 transition-colors">
+            <input
+              type="radio"
+              name="quiz-mode"
+              className="mt-1 size-4 shrink-0 accent-primary"
+              onChange={() => onSelect('practica')}
+            />
+            <BookOpen
+              className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <span className="flex flex-col">
+              <span className="font-semibold text-base leading-tight text-foreground">
+                Pregunta Respuesta
+              </span>
+              <span className="text-sm text-muted-foreground leading-relaxed">
+                Preguntas aleatorias con corrección inmediata. Ideal para
+                practicar.
+              </span>
+            </span>
+          </label>
+
+          <label className="flex items-start gap-3 py-3 border-b border-border cursor-pointer hover:bg-accent/60 transition-colors">
+            <input
+              type="radio"
+              name="quiz-mode"
+              className="mt-1 size-4 shrink-0 accent-primary"
+              onChange={() => onSelect('examen')}
+            />
+            <Timer
+              className="mt-0.5 size-4 shrink-0 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <span className="flex flex-col">
+              <span className="font-semibold text-base leading-tight text-foreground">
+                Examen
+              </span>
+              <span className="text-sm text-muted-foreground leading-relaxed">
+                Modo cronometrado sin retroalimentación. Revisión al finalizar.
+              </span>
+            </span>
+          </label>
+        </fieldset>
       </div>
     </Modal>
   )

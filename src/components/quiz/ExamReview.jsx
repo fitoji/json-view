@@ -12,14 +12,14 @@ export default function ExamReview({
   onBackToMenu,
 }) {
   return (
-    <div className="min-h-screen bg-linear-to-br from-background via-muted to-background">
+    <div className="min-h-screen bg-transparent">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Score header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Resultado del Examen
           </h1>
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-card/80 shadow-lg border border-border/50">
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-card border border-border">
             <span className="text-5xl font-bold text-success">{score}</span>
             <span className="text-2xl text-muted-foreground">/ {total}</span>
             <span className="text-sm text-muted-foreground ml-2">
@@ -53,7 +53,7 @@ export default function ExamReview({
               <Card
                 key={q.id}
                 className={`
-                  bg-card/80 backdrop-blur-xl shadow-md border rounded-2xl
+                  bg-card border rounded-2xl
                   ${isCorrect ? 'border-success/40' : ''}
                   ${isWrong ? 'border-destructive/40' : ''}
                   ${isUnanswered ? 'border-border' : ''}
@@ -101,10 +101,10 @@ export default function ExamReview({
 
                       if (isCorrectAnswer) {
                         optionClass +=
-                          ' border-success bg-success/10 text-success'
+                          ' border-success bg-success/10 text-foreground'
                       } else if (isUserSelected && isWrong) {
                         optionClass +=
-                          ' border-destructive bg-destructive/10 text-destructive'
+                          ' border-destructive bg-destructive/10 text-foreground'
                       } else {
                         optionClass +=
                           ' border-border bg-card text-card-foreground'
@@ -150,7 +150,7 @@ export default function ExamReview({
         {/* Back button */}
         <div className="mt-8 text-center">
           <Button
-            className="bg-primary text-primary-foreground px-8 py-6 rounded-xl font-semibold transition-colors transition-transform hover:scale-105"
+            className="bg-primary text-primary-foreground px-8 py-6 rounded-xl font-semibold transition-colors hover:bg-primary/90"
             onClick={onBackToMenu}
           >
             <ArrowBigRightDash className="mr-2" /> Volver al menú

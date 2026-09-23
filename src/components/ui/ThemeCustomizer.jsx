@@ -159,7 +159,7 @@ export function ThemeCustomizer() {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label htmlFor="theme-radius">Corner radius: {radius}</Label>
+            <Label htmlFor="theme-radius">Radio de esquinas: {radius}</Label>
             <Input id="theme-radius" type="range" min="0" max="1.25" step="0.05" value={Number.parseFloat(radius)} onChange={(event) => updateOverrides({ radius: `${event.target.value}rem` })} />
           </div>
 

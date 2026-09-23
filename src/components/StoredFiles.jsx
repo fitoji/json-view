@@ -110,7 +110,7 @@ export default function StoredFiles({
     <Card
       onDragOver={(e) => e.preventDefault()}
       onDrop={handleFileDrop}
-      className="transition-shadow duration-200 shadow-md w-full max-w-none p-3 md:p-4 bg-card/80 backdrop-blur-xl"
+      className="w-full max-w-none p-3 md:p-4"
     >
       <CardHeader className="pb-2 md:pb-3">
         <CardTitle className="flex justify-center md:justify-start text-base md:text-lg text-card-foreground text-center md:text-left leading-tight">
