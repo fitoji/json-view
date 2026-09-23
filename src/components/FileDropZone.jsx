@@ -106,7 +106,7 @@ export default function FileDropZone({ onFileDrop }) {
   return (
     <div
       className={cn(
-        "rounded-xl p-6 bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 hover:shadow-xl transition-shadow",
+        "rounded-xl p-6 bg-card border border-border",
         isDragging && "ring-2 ring-ring bg-accent/60 cursor-pointer",
       )}
       role="region"

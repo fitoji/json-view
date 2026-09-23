@@ -26,7 +26,7 @@ export default function FraseAleatoria() {
   }
 
   return (
-    <Card className="bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 mt-8 max-w-2xl mx-auto">
+    <Card className="mt-8 max-w-2xl mx-auto">
       <CardHeader className="relative p-4">
         <Button
           variant="ghost"

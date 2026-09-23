@@ -158,6 +158,12 @@
     border-color: var(--border);
   }
 
+  /* Single horizontal overflow guard so no screen can widen the viewport */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -211,7 +217,7 @@
 }
 
 .fito-fondo {
-  min-height: 100vh;
+  min-height: 100dvh;
   background-color: var(--background);
   background-image:
     radial-gradient(

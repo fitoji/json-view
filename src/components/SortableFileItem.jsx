@@ -32,14 +32,14 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
     <div
       ref={setNodeRef}
       style={style}
-      className="flex flex-col mb-2 md:flex-row items-start md:items-center md:justify-between p-3 rounded-lg border border-border hover:bg-accent transition-colors ease-out duration-200 shadow-sm"
+      className="flex flex-col md:flex-row items-start md:items-center md:justify-between p-3 border-b border-border last:border-b-0 hover:bg-accent transition-colors ease-out duration-200"
     >
       <HoverCard>
         <HoverCardTrigger>
           <Button
             {...attributes}
             {...listeners}
-            className="touch-none cursor-grab active:cursor-grabbing p-2 bg-secondary hover:bg-accent rounded-lg mr-2"
+            className="touch-none cursor-grab active:cursor-grabbing p-2 min-h-11 min-w-11 bg-secondary hover:bg-accent rounded-lg mr-2"
           >
             <GripVertical className="w-4 h-4 text-secondary-foreground" />
           </Button>
@@ -53,7 +53,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
         </HoverCardContent>
       </HoverCard>
 
-      <div className="flex flex-row items-center justify-center pr-2 gap-2 mt-2 md:mt-0 md:justify-end">
+      <div className="flex flex-row flex-wrap items-center justify-center pr-2 gap-2 mt-2 md:mt-0 md:justify-end">
         <HoverCard>
           <HoverCardTrigger>
             <Button
@@ -63,11 +63,11 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="min-h-11 min-w-11 bg-primary hover:bg-primary/90 text-primary-foreground"
               size="sm"
             >
               <BookOpen className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Practicar</span>
+              <span>Practicar</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>
@@ -84,11 +84,11 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-warning hover:bg-warning/90 text-warning-foreground"
+              className="min-h-11 min-w-11 bg-warning hover:bg-warning/90 text-warning-foreground"
               size="sm"
             >
               <Timer className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Examen</span>
+              <span>Examen</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>
@@ -105,11 +105,11 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
                 setTituloOff(false);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="bg-success hover:bg-success/90 text-success-foreground"
+              className="min-h-11 min-w-11 bg-success hover:bg-success/90 text-success-foreground"
               size="sm"
             >
               <CircleArrowRight className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Ver</span>
+              <span>Ver</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>
@@ -121,11 +121,12 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
           <HoverCardTrigger>
             <Button
               onClick={() => onDelete(fileName)}
+              className="min-h-11 min-w-11"
               variant="destructive"
               size="sm"
             >
               <Trash2 className="w-4 h-4 mr-2" />
-              <span className="hidden md:inline">Eliminar</span>
+              <span>Eliminar</span>
             </Button>
           </HoverCardTrigger>
           <HoverCardContent>

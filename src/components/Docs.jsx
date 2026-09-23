@@ -84,7 +84,7 @@ export default function Docs() {
   const ActiveIcon = activeData?.icon
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-background to-accent">
+    <div className="min-h-screen bg-transparent">
       {/* ── MOBILE HEADER ── */}
       <header className="sticky top-0 z-40 flex items-center gap-3 bg-background/80 backdrop-blur-xl border-b border-border px-4 py-3 md:hidden">
         <button
@@ -124,7 +124,7 @@ export default function Docs() {
           <div className="max-w-3xl">
             {/* Título */}
             <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-primary">
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground">
                 Visor JsonTests - Documentación
               </h1>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -133,7 +133,7 @@ export default function Docs() {
             </div>
 
             {/* Card con contenido */}
-            <div className="bg-card/80 backdrop-blur-xl shadow-lg border border-border/50 rounded-2xl p-6 md:p-8 transition-colors duration-300">
+            <div className="bg-card border border-border rounded-2xl p-6 md:p-8 transition-colors duration-300">
               <div className="animate-[fadeIn_0.2s_ease-out]" key={activeSection}>
                 {renderContent(activeSection)}
               </div>
