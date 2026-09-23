@@ -27,7 +27,7 @@ export default function Modal({ open, onClose, children, title }) {
       }}
       aria-labelledby={title ? "modal-title" : undefined}
       className="
-        fixed inset-0 z-50 m-auto
+        app-modal fixed inset-0 z-50 m-auto
         bg-transparent shadow-none
         open:flex open:items-center open:justify-center
         backdrop:bg-foreground/20
