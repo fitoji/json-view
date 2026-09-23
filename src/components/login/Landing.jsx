@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { DataProvider } from '../context/DataContext'
 import FileDropZone from '../FileDropZone'
 import FileViewer from '../FileViewer'
 import StoredFiles from '../StoredFiles'
@@ -19,7 +18,7 @@ export default function Landing() {
   const [selectedQuestionnaireIdentity, setSelectedQuestionnaireIdentity] = useState(null)
   const [storageUsage, setStorageUsage] = useState(0)
   const { tituloOff, setTituloOff } = useTituloOff()
-  const { isTourEnabled } = useDriverPreference()
+  const { isTourEnabled, hasSeenTour, markTourSeen } = useDriverPreference()
 
   useEffect(() => {
     const storedFiles = JSON.parse(localStorage.getItem('jsonFiles') || '{}')
@@ -39,10 +38,12 @@ export default function Landing() {
   }, [files])
 
   useEffect(() => {
-    if (isTourEnabled) {
+    // Auto-start runs once per user; re-enabling the tour via the menu switch clears the seen flag.
+    if (isTourEnabled && !hasSeenTour) {
       driverPromise.then(({ driver }) => {
         import('driver.js/dist/driver.css')
         import('./driverjs.css')
+        markTourSeen()
         const driverObj = driver({
           prevBtnText: 'Anterior',
           nextBtnText: 'Siguiente',
@@ -129,7 +130,7 @@ export default function Landing() {
         driverObj.drive()
       })
     }
-  }, [isTourEnabled])
+  }, [isTourEnabled, hasSeenTour])
 
   const updateStorageUsage = () => {
     const totalSpace = 5 * 1024 * 1024
@@ -168,11 +169,9 @@ export default function Landing() {
 
   return (
     // No background class here: body.fito-fondo is the single background owner.
+    // Skip link and #main-content landmark are owned by the App shell.
     <div className="flex flex-col min-h-dvh text-foreground">
-      <a href="#main-content" className="skip-link">
-        Saltar al contenido principal
-      </a>
-      <main id="main-content" className="flex-1">
+      <div className="flex-1">
         <div className="flex flex-col w-full max-w-3xl mx-auto px-4 space-y-4">
           {tituloOff && (
             <div>
@@ -188,36 +187,34 @@ export default function Landing() {
             </div>
           )}
         </div>
-        <DataProvider>
-          <div className="flex flex-col items-center justify-center gap-4 w-full">
-            {selectedFile && (
-              <FileViewer
-                content={selectedFile}
-                questionnaireIdentity={selectedQuestionnaireIdentity}
-                initialMode={initialMode}
-              />
-            )}
-            <div id="driver-step-2">
-              <FileDropZone onFileDrop={handleFileDrop} tituloOff={tituloOff} />
-            </div>
-            <div id="driver-step-3" className="mt-8 w-full px-4">
-              <StoredFiles
-                files={files || {}}
-                onSelect={handleFileSelect}
-                onDelete={handleFileDelete}
-                setTituloOff={setTituloOff}
-                onFileAdd={handleFileDrop}
-              />
-            </div>
-            <Suspense fallback={null}>
-              <FraseAleatoria />
-            </Suspense>
-            <Suspense fallback={null}>
-              <StorageUsage usage={storageUsage} />
-            </Suspense>
+        <div className="flex flex-col items-center justify-center gap-4 w-full">
+          {selectedFile && (
+            <FileViewer
+              content={selectedFile}
+              questionnaireIdentity={selectedQuestionnaireIdentity}
+              initialMode={initialMode}
+            />
+          )}
+          <div id="driver-step-2">
+            <FileDropZone onFileDrop={handleFileDrop} />
           </div>
-        </DataProvider>
-      </main>
+          <div id="driver-step-3" className="mt-8 w-full px-4">
+            <StoredFiles
+              files={files || {}}
+              onSelect={handleFileSelect}
+              onDelete={handleFileDelete}
+              setTituloOff={setTituloOff}
+              onFileAdd={handleFileDrop}
+            />
+          </div>
+          <Suspense fallback={null}>
+            <FraseAleatoria />
+          </Suspense>
+          <Suspense fallback={null}>
+            <StorageUsage usage={storageUsage} />
+          </Suspense>
+        </div>
+      </div>
     </div>
   )
 }

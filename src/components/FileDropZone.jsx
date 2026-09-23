@@ -20,52 +20,21 @@ const isSupportedFile = (file) =>
     /\.(json|txt)$/i.test(file.name));
 
 const toastError = (message) =>
-  toast.error(message, {
-    duration: 5000,
-    style: {
-      backgroundColor: "var(--destructive)",
-      color: "var(--destructive-foreground)",
-    },
-  });
+  toast.error(message, { duration: 5000 });
 
 export default function FileDropZone({ onFileDrop }) {
   const [isDragging, setIsDragging] = useState(false);
 
-  const [jsonData, setJsonData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [fileName, setFileName] = useState("");
-
   // Shared upload path used by both the file input and drag & drop drops.
   const processFile = (file) => {
-    setIsLoading(true);
-    setJsonData(null); // Limpiar datos anteriores
-    setFileName(file.name);
-
     const reader = new FileReader();
     reader.onload = (event) => {
       try {
-        let jsonContent = JSON.parse(event.target.result);
-        if (file.type === "text/plain") {
-          // Si el archivo es .txt, cambiar su extensión a .json
-          jsonContent = JSON.parse(event.target.result);
-          setFileName(file.name.replace(".txt", ".json"));
-        } else {
-          jsonContent = JSON.parse(event.target.result);
-        }
-        toast.success("¡El cuestionario ha sido cargado exitosamente!", {
-          duration: 3000,
-          style: {
-              backgroundColor: "var(--success)",
-              color: "var(--success-foreground)",
-          },
-        });
-        setJsonData(jsonContent);
+        const jsonContent = JSON.parse(event.target.result);
         onFileDrop(file.name, jsonContent);
       } catch (error) {
         console.error("Error al parsear el JSON:", error);
         toastError("'El archivo no es un JSON válido'");
-      } finally {
-        setIsLoading(false);
       }
     };
     reader.readAsText(file);
@@ -97,9 +66,6 @@ export default function FileDropZone({ onFileDrop }) {
 
     if (file) {
       processFile(file);
-    } else {
-      setFileName("");
-      setJsonData(null);
     }
   };
 

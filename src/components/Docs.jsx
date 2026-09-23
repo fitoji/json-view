@@ -13,6 +13,7 @@ import {
   Star,
   Heart,
   Menu,
+  Check,
   X,
 } from "lucide-react"
 
@@ -357,14 +358,14 @@ function renderContent(section) {
               <tbody>
                 <tr>
                    <td className="border border-border p-2 font-semibold">Pregunta Respuesta</td>
-                   <td className="border border-border p-2">✅ Inmediato</td>
+                   <td className="border border-border p-2"><span className="inline-flex items-center gap-1.5"><Check className="size-4 text-success" aria-hidden="true" /> Inmediato</span></td>
                    <td className="border border-border p-2">Aleatorio*</td>
                    <td className="border border-border p-2">No</td>
                    <td className="border border-border p-2">Lineal</td>
                 </tr>
                 <tr>
                    <td className="border border-border p-2 font-semibold">Examen</td>
-                   <td className="border border-border p-2">❌ No</td>
+                   <td className="border border-border p-2"><span className="inline-flex items-center gap-1.5"><X className="size-4 text-destructive" aria-hidden="true" /> No</span></td>
                    <td className="border border-border p-2">Correlativo (1→N)</td>
                    <td className="border border-border p-2">Count-up</td>
                    <td className="border border-border p-2">Libre</td>
@@ -608,8 +609,8 @@ Guarda el resultado como un archivo .json.`}
             body="En modo examen, click en otra opción — se reemplaza automáticamente."
           />
           <ProblemItem
-            title="El tour aparece cada vez"
-            body="Desactivá el tour desde el botón de ayuda al lado del menú."
+            title="Quiero ver o volver a ver el tour"
+            body="El tour guía se muestra una sola vez. Activá 'Guía Introductoria' desde el botón de ayuda al lado del menú para volver a verla."
           />
           <ProblemItem
             title="Examen guardado no aparece al volver"

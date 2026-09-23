@@ -5,7 +5,6 @@
     color-mix(in srgb, var(--accent) 55%, var(--card)),
     color-mix(in srgb, var(--accent) 25%, var(--card))
   ); /* Gradiente */
-  transition: background-image 0.3s ease;
   color: var(--popover-foreground);
 }
 
@@ -19,7 +18,8 @@
   color: var(--popover-foreground);
 }
 
-.driver-popover.driverjs-theme button {
+/* Action buttons only (prev/next/done); close button is styled separately below */
+.driver-popover.driverjs-theme .driver-popover-navigation-btns button {
   flex: 1;
   text-align: center;
   background-color: var(--success);
@@ -31,7 +31,7 @@
   border-radius: calc(var(--radius) * 0.5);
 }
 
-.driver-popover.driverjs-theme button:hover {
+.driver-popover.driverjs-theme .driver-popover-navigation-btns button:hover {
   background-color: color-mix(in srgb, var(--success) 85%, transparent);
   color: var(--success-foreground);
 }

@@ -55,9 +55,9 @@
     color 0.2s ease;
 }
 
-/* ✅ Correcta */
+/* Correcta */
 .quiz-option.right {
-  background: linear-gradient(135deg, var(--success), var(--success));
+  background-color: var(--success);
   border-color: var(--success);
   color: var(--success-foreground);
 }
@@ -67,9 +67,9 @@
   color: var(--success);
 }
 
-/* ❌ Incorrecta */
+/* Incorrecta */
 .quiz-option.wrong {
-  background: linear-gradient(135deg, var(--destructive), var(--destructive));
+  background-color: var(--destructive);
   border-color: var(--destructive);
   color: var(--destructive-foreground);
 }
@@ -90,7 +90,7 @@
 
 .quiz-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary) 100%);
+  background-color: var(--primary);
   border-radius: calc(var(--radius) * 0.25);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
