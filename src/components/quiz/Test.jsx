@@ -597,11 +597,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3 flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="quiz-score quiz-score-correct">
+              <div className={`quiz-score quiz-score-correct ${scoreFlash === 'correct' ? 'animate-pulse-success' : ''}`}>
                 <CheckCircle size={16} />
                 <span>{score}</span>
               </div>
-              <div className="quiz-score quiz-score-wrong">
+              <div className={`quiz-score quiz-score-wrong ${malFlash === 'wrong' ? 'animate-shake-wrong' : ''}`}>
                 <XCircle size={16} />
                 <span>{mal}</span>
               </div>
@@ -731,11 +731,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="quiz-score quiz-score-correct">
+              <div className={`quiz-score quiz-score-correct ${scoreFlash === 'correct' ? 'animate-pulse-success' : ''}`}>
                 <CheckCircle size={16} />
                 <span className="text-sm">{score}</span>
               </div>
-              <div className="quiz-score quiz-score-wrong">
+              <div className={`quiz-score quiz-score-wrong ${malFlash === 'wrong' ? 'animate-shake-wrong' : ''}`}>
                 <XCircle size={16} />
                 <span className="text-sm">{mal}</span>
               </div>
