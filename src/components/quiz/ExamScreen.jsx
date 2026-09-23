@@ -456,7 +456,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
           <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6 md:p-8">
-              <div key={activeIndex} className="min-h-75 animate-slide-in">
+              <div key={activeIndex} className="min-h-75 quiz-slide-in">
                 <div className="flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="quiz-question-number">
@@ -665,7 +665,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
         <main className="flex-1 p-4 overflow-auto">
           <Card className="bg-card border border-border rounded-2xl">
             <CardContent className="p-6">
-              <div key={activeIndex} className="min-h-[250px] animate-slide-in">
+              <div key={activeIndex} className="min-h-[250px] quiz-slide-in">
                 <span className="quiz-question-number text-xs">
                   #{currentQuestion.id}
                 </span>
@@ -772,7 +772,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
         <main className="flex-1 p-4 overflow-y-auto">
           <Card className="bg-card shadow-lg rounded-2xl border-0">
             <CardContent className="p-5">
-              <div key={activeIndex} className="space-y-4 animate-slide-in">
+              <div key={activeIndex} className="space-y-4 quiz-slide-in">
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <span className="quiz-question-number">#{currentQuestion.id}</span>
                   <span>{currentQuestion.asignatura}</span>

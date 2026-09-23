@@ -1,10 +1,10 @@
 import React from 'react'
 import './cargador.css'
 
-const Cargador = () => {
+const Cargador = ({ className }) => {
   return (
     <div
-    className="spinner"
+    className={`spinner${className ? ` ${className}` : ''}`}
     role="status"
     aria-live="polite"
     aria-label="Cargando"

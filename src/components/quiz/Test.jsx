@@ -451,7 +451,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                   entrance. Same pattern in the tablet and mobile trees. */}
               <div
                 key={result ? "result" : index}
-                className="min-h-75 animate-slide-in"
+                className="min-h-75 quiz-slide-in"
               >
                 {result ? (
                   <div className="animate-scale-in flex flex-col items-center justify-center text-center space-y-6 py-8">
@@ -631,7 +631,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             <CardContent className="p-6">
               <div
                 key={result ? "result" : index}
-                className="min-h-[250px] animate-slide-in"
+                className="min-h-[250px] quiz-slide-in"
               >
                 {result ? (
                   <div className="animate-scale-in flex flex-col items-center text-center space-y-4 py-6">
@@ -757,7 +757,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             <CardContent className="p-5 h-full flex flex-col overflow-y-auto max-h-[60vh]">
               <div
                 key={result ? "result" : index}
-                className="space-y-4 flex-1 flex flex-col animate-slide-in"
+                className="space-y-4 flex-1 flex flex-col quiz-slide-in"
               >
                 {result ? (
                   <div className="animate-scale-in text-center py-8 space-y-4">

@@ -88,13 +88,6 @@
   overflow: hidden;
 }
 
-.quiz-progress-bar {
-  height: 100%;
-  background-color: var(--primary);
-  border-radius: calc(var(--radius) * 0.25);
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* 📊 Score display */
 .quiz-score {
   display: flex;
@@ -158,13 +151,17 @@
   animation: shake-wrong 0.4s ease-in-out;
 }
 
-/* 🚪 Slide enter / exit */
-@keyframes slideInRight {
+/* 🚪 Slide enter / exit del quiz — nombres propios (quizSlide*) a propósito:
+   index.css define slideInRight/slideOutLeft + .animate-slide-in/-out para el
+   stagger del menú del header con contratos distintos. Compartir nombres hacía
+   que el orden de carga de los chunks CSS decidiera qué animación ganaba en la
+   pantalla de quiz. */
+@keyframes quizSlideIn {
   from { opacity: 0; transform: translateX(20px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes slideOutLeft {
+@keyframes quizSlideOut {
   from { opacity: 1; transform: translateX(0); }
   to   { opacity: 0; transform: translateX(-20px); }
 }
@@ -174,12 +171,12 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-.animate-slide-in {
-  animation: slideInRight 0.3s ease-out;
+.quiz-slide-in {
+  animation: quizSlideIn 0.3s ease-out;
 }
 
-.animate-slide-out {
-  animation: slideOutLeft 0.3s ease-in;
+.quiz-slide-out {
+  animation: quizSlideOut 0.3s ease-in;
 }
 
 .animate-scale-in {
