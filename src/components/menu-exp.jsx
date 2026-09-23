@@ -4,12 +4,17 @@ import CircleHelp from 'lucide-react/dist/esm/icons/circle-help'
 import Home from 'lucide-react/dist/esm/icons/home'
 import Settings from 'lucide-react/dist/esm/icons/settings'
 import Undo2 from 'lucide-react/dist/esm/icons/undo-2'
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 
 import { Link, useLocation } from 'react-router-dom'
 
 import { TourGuideToggle } from './TourGuideToggle'
-import { ThemeCustomizer } from './ui/ThemeCustomizer'
+
+// The theme studio is the only consumer of Radix Dialog in the app: keep it out
+// of the initial bundle and load it when the header menu is about to be used.
+const loadThemeCustomizer = () =>
+  import('./ui/ThemeCustomizer').then((m) => ({ default: m.ThemeCustomizer }))
+const ThemeCustomizerLazy = lazy(loadThemeCustomizer)
 
 export default function MenuExp() {
   const location = useLocation()
@@ -50,8 +55,9 @@ export default function MenuExp() {
       <div id="driver-step-4" className="relative">
         {/* Main button */}
         <button
-          className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg w-10 h-10 flex items-center justify-center shadow-lg z-20 relative transition-transform duration-150 active:scale-95"
+          className="bg-secondary hover:bg-accent hover:text-accent-foreground text-secondary-foreground rounded-lg w-10 h-10 flex items-center justify-center shadow-lg z-20 relative transition-colors duration-150 active:scale-95"
           onClick={toggleOpen}
+          onPointerEnter={loadThemeCustomizer}
         >
           <span
             className={`${isOpen ? 'rotate-[-45deg]' : 'rotate-0'} transition-transform duration-300 inline-block`}
@@ -69,7 +75,7 @@ export default function MenuExp() {
             <div style={{ '--stagger-index': 0 }} onAnimationEnd={(e) => e.stopPropagation()}>
               <Link
                 id="driver-step-5"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground w-10 h-10 mt-2 flex items-center justify-center rounded-lg shadow-md"
+                className="bg-secondary hover:bg-accent hover:text-accent-foreground text-secondary-foreground w-10 h-10 mt-2 flex items-center justify-center rounded-lg shadow-md"
                 to={location.pathname === '/' ? '/docs' : '/'}
               >
                 {location.pathname === '/' ? (
@@ -85,8 +91,17 @@ export default function MenuExp() {
                 toggleTour={toggleTour}
               />
             </div>
-            <div className="mt-2 rounded-lg bg-card text-card-foreground shadow-md" style={{ '--stagger-index': 2 }} onAnimationEnd={(e) => e.stopPropagation()}>
-              <ThemeCustomizer />
+            <div id="driver-step-temas" className="mt-2 rounded-lg bg-card text-card-foreground shadow-md" style={{ '--stagger-index': 2 }} onAnimationEnd={(e) => e.stopPropagation()}>
+              <Suspense
+                fallback={
+                  <span
+                    aria-hidden="true"
+                    className="block w-10 h-10 rounded-lg bg-muted animate-pulse"
+                  />
+                }
+              >
+                <ThemeCustomizerLazy />
+              </Suspense>
             </div>
           </div>
         )}

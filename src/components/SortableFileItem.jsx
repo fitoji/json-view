@@ -11,6 +11,10 @@ import {
 import { BookOpen, CircleArrowRight, GripVertical, Timer, Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 
+// Prime the lazy Test chunk (same module FileViewer imports) so the quiz opens
+// on click instead of on first fetch.
+const prefetchTest = () => import("./quiz/Test");
+
 export function SortableFileItem({ fileName, onSelect, onDelete }) {
   const { setTituloOff } = useTituloOff();
   const {
@@ -58,6 +62,8 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
           <HoverCardTrigger>
             <Button
               id="driver-step-practicar"
+              onPointerEnter={prefetchTest}
+              onFocus={prefetchTest}
               onClick={() => {
                 onSelect(fileName, 'practica');
                 setTituloOff(false);
@@ -79,6 +85,8 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
           <HoverCardTrigger>
             <Button
               id="driver-step-examen"
+              onPointerEnter={prefetchTest}
+              onFocus={prefetchTest}
               onClick={() => {
                 onSelect(fileName, 'examen');
                 setTituloOff(false);
@@ -100,6 +108,8 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
           <HoverCardTrigger>
             <Button
               id="driver-step-ver"
+              onPointerEnter={prefetchTest}
+              onFocus={prefetchTest}
               onClick={() => {
                 onSelect(fileName);
                 setTituloOff(false);
@@ -120,6 +130,7 @@ export function SortableFileItem({ fileName, onSelect, onDelete }) {
         <HoverCard>
           <HoverCardTrigger>
             <Button
+              id="driver-step-eliminar"
               onClick={() => onDelete(fileName)}
               className="min-h-11 min-w-11"
               variant="destructive"
