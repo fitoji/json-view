@@ -10,7 +10,7 @@ const NavBar = () => {
       <div className="flex flex-row items-center justify-between mx-auto px-4 sm:px-6 lg:px-8 pb-2">
         <div className="flex items-center">
           <img
-            className="h-12"
+            className="h-12 w-12 shrink-0 rounded-full object-cover"
             width={512}
             height={512}
             src="https://utfs.io/f/OrgeCo8Gum6ew8Je4bkx3j7VtxfKkAlXC98D0ovYap6nHgwh"
