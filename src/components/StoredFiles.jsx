@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   DndContext,
@@ -24,6 +24,18 @@ export default function StoredFiles({
   onReorder,
 }) {
   const [orderedFiles, setOrderedFiles] = useState([]);
+
+  // ── Enter/exit presence bookkeeping (row bridge) ──────────────────────
+  // prevIdsRef seeds with the first non-empty snapshot (hydration / page
+  // load), so boot rows mount class-free and a refresh never replays the
+  // enter animation across the whole list. Ids that join later diff against
+  // the previous snapshot and play the enter animation once.
+  const prevIdsRef = useRef(null);
+  const enterIdsRef = useRef(new Set());
+  // Rows whose delete was requested but whose exit animation has not
+  // finished yet. A Set so rapid double-deletes run independently and the
+  // list never blocks.
+  const [deletingIds, setDeletingIds] = useState(() => new Set());
 
   useEffect(() => {
     const loadDefaultFile = async () => {
@@ -64,6 +76,26 @@ export default function StoredFiles({
       ...currentFiles.filter((file) => !storedOrderedFiles.includes(file)),
     ];
 
+    // Enter-animation gate: first non-empty snapshot boots class-free;
+    // anything that appears afterwards is marked for one enter pass.
+    if (prevIdsRef.current === null) {
+      if (newOrderedFiles.length > 0) {
+        prevIdsRef.current = new Set(newOrderedFiles);
+      }
+    } else {
+      for (const fileName of newOrderedFiles) {
+        if (!prevIdsRef.current.has(fileName)) {
+          enterIdsRef.current.add(fileName);
+        }
+      }
+      prevIdsRef.current = new Set(newOrderedFiles);
+    }
+    // Prune exit bookkeeping for ids that left the list (committed or gone).
+    setDeletingIds((prev) => {
+      const kept = [...prev].filter((id) => newOrderedFiles.includes(id));
+      return kept.length === prev.size ? prev : new Set(kept);
+    });
+
     setOrderedFiles(newOrderedFiles);
 
     // Guardar el orden actualizado en localStorage
@@ -71,6 +103,28 @@ export default function StoredFiles({
       localStorage.setItem("orderedFiles", JSON.stringify(newOrderedFiles));
     }
   }, [files, onFileAdd]);
+
+  // A delete click only starts the row's exit animation; the actual
+  // state/storage removal is committed by handleExitComplete below.
+  const handleRequestDelete = (fileName) => {
+    setDeletingIds((prev) => {
+      if (prev.has(fileName)) return prev;
+      const next = new Set(prev);
+      next.add(fileName);
+      return next;
+    });
+  };
+
+  const handleExitComplete = (fileName) => {
+    // The row's exit animation finished (animationend, or the hook's
+    // durationMs fallback in environments without CSS animations). Commit
+    // the removal now via the parent. deletingIds keeps the row invisible
+    // until orderedFiles drops it, so it can never flash back in.
+    enterIdsRef.current.delete(fileName);
+    if (onDelete) {
+      onDelete(fileName);
+    }
+  };
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -134,8 +188,11 @@ export default function StoredFiles({
                     key={fileName}
                     fileName={fileName}
                     onSelect={onSelect}
-                    onDelete={onDelete}
+                    onDelete={handleRequestDelete}
                     setTituloOff={setTituloOff}
+                    isVisible={!deletingIds.has(fileName)}
+                    isNew={enterIdsRef.current.has(fileName)}
+                    onExitComplete={handleExitComplete}
                   />
                 ))}
               </div>

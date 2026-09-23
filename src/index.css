@@ -283,6 +283,21 @@
   animation-delay: calc(var(--stagger-index, 0) * 30ms);
 }
 
+/* 🎬 STORED-FILE ROW enter/exit bridge (StoredFiles list).
+   Dedicated class names on purpose: .animate-slide-in/-out are the subject of
+   the index.css-vs-Test.css collision tracked in T8, so the row bridge must
+   not depend on them. Reuses the keyframes above (no new ones), stays
+   transform/opacity-only, and is applied to the INNER row wrapper — never the
+   dnd-kit sortable root, whose inline transform must stay uncontested for
+   reordering. The global reduced-motion guard below neutralizes both. */
+.file-row-enter {
+  animation: slideInRight 0.25s ease-out both;
+}
+
+.file-row-exit {
+  animation: slideOutLeft 0.15s ease-in both;
+}
+
 /* 🎬 APP MODAL (native <dialog>) enter/exit — CSS-only.
    allow-discrete keeps the dialog painted across the display:none boundary so
    the fade/scale can run on close; @starting-style supplies the enter frame.

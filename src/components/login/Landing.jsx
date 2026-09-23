@@ -181,7 +181,13 @@ export default function Landing() {
   }
 
   const handleFileDelete = (fileName) => {
-    const updatedFiles = { ...files }
+    // Called when a row's exit animation finishes (may be from a timer).
+    // Derive the next store from localStorage instead of the `files`
+    // closure: two exit commits can land within the same tick on a rapid
+    // double-delete, and a stale spread would resurrect the first deleted
+    // file (same source-of-truth idiom as handleFileDrop).
+    const storedFiles = JSON.parse(localStorage.getItem('jsonFiles') || '{}')
+    const updatedFiles = { ...storedFiles }
     delete updatedFiles[fileName]
     setFiles(updatedFiles)
     localStorage.setItem('jsonFiles', JSON.stringify(updatedFiles))
