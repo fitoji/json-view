@@ -2,6 +2,7 @@ import Moon from 'lucide-react/dist/esm/icons/moon'
 import Sun from 'lucide-react/dist/esm/icons/sun'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { runWithThemeViewTransition } from '@/lib/themeViewTransition'
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -27,23 +28,7 @@ export function ThemeToggle() {
 
   const handleThemeChange = (event) => {
     const nextTheme = isDark ? 'light' : 'dark'
-    const prefersReducedMotion = window.matchMedia?.(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-
-    if (
-      prefersReducedMotion ||
-      typeof document.startViewTransition !== 'function'
-    ) {
-      setTheme(nextTheme)
-      return
-    }
-
-    const root = document.documentElement
-    root.style.setProperty('--theme-transition-x', `${event.clientX}px`)
-    root.style.setProperty('--theme-transition-y', `${event.clientY}px`)
-
-    document.startViewTransition(() => setTheme(nextTheme))
+    runWithThemeViewTransition(event, () => setTheme(nextTheme))
   }
 
   return (

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { useThemeCustomization } from '../providers/ThemeProvider'
+import { runWithThemeViewTransition } from '@/lib/themeViewTransition'
 import { Button } from './button'
 import {
   Dialog,
@@ -107,6 +108,10 @@ export function ThemeCustomizer() {
       toast.error(result.error)
       return
     }
+    // Deliberately not wrapped in runWithThemeViewTransition: file import is a
+    // multi-step flow (read → validate → selectPreset + updateOverrides) whose
+    // mutations land after an await, outside the discrete-event flush a view
+    // transition needs to capture the new snapshot. Keep it instant.
     selectPreset(result.state.presetId)
     updateOverrides(result.state.overrides)
     toast.success('Tema importado correctamente.')
@@ -134,7 +139,7 @@ export function ThemeCustomizer() {
                   key={item.id}
                   type="button"
                   aria-pressed={item.id === themeState.presetId}
-                  onClick={() => selectPreset(item.id)}
+                  onClick={(event) => runWithThemeViewTransition(event, () => selectPreset(item.id))}
                   className="flex min-h-16 flex-col items-start gap-1 rounded-lg border border-border bg-card p-2 text-left text-xs transition-colors hover:bg-accent hover:text-accent-foreground aria-pressed:border-primary aria-pressed:ring-2 aria-pressed:ring-ring"
                 >
                   <span className="flex gap-1">
@@ -191,7 +196,7 @@ export function ThemeCustomizer() {
             <Input id="theme-import" type="file" accept="application/json,.json" onChange={importTheme} className="sr-only" />
           </div>
 
-          <Button variant="outline" onClick={resetTheme}>
+          <Button variant="outline" onClick={(event) => runWithThemeViewTransition(event, resetTheme)}>
             <RotateCcw data-icon="inline-start" />
             Restablecer preset
           </Button>
