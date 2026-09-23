@@ -14,6 +14,7 @@ import {
 } from '../ui/card'
 import { Progress } from '../ui/progress'
 import { Separator } from '../ui/separator'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import Modal from '../Modal'
 import { ExamTimer } from './ExamTimer'
 import ExamReview from './ExamReview'
@@ -103,6 +104,15 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
 
   const [startTime, setStartTime] = useState(Date.now())
   const timerRef = useRef(null)
+
+  // Viewport tree selection: mount only the layout for the active breakpoint
+  // instead of rendering all three and gating them with CSS display classes.
+  // Breakpoints mirror Tailwind defaults exactly (md = 768px, lg = 1024px).
+  const isDesktopViewport = useMediaQuery('(min-width: 1024px)')
+  const isTabletViewport = useMediaQuery(
+    '(min-width: 768px) and (max-width: 1023.98px)',
+  )
+  const isMobileViewport = useMediaQuery('(max-width: 767.98px)')
 
   // Initialize or restore session
   useEffect(() => {
@@ -380,7 +390,8 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
       {SubmitConfirmModal}
 
       {/* Desktop Layout - lg+: 3-column */}
-      <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
+      {isDesktopViewport && (
+      <div className="grid lg:grid-cols-12 lg:min-h-screen">
         {/* Left sidebar: Question navigation grid */}
         <aside className="col-span-3 p-6 pt-20 bg-card/50 backdrop-blur-sm border-r border-border overflow-y-auto">
           <div className="sticky top-20 space-y-6">
@@ -594,9 +605,11 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </div>
         </aside>
       </div>
+      )}
 
       {/* Tablet Layout - md to lg */}
-      <div className="hidden md:block lg:hidden min-h-screen">
+      {isTabletViewport && (
+      <div className="block min-h-screen">
         {/* Header */}
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3 flex-shrink-0">
           <div className="flex items-center justify-between">
@@ -705,9 +718,11 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </Card>
         </main>
       </div>
+      )}
 
       {/* Mobile Layout - <md */}
-      <div className="md:hidden flex flex-col min-h-screen">
+      {isMobileViewport && (
+      <div className="flex flex-col min-h-screen">
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="text-lg font-bold font-mono tabular-nums">
@@ -811,7 +826,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </Card>
         </main>
 
-        <footer className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-3 flex items-center justify-between z-40 md:hidden">
+        <footer className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-3 flex items-center justify-between z-40">
           <span className="text-sm text-muted-foreground">
             {answeredCount}/{questions.length} respondidas
           </span>
@@ -820,6 +835,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </span>
         </footer>
       </div>
+      )}
     </div>
   )
 }

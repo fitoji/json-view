@@ -9,6 +9,7 @@ import XCircle from 'lucide-react/dist/esm/icons/x-circle'
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { preguntasAleatorias } from '../../helpers/funcionesTest.mjs'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import Modal from '../Modal'
 import Temporizador from '../Temporizador'
 import { Button } from '../ui/button'
@@ -140,6 +141,15 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
   const Option4 = useRef(null)
   const Option5 = useRef(null)
   const optionRefs = [Option1, Option2, Option3, Option4, Option5]
+
+  // Viewport tree selection: mount only the layout for the active breakpoint
+  // instead of rendering all three and gating them with CSS display classes.
+  // Breakpoints mirror Tailwind defaults exactly (md = 768px, lg = 1024px).
+  const isDesktopViewport = useMediaQuery('(min-width: 1024px)')
+  const isTabletViewport = useMediaQuery(
+    '(min-width: 768px) and (max-width: 1023.98px)',
+  )
+  const isMobileViewport = useMediaQuery('(max-width: 767.98px)')
 
   const [scoreFlash, setScoreFlash] = useState('neutral')
   useEffect(() => {
@@ -370,7 +380,8 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
   return (
     <div className="quiz-wrapper min-h-screen bg-transparent">
       {/* Desktop Layout - lg+ (1024px+): full 3-column layout */}
-      <div className="hidden lg:grid lg:grid-cols-12 lg:min-h-screen">
+      {isDesktopViewport && (
+      <div className="grid lg:grid-cols-12 lg:min-h-screen">
         {/* Sidebar izq */}
         <aside className="col-span-2 p-6 pt-20 bg-card/50 backdrop-blur-sm border-r border-border overflow-y-auto">
           <div className="sticky top-20 space-y-6">
@@ -570,9 +581,14 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           </div>
         </aside>
       </div>
+      )}
 
-      {/* Tablet/Mobile Layout - md to lg (768px-1023px): header + main card only */}
-      <div className="hidden md:block lg:hidden flex flex-col min-h-screen">
+      {/* Tablet Layout - md to lg (768px-1023px): header + main card only.
+          Computed display here was `block` before (md:block won over the base
+          `flex`), so the wrapper keeps `block` and the dead flex utilities
+          were dropped to preserve pixel-equivalence. */}
+      {isTabletViewport && (
+      <div className="block min-h-screen">
         {/* Header con score + timer */}
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3 flex-shrink-0">
           <div className="flex items-center justify-between">
@@ -703,9 +719,11 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           </Card>
         </main>
       </div>
+      )}
 
       {/* Mobile Layout - small screens (<768px) */}
-      <div className="md:hidden flex flex-col min-h-screen">
+      {isMobileViewport && (
+      <div className="flex flex-col min-h-screen">
         <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -819,7 +837,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           </Card>
         </main>
 
-        <footer className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-3 flex items-center justify-between z-40 md:hidden">
+        <footer className="fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-3 flex items-center justify-between z-40">
           <Temporizador
             isRunning={isRunning}
             setIsRunning={setIsRunning}
@@ -830,6 +848,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           </span>
         </footer>
       </div>
+      )}
 
       {/* Modals */}
       <Modal open={open} onClose={() => setOpen(false)}>
