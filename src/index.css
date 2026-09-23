@@ -1,4 +1,8 @@
 @import "tailwindcss";
+/* Tailwind v4 animation utilities (successor of the dead tailwindcss-animate plugin):
+   makes the existing animate-in/out + fade/zoom/slide classes in the Radix
+   wrappers (dialog, hover-card) actually compile. */
+@import "tw-animate-css";
 
 /* Variante dark para Tailwind v4 */
 @custom-variant dark (&:where(.dark, .dark *));
