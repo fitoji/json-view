@@ -483,9 +483,9 @@ export function foregroundFor(color) {
 // ─── Preset data ───────────────────────────────────────────────────────────────
 
 const sharedTokens = {
-  card: 'hsl(0 0% 100%)',
+  card: 'hsl(0 0% 99%)',
   cardForeground: 'hsl(222.2 84% 4.9%)',
-  popover: 'hsl(0 0% 100%)',
+  popover: 'hsl(0 0% 99%)',
   popoverForeground: 'hsl(222.2 84% 4.9%)',
   secondary: 'hsl(210 40% 96.1%)',
   secondaryForeground: 'hsl(222.2 47.4% 11.2%)',
@@ -529,7 +529,8 @@ export const THEME_PRESETS = [
     description: 'The familiar Visor Tests green',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(222.2 84% 4.9%)',
+      card: 'hsl(160 8% 99%)', popover: 'hsl(160 8% 99%)',
+      background: 'hsl(160 8% 97%)', foreground: 'hsl(222.2 84% 4.9%)',
       primary: 'hsl(160 84% 39%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(154 58% 91%)', accentForeground: 'hsl(160 70% 22%)',
     },
@@ -549,6 +550,7 @@ export const THEME_PRESETS = [
     description: 'Cool focus for long study sessions',
     light: {
       ...sharedTokens,
+      card: 'hsl(204 8% 99%)', popover: 'hsl(204 8% 99%)',
       background: 'hsl(204 45% 98%)', foreground: 'hsl(210 45% 15%)',
       primary: 'hsl(199 89% 40%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(190 75% 90%)', accentForeground: 'hsl(201 80% 23%)',
@@ -569,6 +571,7 @@ export const THEME_PRESETS = [
     description: 'Warm energy for a quick review',
     light: {
       ...sharedTokens,
+      card: 'hsl(30 8% 99%)', popover: 'hsl(30 8% 99%)',
       background: 'hsl(30 100% 98%)', foreground: 'hsl(20 45% 16%)',
       primary: 'hsl(12 82% 55%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(35 100% 88%)', accentForeground: 'hsl(23 75% 24%)',
@@ -609,7 +612,8 @@ export const THEME_PRESETS = [
     description: 'Subtle blue-gray, calm and focused',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(222.2 84% 4.9%)',
+      card: 'hsl(222 6% 99%)', popover: 'hsl(222 6% 99%)',
+      background: 'hsl(222 6% 97%)', foreground: 'hsl(222.2 84% 4.9%)',
       primary: 'hsl(222.2 47.4% 11.2%)', primaryForeground: 'hsl(210 40% 98%)',
       accent: 'hsl(210 40% 96.1%)', accentForeground: 'hsl(222.2 47.4% 11.2%)',
     },
@@ -629,7 +633,8 @@ export const THEME_PRESETS = [
     description: 'Warm earthy tones, natural feel',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(20 14.3% 4.1%)',
+      card: 'hsl(24 5% 99%)', popover: 'hsl(24 5% 99%)',
+      background: 'hsl(24 5% 97%)', foreground: 'hsl(20 14.3% 4.1%)',
       primary: 'hsl(24 9.8% 10%)', primaryForeground: 'hsl(60 9.1% 97.8%)',
       accent: 'hsl(60 4.8% 95.9%)', accentForeground: 'hsl(24 9.8% 10%)',
     },
@@ -649,7 +654,8 @@ export const THEME_PRESETS = [
     description: 'Classic cool gray, timeless',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(224 71.4% 4.1%)',
+      card: 'hsl(221 4% 99%)', popover: 'hsl(221 4% 99%)',
+      background: 'hsl(221 4% 97%)', foreground: 'hsl(224 71.4% 4.1%)',
       primary: 'hsl(220.9 39.3% 11%)', primaryForeground: 'hsl(210 20% 98%)',
       accent: 'hsl(220 14.3% 95.9%)', accentForeground: 'hsl(220.9 39.3% 11%)',
     },
@@ -689,7 +695,8 @@ export const THEME_PRESETS = [
     description: 'Bold and urgent, high contrast',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(0 0% 3.9%)',
+      card: 'hsl(0 5% 99%)', popover: 'hsl(0 5% 99%)',
+      background: 'hsl(0 5% 97%)', foreground: 'hsl(0 0% 3.9%)',
       primary: 'hsl(0 72.2% 50.6%)', primaryForeground: 'hsl(0 85.7% 97.3%)',
       accent: 'hsl(0 0% 96.1%)', accentForeground: 'hsl(0 0% 9%)',
     },
@@ -709,7 +716,8 @@ export const THEME_PRESETS = [
     description: 'Soft pink warmth, gentle and inviting',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(240 10% 3.9%)',
+      card: 'hsl(347 5% 99%)', popover: 'hsl(347 5% 99%)',
+      background: 'hsl(347 5% 97%)', foreground: 'hsl(240 10% 3.9%)',
       primary: 'hsl(346.8 77.2% 49.8%)', primaryForeground: 'hsl(355.7 100% 97.3%)',
       accent: 'hsl(240 4.8% 95.9%)', accentForeground: 'hsl(240 5.9% 10%)',
     },
@@ -729,7 +737,8 @@ export const THEME_PRESETS = [
     description: 'Energetic and playful, stands out',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(20 14.3% 4.1%)',
+      card: 'hsl(25 6% 99%)', popover: 'hsl(25 6% 99%)',
+      background: 'hsl(25 6% 97%)', foreground: 'hsl(20 14.3% 4.1%)',
       primary: 'hsl(24.6 95% 53.1%)', primaryForeground: 'hsl(60 9.1% 97.8%)',
       accent: 'hsl(60 4.8% 95.9%)', accentForeground: 'hsl(24 9.8% 10%)',
     },
@@ -749,7 +758,8 @@ export const THEME_PRESETS = [
     description: 'Fresh and balanced, easy on the eyes',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(240 10% 3.9%)',
+      card: 'hsl(142 5% 99%)', popover: 'hsl(142 5% 99%)',
+      background: 'hsl(142 5% 97%)', foreground: 'hsl(240 10% 3.9%)',
       primary: 'hsl(142.1 76.2% 36.3%)', primaryForeground: 'hsl(355.7 100% 97.3%)',
       accent: 'hsl(240 4.8% 95.9%)', accentForeground: 'hsl(240 5.9% 10%)',
     },
@@ -769,7 +779,8 @@ export const THEME_PRESETS = [
     description: 'Classic trusty blue, reliable and clear',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(222.2 84% 4.9%)',
+      card: 'hsl(221 6% 99%)', popover: 'hsl(221 6% 99%)',
+      background: 'hsl(221 6% 97%)', foreground: 'hsl(222.2 84% 4.9%)',
       primary: 'hsl(221.2 83.2% 53.3%)', primaryForeground: 'hsl(210 40% 98%)',
       accent: 'hsl(210 40% 96.1%)', accentForeground: 'hsl(222.2 47.4% 11.2%)',
     },
@@ -789,7 +800,8 @@ export const THEME_PRESETS = [
     description: 'Bright and optimistic, high energy',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(20 14.3% 4.1%)',
+      card: 'hsl(48 8% 99%)', popover: 'hsl(48 8% 99%)',
+      background: 'hsl(48 8% 97%)', foreground: 'hsl(20 14.3% 4.1%)',
       primary: 'hsl(47.9 95.8% 53.1%)', primaryForeground: 'hsl(26 83.3% 14.1%)',
       accent: 'hsl(60 4.8% 95.9%)', accentForeground: 'hsl(24 9.8% 10%)',
     },
@@ -809,7 +821,8 @@ export const THEME_PRESETS = [
     description: 'Creative and distinctive, elegant depth',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(224 71.4% 4.1%)',
+      card: 'hsl(262 6% 99%)', popover: 'hsl(262 6% 99%)',
+      background: 'hsl(262 6% 97%)', foreground: 'hsl(224 71.4% 4.1%)',
       primary: 'hsl(262.1 83.3% 57.8%)', primaryForeground: 'hsl(210 20% 98%)',
       accent: 'hsl(220 14.3% 95.9%)', accentForeground: 'hsl(220.9 39.3% 11%)',
     },
@@ -829,6 +842,7 @@ export const THEME_PRESETS = [
     description: 'Soothing pastels for cozy productivity',
     light: {
       ...sharedTokens,
+      card: 'hsl(266 6% 98%)', popover: 'hsl(266 6% 98%)',
       background: 'hsl(220 23% 95%)', foreground: 'hsl(234 16% 35%)',
       primary: 'hsl(266 85% 58%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(197 97% 46%)', accentForeground: 'hsl(0 0% 100%)',
@@ -849,6 +863,7 @@ export const THEME_PRESETS = [
     description: 'Warm terracotta, Anthropic signature look',
     light: {
       ...sharedTokens,
+      card: 'hsl(30 5% 98%)', popover: 'hsl(30 5% 98%)',
       background: 'hsl(36 33% 97%)', foreground: 'hsl(34 16% 9%)',
       primary: 'hsl(30 100% 39%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(31 100% 94%)', accentForeground: 'hsl(30 100% 39%)',
@@ -869,6 +884,7 @@ export const THEME_PRESETS = [
     description: 'Fresh greens inspired by natural landscapes',
     light: {
       ...sharedTokens,
+      card: 'hsl(123 5% 98%)', popover: 'hsl(123 5% 98%)',
       background: 'hsl(38 36% 96%)', foreground: 'hsl(9 28% 19%)',
       primary: 'hsl(123 46% 34%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(122 37% 84%)', accentForeground: 'hsl(124 55% 24%)',
@@ -895,6 +911,7 @@ export const THEME_PRESETS = [
     },
     dark: {
       ...darkSharedTokens,
+      card: 'hsl(0 0% 4%)', popover: 'hsl(0 0% 3%)',
       background: 'hsl(0 0% 0%)', foreground: 'hsl(0 0% 98%)',
       primary: 'hsl(0 0% 100%)', primaryForeground: 'hsl(0 0% 0%)',
       accent: 'hsl(0 0% 7%)', accentForeground: 'hsl(0 0% 100%)',
@@ -909,7 +926,8 @@ export const THEME_PRESETS = [
     description: 'Official GitHub dark and light theme',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(213 13% 14%)',
+      card: 'hsl(212 6% 99%)', popover: 'hsl(212 6% 99%)',
+      background: 'hsl(212 6% 97%)', foreground: 'hsl(213 13% 14%)',
       primary: 'hsl(212 92% 45%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(199 100% 93%)', accentForeground: 'hsl(212 92% 45%)',
     },
@@ -929,7 +947,8 @@ export const THEME_PRESETS = [
     description: 'Official Spotify green for music apps',
     light: {
       ...sharedTokens,
-      background: 'hsl(0 0% 100%)', foreground: 'hsl(0 11% 9%)',
+      card: 'hsl(141 6% 99%)', popover: 'hsl(141 6% 99%)',
+      background: 'hsl(141 6% 97%)', foreground: 'hsl(0 11% 9%)',
       primary: 'hsl(141 73% 42%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(145 52% 94%)', accentForeground: 'hsl(141 73% 42%)',
     },
@@ -949,6 +968,7 @@ export const THEME_PRESETS = [
     description: 'Retro gaming red and dark theme',
     light: {
       ...sharedTokens,
+      card: 'hsl(0 4% 99%)', popover: 'hsl(0 4% 99%)',
       background: 'hsl(0 0% 80%)', foreground: 'hsl(0 0% 12%)',
       primary: 'hsl(0 84% 41%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(210 33% 50%)', accentForeground: 'hsl(0 0% 100%)',
@@ -969,6 +989,7 @@ export const THEME_PRESETS = [
     description: 'Neon-powered futuristic aesthetics',
     light: {
       ...sharedTokens,
+      card: 'hsl(294 6% 98%)', popover: 'hsl(294 6% 98%)',
       background: 'hsl(220 20% 97%)', foreground: 'hsl(222 47% 11%)',
       primary: 'hsl(294 87% 57%)', primaryForeground: 'hsl(0 0% 100%)',
       accent: 'hsl(175 100% 45%)', accentForeground: 'hsl(0 0% 100%)',
@@ -997,6 +1018,7 @@ export const THEME_PRESETS = [
     },
     dark: {
       ...darkSharedTokens,
+      card: 'hsl(0 0% 4%)', popover: 'hsl(0 0% 3%)',
       background: 'hsl(0 0% 0%)', foreground: 'hsl(0 0% 100%)',
       primary: 'hsl(25 95% 53%)', primaryForeground: 'hsl(0 0% 0%)',
       accent: 'hsl(239 84% 67%)', accentForeground: 'hsl(0 0% 0%)',
@@ -1020,9 +1042,9 @@ export const THEME_PRESETS = [
     description: 'Ported from tweakcn — Modern Minimal',
     light: {
       ...sharedTokens,
-      background: '#ffffff', foreground: '#333333',
-      card: '#ffffff', cardForeground: '#333333',
-      popover: '#ffffff', popoverForeground: '#333333',
+      background: 'hsl(217 6% 98%)', foreground: '#333333',
+      card: 'hsl(217 6% 99%)', cardForeground: '#333333',
+      popover: 'hsl(217 6% 99%)', popoverForeground: '#333333',
       primary: '#3b82f6', primaryForeground: '#ffffff',
       secondary: '#f3f4f6', secondaryForeground: '#4b5563',
       muted: '#f9fafb', mutedForeground: '#6b7280',
@@ -1091,7 +1113,7 @@ export const THEME_PRESETS = [
       ...sharedTokens,
       background: '#faf5fa', foreground: '#501854',
       card: '#faf5fa', cardForeground: '#501854',
-      popover: '#ffffff', popoverForeground: '#501854',
+      popover: 'hsl(333 22% 98%)', popoverForeground: '#501854',
       primary: '#a84370', primaryForeground: '#ffffff',
       secondary: '#f1c4e6', secondaryForeground: '#77347c',
       muted: '#f6e5f3', mutedForeground: '#834588',
@@ -1124,7 +1146,7 @@ export const THEME_PRESETS = [
       ...sharedTokens,
       background: '#F1F0E5', foreground: '#56453F',
       card: '#F1F0E5', cardForeground: '#56453F',
-      popover: '#FFFFFF', popoverForeground: '#56453F',
+      popover: 'hsl(55 12% 98%)', popoverForeground: '#56453F',
       primary: '#A37764', primaryForeground: '#FFFFFF',
       secondary: '#BAAB92', secondaryForeground: '#ffffff',
       muted: '#E4C7B8', mutedForeground: '#8A655A',
@@ -1157,8 +1179,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f8f7fa', foreground: '#3d3c4f',
-      card: '#ffffff', cardForeground: '#3d3c4f',
-      popover: '#ffffff', popoverForeground: '#3d3c4f',
+      card: 'hsl(260 6% 98%)', cardForeground: '#3d3c4f',
+      popover: 'hsl(260 6% 98%)', popoverForeground: '#3d3c4f',
       primary: '#8a79ab', primaryForeground: '#f8f7fa',
       secondary: '#dfd9ec', secondaryForeground: '#3d3c4f',
       muted: '#dcd9e3', mutedForeground: '#6b6880',
@@ -1258,8 +1280,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f5f5ff', foreground: '#2a2a4a',
-      card: '#ffffff', cardForeground: '#2a2a4a',
-      popover: '#ffffff', popoverForeground: '#2a2a4a',
+      card: 'hsl(250 8% 98%)', cardForeground: '#2a2a4a',
+      popover: 'hsl(250 8% 98%)', popoverForeground: '#2a2a4a',
       primary: '#6e56cf', primaryForeground: '#ffffff',
       secondary: '#e4dfff', secondaryForeground: '#4a4080',
       muted: '#f0f0fa', mutedForeground: '#6c6c8a',
@@ -1325,9 +1347,9 @@ export const THEME_PRESETS = [
     description: 'Ported from tweakcn — Bold Tech',
     light: {
       ...sharedTokens,
-      background: '#ffffff', foreground: '#312e81',
-      card: '#ffffff', cardForeground: '#312e81',
-      popover: '#ffffff', popoverForeground: '#312e81',
+      background: 'hsl(258 7% 98%)', foreground: '#312e81',
+      card: 'hsl(258 7% 99%)', cardForeground: '#312e81',
+      popover: 'hsl(258 7% 99%)', popoverForeground: '#312e81',
       primary: '#8b5cf6', primaryForeground: '#ffffff',
       secondary: '#f3f0ff', secondaryForeground: '#4338ca',
       muted: '#f5f3ff', mutedForeground: '#7c3aed',
@@ -1393,9 +1415,9 @@ export const THEME_PRESETS = [
     description: 'Ported from tweakcn — Amber Minimal',
     light: {
       ...sharedTokens,
-      background: '#ffffff', foreground: '#262626',
-      card: '#ffffff', cardForeground: '#262626',
-      popover: '#ffffff', popoverForeground: '#262626',
+      background: 'hsl(38 8% 98%)', foreground: '#262626',
+      card: 'hsl(38 8% 99%)', cardForeground: '#262626',
+      popover: 'hsl(38 8% 99%)', popoverForeground: '#262626',
       primary: '#f59e0b', primaryForeground: '#000000',
       secondary: '#f3f4f6', secondaryForeground: '#4b5563',
       muted: '#f9fafb', mutedForeground: '#6b7280',
@@ -1495,8 +1517,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f7f3f9', foreground: '#374151',
-      card: '#ffffff', cardForeground: '#374151',
-      popover: '#ffffff', popoverForeground: '#374151',
+      card: 'hsl(258 8% 98%)', cardForeground: '#374151',
+      popover: 'hsl(258 8% 98%)', popoverForeground: '#374151',
       primary: '#a78bfa', primaryForeground: '#ffffff',
       secondary: '#e9d8fd', secondaryForeground: '#4b5563',
       muted: '#f3e8ff', mutedForeground: '#6b7280',
@@ -1529,8 +1551,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f8fafc', foreground: '#1e293b',
-      card: '#ffffff', cardForeground: '#1e293b',
-      popover: '#ffffff', popoverForeground: '#1e293b',
+      card: 'hsl(234 6% 98%)', cardForeground: '#1e293b',
+      popover: 'hsl(234 6% 98%)', popoverForeground: '#1e293b',
       primary: '#6366f1', primaryForeground: '#ffffff',
       secondary: '#e5e7eb', secondaryForeground: '#374151',
       muted: '#f3f4f6', mutedForeground: '#6b7280',
@@ -1563,8 +1585,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f0f8ff', foreground: '#374151',
-      card: '#ffffff', cardForeground: '#374151',
-      popover: '#ffffff', popoverForeground: '#374151',
+      card: 'hsl(140 6% 98%)', cardForeground: '#374151',
+      popover: 'hsl(140 6% 98%)', popoverForeground: '#374151',
       primary: '#22c55e', primaryForeground: '#ffffff',
       secondary: '#e0f2fe', secondaryForeground: '#4b5563',
       muted: '#f3f4f6', mutedForeground: '#6b7280',
@@ -1631,8 +1653,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f9f9f9', foreground: '#333333',
-      card: '#ffffff', cardForeground: '#333333',
-      popover: '#ffffff', popoverForeground: '#333333',
+      card: 'hsl(250 5% 98%)', cardForeground: '#333333',
+      popover: 'hsl(250 5% 98%)', popoverForeground: '#333333',
       primary: '#6c5ce7', primaryForeground: '#ffffff',
       secondary: '#a1c9f2', secondaryForeground: '#333333',
       muted: '#c9c4b5', mutedForeground: '#6e6e6e',
@@ -1665,8 +1687,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f9f9fa', foreground: '#333333',
-      card: '#ffffff', cardForeground: '#333333',
-      popover: '#ffffff', popoverForeground: '#333333',
+      card: 'hsl(140 5% 98%)', cardForeground: '#333333',
+      popover: 'hsl(140 5% 98%)', popoverForeground: '#333333',
       primary: '#34a85a', primaryForeground: '#ffffff',
       secondary: '#6495ed', secondaryForeground: '#ffffff',
       muted: '#ddd9c4', mutedForeground: '#6e6e6e',
@@ -1733,8 +1755,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#fff9f5', foreground: '#3d3436',
-      card: '#ffffff', cardForeground: '#3d3436',
-      popover: '#ffffff', popoverForeground: '#3d3436',
+      card: 'hsl(14 8% 98%)', cardForeground: '#3d3436',
+      popover: 'hsl(14 8% 98%)', popoverForeground: '#3d3436',
       primary: '#ff7e5f', primaryForeground: '#ffffff',
       secondary: '#ffedea', secondaryForeground: '#b35340',
       muted: '#fff0eb', mutedForeground: '#78716C',
@@ -1801,8 +1823,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f7f9f3', foreground: '#000000',
-      card: '#ffffff', cardForeground: '#000000',
-      popover: '#ffffff', popoverForeground: '#000000',
+      card: 'hsl(238 5% 98%)', cardForeground: '#000000',
+      popover: 'hsl(238 5% 98%)', popoverForeground: '#000000',
       primary: '#4f46e5', primaryForeground: '#ffffff',
       secondary: '#14b8a6', secondaryForeground: '#ffffff',
       muted: '#f0f0f0', mutedForeground: '#333333',
@@ -1835,8 +1857,8 @@ export const THEME_PRESETS = [
     light: {
       ...sharedTokens,
       background: '#f8f7f4', foreground: '#1a1f2e',
-      card: '#ffffff', cardForeground: '#1a1f2e',
-      popover: '#ffffff', popoverForeground: '#1a1f2e',
+      card: 'hsl(140 5% 98%)', cardForeground: '#1a1f2e',
+      popover: 'hsl(140 5% 98%)', popoverForeground: '#1a1f2e',
       primary: '#7c9082', primaryForeground: '#ffffff',
       secondary: '#ced4bf', secondaryForeground: '#1a1f2e',
       muted: '#e8e6e1', mutedForeground: '#6b7280',

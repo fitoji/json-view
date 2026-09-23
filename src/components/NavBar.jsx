@@ -4,7 +4,7 @@ import { ThemeToggle } from './ui/ThemeToggle'
 const NavBar = () => {
   return (
     <nav
-      className="navbar-fondo text-primary-foreground backdrop-blur-xl py-4 border-b border-primary/30"
+      className="navbar-fondo text-primary-foreground py-4 border-b border-primary/30"
       aria-label="Navegación principal"
     >
       <div className="flex flex-row items-center justify-between mx-auto px-4 sm:px-6 lg:px-8 pb-2">

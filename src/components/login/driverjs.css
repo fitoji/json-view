@@ -33,7 +33,7 @@
 
 .driver-popover.driverjs-theme button:hover {
   background-color: color-mix(in srgb, var(--success) 85%, transparent);
-  color: #ffffff;
+  color: var(--success-foreground);
 }
 
 .driver-popover.driverjs-theme .driver-popover-navigation-btns {
