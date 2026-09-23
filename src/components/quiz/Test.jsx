@@ -27,6 +27,14 @@ import ExamScreen from './ExamScreen'
 import ModeSelectionDialog from './ModeSelectionDialog'
 import './Test.css'
 
+// Toast de respuesta incorrecta con fondo destructive (gana al style del Toaster global).
+const INCORRECTO_TOAST = {
+  duration: 1500,
+  icon: <XCircle />,
+  className:
+    'bg-destructive! text-destructive-foreground! border-destructive!',
+}
+
 
 const OpcionList = memo(({
   question, numero, index, lock, selectedOption, checkAns, optionRefs
@@ -180,10 +188,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
           setOpenAlert(true)
         } else {
           e.target.classList.add('wrong')
-          toast.error('Incorrecto', {
-            duration: 1500,
-            icon: <XCircle />,
-          })
+          toast.error('Incorrecto', INCORRECTO_TOAST)
           if (
             question.ans >= 1 &&
             question.ans <= 5 &&
@@ -268,10 +273,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
               if (question.ans === 0) {
                 setOpenAlert(true)
               } else {
-                toast.error('Incorrecto', {
-                  duration: 1500,
-                  icon: <XCircle />,
-                })
+                toast.error('Incorrecto', INCORRECTO_TOAST)
                 setMal((m) => m + 1)
                 setEquiv((prev) => [...prev, question])
               }
@@ -517,7 +519,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             )}
           </Card>
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col rounded-xl mt-8">
+          <Card className="hidden md:flex flex-col rounded-xl mt-8">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm flex justify-center items-center gap-2 text-card-foreground">
                 <KeyboardIcon className="w-4 h-4" />
@@ -669,7 +671,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
             )}
           </Card>
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col rounded-xl mt-8">
+          <Card className="hidden md:flex flex-col rounded-xl mt-8">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm flex justify-center items-center gap-2 text-card-foreground">
                 <KeyboardIcon className="w-4 h-4" />
@@ -798,7 +800,7 @@ const Test = ({ data, questionnaireIdentity, initialMode }) => {
                 >
                   <ArrowBigRightDash className="mr-2" /> Siguiente
                 </Button>
-                <div className="text-center mt-2 text-xs text-muted-foreground flex items-center justify-center gap-3">
+                <div className="hidden md:flex text-center mt-2 text-xs text-muted-foreground items-center justify-center gap-3">
                   <span>
                     <kbd className="px-1 py-0.5 bg-muted rounded text-[10px]">
                       1-5

@@ -510,7 +510,7 @@ export default function ExamScreen({ questions: rawQuestions, questionnaireIdent
           </Card>
 
           {/* Keyboard shortcuts card */}
-          <Card className="flex flex-col rounded-xl mt-8">
+          <Card className="hidden md:flex flex-col rounded-xl mt-8">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm flex justify-center items-center gap-2 text-card-foreground">
                 <KeyboardIcon className="w-4 h-4" />
